@@ -12,3 +12,5 @@ logs
 *_OFF
 *-test.*
 *.local
+
+_site
