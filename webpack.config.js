@@ -50,7 +50,7 @@ const config = {
   plugins: [
     /*
      * plugin operates to produce output to the destination defined in 
-     * config.output.path above , therefore, our actual path for
+     * config.output.path above, therefore, our actual path for
      * CSS output is: webRoot + 'css/main.css'.
      */
     new ExtractTextPlugin('css/[name].css') 
