@@ -5,6 +5,7 @@
 node_modules
 vendor
 *.lock
+*-lock.*
 logs
 *.csv
 *_OFF.*
@@ -14,3 +15,5 @@ logs
 *.local
 
 _site
+css
+js
