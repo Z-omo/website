@@ -1,0 +1,14 @@
+baseurl:  website
+exclude:  ['README.md', 'node_modules']
+
+# site navigation links
+links:
+  - title:  Home
+    url:    /
+  - title:  About
+    url:    /about
+  - title:  Blog
+    url:    /blog
+  - title:  Work
+    url:    /work
+
