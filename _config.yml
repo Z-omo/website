@@ -1,5 +1,13 @@
 baseurl:  'website'
-exclude:  ['README.md', 'node_modules', 'src']
+exclude:  [
+  '.DS_Store',
+  'README.md', 
+  'node_modules',
+  'package*.json',
+  'Gemfile*',
+  'src',
+  'webpack.config.js'
+]
 
 # site navigation links
 links:
