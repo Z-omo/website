@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*
+ * SASS bootstrap for website.com
+ */
+/*
+ * SASS for body elements - website.com
+ */
+html, body {
+  margin: 0;
+  padding: 0; }
+
+.boundary {
+  margin: 0 auto;
+  max-width: 1024px; }
+
+/*
+ * SASS for page header element – website.com
+ */
+header {
+  width: 100%;
+  min-height: 10rem;
+  background-color: #172121; }
+  header h1 {
+    display: none; }
+
+/*
+ * SASS for text content elements – website.com
+ */
+body {
+  font-family: verdana, helvetica, sans-serif;
+  font-size: 1rem;
+  color: #0d1321; }
+
+/*
+ * SASS for footer element - website.com
+ */
+footer {
+  padding: 1em 2em;
+  width: auto;
+  min-height: 6rem;
+  background-color: #172121;
+  color: #bdd4e7; }
