@@ -1,4 +1,4 @@
-baseurl:  ''
+baseurl:  'website'
 exclude:  ['README.md', 'node_modules', 'src']
 
 # site navigation links
