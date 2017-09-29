@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "description": "Helping to build elegant web experiences.",
   "scripts": {
-    "dev": "webpack -d --watch",
-    "prod": "webpack -p"
+    "webpack-dev": "webpack -d --watch",
+    "jekyll-serve": "jekyll liveserve",
+    "prod": "webpack -p",
+    "dev": "npm run webpack-dev & npm run jekyll-serve"
   },
   "repository": {
     "type": "git",
