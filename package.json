@@ -4,7 +4,7 @@
   "description": "Helping to build elegant web experiences.",
   "scripts": {
     "webpack-dev": "webpack -d --watch",
-    "jekyll-serve": "jekyll liveserve",
+    "jekyll-serve": "jekyll liveserve --baseurl \"\"",
     "prod": "webpack -p",
     "dev": "npm run webpack-dev & npm run jekyll-serve"
   },
