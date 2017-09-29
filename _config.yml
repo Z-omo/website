@@ -4,11 +4,11 @@ exclude:  ['README.md', 'node_modules', 'src']
 # site navigation links
 links:
   - title:  Home
-    url:    /
+    url:    ./
   - title:  About
-    url:    /about
+    url:    about
   - title:  Blog
-    url:    /blog
+    url:    blog
   - title:  Work
-    url:    /work
+    url:    work
 
