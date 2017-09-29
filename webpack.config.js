@@ -12,11 +12,12 @@
  * This file and its @package are under version control.
  */
 
-const path = require('path');
-const nodeMod = path.join(__dirname, 'node_modules/');
+ // Note: __dirname refers to the path where webpack.config.js file is located.
 const srcDir = __dirname + '/src/';
 const webRoot = __dirname + '/';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+console.log('__dirname: ', __dirname);
 
 const config = {
   resolve: {
@@ -47,7 +48,12 @@ const config = {
   },
 
   plugins: [
-    new ExtractTextPlugin('css/[name].css')
+    /*
+     * plugin operates to produce output to the destination defined in 
+     * config.output.path above , therefore, our actual path for
+     * CSS output is: webRoot + 'css/main.css'.
+     */
+    new ExtractTextPlugin('css/[name].css') 
   ]
 };
 
