@@ -1,10 +1,36 @@
 /*
  * SASS for body elements - website.com
  */
-html, body
+html
+  margin: 0
+  height: 100%
+
+body
   margin: 0
   padding: 0
+  height: 100%
+  overflow-y: scroll
 
 .boundary
+  position: relative
+  top: 0
+  left: 0
   margin: 0 auto
-  max-width: 1024px
+  max-width: $maxWidth
+
+main, aside
+  display: inline-block
+  vertical-align: top
+  box-sizing: border-box
+  margin: 0 auto
+  padding: $contentPadding
+  min-height: 40vh
+  background-color: rgba(white, 0.9)
+
+main
+  width: 70vw
+  max-width: $maxWidth / 2
+
+aside
+  width: 30vw
+  

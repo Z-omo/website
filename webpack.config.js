@@ -13,6 +13,7 @@
  */
 
  // Note: __dirname refers to the path where webpack.config.js file is located.
+const path = require('path');
 const srcDir = __dirname + '/src/';
 const webRoot = __dirname + '/';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -32,13 +33,16 @@ const config = {
 
   output: {
     path: webRoot,
-    filename: 'js/[name].js'
+    filename: 'js/[name].js'//,
+    //publicPath: './'
   },
 
   module: {
     rules: [
       {
         test: /\.sass$/,
+        //include: [path.resolve(__dirname, 'src/sass')],
+        //exclude: [path.resolve(__dirname, 'resources/images')],
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
@@ -53,7 +57,7 @@ const config = {
      * config.output.path above, therefore, our actual path for
      * CSS output is: webRoot + 'css/main.css'.
      */
-    new ExtractTextPlugin('css/[name].css') 
+    new ExtractTextPlugin('css/[name].css', { allChunks: true }) 
   ]
 };
 
