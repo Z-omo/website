@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Helping to build elegant web experiences.",
   "scripts": {
+    "install":  "npm install",
     "webpack-dev": "webpack -d --watch",
     "jekyll-serve": "jekyll liveserve --baseurl \"\"",
     "prod": "webpack -p",
