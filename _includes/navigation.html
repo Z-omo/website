@@ -1,4 +1,4 @@
-<nav role="navigation">
+<nav id="menu" role="navigation">
   <ul>
     {% for link in site.links %}
     <li{% if link.url == page.url %} class="active"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>

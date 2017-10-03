@@ -8,10 +8,18 @@ header
   min-height: 40vh
   color: #FFFFFF
 
+  a[href="#menu"]
+    +setAsIcon
+    +setIcon(menu)
+
+    top: $viewEdgePos
+    right: $viewEdgePos
+    left: auto    
+
   .logo
     position: absolute
-    top: 0.5em
-    left: 0.5em
+    top: $viewEdgePos
+    left: $viewEdgePos
 
     img
       width: 4em
@@ -21,7 +29,7 @@ header
   
   h2
     font-size: 2rem
-    max-width: 60%
+    //max-width: 60%
     text-shadow: $textShadow
 
   .page-header-image
@@ -31,7 +39,8 @@ header
     bottom: 0
     left: 0
 
-    min-height: 40vh
+    min-height: 380px
+    //min-height: 40vh
     max-height: 60vh
     z-index: -1
 
@@ -39,7 +48,11 @@ header
     background-position: center center
     background-size: cover
 
-    background-image: url('#{$imagePath}header-image.jpg')
+    background-image: url('#{$imagePath}header-image-mobile.jpg')
+
+    @media only screen and (min-width: $tabletWidth)
+      min-height: 30vh
+      background-image: url('#{$imagePath}header-image.jpg')
 
     &::after
       content: ''

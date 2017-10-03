@@ -4,6 +4,7 @@
 html
   margin: 0
   height: 100%
+  //background-color: $primary
 
 body
   margin: 0
@@ -17,20 +18,52 @@ body
   left: 0
   margin: 0 auto
   max-width: $maxWidth
-
-main, aside
-  display: inline-block
-  vertical-align: top
+  
+main
   box-sizing: border-box
   margin: 0 auto
   padding: $contentPadding
   min-height: 40vh
+  max-width: $maxContentWidth
   background-color: rgba(white, 0.9)
 
-main
-  width: 70vw
-  max-width: $maxWidth / 2
+.content
+  margin: 0 0 $contentMargin
 
-aside
-  width: 30vw
+@media only screen and (min-width: $tabletWidth)
+  .content, .side-bar
+    display: inline-block
+    vertical-align: top
+    margin: 0 -2px
+    
+  .content
+    box-sizing: border-box
+    padding: 0 (2 * $contentPadding) 0 0
+    width: 70%
+
+  .side-bar
+    box-sizing: border-box
+    padding: 0
+    width: 30%
+    max-width: 320px
+
+figure
+  margin: 0 auto
+  padding: 0
+  width: 90%
+
+  @media only screen and (min-width: $tabletWidth)
+    transform: translateY(-50%)
+
+figcaption
+  padding: 0.4em
+  font-size: 0.8rem
+
+img
+  display: block
+  margin: 0
+  +corners
+  border: solid 0.375em rgba($primary, 0.8)
+  width: 100%
+
   

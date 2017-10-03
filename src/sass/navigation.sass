@@ -1,0 +1,93 @@
+/*
+ * SASS for navigation elements - website.com
+ */
+
+// @TODO move to colour theme:
+$navBGColour: rgba($color4, 0.8)
+
+$mobileRibbonHeight: $iconSize + (2 * $viewEdgePos)
+
+nav
+  background-color: $primary
+
+  ul
+    list-style: none
+    margin: 0
+    padding: $contentPadding 0
+
+  li
+    margin: 0 auto ($contentMargin * 0.5)
+    width: 80%
+  
+  a
+    display: block
+    +corners(2em)
+    border: solid 1px $color4
+    padding: 0.8em 2em
+    text-decoration: none
+    color: white
+    text-align: center
+    background-color: $navBGColour
+
+@media only screen and (max-width: $tabletWidth)
+  .focus-js nav
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    height: $mobileRibbonHeight
+    background-color: transparent
+    +gradientBackground(rgba($primary, 0.8), $primary)
+
+    ul
+      margin-top: $mobileRibbonHeight
+      padding-bottom: $mobileRibbonHeight
+      background-color: rgba($primary, 0.9)
+      transition: transform $transDurationIn $easeSpecial
+      transform: translateY(0%)
+
+    &.open ul
+      transition-duration: $transDurationIn * 2
+      transform: translateY(-101%)
+
+    #menuBtn
+      +setAsIcon
+      +setIcon(menu)
+      top: auto
+      right: $viewEdgePos
+      bottom: $viewEdgePos
+      left: auto
+      opacity: 0.8
+      transition: transform $transDurationIn $easeSpecial
+
+    &.open #menuBtn
+      transition-duration: $transDurationIn * 2
+      transform: rotate(45deg)
+
+@media only screen and (min-width: $tabletWidth)
+  nav
+    position: fixed
+    top: 0
+    right: 0
+    z-index: 100
+    background-color: transparent
+
+    ul
+      padding: $contentPadding / 2
+
+      display: flex
+      justify-content: flex-end
+
+    li
+      margin: 0
+      padding: 0
+      
+    a
+      border: none
+      padding: 0.2em 2em
+      background-color: transparent
+      transition: background-color $transDurationOut ease-out
+      
+      &:hover
+        background-color: $navBGColour
+        transition-duration: $transDurationIn

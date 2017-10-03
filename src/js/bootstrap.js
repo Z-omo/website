@@ -13,4 +13,5 @@
  */
 require('../sass/bootstrap.sass');
  
-console.log('Bootstrap loaded.');
+const focus = require('./focus-app.js');
+focus.init();
