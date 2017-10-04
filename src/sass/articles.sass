@@ -1,0 +1,40 @@
+/*
+ * SASS for article collection views – website.com
+ */
+.articles
+  margin: 0 0 $contentMargin
+  display: flex
+
+  article
+    position: relative
+    box-sizing: border-box
+    margin: 0 0.4em 0 0
+    +corners
+    border: solid 0.3em rgba($primary, 0.8)
+    width: 33.33%
+    height: 16rem
+
+    background-repeat: no-repeat
+    background-position: center center
+    background-size: cover
+    
+    a
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+
+    h1
+      position: absolute
+      bottom: 0
+      left: 0
+      padding: $contentPadding
+      font-size: 1.8rem
+      line-height: 2.2rem
+      color: white
+      opacity: 0.9
+      text-shadow: $textShadow
+
+
+

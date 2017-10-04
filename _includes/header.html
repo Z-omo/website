@@ -6,5 +6,5 @@
 
   <noscript><a href="#menu">Menu</a></noscript>
   <div class="page-header-image"></div>
-  <h2>{{ page.heading }}</h2>
+  <h2>{% if page.title %}{{ page.title }}{% else %}{{ page.heading }}{% endif %}</h2>
 </header>

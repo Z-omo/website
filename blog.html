@@ -1,6 +1,19 @@
 ---
-layout: default
-permalink: /blog
+layout: collection
 ---
+
 <h1>Blog</h1>
 
+<section class="articles">
+  {% for article in site.posts %}
+  {% capture postPath %}/{{ article.date | date: '%Y' }}/{% endcapture %}
+  {% assign tileName = article.id | replace: postPath, '' %}
+  <article style="background-image: url(resources/posts/tiles/{{ tileName }}.jpg);">
+    <header>
+      <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
+    </header>
+  </article>
+  {% endfor %}
+</section>
+<ul>
+</ul>

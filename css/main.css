@@ -188,6 +188,8 @@ main {
     box-sizing: border-box;
     padding: 0 4rem 0 0;
     width: 70%; }
+    .collection .content {
+      width: 100%; }
   .side-bar {
     box-sizing: border-box;
     padding: 0;
@@ -202,16 +204,16 @@ main {
 /*
  * SASS for page header element – website.com
  */
-header {
+.boundary > header {
   padding: 4rem 2rem 2rem;
   box-sizing: border-box;
   width: 100%;
   min-height: 240px;
   color: #FFFFFF; }
   @media only screen and (min-width: 39em) {
-    header {
+    .boundary > header {
       min-height: 320px; } }
-  header a[href="#menu"] {
+  .boundary > header a[href="#menu"] {
     position: absolute;
     top: 0;
     left: 0;
@@ -229,52 +231,52 @@ header {
     top: 0.5rem;
     right: 0.5rem;
     left: auto; }
-  header .logo {
+  .boundary > header .logo {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
     opacity: 0.8;
     width: 5em; }
-    header .logo img {
+    .boundary > header .logo img {
       width: 100%; }
     @media only screen and (min-width: 39em) {
-      header .logo {
+      .boundary > header .logo {
         position: fixed;
         z-index: 101;
         width: 5.4em;
         transition: transform 200ms ease-out;
         transform-origin: top left;
         transform: scale(1); }
-        .js-scrolled header .logo {
+        .js-scrolled .boundary > header .logo {
           transform: scale(0.84); } }
     @media only screen and (min-width: 2000px) {
-      header .logo {
+      .boundary > header .logo {
         left: auto; } }
-  header h1 {
+  .boundary > header h1 {
     display: none; }
-  header h2 {
+  .boundary > header h2 {
     margin: 0.5rem 0;
     font-size: 2.2rem;
     line-height: 3.5596rem;
     text-shadow: 2px 2px 1px #0d1321;
     opacity: 0.87; }
     @media only screen and (min-width: 39em) {
-      header h2 {
+      .boundary > header h2 {
         max-width: 32.63288rem;
         font-size: 3rem;
         line-height: 4.854rem; } }
     @media only screen and (min-width: 69em) {
-      header h2 {
+      .boundary > header h2 {
         padding-left: 2rem;
         max-width: 48.94932rem;
         font-size: 3.2rem;
         line-height: 5.1776rem; } }
     @media only screen and (min-width: 2000px) {
-      header h2 {
+      .boundary > header h2 {
         max-width: 65.26576rem;
         font-size: 4rem;
         line-height: 6.472rem; } }
-  header .page-header-image {
+  .boundary > header .page-header-image {
     position: absolute;
     top: 0;
     right: 0;
@@ -287,14 +289,14 @@ header {
     background-size: cover;
     background-image: url("/resources/image/header-image-mobile.jpg"); }
     @media only screen and (min-width: 39em) {
-      header .page-header-image {
+      .boundary > header .page-header-image {
         background-image: url("/resources/image/header-image.jpg"); } }
     @media only screen and (min-width: 2000px) {
-      header .page-header-image {
+      .boundary > header .page-header-image {
         -webkit-border-radius: 0 0 0.3em 0.3em;
         border-radius: 0 0 0.3em 0.3em;
         max-height: 1240px; } }
-    header .page-header-image::after {
+    .boundary > header .page-header-image::after {
       content: '';
       display: block;
       position: absolute;
@@ -483,3 +485,38 @@ footer {
     footer {
       -webkit-border-radius: 0.3em;
       border-radius: 0.3em; } }
+
+/*
+ * SASS for article collection views – website.com
+ */
+.articles {
+  margin: 0 0 2rem;
+  display: flex; }
+  .articles article {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 0.4em 0 0;
+    -webkit-border-radius: 0.3em;
+    border-radius: 0.3em;
+    border: solid 0.3em rgba(13, 19, 33, 0.8);
+    width: 33.33%;
+    height: 16rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; }
+    .articles article a {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0; }
+    .articles article h1 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 2rem;
+      font-size: 1.8rem;
+      line-height: 2.2rem;
+      color: white;
+      opacity: 0.9;
+      text-shadow: 2px 2px 1px #0d1321; }

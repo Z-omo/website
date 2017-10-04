@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Website.com</title>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="{{ '/css/main.css' | absolute_url }}">
 </head>
 <body>
-  <div class="boundary">
+  <div class="boundary collection">
   {% include header.html %}
 
   <main>
@@ -17,14 +17,12 @@
         {{content}}
     </div>
     
-    <aside class="side-bar">
-    </aside>
   </main>
   
   {% include navigation.html %}
   {% include footer.html %}
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="{{ '/js/main.js' | absolute_url }}"></script>
 </body>
 </html>
