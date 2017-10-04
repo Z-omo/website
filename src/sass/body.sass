@@ -56,20 +56,23 @@ main
     @media only screen and (min-width: $tabletWidth)
       transform: translateY(-20%)
 
-figure
-  margin: 0 auto
-  padding: 0
-  width: 90%
+.side-bar
+  figure
+    margin: 0 auto
+    padding: 0
+    width: 90%
 
-figcaption
-  padding: 0.4em
-  font-size: 0.8rem
+    @media only screen and (min-width: $tabletWidth)
+      width: 70%
 
-img
-  display: block
-  margin: 0
-  +corners
-  border: solid 6px rgba($primary, 0.8)
-  width: 100%
+  img
+    display: block
+    margin: 0
+    +corners
+    border: solid 6px rgba($primary, 0.8)
+    width: 100%
 
-  
+  figcaption
+    padding: 0.4em
+    font-size: 0.8rem
+

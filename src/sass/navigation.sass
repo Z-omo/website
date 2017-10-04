@@ -7,6 +7,7 @@ $navBGColour: rgba($color4, 0.8)
 
 $mobileRibbonHeight: $iconSize + (2 * $viewEdgePos)
 
+//—————————————————————————————————————————————: Default view
 nav
   background-color: $primary
 
@@ -30,6 +31,7 @@ nav
     text-align: center
     background-color: $navBGColour
 
+//—————————————————————————————————————————————: Mobile and JS enabled only
 @media only screen and (max-width: $tabletWidth)
   .focus-js nav
     position: fixed
@@ -65,6 +67,17 @@ nav
       transition-duration: $transDurationIn * 2
       transform: rotate(45deg)
 
+    .home-link
+      +setAsIcon
+      top: auto
+      left: $viewEdgePos
+      bottom: $viewEdgePos + 0.1rem
+      background-image: url('#{$imagePath}on-focus-logo.svg')
+      width: 44px
+      padding-top: 30px
+      opacity: 0.8
+
+//—————————————————————————————————————————————: Tablet and above.
 @media only screen and (min-width: $tabletWidth)
   nav
     position: fixed
@@ -115,7 +128,7 @@ nav
     
   .js-scrolled nav::before
     opacity: 1
-    
+
 @media only screen and (min-width: $desktopWidth)
   nav
     a
@@ -127,3 +140,4 @@ nav
     a
       padding: 0.2em 3em
       font-size: 1.6rem
+      

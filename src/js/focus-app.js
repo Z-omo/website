@@ -23,7 +23,7 @@ const focus = {
   {
     focus.setViewParams();
     focus.setJSMode();    
-    if (true === focus.view.smallView) { focus.setupMenu(); }
+    if (true === focus.view.smallView) { focus.setupMobileMenu(); }
 
     focus.setupEvents();
   },
@@ -51,7 +51,7 @@ const focus = {
     focus.view.html = html;
   },
 
-  setupMenu: function()
+  setupMobileMenu: function()
   {
     let nav = document.querySelector('#menu');
     if (!nav) { return; }
@@ -61,12 +61,17 @@ const focus = {
     menu.id = 'menuBtn';
     menu.addEventListener('click', focus.onMenu);
 
+    let home = document.createElement('span');
+    nav.appendChild(home);
+    home.classList.add('home-link');
+    home.addEventListener('click', focus.onHome);
+
     focus.view.nav = nav;
   },
   
   setupEvents: function()
   {
-    window.addEventListener('scroll', debounce(focus.onScroll, 250));
+    window.addEventListener('scroll', debounce(focus.onScroll, 120));
   },
   
   onMenu: function(e)
@@ -79,6 +84,11 @@ const focus = {
     focus.view.nav.classList.toggle('open');
   },
 
+  onHome: function()
+  {
+    window.location.href = './';
+  },
+  
   onScroll: function(e)
   {
     let scroll = window.scrollY;
@@ -89,9 +99,7 @@ const focus = {
     }
 
     focus.view.html.classList.add(focus.view.scrolledClass);
-  },
-  
-  
+  }
 };
 
 module.exports = focus;
