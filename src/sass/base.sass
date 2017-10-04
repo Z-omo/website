@@ -8,7 +8,7 @@ $tabletWidth:     39em
 $wideTabletWidth: 59em
 $desktopWidth:    69em
 $maxWidth:        2000px
-$maxContentWidth: 1800px
+$maxMainElementWidth: 1800px
 
 //—————————————————————————————————————————————: Layout values
 $contentMargin:   2em
@@ -16,8 +16,22 @@ $contentPadding:  2em
 
 $viewEdgePos:     0.5rem
 
+$cornerRadius:    0.3em
+
 //—————————————————————————————————————————————: Text values
-$textShadow: 2px 2px 1px black
+$gRatio: 1.618
+$baseFontSize: 87.5%
+$contentFontSize: 1rem
+$bodycontentLineHeight: $contentFontSize * $gRatio
+
+$charactersPerLine: 90
+$maxContentWidth: ($contentFontSize / $gRatio) * $charactersPerLine
+
+$headerTitleFontSize: 2.2rem
+$headerTitleLineHeight: $headerTitleFontSize * $gRatio
+$maxHeaderTitleWidth: ($headerTitleFontSize / $gRatio) * 24
+
+$textShadow: 2px 2px 1px $primary
 
 //—————————————————————————————————————————————: Animation values
 $transDurationIn: 200ms

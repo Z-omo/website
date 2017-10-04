@@ -1,10 +1,17 @@
 /*
  * SASS for text content elements – website.com
  */
+
+html
+  font-size: $baseFontSize
+
 body
   font-family: verdana, helvetica, sans-serif
-  font-size: 1rem/1.4
+  font-size: $contentFontSize
+  line-height: $contentFontSize * 1.618
   color: $primary
+
+
 
 // selected text:
 ::-moz-selection

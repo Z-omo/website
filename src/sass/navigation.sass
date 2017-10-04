@@ -25,6 +25,7 @@ nav
     border: solid 1px $color4
     padding: 0.8em 2em
     text-decoration: none
+    font-size: 1.2rem
     color: white
     text-align: center
     background-color: $navBGColour
@@ -68,7 +69,10 @@ nav
   nav
     position: fixed
     top: 0
-    right: 0
+    left: auto
+    padding: 0
+    width: 100%
+    max-width: $maxWidth
     z-index: 100
     background-color: transparent
 
@@ -76,18 +80,50 @@ nav
       padding: $contentPadding / 2
 
       display: flex
+      flex-direction: row
       justify-content: flex-end
 
     li
+      flex: 0 1 auto
       margin: 0
       padding: 0
+      width: auto
       
     a
       border: none
-      padding: 0.2em 2em
+      padding: 0 1.8em
+      font-size: 1.1rem
       background-color: transparent
       transition: background-color $transDurationOut ease-out
       
       &:hover
         background-color: $navBGColour
         transition-duration: $transDurationIn
+
+  nav::before
+    content: ''
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background-color: rgba($primary, 0.8)
+    z-index: -1
+    opacity: 0
+    transition: opacity $transDurationIn ease-out
+    
+  .js-scrolled nav::before
+    opacity: 1
+    
+@media only screen and (min-width: $desktopWidth)
+  nav
+    a
+      padding: 0.2em 3em
+      font-size: 1.2rem
+
+@media only screen and (min-width: $maxWidth)
+  nav
+    a
+      padding: 0.2em 3em
+      font-size: 1.6rem

@@ -11,22 +11,21 @@
  *
  * This file and its @package are under version control.
  */
-
+const debounce = require('lodash.debounce');
 const focus = {
 
   view: {
-    smallViewEM: 39
+    smallViewEM:    39,
+    scrolledClass:  'js-scrolled'
   },
 
   init: function()
   {
     focus.setViewParams();
+    focus.setJSMode();    
+    if (true === focus.view.smallView) { focus.setupMenu(); }
 
-    if (true === focus.view.smallView)
-    {
-      focus.setJSMode();
-      focus.setupMenu();  
-    }
+    focus.setupEvents();
   },
 
   setViewParams: function()
@@ -49,6 +48,7 @@ const focus = {
     if (!html) { return; }
     
     html.classList.add('focus-js');
+    focus.view.html = html;
   },
 
   setupMenu: function()
@@ -64,6 +64,11 @@ const focus = {
     focus.view.nav = nav;
   },
   
+  setupEvents: function()
+  {
+    window.addEventListener('scroll', debounce(focus.onScroll, 250));
+  },
+  
   onMenu: function(e)
   {
     focus.toggleMenu();
@@ -73,6 +78,19 @@ const focus = {
   {
     focus.view.nav.classList.toggle('open');
   },
+
+  onScroll: function(e)
+  {
+    let scroll = window.scrollY;
+    if (0 === scroll)
+    {
+      focus.view.html.classList.remove(focus.view.scrolledClass);
+      return;
+    }
+
+    focus.view.html.classList.add(focus.view.scrolledClass);
+  },
+  
   
 };
 

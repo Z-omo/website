@@ -147,9 +147,15 @@ main {
   min-height: 40vh;
   max-width: 1800px;
   background-color: rgba(255, 255, 255, 0.9); }
+  @media only screen and (min-width: 1800px) {
+    main {
+      -webkit-border-radius: 0.3em;
+      border-radius: 0.3em; } }
 
 .content {
   margin: 0 0 2em; }
+  .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content blockquote, .content code {
+    max-width: 55.62423rem; }
 
 @media only screen and (min-width: 39em) {
   .content, .side-bar {
@@ -165,14 +171,14 @@ main {
     padding: 0;
     width: 30%;
     max-width: 320px; } }
+  @media only screen and (min-width: 39em) and (min-width: 39em) {
+    .side-bar {
+      transform: translateY(-20%); } }
 
 figure {
   margin: 0 auto;
   padding: 0;
   width: 90%; }
-  @media only screen and (min-width: 39em) {
-    figure {
-      transform: translateY(-50%); } }
 
 figcaption {
   padding: 0.4em;
@@ -181,19 +187,19 @@ figcaption {
 img {
   display: block;
   margin: 0;
-  -webkit-border-radius: 0.2em;
-  border-radius: 0.2em;
-  border: solid 0.375em rgba(13, 19, 33, 0.8);
+  -webkit-border-radius: 0.3em;
+  border-radius: 0.3em;
+  border: solid 6px rgba(13, 19, 33, 0.8);
   width: 100%; }
 
 /*
  * SASS for page header element – website.com
  */
 header {
-  padding: 4em 2em;
+  padding: 4em 2em 2em;
   box-sizing: border-box;
   width: 100%;
-  min-height: 40vh;
+  min-height: 320px;
   color: #FFFFFF; }
   header a[href="#menu"] {
     position: absolute;
@@ -216,14 +222,41 @@ header {
   header .logo {
     position: absolute;
     top: 0.5rem;
-    left: 0.5rem; }
-    header .logo img {
-      width: 4em; }
+    left: 0.5rem;
+    opacity: 0.8;
+    width: 5em; }
+    @media only screen and (min-width: 39em) {
+      header .logo {
+        position: fixed;
+        z-index: 101;
+        transition: transform 200ms ease-out;
+        transform-origin: top left;
+        transform: scale(1); }
+        .js-scrolled header .logo {
+          transform: scale(0.88); } }
   header h1 {
     display: none; }
   header h2 {
-    font-size: 2rem;
-    text-shadow: 2px 2px 1px black; }
+    margin: 0.5rem 0;
+    font-size: 2.2rem;
+    line-height: 3.5596rem;
+    text-shadow: 2px 2px 1px #0d1321;
+    opacity: 0.87; }
+    @media only screen and (min-width: 39em) {
+      header h2 {
+        max-width: 32.63288rem;
+        font-size: 3rem;
+        line-height: 4.854rem; } }
+    @media only screen and (min-width: 69em) {
+      header h2 {
+        max-width: 48.94932rem;
+        font-size: 3.2rem;
+        line-height: 5.1776rem; } }
+    @media only screen and (min-width: 2000px) {
+      header h2 {
+        max-width: 65.26576rem;
+        font-size: 4rem;
+        line-height: 6.472rem; } }
   header .page-header-image {
     position: absolute;
     top: 0;
@@ -231,7 +264,7 @@ header {
     bottom: 0;
     left: 0;
     min-height: 380px;
-    max-height: 60vh;
+    max-height: 640px;
     z-index: -1;
     background-repeat: no-repeat;
     background-position: center center;
@@ -239,13 +272,17 @@ header {
     background-image: url("/resources/image/header-image-mobile.jpg"); }
     @media only screen and (min-width: 39em) {
       header .page-header-image {
-        min-height: 30vh;
+        max-height: 600px;
         background-image: url("/resources/image/header-image.jpg"); } }
+    @media only screen and (min-width: 2000px) {
+      header .page-header-image {
+        -webkit-border-radius: 0 0 0.3em 0.3em;
+        border-radius: 0 0 0.3em 0.3em; } }
     header .page-header-image::after {
       content: '';
       display: block;
       position: absolute;
-      bottom: 0;
+      bottom: -1px;
       left: 0;
       width: 100%;
       height: 5em;
@@ -255,9 +292,13 @@ header {
 /*
  * SASS for text content elements – website.com
  */
+html {
+  font-size: 87.5%; }
+
 body {
   font-family: verdana, helvetica, sans-serif;
-  font-size: 1rem/1.4;
+  font-size: 1rem;
+  line-height: 1.618rem;
   color: #0d1321; }
 
 ::-moz-selection {
@@ -287,6 +328,7 @@ nav {
     border: solid 1px #bdd4e7;
     padding: 0.8em 2em;
     text-decoration: none;
+    font-size: 1.2rem;
     color: white;
     text-align: center;
     background-color: rgba(189, 212, 231, 0.8); }
@@ -339,24 +381,55 @@ nav {
   nav {
     position: fixed;
     top: 0;
-    right: 0;
+    left: auto;
+    padding: 0;
+    width: 100%;
+    max-width: 2000px;
     z-index: 100;
     background-color: transparent; }
     nav ul {
       padding: 1em;
       display: flex;
+      flex-direction: row;
       justify-content: flex-end; }
     nav li {
+      flex: 0 1 auto;
       margin: 0;
-      padding: 0; }
+      padding: 0;
+      width: auto; }
     nav a {
       border: none;
-      padding: 0.2em 2em;
+      padding: 0 1.8em;
+      font-size: 1.1rem;
       background-color: transparent;
       transition: background-color 1s ease-out; }
       nav a:hover {
         background-color: rgba(189, 212, 231, 0.8);
-        transition-duration: 200ms; } }
+        transition-duration: 200ms; }
+  nav::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(13, 19, 33, 0.8);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 200ms ease-out; }
+  .js-scrolled nav::before {
+    opacity: 1; } }
+
+@media only screen and (min-width: 69em) {
+  nav a {
+    padding: 0.2em 3em;
+    font-size: 1.2rem; } }
+
+@media only screen and (min-width: 2000px) {
+  nav a {
+    padding: 0.2em 3em;
+    font-size: 1.6rem; } }
 
 /*
  * SASS for footer element - website.com
@@ -367,3 +440,7 @@ footer {
   min-height: 6rem;
   background-color: #172121;
   color: #bdd4e7; }
+  @media only screen and (min-width: 2000px) {
+    footer {
+      -webkit-border-radius: 0.3em;
+      border-radius: 0.3em; } }

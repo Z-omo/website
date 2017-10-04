@@ -2,10 +2,10 @@
  * SASS for page header element – website.com
  */
 header
-  padding: $contentPadding * 2 $contentPadding
+  padding: ($contentPadding * 2) $contentPadding $contentPadding
   box-sizing: border-box
   width: 100%
-  min-height: 40vh
+  min-height: 320px
   color: #FFFFFF
 
   a[href="#menu"]
@@ -20,17 +20,43 @@ header
     position: absolute
     top: $viewEdgePos
     left: $viewEdgePos
+    opacity: 0.8
+    width: 5em
 
-    img
-      width: 4em
+    @media only screen and (min-width: $tabletWidth)
+      position: fixed
+      z-index: 101
+      transition: transform $transDurationIn ease-out
+      transform-origin: top left
+      transform: scale(1)
+
+      .js-scrolled &
+        transform: scale(0.88)
 
   h1
     display: none
   
   h2
-    font-size: 2rem
-    //max-width: 60%
+    margin: $viewEdgePos 0
+    font-size: $headerTitleFontSize
+    line-height: $headerTitleLineHeight
     text-shadow: $textShadow
+    opacity: 0.87
+
+    @media only screen and (min-width: $tabletWidth)
+      max-width: ($headerTitleFontSize / $gRatio) * 24
+      font-size: 3rem
+      line-height: 3rem * $gRatio
+
+    @media only screen and (min-width: $desktopWidth)
+      max-width: ($headerTitleFontSize / $gRatio) * 36
+      font-size: 3.2rem
+      line-height: 3.2rem * $gRatio
+
+    @media only screen and (min-width: $maxWidth)
+      max-width: ($headerTitleFontSize / $gRatio) * 48
+      font-size: 4rem
+      line-height: 4rem * $gRatio
 
   .page-header-image
     position: absolute
@@ -40,8 +66,7 @@ header
     left: 0
 
     min-height: 380px
-    //min-height: 40vh
-    max-height: 60vh
+    max-height: 640px
     z-index: -1
 
     background-repeat: no-repeat
@@ -51,14 +76,17 @@ header
     background-image: url('#{$imagePath}header-image-mobile.jpg')
 
     @media only screen and (min-width: $tabletWidth)
-      min-height: 30vh
+      max-height: 600px
       background-image: url('#{$imagePath}header-image.jpg')
+
+    @media only screen and (min-width: $maxWidth)
+      +corners(0 0 $cornerRadius $cornerRadius)
 
     &::after
       content: ''
       display: block
       position: absolute
-      bottom: 0
+      bottom: -1px
       left: 0
       width: 100%
       height: 5em
