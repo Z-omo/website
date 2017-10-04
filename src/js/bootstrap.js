@@ -11,6 +11,8 @@
  *
  * This file and its @package are under version control.
  */
+'use strict';
+
 require('../sass/bootstrap.sass');
  
 const focus = require('./focus-app.js');

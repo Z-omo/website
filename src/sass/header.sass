@@ -5,8 +5,11 @@ header
   padding: ($contentPadding * 2) $contentPadding $contentPadding
   box-sizing: border-box
   width: 100%
-  min-height: 320px
+  min-height: 240px
   color: #FFFFFF
+
+  @media only screen and (min-width: $tabletWidth)
+    min-height: 320px
 
   a[href="#menu"]
     +setAsIcon
@@ -33,9 +36,12 @@ header
       transition: transform $transDurationIn ease-out
       transform-origin: top left
       transform: scale(1)
-
+      
       .js-scrolled &
         transform: scale(0.84)
+
+    @media only screen and (min-width: $maxWidth)
+      left: auto
 
   h1
     display: none
@@ -53,6 +59,7 @@ header
       line-height: 3rem * $gRatio
 
     @media only screen and (min-width: $desktopWidth)
+      padding-left: $contentPadding
       max-width: ($headerTitleFontSize / $gRatio) * 36
       font-size: 3.2rem
       line-height: 3.2rem * $gRatio
@@ -69,7 +76,6 @@ header
     bottom: 0
     left: 0
 
-    min-height: 380px
     max-height: 640px
     z-index: -1
 
@@ -80,11 +86,11 @@ header
     background-image: url('#{$imagePath}header-image-mobile.jpg')
 
     @media only screen and (min-width: $tabletWidth)
-      max-height: 600px
       background-image: url('#{$imagePath}header-image.jpg')
-
+    
     @media only screen and (min-width: $maxWidth)
       +corners(0 0 $cornerRadius $cornerRadius)
+      max-height: 1240px
 
     &::after
       content: ''

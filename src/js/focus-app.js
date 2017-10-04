@@ -11,6 +11,8 @@
  *
  * This file and its @package are under version control.
  */
+'use strict';
+
 const debounce = require('lodash.debounce');
 const focus = {
 

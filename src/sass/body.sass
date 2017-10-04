@@ -29,32 +29,14 @@ main
 
   @media only screen and (min-width: $maxMainElementWidth)
     +corners
+    border: solid 1px $color4
+    margin-bottom: ($contentMargin * 2)
 
 .content
   margin: 0 0 $contentMargin
 
   header, footer, h1, h2, h3, p, ul, ol, blockquote, code
     max-width: $maxContentWidth
-
-@media only screen and (min-width: $tabletWidth)
-  .content, .side-bar
-    display: inline-block
-    vertical-align: top
-    margin: 0 -2px
-    
-  .content
-    box-sizing: border-box
-    padding: 0 (2 * $contentPadding) 0 0
-    width: 70%
-
-  .side-bar
-    box-sizing: border-box
-    padding: 0
-    width: 30%
-    max-width: 320px
-
-    @media only screen and (min-width: $tabletWidth)
-      transform: translateY(-20%)
 
 .side-bar
   figure
@@ -76,3 +58,25 @@ main
     padding: 0.4em
     font-size: 0.8rem
 
+@media only screen and (min-width: $tabletWidth)
+  .content, .side-bar
+    display: inline-block
+    vertical-align: top
+    margin: 0 -2px
+    
+  .content
+    box-sizing: border-box
+    padding: 0 (2 * $contentPadding) 0 0
+    width: 70%
+
+  .side-bar
+    box-sizing: border-box
+    padding: 0
+    width: 30%
+    max-width: 320px
+
+    transform: translateY(-20%)
+
+@media only screen and (min-width: $desktopWidth)
+  .content
+    padding-left: $contentPadding

@@ -14,9 +14,9 @@ links:
   - title:  Home
     url:    ./
   - title:  About
-    url:    about
+    url:    /about
   - title:  Blog
-    url:    blog
+    url:    /blog
   - title:  Work
-    url:    work
+    url:    /work
 
