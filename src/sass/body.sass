@@ -4,7 +4,7 @@
 html
   margin: 0
   height: 100%
-  //background-color: $primary
+  background-color: $primary
 
 body
   margin: 0
@@ -18,18 +18,22 @@ body
   left: 0
   margin: 0 auto
   max-width: $maxWidth
+  background-color: white
+  z-index: 1
+
   
 main
+  position: relative
   box-sizing: border-box
   margin: 0 auto
   padding: $contentPadding
   min-height: 40vh
   max-width: $maxMainElementWidth
   background-color: rgba(white, 0.9)
+  z-index: 1
 
   @media only screen and (min-width: $maxMainElementWidth)
     +corners
-    border: solid 1px $color4
     margin-bottom: ($contentMargin * 2)
 
 .content

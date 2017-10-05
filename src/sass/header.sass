@@ -6,7 +6,8 @@
   box-sizing: border-box
   width: 100%
   min-height: 240px
-  color: #FFFFFF
+  color: white
+  background-color: $primary
 
   @media only screen and (min-width: $tabletWidth)
     min-height: 320px
@@ -75,19 +76,15 @@
     right: 0
     bottom: 0
     left: 0
+    background-color: $primary
 
     max-height: 640px
-    z-index: -1
+    z-index: 0
 
     background-repeat: no-repeat
     background-position: center center
     background-size: cover
 
-    background-image: url('#{$imagePath}header-image-mobile.jpg')
-
-    @media only screen and (min-width: $tabletWidth)
-      background-image: url('#{$imagePath}header-image.jpg')
-    
     @media only screen and (min-width: $maxWidth)
       +corners(0 0 $cornerRadius $cornerRadius)
       max-height: 1240px
