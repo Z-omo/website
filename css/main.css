@@ -378,11 +378,15 @@ nav {
       margin-top: 3.375rem;
       padding-bottom: 3.375rem;
       background-color: rgba(13, 19, 33, 0.9);
-      transition: transform 200ms cubic-bezier(0.9, 0, 0.13, 1.17);
-      transform: translateY(0%); }
+      transition-property: transform, opacity;
+      transition-duration: 200ms, 200ms;
+      transition-timing-function: cubic-bezier(0.9, 0, 0.13, 1.17), ease-in-out;
+      transform: translateY(0%);
+      opacity: 0; }
     .focus-js nav.open ul {
-      transition-duration: 400ms;
-      transform: translateY(-101%); }
+      transition-duration: 400ms, 560ms;
+      transform: translateY(-101%);
+      opacity: 1; }
     .focus-js nav #menuBtn {
       position: absolute;
       top: 0;
@@ -443,21 +447,24 @@ nav {
       padding: 1rem;
       display: flex;
       flex-direction: row;
-      justify-content: flex-end; }
+      justify-content: flex-end;
+      text-align: right; }
     nav li {
-      flex: 0 1 auto;
       margin: 0;
       padding: 0;
-      width: auto; }
+      width: auto;
+      display: inline-block; }
     nav a {
       border: none;
       padding: 0 1.8em;
       font-size: 1.1rem;
       background-color: transparent;
-      transition: all 1s ease-out; }
+      transition-property: background-color, color;
+      transition-duration: 1s, 2s;
+      transition-timing-function: ease-out, ease-out; }
       nav a:hover {
         background-color: rgba(189, 212, 231, 0.8);
-        transition-duration: 200ms;
+        transition-duration: 200ms, 400ms;
         color: #0d1321; }
     nav .active a {
       background-color: rgba(134, 147, 171, 0.4);
@@ -532,7 +539,8 @@ footer {
       .collection .articles article {
         margin: 0 1rem 2rem;
         width: 45%;
-        height: 12rem; } }
+        height: 12rem;
+        display: inline-block; } }
     @media only screen and (min-width: 69em) {
       .collection .articles article {
         width: 30%;

@@ -6,7 +6,7 @@
     "start": "npm run dev",
     "setup": "npm install",
     "webpack-dev": "webpack -d --watch",
-    "jekyll-serve": "jekyll liveserve --baseurl \"\/\"",
+    "jekyll-serve": "jekyll liveserve --host=192.168.0.28 --baseurl \"\/\"",
     "open-chrome": "opn http://dev.website.com:4000 -- 'google chrome'",
     "prod": "webpack -p",
     "dev": "npm run open-chrome && npm run jekyll-serve & npm run webpack-dev",

@@ -47,12 +47,16 @@ nav
       margin-top: $mobileRibbonHeight
       padding-bottom: $mobileRibbonHeight
       background-color: rgba($primary, 0.9)
-      transition: transform $transDurationIn $easeSpecial
+      transition-property: transform, opacity
+      transition-duration: $transDurationIn, $transDurationIn
+      transition-timing-function: $easeSpecial, ease-in-out
       transform: translateY(0%)
+      opacity: 0
 
     &.open ul
-      transition-duration: $transDurationIn * 2
+      transition-duration: $transDurationIn * 2, $transDurationIn * 2.8
       transform: translateY(-101%)
+      opacity: 1
 
     #menuBtn
       +setAsIcon
@@ -97,22 +101,29 @@ nav
       flex-direction: row
       justify-content: flex-end
 
+      // for browsers with no flex support:
+      text-align: right
+
     li
-      flex: 0 1 auto
       margin: 0
       padding: 0
       width: auto
+
+      // for browsers with no flex support:
+      display: inline-block
       
     a
       border: none
       padding: 0 1.8em
       font-size: 1.1rem
       background-color: transparent
-      transition: all $transDurationOut ease-out
+      transition-property: background-color, color
+      transition-duration: $transDurationOut, $transDurationOut * 2
+      transition-timing-function: ease-out, ease-out
       
       &:hover
         background-color: $navBGColour
-        transition-duration: $transDurationIn
+        transition-duration: $transDurationIn, $transDurationIn * 2
         color: $primary
 
     .active a
