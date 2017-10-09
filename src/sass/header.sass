@@ -5,12 +5,12 @@
   padding: ($contentPadding * 2) $contentPadding $contentPadding
   box-sizing: border-box
   width: 100%
-  min-height: 240px
+  min-height: 120px
   color: white
   background-color: $primary
 
   @media only screen and (min-width: $tabletWidth)
-    min-height: 320px
+    //min-height: 320px
 
   a[href="#menu"]
     +setAsIcon
@@ -26,13 +26,13 @@
     left: $viewEdgePos
     opacity: 0.8
     width: 5em
+    z-index: 101
 
     img
       width: 100%
 
     @media only screen and (min-width: $tabletWidth)
       position: fixed
-      z-index: 101
       width: 5.4em
       transition: transform $transDurationIn ease-out
       transform-origin: top left
@@ -53,6 +53,7 @@
     line-height: $headerTitleLineHeight
     text-shadow: $textShadow
     opacity: 0.87
+    color: white
 
     @media only screen and (min-width: $tabletWidth)
       max-width: ($headerTitleFontSize / $gRatio) * 24

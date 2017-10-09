@@ -20,7 +20,6 @@ body
   max-width: $maxWidth
   background-color: white
   z-index: 1
-
   
 main
   position: relative
@@ -39,6 +38,9 @@ main
 .content
   margin: 0 0 $contentMargin
 
+  .collection &
+    transform: translateY(-70px)
+
   header, footer, h1, h2, h3, p, ul, ol, blockquote, code
     max-width: $maxContentWidth
 
@@ -47,6 +49,7 @@ main
     margin: 0 auto
     padding: 0
     width: 90%
+    max-width: 320px
 
     @media only screen and (min-width: $tabletWidth)
       width: 70%
@@ -74,6 +77,7 @@ main
     width: 70%
 
     .collection &
+      padding-right: 0
       width: 100%
 
   .side-bar

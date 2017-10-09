@@ -154,19 +154,22 @@ main {
   z-index: 1; }
   @media only screen and (min-width: 1800px) {
     main {
-      -webkit-border-radius: 0.3em;
-      border-radius: 0.3em;
+      -webkit-border-radius: 0.26em;
+      border-radius: 0.26em;
       margin-bottom: 4rem; } }
 
 .content {
   margin: 0 0 2rem; }
+  .collection .content {
+    transform: translateY(-70px); }
   .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content blockquote, .content code {
     max-width: 55.62423rem; }
 
 .side-bar figure {
   margin: 0 auto;
   padding: 0;
-  width: 90%; }
+  width: 90%;
+  max-width: 320px; }
   @media only screen and (min-width: 39em) {
     .side-bar figure {
       width: 70%; } }
@@ -174,8 +177,8 @@ main {
 .side-bar img {
   display: block;
   margin: 0;
-  -webkit-border-radius: 0.3em;
-  border-radius: 0.3em;
+  -webkit-border-radius: 0.26em;
+  border-radius: 0.26em;
   border: solid 6px rgba(13, 19, 33, 0.8);
   width: 100%; }
 
@@ -193,6 +196,7 @@ main {
     padding: 0 4rem 0 0;
     width: 70%; }
     .collection .content {
+      padding-right: 0;
       width: 100%; }
   .side-bar {
     box-sizing: border-box;
@@ -212,12 +216,9 @@ main {
   padding: 4rem 2rem 2rem;
   box-sizing: border-box;
   width: 100%;
-  min-height: 240px;
+  min-height: 120px;
   color: white;
   background-color: #0d1321; }
-  @media only screen and (min-width: 39em) {
-    .boundary > header {
-      min-height: 320px; } }
   .boundary > header a[href="#menu"] {
     position: absolute;
     top: 0;
@@ -241,13 +242,13 @@ main {
     top: 0.5rem;
     left: 0.5rem;
     opacity: 0.8;
-    width: 5em; }
+    width: 5em;
+    z-index: 101; }
     .boundary > header .logo img {
       width: 100%; }
     @media only screen and (min-width: 39em) {
       .boundary > header .logo {
         position: fixed;
-        z-index: 101;
         width: 5.4em;
         transition: transform 200ms ease-out;
         transform-origin: top left;
@@ -264,7 +265,8 @@ main {
     font-size: 2.2rem;
     line-height: 3.5596rem;
     text-shadow: 2px 2px 1px #0d1321;
-    opacity: 0.87; }
+    opacity: 0.87;
+    color: white; }
     @media only screen and (min-width: 39em) {
       .boundary > header h2 {
         max-width: 32.63288rem;
@@ -295,8 +297,8 @@ main {
     background-size: cover; }
     @media only screen and (min-width: 2000px) {
       .boundary > header .page-header-image {
-        -webkit-border-radius: 0 0 0.3em 0.3em;
-        border-radius: 0 0 0.3em 0.3em;
+        -webkit-border-radius: 0 0 0.26em 0.26em;
+        border-radius: 0 0 0.26em 0.26em;
         max-height: 1240px; } }
     .boundary > header .page-header-image::after {
       content: '';
@@ -320,6 +322,14 @@ body {
   font-size: 1rem;
   line-height: 1.618rem;
   color: #0d1321; }
+
+h1, h2, h3 {
+  margin: 0 0 2rem;
+  color: #0d1321; }
+  .collection h1, .collection h2, .collection h3 {
+    color: white;
+    opacity: 0.8;
+    text-shadow: 2px 2px 1px #0d1321; }
 
 ::-moz-selection {
   background: grey;
@@ -362,7 +372,8 @@ nav {
     height: 3.375rem;
     background-color: transparent;
     background-image: -webkit-linear-gradient(top, rgba(13, 19, 33, 0.8), #0d1321);
-    background-image: linear-gradient(to bottom, rgba(13, 19, 33, 0.8), #0d1321); }
+    background-image: linear-gradient(to bottom, rgba(13, 19, 33, 0.8), #0d1321);
+    z-index: 100; }
     .focus-js nav ul {
       margin-top: 3.375rem;
       padding-bottom: 3.375rem;
@@ -443,12 +454,14 @@ nav {
       padding: 0 1.8em;
       font-size: 1.1rem;
       background-color: transparent;
-      transition: background-color 1s ease-out; }
+      transition: all 1s ease-out; }
       nav a:hover {
         background-color: rgba(189, 212, 231, 0.8);
-        transition-duration: 200ms; }
+        transition-duration: 200ms;
+        color: #0d1321; }
     nav .active a {
-      background-color: rgba(13, 19, 33, 0.4); }
+      background-color: rgba(134, 147, 171, 0.4);
+      color: white; }
   nav::before {
     content: '';
     display: block;
@@ -487,40 +500,75 @@ footer {
   z-index: 1; }
   @media only screen and (min-width: 2000px) {
     footer {
-      -webkit-border-radius: 0.3em;
-      border-radius: 0.3em; } }
+      -webkit-border-radius: 0.26em;
+      border-radius: 0.26em; } }
 
 /*
  * SASS for article collection views – website.com
  */
-.articles {
+.collection .articles {
+  position: relative;
   margin: 0 0 2rem;
-  display: flex; }
-  .articles article {
+  padding-top: 2rem; }
+  @media only screen and (min-width: 39em) {
+    .collection .articles {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center; } }
+  .collection .articles article {
+    display: block;
     position: relative;
     box-sizing: border-box;
-    margin: 0 0.4em 0 0;
-    -webkit-border-radius: 0.3em;
-    border-radius: 0.3em;
-    border: solid 0.3em rgba(13, 19, 33, 0.8);
-    width: 33.33%;
-    height: 16rem;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    -webkit-border-radius: 0.26em;
+    border-radius: 0.26em;
+    height: 8rem;
+    background-color: grey;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover; }
-    .articles article a {
+    @media only screen and (min-width: 39em) {
+      .collection .articles article {
+        margin: 0 1rem 2rem;
+        width: 45%;
+        height: 12rem; } }
+    @media only screen and (min-width: 69em) {
+      .collection .articles article {
+        width: 30%;
+        height: 16rem; } }
+    .collection .articles article a {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0; }
-    .articles article h1 {
+    .collection .articles article h1 {
       position: absolute;
       bottom: 0;
       left: 0;
-      padding: 2rem;
-      font-size: 1.8rem;
-      line-height: 2.2rem;
+      margin: 0;
+      -webkit-border-radius: 0 0 0.26em 0.26em;
+      border-radius: 0 0 0.26em 0.26em;
+      padding: 0.66667rem 1rem;
+      box-sizing: border-box;
+      width: 100%;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
       color: white;
       opacity: 0.9;
-      text-shadow: 2px 2px 1px #0d1321; }
+      text-shadow: 2px 2px 1px #0d1321;
+      background-color: rgba(13, 19, 33, 0.4);
+      transition: background-color 1s ease-out; }
+      @media only screen and (min-width: 39em) {
+        .collection .articles article h1 {
+          font-size: 1.4rem;
+          line-height: 1.8rem; } }
+      @media only screen and (min-width: 69em) {
+        .collection .articles article h1 {
+          font-size: 1.8rem;
+          line-height: 2.2rem; } }
+    .collection .articles article:hover h1 {
+      opacity: 1;
+      transition-duration: 200ms;
+      background-color: rgba(23, 33, 33, 0.8); }

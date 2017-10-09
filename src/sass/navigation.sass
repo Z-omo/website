@@ -41,6 +41,7 @@ nav
     height: $mobileRibbonHeight
     background-color: transparent
     +gradientBackground(rgba($primary, 0.8), $primary)
+    z-index: 100
 
     ul
       margin-top: $mobileRibbonHeight
@@ -107,14 +108,16 @@ nav
       padding: 0 1.8em
       font-size: 1.1rem
       background-color: transparent
-      transition: background-color $transDurationOut ease-out
+      transition: all $transDurationOut ease-out
       
       &:hover
         background-color: $navBGColour
         transition-duration: $transDurationIn
+        color: $primary
 
     .active a
-        background-color: rgba($primary, 0.4)
+        background-color: rgba($color2, 0.4)
+        color: white
 
   nav::before
     content: ''

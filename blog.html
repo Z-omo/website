@@ -4,7 +4,7 @@ layout: collection
 
 <h1>Blog</h1>
 
-<section class="articles">
+<div class="articles">
   {% for article in site.posts %}
   {% capture postPath %}/{{ article.date | date: '%Y' }}/{% endcapture %}
   {% assign tileName = article.id | replace: postPath, '' %}
@@ -13,7 +13,5 @@ layout: collection
       <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
     </header>
   </article>
-  {% endfor %}
-</section>
-<ul>
-</ul>
+  {% endfor %}    
+</div>

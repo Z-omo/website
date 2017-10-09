@@ -1,22 +1,38 @@
 /*
  * SASS for article collection views – website.com
  */
-.articles
+.collection .articles
+  position: relative
   margin: 0 0 $contentMargin
-  display: flex
+  padding-top: $contentMargin
+
+  @media only screen and (min-width: $tabletWidth)
+    display: flex
+    flex-flow: row wrap
+    justify-content: center
 
   article
+    display: block
     position: relative
     box-sizing: border-box
-    margin: 0 0.4em 0 0
+    margin: 0 0 $contentMargin 0
+    padding: 0
     +corners
-    border: solid 0.3em rgba($primary, 0.8)
-    width: 33.33%
-    height: 16rem
+    height: 8rem
 
+    background-color: grey
     background-repeat: no-repeat
     background-position: center center
     background-size: cover
+
+    @media only screen and (min-width: $tabletWidth)
+      margin: 0 ($contentMargin / 2) ($contentMargin)
+      width: 45%
+      height: 12rem
+
+    @media only screen and (min-width: $desktopWidth)
+      width: 30%
+      height: 16rem
     
     a
       position: absolute
@@ -29,12 +45,39 @@
       position: absolute
       bottom: 0
       left: 0
-      padding: $contentPadding
-      font-size: 1.8rem
-      line-height: 2.2rem
+      margin: 0
+      +corners(0 0 $cornerRadius $cornerRadius)
+      padding: $contentPadding / 3 $contentPadding / 2
+      box-sizing: border-box
+      width: 100%
+      font-size: 1.2rem
+      line-height: 1.5rem
       color: white
       opacity: 0.9
       text-shadow: $textShadow
+      background-color: rgba($primary, 0.4)
+      transition: background-color $transDurationOut ease-out
+      
+      @media only screen and (min-width: $tabletWidth)
+        font-size: 1.4rem
+        line-height: 1.8rem
 
+      @media only screen and (min-width: $desktopWidth)
+        font-size: 1.8rem
+        line-height: 2.2rem
 
+      // &::before
+      //   content: ''
+      //   display: block
+      //   position: absolute
+      //   top: -$contentPadding / 2
+      //   left: 0
+      //   width: 100%
+      //   height: $contentPadding / 2
+      //   +gradientBackground(transparent, rgba($primary, 0.4))
 
+    &:hover
+      h1
+        opacity: 1
+        transition-duration: $transDurationIn
+        background-color: rgba($color3, 0.8)
