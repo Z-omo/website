@@ -5,13 +5,19 @@ layout: collection
 <h1>Blog</h1>
 
 <div class="articles">
-  {% for article in site.posts %}
-  {% capture postPath %}/{{ article.date | date: '%Y' }}/{% endcapture %}
-  {% assign tileName = article.id | replace: postPath, '' %}
+  {%- for article in site.posts -%}
+  {% comment %}
+  Capture in var postPath the string: ‘/nnnn/‘; nnnn being the article date year value.
+  {% endcomment %}
+  {% comment %}
+  Assign the var tileName with a string made from the article ID, filtered to remove the ‘/nnnn/‘ above component.
+  {% endcomment %}
+  {%- capture postPath -%}/{{ article.date | date: '%Y' }}/{% endcapture %}
+  {%- assign tileName = article.id | replace: postPath, '' -%}
   <article style="background-image: url(resources/posts/tiles/{{ tileName }}.jpg);">
     <header>
       <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
     </header>
   </article>
-  {% endfor %}    
+  {%- endfor -%}
 </div>
