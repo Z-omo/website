@@ -14,6 +14,7 @@
 'use strict';
 
 const debounce = require('lodash.debounce');
+const RWDView = require('./rwd-view.js');
 const focus = {
 
   view: {
@@ -28,6 +29,7 @@ const focus = {
     if (true === focus.view.smallView) { focus.setupMobileMenu(); }
 
     focus.setupEvents();
+    focus.setupRWDViews();
   },
 
   setViewParams: function()
@@ -101,7 +103,16 @@ const focus = {
     }
 
     focus.view.html.classList.add(focus.view.scrolledClass);
-  }
+  },
+
+  setupRWDViews: function()
+  {
+    let rwd = document.querySelectorAll('.rwd-view');
+    if (!rwd || 0 === rwd.length) { return; }
+
+    RWDView.setup(rwd);
+  },
+  
 };
 
 module.exports = focus;

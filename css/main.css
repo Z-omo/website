@@ -332,12 +332,14 @@ h1, h2, h3 {
     text-shadow: 2px 2px 1px #0d1321; }
 
 ::-moz-selection {
-  background: grey;
-  text-shadow: none; }
+  background: #0d1321;
+  text-shadow: none;
+  color: white; }
 
 ::selection {
-  background: grey;
-  text-shadow: none; }
+  background: #0d1321;
+  text-shadow: none;
+  color: white; }
 
 /*
  * SASS for navigation elements - website.com
@@ -580,3 +582,87 @@ footer {
       opacity: 1;
       transition-duration: 200ms;
       background-color: rgba(23, 33, 33, 0.8); }
+
+/*
+ * SASS for supportng an iframe used to display RWD views.
+ */
+/*
+ * SASS definitions for RWD view device dimensions.
+ */
+.rwd-view {
+  position: relative; }
+
+.rwd-device {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transform-origin: 0 0;
+  transform: scale(0.72);
+  transition: all 1s cubic-bezier(0.9, 0, 0.13, 1.17); }
+  .rwd-mobile .rwd-device {
+    width: mobile;
+    height: calc(100vw * 2.01047);
+    max-width: 382px;
+    max-height: 768px; }
+  .rwd-tablet .rwd-device {
+    width: tablet;
+    height: calc(100vw * 1.38426);
+    max-width: 648px;
+    max-height: 897px; }
+  .rwd-desktop .rwd-device {
+    width: desktop;
+    height: calc(100vw * 0.62103);
+    max-width: 1417px;
+    max-height: 880px; }
+  @media only screen and (min-width: 39em) {
+    .rwd-device {
+      margin: 0 auto;
+      transform-origin: center 0; } }
+  .rwd-device::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 100% auto;
+    pointer-events: none; }
+    .rwd-mobile .rwd-device::before {
+      background-image: url("/resources/image/iphone-frame.png"); }
+    .rwd-tablet .rwd-device::before {
+      background-image: url("/resources/image/ipad-frame.png"); }
+    .rwd-desktop .rwd-device::before {
+      background-image: url("/resources/image/browser-frame.png"); }
+
+.rwd-mobile .rwd-view-frame {
+  position: absolute;
+  top: 18.09896%;
+  left: 7.32984%;
+  width: 83.76963%;
+  height: 68.88021%;
+  border: solid 3px black; }
+
+.rwd-tablet .rwd-view-frame {
+  position: absolute;
+  top: 12.82051%;
+  left: 4.78395%;
+  width: 88.88889%;
+  height: 80.26756%;
+  border: solid 3px black; }
+
+.rwd-desktop .rwd-view-frame {
+  position: absolute;
+  top: 8.40909%;
+  left: 0%;
+  width: 100%;
+  height: 91.59091%;
+  border: none; }
+
+.rwd-view-controls {
+  margin: 0 0 1rem; }
