@@ -18,6 +18,9 @@ const srcDir = __dirname + '/src/';
 const webRoot = __dirname + '/';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+//Only load this for production build, as webpack -p throws an error when processing ES6.
+//const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
 console.log('__dirname: ', __dirname);
 
 const config = {
@@ -57,7 +60,11 @@ const config = {
      * config.output.path above, therefore, our actual path for
      * CSS output is: webRoot + 'css/main.css'.
      */
-    new ExtractTextPlugin('css/[name].css', { allChunks: true }) 
+    new ExtractTextPlugin('css/[name].css', { allChunks: true }),
+    // new UglifyJSPlugin({
+    //   exclude: /\/node_modules/,
+    //   uglifyOptions: { ecma: 6, mangle: true, compress: true }
+    // })
   ]
 };
 

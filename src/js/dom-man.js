@@ -21,12 +21,36 @@ const DOM = {
     element.classList.add(className);
   },
 
+  hasClass: function(className, element)
+  {
+    return (element.classList && element.classList.contains(className));
+  },
+
+  toggleClass: function(className, element)
+  {
+    element.classList.toggle(className);
+  },
+
+  removeClass: function(className, element)
+  {
+    element.classList.remove(className);
+  },
+  
   tagIS: function(tagName, element)
   {
     if (!element) { return; }
     return element.tagName.toLowerCase() === tagName.toLowerCase();
   },
   
+  add: function(element, container)
+  {
+    container.appendChild(element);
+  },
+
+  prepend: function(element, container)
+  {
+    container.insertBefore(element, container.firstChild);
+  }
 };
 
 module.exports = DOM;

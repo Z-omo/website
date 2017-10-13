@@ -1,0 +1,26 @@
+/*
+ * SASS for button elements – website.com
+ */
+button
+  display: inline-block
+  vertical-align: middle
+  margin: 0 0.8em 0 0
+  +corners(2em)
+  border: solid 1px $color4
+  padding: 0.6em 2em
+  text-decoration: none
+  font-size: 1.2rem
+  color: $primary
+  text-align: center
+  background-color: $navBGColour
+  outline: none
+
+  transition: background-color $transDurationOut
+
+  &:hover
+    background-color: white
+    transition-duration: $transDurationIn
+
+  &.active
+    background-color: $color5
+    color: white

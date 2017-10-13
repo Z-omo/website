@@ -14,6 +14,7 @@
 'use strict';
 
 const debounce = require('lodash.debounce');
+const DOM = require('./dom-man.js');
 const RWDView = require('./rwd-view.js');
 const focus = {
 
@@ -29,7 +30,7 @@ const focus = {
     if (true === focus.view.smallView) { focus.setupMobileMenu(); }
 
     focus.setupEvents();
-    focus.setupRWDViews();
+    if (false === focus.view.smallView) { focus.setupRWDViews(); }
   },
 
   setViewParams: function()
@@ -51,7 +52,7 @@ const focus = {
     let html = document.querySelector('html');
     if (!html) { return; }
     
-    html.classList.add('focus-js');
+    DOM.addClass('focus-js', html);
     focus.view.html = html;
   },
 
@@ -67,7 +68,7 @@ const focus = {
 
     let home = document.createElement('span');
     nav.appendChild(home);
-    home.classList.add('home-link');
+    DOM.addClass('home-link', home);
     home.addEventListener('click', focus.onHome);
 
     focus.view.nav = nav;
@@ -85,7 +86,7 @@ const focus = {
   
   toggleMenu: function()
   {
-    focus.view.nav.classList.toggle('open');
+    DOM.toggleClass('open', focus.view.nav);
   },
 
   onHome: function()
@@ -96,13 +97,16 @@ const focus = {
   onScroll: function(e)
   {
     let scroll = window.scrollY;
+    let html = focus.view.html;
+    let scrollClass = focus.view.scrolledClass;
+
     if (0 === scroll)
     {
-      focus.view.html.classList.remove(focus.view.scrolledClass);
+      DOM.removeClass(scrollClass, html);
       return;
     }
 
-    focus.view.html.classList.add(focus.view.scrolledClass);
+    DOM.addClass(scrollClass, html);
   },
 
   setupRWDViews: function()
@@ -110,9 +114,8 @@ const focus = {
     let rwd = document.querySelectorAll('.rwd-view');
     if (!rwd || 0 === rwd.length) { return; }
 
-    RWDView.setup(rwd);
-  },
-  
+    RWDView.setup(rwd, focus.view.smallView);
+  }
 };
 
 module.exports = focus;

@@ -8,17 +8,17 @@ $rwdDeviceDims: (
     height:     768,
     vpWidth:    320,
     vpHeight:   529,
-    vpVertPos:  139,
+    vpVertPos:  136,
     vpHorizPos: 31 
   ),
   // need to use dims where the websites actually switch to tablet views:
   tablet: (
-    width:      648, 
-    height:     897,
-    vpWidth:    576,
-    vpHeight:   720,
-    vpVertPos:  115,
-    vpHorizPos: 34    
+    width:      820,//648, 
+    height:     1131,//897,
+    vpWidth:    728,
+    vpHeight:   910,
+    vpVertPos:  142,
+    vpHorizPos: 44    
   ),
   desktop: (
     width:      1417, 
@@ -72,7 +72,7 @@ $rwdIFrameBorderWidth: 0;
     $height: map-get($rwdDims, height);
     $aspectRatio: $height / $width;
 
-    width: $rwdMode;
+    width: $rwdWidth;
     height: calc(#{$rwdWidth} * #{$aspectRatio});
     max-width: #{$width}px;
     max-height: #{$height}px;
