@@ -25,3 +25,9 @@ links:
 # blog posts are grouped into year folders, e.g. 2017/title-of-article.
 permalink: /:year/:title
 
+# work/project samples and case studies. 
+collections:
+    work:
+      output: true
+      permalink: /:title
+
