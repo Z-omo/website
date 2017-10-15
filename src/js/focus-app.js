@@ -16,6 +16,7 @@
 const debounce = require('lodash.debounce');
 const DOM = require('./dom-man.js');
 const RWDView = require('./rwd-view.js');
+
 const focus = {
 
   view: {
@@ -37,7 +38,7 @@ const focus = {
   {
     let boundary = document.querySelector('.boundary');
     if (!boundary) { return; }
-    
+
     let compStyle = window.getComputedStyle(boundary);
     let regexNumeric = /^\d+/;
     let vpWidth = Number(regexNumeric.exec(compStyle.width));
@@ -46,12 +47,12 @@ const focus = {
 
     focus.view.smallView = vpWidth < vpMobileMax;
   },
-  
+
   setJSMode: function()
   {
     let html = document.querySelector('html');
     if (!html) { return; }
-    
+
     DOM.addClass('focus-js', html);
     focus.view.html = html;
   },
@@ -73,17 +74,17 @@ const focus = {
 
     focus.view.nav = nav;
   },
-  
+
   setupEvents: function()
   {
     window.addEventListener('scroll', debounce(focus.onScroll, 120));
   },
-  
-  onMenu: function(e)
+
+  onMenu: function()
   {
     focus.toggleMenu();
   },
-  
+
   toggleMenu: function()
   {
     DOM.toggleClass('open', focus.view.nav);
@@ -93,8 +94,8 @@ const focus = {
   {
     window.location.href = './';
   },
-  
-  onScroll: function(e)
+
+  onScroll: function()
   {
     let scroll = window.scrollY;
     let html = focus.view.html;

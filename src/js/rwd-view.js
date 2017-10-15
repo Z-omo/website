@@ -11,24 +11,36 @@
  *
  * This file and its @package are under version control.
  */
-'use strict';
+'user strict';
 
 const DOM = require('./dom-man.js');
 
-function setupViewControls()
-{
-  RWDView.container.forEach(function(view) {
-    buildViewControls(view);
-    view.addEventListener('click', onSelectControl);
-  });
-}
+const RWDView = {
+  viewModes:  ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
+  selectors:  {
+    container:  'rwd-view',
+    controls:   'rwd-view-controls',
+    active:     'active',
+    device:     'rwd-device',
+    frame:      'rwd-view-frame',
+    index:      'data-index',
+    frameURL:   'data-src'
+  },
+
+  setup: function(container) {
+    RWDView.container = container;
+    setupViewControls();
+    //setupView();
+    console.log('RWD View setup completed.');
+  },
+};
 
 function buildViewControls(container)
 {
   let controls = document.createElement('div');
   DOM.addClass(RWDView.selectors.controls, controls);
 
-  RWDView.viewModes.forEach(function(mode, index)
+  RWDView.viewModes.forEach((mode, index) =>
   {
     let button = document.createElement('button');
     setButtonText(mode, button);
@@ -41,6 +53,14 @@ function buildViewControls(container)
   DOM.prepend(controls, container);
 }
 
+function setupViewControls()
+{
+  RWDView.container.forEach((view) => {
+    buildViewControls(view);
+    view.addEventListener('click', onSelectControl);
+  });
+}
+
 function setButtonText(text, button)
 {
   text = text.replace('rwd-', '');
@@ -48,9 +68,6 @@ function setButtonText(text, button)
   {
     return letter.toUpperCase();
   });
-
-  console.log('text: ', text);
-  
   button.innerHTML = text;
 }
 
@@ -78,28 +95,34 @@ function activateControl(control)
   RWDView.activeControl = control;
 }
 
-function getViewFrame(element)
-{
-  let frame = element.querySelector('.' + RWDView.selectors.frame);
-  if (!frame) { frame = buildFrame(element); }
-  return frame;
-}
+// function getViewFrame(element)
+// {
+//   let frame = element.querySelector('.' + RWDView.selectors.frame);
+//   if (!frame) { frame = buildFrame(element); }
+//   return frame;
+// }
 
-function buildFrame(element)
-{
-  let device = element.querySelector('.' + RWDView.selectors.device);
-  if (!device) { device = element; }
+// function buildFrame(element)
+// {
+//   let device = getViewDevice(element);
+//   if (!device) { device = element; }
 
-  let frame = document.createElement('iframe');
-  DOM.add(frame, device);
-  DOM.addClass(RWDView.selectors.frame, frame);
+//   let frame = document.createElement('iframe');
+//   DOM.add(frame, device);
+//   DOM.addClass(RWDView.selectors.frame, frame);
 
-  return frame;
-}
+//   return frame;
+// }
 
-function getViewContainer(element)
-{
-  let target = element, isContainer, parent;
+// function getViewDevice(view) {
+//   return view.querySelector('.' + RWDView.selectors.device);
+// }
+
+// @TODO: rewrite so that element passed could be identified as container.
+function getViewContainer(element) {
+  let target = element;
+  let isContainer;
+  let parent
   if (!element) { return; }
 
   do
@@ -109,10 +132,9 @@ function getViewContainer(element)
 
     isContainer = DOM.hasClass(RWDView.selectors.container, parent);
     target = parent;
-
   } while (!isContainer && parent);
 
-  return parent;  
+  return parent;
 }
 
 function setViewMode(view, index)
@@ -132,18 +154,30 @@ function resetViewMode(view)
   });
 }
 
-function setupView()
-{
-  RWDView.container.forEach(function(view) {
-    let frame = getViewFrame(view);
-    if (!frame) { return; }
+// function setupView()
+// {
+//   RWDView.container.forEach(function(view) {
+//     let frame = getViewFrame(view);
+//     if (!frame) { return; }
 
-    let url = view.getAttribute(RWDView.selectors.frameURL);
-    if (!url) { return; }
+//     console.log('frame: ', frame);
+//     let barWidth = frame.offsetWidth - frame.clientWidth;
+//     console.log('barWidth: ', barWidth);
+
+//     if (0 < barWidth)
+//     {
+//       let device = getViewDevice(view);
+//       if (!device) { return; }
+
+//       let frameWidth = 100 * ((frame.offsetWidth + barWidth) / device.offsetWidth);
+//       //frame.setAttribute('style', 'width: ' + frameWidth + '%;');
+//     }
+//     // let url = view.getAttribute(RWDView.selectors.frameURL);
+//     // if (!url) { return; }
     
-    frame.setAttribute('src', url);    
-  });
-}
+//     // frame.setAttribute('src', url);    
+//   });
+//}
 
 // function setMobileAgent(targetWindow)
 // {
@@ -158,28 +192,5 @@ function setupView()
 //     targetWindow.parent.navigator = Object.create(navigator, { userAgent: agentProp });
 //   }
 //}
-
-const RWDView = {
-
-  viewModes:  ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
-  selectors:  {
-    container:  'rwd-view',
-    controls:   'rwd-view-controls',
-    active:     'active',
-    device:     'rwd-device',
-    frame:      'rwd-view-frame',
-    index:      'data-index',
-    frameURL:   'data-src'
-  },
-
-  setup: function(container)
-  {
-    RWDView.container = container;
-
-    setupViewControls();
-    //setupView();
-    console.log('RWD View setup completed.');
-  }
-};
 
 module.exports = RWDView;
