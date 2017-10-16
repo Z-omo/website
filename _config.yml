@@ -1,5 +1,5 @@
 # baseurl is being used to set <base> tag on pages built into subfolders.
-baseurl: 'website'
+baseurl: 'z-omo.github.io/website'
 
 exclude: [
   '.DS_Store',
@@ -29,5 +29,5 @@ permalink: :year/:title
 collections:
     work:
       output: true
-      permalink: :title
+      permalink: /:title
 
