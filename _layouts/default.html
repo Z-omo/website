@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="{{ site.baseurl }}">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Website.com</title>
+  {% include typekit-font.html %}  
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
   <div class="boundary">
   {% include header.html %}
-  {{content}}
+
+  <main>
+    <div class="content">
+        {{content}}
+    </div>
+    
+    <aside class="side-bar">
+    </aside>
+  </main>
+  
   {% include navigation.html %}
   {% include footer.html %}
   </div>

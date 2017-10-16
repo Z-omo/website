@@ -1,0 +1,85 @@
+/*
+ * SASS for supportng an iframe used to display RWD views.
+ */
+
+@import "device-dims"
+
+.rwd-view
+  position: relative
+
+$iFrameScrollBarWidth: 20
+
+.rwd-device // <figure>
+  position: relative
+  top: 0
+  left: 0
+  margin: 0
+  padding: 0
+  overflow: hidden
+  
+  .rwd-mobile &
+    +rwdDeviceRules(mobile)
+
+  .rwd-tablet &
+    +rwdDeviceRules(tablet)
+
+  .rwd-desktop &
+    +rwdDeviceRules(desktop)
+    transform: scale(0.72)
+  
+  transform-origin: 0 0
+  transform: scale(0.62)
+  transition: all $transDurationIn * 2 $easeSpecial
+
+  @media only screen and (min-width: $tabletWidth)
+    margin: 0 auto
+    transform-origin: center 0
+
+  &::before // device skin
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 2
+
+    background-repeat: no-repeat
+    background-position: left top
+    background-size: 100% 100%
+    pointer-events: none
+
+    .rwd-mobile &
+      background-image: url('#{$imagePath}iphone-frame.png')
+
+    .rwd-tablet &
+      background-image: url('#{$imagePath}ipad-frame.png')
+
+    .rwd-desktop &
+      background-size: 100% auto
+      background-image: url('#{$imagePath}browser-frame.png')
+    
+.rwd-view-frame // <iframe>
+  background-color: white
+  opacity: 0
+  transition: opacity $transDurationOut
+
+  .rwd-mobile &
+    +rwdIFrameRules(mobile)
+    opacity: 1
+
+  .rwd-tablet &
+    +rwdIFrameRules(tablet)
+    opacity: 1
+
+  .rwd-desktop &
+    +rwdIFrameRules(desktop)
+    opacity: 1
+  
+.rwd-view-controls
+  display: none
+  margin: 0 0 $contentMargin / 2
+  
+  .focus-js &
+    display: block
+

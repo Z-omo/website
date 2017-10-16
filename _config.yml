@@ -1,14 +1,33 @@
-baseurl:  'website'
-exclude:  ['README.md', 'node_modules', 'src']
+# baseurl is being used to set <base> tag on pages built into subfolders.
+baseurl: 'website'
 
-# site navigation links
+exclude: [
+  '.DS_Store',
+  'README.md', 
+  'node_modules',
+  'package*.json',
+  'Gemfile*',
+  'src',
+  'webpack.config.js'
+]
+
+# site navigation links:
 links:
-  - title:  Home
-    url:    ./
-  - title:  About
-    url:    about
-  - title:  Blog
-    url:    blog
-  - title:  Work
-    url:    work
+  - title: Home
+    url: ./
+  - title: About
+    url: /about
+  - title: Blog
+    url: /blog
+  - title: Work
+    url: /work
+
+# blog posts are grouped into year folders, e.g. 2017/title-of-article.
+permalink: /:year/:title
+
+# work/project samples and case studies. 
+collections:
+    work:
+      output: true
+      permalink: /:title
 

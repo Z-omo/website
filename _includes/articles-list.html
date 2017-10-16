@@ -1,0 +1,30 @@
+<div class="articles{% if include.group %} {{ include.group }}{% endif %}">
+  {%- for article in include.articles -%}
+  {% comment %}
+  Capture in var postPath the string: ‘/nnnn/‘; nnnn being the article date year value.
+  {% endcomment %}
+  {% comment %}
+  Assign the var tileName with a string made from the article ID, filtered to remove the ‘/nnnn/‘ above component.
+  {% endcomment %}
+  
+  {%- capture postPath -%}/{{ article.date | date: '%Y' }}/{% endcapture %}
+  {%- assign tileName = article.id | replace: postPath, '' | replace: '/', '' -%}
+  
+  {% assign tileData = site.static_files | where: 'basename', tileName %}
+
+  {%- if 1 == tileData.size -%}
+    {% assign withImage = true %}
+    {% assign articleClass = 'with-image' %}
+  {%- endif -%}
+
+  {%- if article.hideTileTitle -%}
+    {% assign articleClass = articleClass | append: ' hide-title' %}
+  {%- endif -%}
+
+  <article{% if articleClass %} class="{{ articleClass }}"{% endif %}{% if withImage %} style="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}"{%- endif -%}>
+    <header>
+      <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
+    </header>
+  </article>
+  {%- endfor -%}
+</div>

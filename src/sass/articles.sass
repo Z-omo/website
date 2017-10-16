@@ -1,0 +1,96 @@
+/*
+ * SASS for article collection views – website.com
+ */
+.articles
+  position: relative
+  margin: 0 0 $contentMargin
+  padding-top: $contentMargin
+
+  @media only screen and (min-width: $tabletWidth)
+    display: flex
+    flex-flow: row wrap
+    justify-content: center
+
+  article
+    display: block
+    position: relative
+    box-sizing: border-box
+    margin: 0 0 $contentMargin 0
+    padding: 0
+    border: solid 1px rgba(white, 0.7)//rgba($color2, 0.1)
+    +corners
+    height: 8rem
+
+    background-color: transparent
+
+    transition: background-color $transDurationOut ease-out
+
+    @media only screen and (min-width: $tabletWidth)
+      margin: 0 ($contentMargin / 2) ($contentMargin)
+      width: 45%
+      height: 12rem
+
+      // for browsers with no flex support:
+      display: inline-block
+
+    @media only screen and (min-width: $desktopWidth)
+      width: 30%
+      height: 16rem
+    
+    a
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      text-decoration: none
+
+    h1
+      padding: $contentPadding / 3 $contentPadding / 2
+      font-size: 1.2rem
+      line-height: 1.5rem
+      color: $primary
+      
+      transition: background-color $transDurationOut ease-out
+      
+      @media only screen and (min-width: $tabletWidth)
+        font-size: 1.4rem
+        line-height: 1.8rem
+
+      @media only screen and (min-width: $desktopWidth)
+        font-size: 1.8rem
+        line-height: 2.2rem
+
+    &.hide-title h1
+      opacity: 0 !important
+
+    &.with-image
+      //background-color: grey
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: cover
+
+      h1
+        position: absolute
+        bottom: 0
+        left: 0
+        margin: 0
+        +corners(0 0 $cornerRadius $cornerRadius)
+        box-sizing: border-box
+        width: 100%
+        color: white
+        text-shadow: $textShadow
+        opacity: 0.9
+        background-color: rgba($primary, 0.4)
+
+    &:hover
+      background-color: rgba($color2, 0.2)
+      transition-duration: $transDurationIn
+
+    &.with-image:hover  h1
+      opacity: 1
+      transition-duration: $transDurationIn
+      background-color: rgba($color3, 0.8)
+
+  &.work-articles .with-image
+    background-size: auto 100%

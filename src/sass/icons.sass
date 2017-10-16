@@ -1,0 +1,54 @@
+/*
+ * SASS for website icon elements - website.com
+ */
+
+$iconsSVGFile:  '#{$imagePath}website-icons.svg'
+//$iconsPNGFile:  '#{$imagePath}family-links-website-icons-3.png'
+
+$iconNames: menu, twitter, email
+
+$iconSize:        2.375rem // 38px, fixes Firefox odd scaling issue.
+$noSVGIconSize:   38px
+$iconInlineSize:  20px
+
+@function calcIconPos($iconNum: 0, $iconOffsetSize: $iconSize)
+  @return -($iconNum * $iconOffsetSize)
+
+=setIcon($iconName: 'menu', $iconOffsetSize: $iconSize, $y: 0)
+  $iconIndex: index($iconNames, $iconName) - 1
+  background-position: calcIconPos($iconIndex, $iconOffsetSize) $y
+
+=iconImage
+  background-color: transparent
+  //background-image: url($iconsPNGFile)
+  background-image: url($iconsSVGFile)
+
+  background-repeat: no-repeat
+  background-position: 0 top
+  background-size: auto 100%
+
+=setAsIcon
+  position: absolute
+  top: 0
+  left: 0
+  border: none
+  padding-top: $iconSize
+  width: $iconSize
+  height: 0
+  overflow: hidden
+  +iconImage
+
+//—————————————————————————————————————————————: ICON
+.icon
+  position: relative
+  top: 0
+  left: 0
+
+  width: $iconSize
+  height: $iconSize
+  overflow: hidden
+
+  +iconImage
+
+  a
+    +setAsIcon

@@ -1,3 +1,20 @@
 <header>
   <h1>Website com</h1>
+  <a class="logo" href="./" title="Jump to the home page of website.com">
+    <img src="resources/image/on-focus-logo.svg" alt="Focus on the finer details whilst taking in the fuller view.">
+  </a>
+
+  <noscript><a href="#menu">Menu</a></noscript>
+  {% if page.headerImage %}
+  <div class="page-header-image">
+    <style>
+      .page-header-image{ background-image: url('resources/header/small/{{ page.headerImage }}');}
+      @media only screen and (min-width: 39em){ .page-header-image{ background-image: url('resources/header/medium/{{ page.headerImage }}');}}
+      @media only screen and (min-width: 69em){ .page-header-image{ background-image: url('resources/header/large/{{ page.headerImage }}');}}
+    </style>
+  </div>
+  {%- endif -%}
+  {% if  page.title or page.heading %}
+  <h2>{% if page.title %}{{ page.title }}{% else %}{{ page.heading }}{% endif %}</h2>
+  {% endif %}
 </header>
