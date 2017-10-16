@@ -1,5 +1,5 @@
 # baseurl is being used to set <base> tag on pages built into subfolders.
-baseurl: 'website'
+baseurl: '/'
 
 exclude: [
   '.DS_Store',
@@ -14,13 +14,13 @@ exclude: [
 # site navigation links:
 links:
   - title: Home
-    url: ./
+    url: /
   - title: About
-    url: about
+    url: /about
   - title: Blog
-    url: blog
+    url: /blog
   - title: Work
-    url: work
+    url: /work
 
 # blog posts are grouped into year folders, e.g. 2017/title-of-article.
 permalink: :year/:title
@@ -30,4 +30,3 @@ collections:
     work:
       output: true
       permalink: :title
-
