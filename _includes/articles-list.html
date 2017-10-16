@@ -23,7 +23,7 @@
 
   <article{% if articleClass %} class="{{ articleClass }}"{% endif %}{% if withImage %} style="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}"{%- endif -%}>
     <header>
-      <a href="{{ article.url }}"><h1>{{ article.title }}</h1></a>
+      <a href="{{ article.url | absolute_url }}"><h1>{{ article.title }}</h1></a>
     </header>
   </article>
   {%- endfor -%}
