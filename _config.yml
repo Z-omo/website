@@ -29,5 +29,5 @@ permalink: :year/:title
 collections:
     work:
       output: true
-      permalink: /:title
+      permalink: :title
 
