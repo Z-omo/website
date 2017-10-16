@@ -625,11 +625,11 @@ button {
   border-radius: 2em;
   border: solid 1px #bdd4e7;
   padding: 0.4em 2em;
+  font-family: "ff-meta-web-pro", "Trebuchet MS", sans-serif;
   text-decoration: none;
   font-size: 1.1rem;
   line-height: 1.1rem;
   color: #0d1321;
-  font-family: "ff-meta-web-pro", sans-serif;
   text-align: center;
   background-color: rgba(189, 212, 231, 0.8);
   outline: none;
