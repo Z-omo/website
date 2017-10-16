@@ -20,18 +20,28 @@ $cornerRadius:    0.26em
 
 //—————————————————————————————————————————————: Text values
 $gRatio: 1.618
-$baseFontSize: 87.5%
+$baseFontSize: 93.75%
+
+/*
+ * Fonts loaded via Typekit
+ * Preference is Seravek, but not available through paid plan, 
+ * perhaps buy it when funds allow?available?
+ */
+$contentFont: "ff-tisa-sans-web-pro"
+$headingFont: "ff-meta-web-pro"
+$fallbackFont: "Trebuchet MS", sans-serif
+
 $contentFontSize: 1rem
-$bodycontentLineHeight: $contentFontSize * $gRatio
+$bodyContentLineHeight: $contentFontSize * $gRatio
 
 $charactersPerLine: 90
 $maxContentWidth: ($contentFontSize / $gRatio) * $charactersPerLine
 
-$headerTitleFontSize: 2.2rem
+$headerTitleFontSize: 2.09rem // mobile view.
 $headerTitleLineHeight: $headerTitleFontSize * $gRatio
 $maxHeaderTitleWidth: ($headerTitleFontSize / $gRatio) * 24
 
-$textShadow: 2px 2px 1px $primary
+$textShadow: 2px 1px 1px rgba($primary, 0.8)
 
 //—————————————————————————————————————————————: Animation values
 $transDurationIn: 200ms
