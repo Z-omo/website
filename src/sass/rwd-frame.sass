@@ -25,15 +25,18 @@ $iFrameScrollBarWidth: 20
 
   .rwd-desktop &
     +rwdDeviceRules(desktop)
-    transform: scale(0.72)
+    transform: scale(0.82)
   
+    @media only screen and (min-width: $desktopWidth)
+      transform: scale(0.72)
+
   transform-origin: 0 0
   transform: scale(0.62)
   transition: all $transDurationIn * 2 $easeSpecial
 
   @media only screen and (min-width: $tabletWidth)
-    margin: 0 auto
-    transform-origin: center 0
+    margin: 0
+    //transform-origin: center 0
 
   &::before // device skin
     content: ''
@@ -78,7 +81,7 @@ $iFrameScrollBarWidth: 20
   
 .rwd-view-controls
   display: none
-  margin: 0 0 $contentMargin / 2
+  margin: 0 0 $contentMargin
   
   .focus-js &
     display: block

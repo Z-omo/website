@@ -19,8 +19,8 @@ links:
     url: /about
   #- title: Blog
    # url: /blog
-  #- title: Work
-   # url: /work
+  - title: Work
+    url: /work
 
 # blog posts are grouped into year folders, e.g. 2017/title-of-article.
 permalink: :year/:title

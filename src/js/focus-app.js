@@ -77,7 +77,7 @@ const focus = {
 
   setupEvents: function()
   {
-    window.addEventListener('scroll', debounce(focus.onScroll, 120));
+    window.addEventListener('scroll', focus.onScroll);
   },
 
   onMenu: function()
@@ -97,6 +97,20 @@ const focus = {
 
   onScroll: function()
   {
+    if (!focus.view.scrolling)
+    {
+      window.requestAnimationFrame(function()
+      {
+        focus.setScrollState();
+        focus.view.scrolling = false;
+      });
+    }
+
+    focus.view.scrolling = true;
+  },
+
+  setScrollState: function()
+  {
     let scroll = window.scrollY;
     let html = focus.view.html;
     let scrollClass = focus.view.scrolledClass;
@@ -104,10 +118,12 @@ const focus = {
     if (0 === scroll)
     {
       DOM.removeClass(scrollClass, html);
+      focus.view.scrolled = false;
       return;
     }
 
-    DOM.addClass(scrollClass, html);
+    if (!focus.view.scrolled) { DOM.addClass(scrollClass, html); }
+    focus.view.scrolled = true;
   },
 
   setupRWDViews: function()

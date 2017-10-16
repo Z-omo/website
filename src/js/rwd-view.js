@@ -95,12 +95,12 @@ function activateControl(control)
   RWDView.activeControl = control;
 }
 
-// function getViewFrame(element)
-// {
-//   let frame = element.querySelector('.' + RWDView.selectors.frame);
-//   if (!frame) { frame = buildFrame(element); }
-//   return frame;
-// }
+function getViewFrame(element)
+{
+  let frame = element.querySelector('.' + RWDView.selectors.frame);
+  //if (!frame) { frame = buildFrame(element); }
+  return frame;
+}
 
 // function buildFrame(element)
 // {
@@ -144,6 +144,11 @@ function setViewMode(view, index)
 
   resetViewMode(view);
   DOM.addClass(mode, view);
+
+  if (mode === RWDView.viewModes[0])
+  {
+    reloadFrame(view);
+  }
 }
 
 function resetViewMode(view)
@@ -152,6 +157,17 @@ function resetViewMode(view)
   {
     if (DOM.hasClass(mode, view)) { DOM.removeClass(mode, view); }
   });
+}
+
+function reloadFrame(view)
+{
+  let frame = getViewFrame(view);
+  if (!frame) { return; }
+  
+  setTimeout(function()
+  {
+    frame.contentWindow.location.reload();
+  }, 400);
 }
 
 // function setupView()

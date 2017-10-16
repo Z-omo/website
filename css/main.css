@@ -175,19 +175,19 @@ main {
   max-width: 320px; }
   @media only screen and (min-width: 39em) {
     .side-bar figure {
-      width: 70%; } }
+      width: 71.2%; } }
 
 .side-bar img {
   display: block;
   margin: 0;
   -webkit-border-radius: 0.26em;
   border-radius: 0.26em;
-  border: solid 6px rgba(13, 19, 33, 0.8);
+  border: solid 0.4rem rgba(13, 19, 33, 0.8);
   width: 100%; }
 
 .side-bar figcaption {
   padding: 0.4em;
-  font-size: 0.8rem; }
+  font-size: 0.9rem; }
 
 @media only screen and (min-width: 39em) {
   .content, .side-bar {
@@ -675,11 +675,13 @@ button {
     height: calc(100vw * 0.62103);
     max-width: 1417px;
     max-height: 880px;
-    transform: scale(0.72); }
+    transform: scale(0.82); }
+    @media only screen and (min-width: 69em) {
+      .rwd-desktop .rwd-device {
+        transform: scale(0.72); } }
   @media only screen and (min-width: 39em) {
     .rwd-device {
-      margin: 0 auto;
-      transform-origin: center 0; } }
+      margin: 0; } }
   .rwd-device::before {
     content: '';
     position: absolute;
@@ -731,6 +733,6 @@ button {
 
 .rwd-view-controls {
   display: none;
-  margin: 0 0 1rem; }
+  margin: 0 0 2rem; }
   .focus-js .rwd-view-controls {
     display: block; }
