@@ -11,6 +11,7 @@
  *
  * This file and its @package are under version control.
  */
+
 'use strict';
 
 const debounce = require('lodash.debounce');
@@ -77,6 +78,7 @@ const focus = {
 
   setupEvents: function()
   {
+    //window.addEventListener('scroll', debounce(focus.onScroll, 80));
     window.addEventListener('scroll', focus.onScroll);
   },
 
@@ -98,39 +100,53 @@ const focus = {
   onScroll: function()
   {
     if (!focus.view.scrolling)
-    {
-      window.requestAnimationFrame(function()
+   {
+      if (window.requestAnimationFrame)
       {
-        focus.setScrollState();
-        focus.view.scrolling = false;
-      });
+        window.requestAnimationFrame(function()
+        {
+          focus.requestScrollCheck();
+        });
+      } else {
+        setTimeout(function() { focus.requestScrollCheck() }, 200);
+      }
     }
 
     focus.view.scrolling = true;
   },
 
+  requestScrollCheck: function()
+  {
+    focus.setScrollState();
+    focus.view.scrolling = false;
+  },
+  
   setScrollState: function()
   {
-    let scroll = window.scrollY;
-    let html = focus.view.html;
-    let scrollClass = focus.view.scrolledClass;
+    let scroll = window.pageYOffset;
 
     if (0 === scroll)
     {
-      DOM.removeClass(scrollClass, html);
+      DOM.removeClass(focus.view.scrolledClass, focus.view.html);
       focus.view.scrolled = false;
       return;
     }
 
-    if (!focus.view.scrolled) { DOM.addClass(scrollClass, html); }
+    if (!focus.view.scrolled)
+    {
+      DOM.addClass(focus.view.scrolledClass, focus.view.html);
+    }
+    
     focus.view.scrolled = true;
   },
 
   setupRWDViews: function()
   {
-    let rwd = document.querySelectorAll('.rwd-view');
-    if (!rwd || 0 === rwd.length) { return; }
+    let nodes = document.querySelectorAll('.rwd-view');
+    if (!nodes || 0 === nodes.length) { return; }
 
+    // convert NodeList to an Array, otherwise IE throws error on forEach:
+    let rwd = Array.prototype.slice.call(nodes);
     RWDView.setup(rwd, focus.view.smallView);
   }
 };

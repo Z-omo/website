@@ -18,7 +18,12 @@ const DOM = {
   addClass: function(className, element)
   {
     if (!element) { return; }
-    element.classList.add(className);
+    if (element.classList)
+    {
+      element.classList.add(className);
+    } else {
+      element.className = element.className + ' ' + className;
+    }
   },
 
   hasClass: function(className, element)
@@ -33,7 +38,13 @@ const DOM = {
 
   removeClass: function(className, element)
   {
-    element.classList.remove(className);
+    if (element.classList)
+    {
+      element.classList.remove(className);
+    } else {
+      element.className = element.className
+        .replace( new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
   },
   
   tagIS: function(tagName, element)

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run dev",
     "setup": "npm install",
-    "webpack-dev": "webpack -d --watch",
+    "webpack-dev": "webpack --watch",
     "jekyll-serve": "jekyll liveserve --host=192.168.0.28 --baseurl \"/\"",
     "open-chrome": "opn http://dev.colintester.com:4000 -- 'google chrome'",
     "prod": "webpack -p",
@@ -23,6 +23,9 @@
   },
   "homepage": "https://github.com/Z-omo/website#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "css-loader": "^0.28.7",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.0.2",
@@ -35,6 +38,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "lodash.debounce": "^4.0.8",
     "node-sass": "^4.5.3",
+    "picturefill": "^3.0.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.3",

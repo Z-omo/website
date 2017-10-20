@@ -65,83 +65,2446 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!***************************!*\
-  !*** ./src/js/dom-man.js ***!
-  \***************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/**\n * Browser DOM manager: provides helper functions for DOM manipulation.\n *\n * @package     Focus-App\n * @author      Colin Tester <office@z-omo.com>\n * \n * This file forms part of the installed @package and should not be copied \n * and/or distributed without the written consent from the file's author.\n *\n * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>\n *\n * This file and its @package are under version control.\n */\n\n\nconst DOM = {\n\n  addClass: function(className, element)\n  {\n    if (!element) { return; }\n    element.classList.add(className);\n  },\n\n  hasClass: function(className, element)\n  {\n    return (element.classList && element.classList.contains(className));\n  },\n\n  toggleClass: function(className, element)\n  {\n    element.classList.toggle(className);\n  },\n\n  removeClass: function(className, element)\n  {\n    element.classList.remove(className);\n  },\n  \n  tagIS: function(tagName, element)\n  {\n    if (!element) { return; }\n    return element.tagName.toLowerCase() === tagName.toLowerCase();\n  },\n  \n  add: function(element, container)\n  {\n    container.appendChild(element);\n  },\n\n  prepend: function(element, container)\n  {\n    container.insertBefore(element, container.firstChild);\n  }\n};\n\nmodule.exports = DOM;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9kb20tbWFuLmpzP2M1OTgiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBCcm93c2VyIERPTSBtYW5hZ2VyOiBwcm92aWRlcyBoZWxwZXIgZnVuY3Rpb25zIGZvciBET00gbWFuaXB1bGF0aW9uLlxuICpcbiAqIEBwYWNrYWdlICAgICBGb2N1cy1BcHBcbiAqIEBhdXRob3IgICAgICBDb2xpbiBUZXN0ZXIgPG9mZmljZUB6LW9tby5jb20+XG4gKiBcbiAqIFRoaXMgZmlsZSBmb3JtcyBwYXJ0IG9mIHRoZSBpbnN0YWxsZWQgQHBhY2thZ2UgYW5kIHNob3VsZCBub3QgYmUgY29waWVkIFxuICogYW5kL29yIGRpc3RyaWJ1dGVkIHdpdGhvdXQgdGhlIHdyaXR0ZW4gY29uc2VudCBmcm9tIHRoZSBmaWxlJ3MgYXV0aG9yLlxuICpcbiAqIEBjb3B5cmlnaHQ6IFBsZWFzZSBzZWU6IDxodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9CZXJuZV9Db252ZW50aW9uPlxuICpcbiAqIFRoaXMgZmlsZSBhbmQgaXRzIEBwYWNrYWdlIGFyZSB1bmRlciB2ZXJzaW9uIGNvbnRyb2wuXG4gKi9cbid1c2Ugc3RyaWN0JztcblxuY29uc3QgRE9NID0ge1xuXG4gIGFkZENsYXNzOiBmdW5jdGlvbihjbGFzc05hbWUsIGVsZW1lbnQpXG4gIHtcbiAgICBpZiAoIWVsZW1lbnQpIHsgcmV0dXJuOyB9XG4gICAgZWxlbWVudC5jbGFzc0xpc3QuYWRkKGNsYXNzTmFtZSk7XG4gIH0sXG5cbiAgaGFzQ2xhc3M6IGZ1bmN0aW9uKGNsYXNzTmFtZSwgZWxlbWVudClcbiAge1xuICAgIHJldHVybiAoZWxlbWVudC5jbGFzc0xpc3QgJiYgZWxlbWVudC5jbGFzc0xpc3QuY29udGFpbnMoY2xhc3NOYW1lKSk7XG4gIH0sXG5cbiAgdG9nZ2xlQ2xhc3M6IGZ1bmN0aW9uKGNsYXNzTmFtZSwgZWxlbWVudClcbiAge1xuICAgIGVsZW1lbnQuY2xhc3NMaXN0LnRvZ2dsZShjbGFzc05hbWUpO1xuICB9LFxuXG4gIHJlbW92ZUNsYXNzOiBmdW5jdGlvbihjbGFzc05hbWUsIGVsZW1lbnQpXG4gIHtcbiAgICBlbGVtZW50LmNsYXNzTGlzdC5yZW1vdmUoY2xhc3NOYW1lKTtcbiAgfSxcbiAgXG4gIHRhZ0lTOiBmdW5jdGlvbih0YWdOYW1lLCBlbGVtZW50KVxuICB7XG4gICAgaWYgKCFlbGVtZW50KSB7IHJldHVybjsgfVxuICAgIHJldHVybiBlbGVtZW50LnRhZ05hbWUudG9Mb3dlckNhc2UoKSA9PT0gdGFnTmFtZS50b0xvd2VyQ2FzZSgpO1xuICB9LFxuICBcbiAgYWRkOiBmdW5jdGlvbihlbGVtZW50LCBjb250YWluZXIpXG4gIHtcbiAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQoZWxlbWVudCk7XG4gIH0sXG5cbiAgcHJlcGVuZDogZnVuY3Rpb24oZWxlbWVudCwgY29udGFpbmVyKVxuICB7XG4gICAgY29udGFpbmVyLmluc2VydEJlZm9yZShlbGVtZW50LCBjb250YWluZXIuZmlyc3RDaGlsZCk7XG4gIH1cbn07XG5cbm1vZHVsZS5leHBvcnRzID0gRE9NO1xuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvZG9tLW1hbi5qc1xuLy8gbW9kdWxlIGlkID0gMFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///0\n");
+/**
+ * Browser DOM manager: provides helper functions for DOM manipulation.
+ *
+ * @package     Focus-App
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+var DOM = {
+
+  addClass: function addClass(className, element) {
+    if (!element) {
+      return;
+    }
+    if (element.classList) {
+      element.classList.add(className);
+    } else {
+      element.className = element.className + ' ' + className;
+    }
+  },
+
+  hasClass: function hasClass(className, element) {
+    return element.classList && element.classList.contains(className);
+  },
+
+  toggleClass: function toggleClass(className, element) {
+    element.classList.toggle(className);
+  },
+
+  removeClass: function removeClass(className, element) {
+    if (element.classList) {
+      element.classList.remove(className);
+    } else {
+      element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+  },
+
+  tagIS: function tagIS(tagName, element) {
+    if (!element) {
+      return;
+    }
+    return element.tagName.toLowerCase() === tagName.toLowerCase();
+  },
+
+  add: function add(element, container) {
+    container.appendChild(element);
+  },
+
+  prepend: function prepend(element, container) {
+    container.insertBefore(element, container.firstChild);
+  }
+};
+
+module.exports = DOM;
 
 /***/ }),
 /* 1 */
-/*!*****************************!*\
-  !*** ./src/js/bootstrap.js ***!
-  \*****************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/**\n * Bootstrap JavaScript file for website.com\n *\n * @package     Website\n * @author      Colin Tester <office@z-omo.com>\n * \n * This file forms part of the installed @package and should not be copied \n * and/or distributed without the written consent from the file's author.\n *\n * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>\n *\n * This file and its @package are under version control.\n */\n\n\n__webpack_require__(/*! ../sass/bootstrap.sass */ 2);\n \nconst focus = __webpack_require__(/*! ./focus-app.js */ 3);\nfocus.init();\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9ib290c3RyYXAuanM/YmUwYSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEJvb3RzdHJhcCBKYXZhU2NyaXB0IGZpbGUgZm9yIHdlYnNpdGUuY29tXG4gKlxuICogQHBhY2thZ2UgICAgIFdlYnNpdGVcbiAqIEBhdXRob3IgICAgICBDb2xpbiBUZXN0ZXIgPG9mZmljZUB6LW9tby5jb20+XG4gKiBcbiAqIFRoaXMgZmlsZSBmb3JtcyBwYXJ0IG9mIHRoZSBpbnN0YWxsZWQgQHBhY2thZ2UgYW5kIHNob3VsZCBub3QgYmUgY29waWVkIFxuICogYW5kL29yIGRpc3RyaWJ1dGVkIHdpdGhvdXQgdGhlIHdyaXR0ZW4gY29uc2VudCBmcm9tIHRoZSBmaWxlJ3MgYXV0aG9yLlxuICpcbiAqIEBjb3B5cmlnaHQ6IFBsZWFzZSBzZWU6IDxodHRwczovL2VuLndpa2lwZWRpYS5vcmcvd2lraS9CZXJuZV9Db252ZW50aW9uPlxuICpcbiAqIFRoaXMgZmlsZSBhbmQgaXRzIEBwYWNrYWdlIGFyZSB1bmRlciB2ZXJzaW9uIGNvbnRyb2wuXG4gKi9cbid1c2Ugc3RyaWN0JztcblxucmVxdWlyZSgnLi4vc2Fzcy9ib290c3RyYXAuc2FzcycpO1xuIFxuY29uc3QgZm9jdXMgPSByZXF1aXJlKCcuL2ZvY3VzLWFwcC5qcycpO1xuZm9jdXMuaW5pdCgpO1xuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvanMvYm9vdHN0cmFwLmpzXG4vLyBtb2R1bGUgaWQgPSAxXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///1\n");
+/**
+ * Bootstrap JavaScript file for website.com
+ *
+ * @package     Website
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+__webpack_require__(2);
+__webpack_require__(11);
+
+var focus = __webpack_require__(3);
+focus.init();
 
 /***/ }),
 /* 2 */
-/*!*********************************!*\
-  !*** ./src/sass/bootstrap.sass ***!
-  \*********************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports) {
 
-eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9zYXNzL2Jvb3RzdHJhcC5zYXNzP2Y5NmQiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gcmVtb3ZlZCBieSBleHRyYWN0LXRleHQtd2VicGFjay1wbHVnaW5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9zYXNzL2Jvb3RzdHJhcC5zYXNzXG4vLyBtb2R1bGUgaWQgPSAyXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///2\n");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 3 */
-/*!*****************************!*\
-  !*** ./src/js/focus-app.js ***!
-  \*****************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/**\n * Focus app – mediator for website.com\n *\n * @package     Focus\n * @author      Colin Tester <office@z-omo.com>\n * \n * This file forms part of the installed @package and should not be copied \n * and/or distributed without the written consent from the file's author.\n *\n * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>\n *\n * This file and its @package are under version control.\n */\n\n\nconst debounce = __webpack_require__(/*! lodash.debounce */ 4);\nconst DOM = __webpack_require__(/*! ./dom-man.js */ 0);\nconst RWDView = __webpack_require__(/*! ./rwd-view.js */ 6);\n\nconst focus = {\n\n  view: {\n    smallViewEM:    39,\n    scrolledClass:  'js-scrolled'\n  },\n\n  init: function()\n  {\n    focus.setViewParams();\n    focus.setJSMode();    \n    if (true === focus.view.smallView) { focus.setupMobileMenu(); }\n\n    focus.setupEvents();\n    if (false === focus.view.smallView) { focus.setupRWDViews(); }\n  },\n\n  setViewParams: function()\n  {\n    let boundary = document.querySelector('.boundary');\n    if (!boundary) { return; }\n\n    let compStyle = window.getComputedStyle(boundary);\n    let regexNumeric = /^\\d+/;\n    let vpWidth = Number(regexNumeric.exec(compStyle.width));\n    let vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));\n    let vpMobileMax = focus.view.smallViewEM * vpFontSize;\n\n    focus.view.smallView = vpWidth < vpMobileMax;\n  },\n\n  setJSMode: function()\n  {\n    let html = document.querySelector('html');\n    if (!html) { return; }\n\n    DOM.addClass('focus-js', html);\n    focus.view.html = html;\n  },\n\n  setupMobileMenu: function()\n  {\n    let nav = document.querySelector('#menu');\n    if (!nav) { return; }\n\n    let menu = document.createElement('span');\n    nav.appendChild(menu);\n    menu.id = 'menuBtn';\n    menu.addEventListener('click', focus.onMenu);\n\n    let home = document.createElement('span');\n    nav.appendChild(home);\n    DOM.addClass('home-link', home);\n    home.addEventListener('click', focus.onHome);\n\n    focus.view.nav = nav;\n  },\n\n  setupEvents: function()\n  {\n    window.addEventListener('scroll', focus.onScroll);\n  },\n\n  onMenu: function()\n  {\n    focus.toggleMenu();\n  },\n\n  toggleMenu: function()\n  {\n    DOM.toggleClass('open', focus.view.nav);\n  },\n\n  onHome: function()\n  {\n    window.location.href = './';\n  },\n\n  onScroll: function()\n  {\n    if (!focus.view.scrolling)\n    {\n      window.requestAnimationFrame(function()\n      {\n        focus.setScrollState();\n        focus.view.scrolling = false;\n      });\n    }\n\n    focus.view.scrolling = true;\n  },\n\n  setScrollState: function()\n  {\n    let scroll = window.scrollY;\n    let html = focus.view.html;\n    let scrollClass = focus.view.scrolledClass;\n\n    if (0 === scroll)\n    {\n      DOM.removeClass(scrollClass, html);\n      focus.view.scrolled = false;\n      return;\n    }\n\n    if (!focus.view.scrolled) { DOM.addClass(scrollClass, html); }\n    focus.view.scrolled = true;\n  },\n\n  setupRWDViews: function()\n  {\n    let rwd = document.querySelectorAll('.rwd-view');\n    if (!rwd || 0 === rwd.length) { return; }\n\n    RWDView.setup(rwd, focus.view.smallView);\n  }\n};\n\nmodule.exports = focus;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9mb2N1cy1hcHAuanM/YTMxYSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEZvY3VzIGFwcCDigJMgbWVkaWF0b3IgZm9yIHdlYnNpdGUuY29tXG4gKlxuICogQHBhY2thZ2UgICAgIEZvY3VzXG4gKiBAYXV0aG9yICAgICAgQ29saW4gVGVzdGVyIDxvZmZpY2VAei1vbW8uY29tPlxuICogXG4gKiBUaGlzIGZpbGUgZm9ybXMgcGFydCBvZiB0aGUgaW5zdGFsbGVkIEBwYWNrYWdlIGFuZCBzaG91bGQgbm90IGJlIGNvcGllZCBcbiAqIGFuZC9vciBkaXN0cmlidXRlZCB3aXRob3V0IHRoZSB3cml0dGVuIGNvbnNlbnQgZnJvbSB0aGUgZmlsZSdzIGF1dGhvci5cbiAqXG4gKiBAY29weXJpZ2h0OiBQbGVhc2Ugc2VlOiA8aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQmVybmVfQ29udmVudGlvbj5cbiAqXG4gKiBUaGlzIGZpbGUgYW5kIGl0cyBAcGFja2FnZSBhcmUgdW5kZXIgdmVyc2lvbiBjb250cm9sLlxuICovXG4ndXNlIHN0cmljdCc7XG5cbmNvbnN0IGRlYm91bmNlID0gcmVxdWlyZSgnbG9kYXNoLmRlYm91bmNlJyk7XG5jb25zdCBET00gPSByZXF1aXJlKCcuL2RvbS1tYW4uanMnKTtcbmNvbnN0IFJXRFZpZXcgPSByZXF1aXJlKCcuL3J3ZC12aWV3LmpzJyk7XG5cbmNvbnN0IGZvY3VzID0ge1xuXG4gIHZpZXc6IHtcbiAgICBzbWFsbFZpZXdFTTogICAgMzksXG4gICAgc2Nyb2xsZWRDbGFzczogICdqcy1zY3JvbGxlZCdcbiAgfSxcblxuICBpbml0OiBmdW5jdGlvbigpXG4gIHtcbiAgICBmb2N1cy5zZXRWaWV3UGFyYW1zKCk7XG4gICAgZm9jdXMuc2V0SlNNb2RlKCk7ICAgIFxuICAgIGlmICh0cnVlID09PSBmb2N1cy52aWV3LnNtYWxsVmlldykgeyBmb2N1cy5zZXR1cE1vYmlsZU1lbnUoKTsgfVxuXG4gICAgZm9jdXMuc2V0dXBFdmVudHMoKTtcbiAgICBpZiAoZmFsc2UgPT09IGZvY3VzLnZpZXcuc21hbGxWaWV3KSB7IGZvY3VzLnNldHVwUldEVmlld3MoKTsgfVxuICB9LFxuXG4gIHNldFZpZXdQYXJhbXM6IGZ1bmN0aW9uKClcbiAge1xuICAgIGxldCBib3VuZGFyeSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5ib3VuZGFyeScpO1xuICAgIGlmICghYm91bmRhcnkpIHsgcmV0dXJuOyB9XG5cbiAgICBsZXQgY29tcFN0eWxlID0gd2luZG93LmdldENvbXB1dGVkU3R5bGUoYm91bmRhcnkpO1xuICAgIGxldCByZWdleE51bWVyaWMgPSAvXlxcZCsvO1xuICAgIGxldCB2cFdpZHRoID0gTnVtYmVyKHJlZ2V4TnVtZXJpYy5leGVjKGNvbXBTdHlsZS53aWR0aCkpO1xuICAgIGxldCB2cEZvbnRTaXplID0gTnVtYmVyKHJlZ2V4TnVtZXJpYy5leGVjKGNvbXBTdHlsZS5mb250U2l6ZSkpO1xuICAgIGxldCB2cE1vYmlsZU1heCA9IGZvY3VzLnZpZXcuc21hbGxWaWV3RU0gKiB2cEZvbnRTaXplO1xuXG4gICAgZm9jdXMudmlldy5zbWFsbFZpZXcgPSB2cFdpZHRoIDwgdnBNb2JpbGVNYXg7XG4gIH0sXG5cbiAgc2V0SlNNb2RlOiBmdW5jdGlvbigpXG4gIHtcbiAgICBsZXQgaHRtbCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ2h0bWwnKTtcbiAgICBpZiAoIWh0bWwpIHsgcmV0dXJuOyB9XG5cbiAgICBET00uYWRkQ2xhc3MoJ2ZvY3VzLWpzJywgaHRtbCk7XG4gICAgZm9jdXMudmlldy5odG1sID0gaHRtbDtcbiAgfSxcblxuICBzZXR1cE1vYmlsZU1lbnU6IGZ1bmN0aW9uKClcbiAge1xuICAgIGxldCBuYXYgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcjbWVudScpO1xuICAgIGlmICghbmF2KSB7IHJldHVybjsgfVxuXG4gICAgbGV0IG1lbnUgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJyk7XG4gICAgbmF2LmFwcGVuZENoaWxkKG1lbnUpO1xuICAgIG1lbnUuaWQgPSAnbWVudUJ0bic7XG4gICAgbWVudS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGZvY3VzLm9uTWVudSk7XG5cbiAgICBsZXQgaG9tZSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NwYW4nKTtcbiAgICBuYXYuYXBwZW5kQ2hpbGQoaG9tZSk7XG4gICAgRE9NLmFkZENsYXNzKCdob21lLWxpbmsnLCBob21lKTtcbiAgICBob21lLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZm9jdXMub25Ib21lKTtcblxuICAgIGZvY3VzLnZpZXcubmF2ID0gbmF2O1xuICB9LFxuXG4gIHNldHVwRXZlbnRzOiBmdW5jdGlvbigpXG4gIHtcbiAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignc2Nyb2xsJywgZm9jdXMub25TY3JvbGwpO1xuICB9LFxuXG4gIG9uTWVudTogZnVuY3Rpb24oKVxuICB7XG4gICAgZm9jdXMudG9nZ2xlTWVudSgpO1xuICB9LFxuXG4gIHRvZ2dsZU1lbnU6IGZ1bmN0aW9uKClcbiAge1xuICAgIERPTS50b2dnbGVDbGFzcygnb3BlbicsIGZvY3VzLnZpZXcubmF2KTtcbiAgfSxcblxuICBvbkhvbWU6IGZ1bmN0aW9uKClcbiAge1xuICAgIHdpbmRvdy5sb2NhdGlvbi5ocmVmID0gJy4vJztcbiAgfSxcblxuICBvblNjcm9sbDogZnVuY3Rpb24oKVxuICB7XG4gICAgaWYgKCFmb2N1cy52aWV3LnNjcm9sbGluZylcbiAgICB7XG4gICAgICB3aW5kb3cucmVxdWVzdEFuaW1hdGlvbkZyYW1lKGZ1bmN0aW9uKClcbiAgICAgIHtcbiAgICAgICAgZm9jdXMuc2V0U2Nyb2xsU3RhdGUoKTtcbiAgICAgICAgZm9jdXMudmlldy5zY3JvbGxpbmcgPSBmYWxzZTtcbiAgICAgIH0pO1xuICAgIH1cblxuICAgIGZvY3VzLnZpZXcuc2Nyb2xsaW5nID0gdHJ1ZTtcbiAgfSxcblxuICBzZXRTY3JvbGxTdGF0ZTogZnVuY3Rpb24oKVxuICB7XG4gICAgbGV0IHNjcm9sbCA9IHdpbmRvdy5zY3JvbGxZO1xuICAgIGxldCBodG1sID0gZm9jdXMudmlldy5odG1sO1xuICAgIGxldCBzY3JvbGxDbGFzcyA9IGZvY3VzLnZpZXcuc2Nyb2xsZWRDbGFzcztcblxuICAgIGlmICgwID09PSBzY3JvbGwpXG4gICAge1xuICAgICAgRE9NLnJlbW92ZUNsYXNzKHNjcm9sbENsYXNzLCBodG1sKTtcbiAgICAgIGZvY3VzLnZpZXcuc2Nyb2xsZWQgPSBmYWxzZTtcbiAgICAgIHJldHVybjtcbiAgICB9XG5cbiAgICBpZiAoIWZvY3VzLnZpZXcuc2Nyb2xsZWQpIHsgRE9NLmFkZENsYXNzKHNjcm9sbENsYXNzLCBodG1sKTsgfVxuICAgIGZvY3VzLnZpZXcuc2Nyb2xsZWQgPSB0cnVlO1xuICB9LFxuXG4gIHNldHVwUldEVmlld3M6IGZ1bmN0aW9uKClcbiAge1xuICAgIGxldCByd2QgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcucndkLXZpZXcnKTtcbiAgICBpZiAoIXJ3ZCB8fCAwID09PSByd2QubGVuZ3RoKSB7IHJldHVybjsgfVxuXG4gICAgUldEVmlldy5zZXR1cChyd2QsIGZvY3VzLnZpZXcuc21hbGxWaWV3KTtcbiAgfVxufTtcblxubW9kdWxlLmV4cG9ydHMgPSBmb2N1cztcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vc3JjL2pzL2ZvY3VzLWFwcC5qc1xuLy8gbW9kdWxlIGlkID0gM1xuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///3\n");
+/**
+ * Focus app – mediator for website.com
+ *
+ * @package     Focus
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+
+var debounce = __webpack_require__(4);
+var DOM = __webpack_require__(0);
+var RWDView = __webpack_require__(6);
+
+var focus = {
+
+  view: {
+    smallViewEM: 39,
+    scrolledClass: 'js-scrolled'
+  },
+
+  init: function init() {
+    focus.setViewParams();
+    focus.setJSMode();
+    if (true === focus.view.smallView) {
+      focus.setupMobileMenu();
+    }
+
+    focus.setupEvents();
+    if (false === focus.view.smallView) {
+      focus.setupRWDViews();
+    }
+  },
+
+  setViewParams: function setViewParams() {
+    var boundary = document.querySelector('.boundary');
+    if (!boundary) {
+      return;
+    }
+
+    var compStyle = window.getComputedStyle(boundary);
+    var regexNumeric = /^\d+/;
+    var vpWidth = Number(regexNumeric.exec(compStyle.width));
+    var vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
+    var vpMobileMax = focus.view.smallViewEM * vpFontSize;
+
+    focus.view.smallView = vpWidth < vpMobileMax;
+  },
+
+  setJSMode: function setJSMode() {
+    var html = document.querySelector('html');
+    if (!html) {
+      return;
+    }
+
+    DOM.addClass('focus-js', html);
+    focus.view.html = html;
+  },
+
+  setupMobileMenu: function setupMobileMenu() {
+    var nav = document.querySelector('#menu');
+    if (!nav) {
+      return;
+    }
+
+    var menu = document.createElement('span');
+    nav.appendChild(menu);
+    menu.id = 'menuBtn';
+    menu.addEventListener('click', focus.onMenu);
+
+    var home = document.createElement('span');
+    nav.appendChild(home);
+    DOM.addClass('home-link', home);
+    home.addEventListener('click', focus.onHome);
+
+    focus.view.nav = nav;
+  },
+
+  setupEvents: function setupEvents() {
+    //window.addEventListener('scroll', debounce(focus.onScroll, 80));
+    window.addEventListener('scroll', focus.onScroll);
+  },
+
+  onMenu: function onMenu() {
+    focus.toggleMenu();
+  },
+
+  toggleMenu: function toggleMenu() {
+    DOM.toggleClass('open', focus.view.nav);
+  },
+
+  onHome: function onHome() {
+    window.location.href = './';
+  },
+
+  onScroll: function onScroll() {
+    if (!focus.view.scrolling) {
+      if (window.requestAnimationFrame) {
+        window.requestAnimationFrame(function () {
+          focus.requestScrollCheck();
+        });
+      } else {
+        setTimeout(function () {
+          focus.requestScrollCheck();
+        }, 200);
+      }
+    }
+
+    focus.view.scrolling = true;
+  },
+
+  requestScrollCheck: function requestScrollCheck() {
+    focus.setScrollState();
+    focus.view.scrolling = false;
+  },
+
+  setScrollState: function setScrollState() {
+    var scroll = window.pageYOffset;
+
+    if (0 === scroll) {
+      DOM.removeClass(focus.view.scrolledClass, focus.view.html);
+      focus.view.scrolled = false;
+      return;
+    }
+
+    if (!focus.view.scrolled) {
+      DOM.addClass(focus.view.scrolledClass, focus.view.html);
+    }
+
+    focus.view.scrolled = true;
+  },
+
+  setupRWDViews: function setupRWDViews() {
+    var nodes = document.querySelectorAll('.rwd-view');
+    if (!nodes || 0 === nodes.length) {
+      return;
+    }
+
+    // convert NodeList to an Array, otherwise IE throws error on forEach:
+    var rwd = Array.prototype.slice.call(nodes);
+    RWDView.setup(rwd, focus.view.smallView);
+  }
+};
+
+module.exports = focus;
 
 /***/ }),
 /* 4 */
-/*!***********************************************!*\
-  !*** ./node_modules/lodash.debounce/index.js ***!
-  \***********************************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/* WEBPACK VAR INJECTION */(function(global) {/**\n * lodash (Custom Build) <https://lodash.com/>\n * Build: `lodash modularize exports=\"npm\" -o ./`\n * Copyright jQuery Foundation and other contributors <https://jquery.org/>\n * Released under MIT license <https://lodash.com/license>\n * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>\n * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors\n */\n\n/** Used as the `TypeError` message for \"Functions\" methods. */\nvar FUNC_ERROR_TEXT = 'Expected a function';\n\n/** Used as references for various `Number` constants. */\nvar NAN = 0 / 0;\n\n/** `Object#toString` result references. */\nvar symbolTag = '[object Symbol]';\n\n/** Used to match leading and trailing whitespace. */\nvar reTrim = /^\\s+|\\s+$/g;\n\n/** Used to detect bad signed hexadecimal string values. */\nvar reIsBadHex = /^[-+]0x[0-9a-f]+$/i;\n\n/** Used to detect binary string values. */\nvar reIsBinary = /^0b[01]+$/i;\n\n/** Used to detect octal string values. */\nvar reIsOctal = /^0o[0-7]+$/i;\n\n/** Built-in method references without a dependency on `root`. */\nvar freeParseInt = parseInt;\n\n/** Detect free variable `global` from Node.js. */\nvar freeGlobal = typeof global == 'object' && global && global.Object === Object && global;\n\n/** Detect free variable `self`. */\nvar freeSelf = typeof self == 'object' && self && self.Object === Object && self;\n\n/** Used as a reference to the global object. */\nvar root = freeGlobal || freeSelf || Function('return this')();\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/**\n * Used to resolve the\n * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)\n * of values.\n */\nvar objectToString = objectProto.toString;\n\n/* Built-in method references for those with the same name as other `lodash` methods. */\nvar nativeMax = Math.max,\n    nativeMin = Math.min;\n\n/**\n * Gets the timestamp of the number of milliseconds that have elapsed since\n * the Unix epoch (1 January 1970 00:00:00 UTC).\n *\n * @static\n * @memberOf _\n * @since 2.4.0\n * @category Date\n * @returns {number} Returns the timestamp.\n * @example\n *\n * _.defer(function(stamp) {\n *   console.log(_.now() - stamp);\n * }, _.now());\n * // => Logs the number of milliseconds it took for the deferred invocation.\n */\nvar now = function() {\n  return root.Date.now();\n};\n\n/**\n * Creates a debounced function that delays invoking `func` until after `wait`\n * milliseconds have elapsed since the last time the debounced function was\n * invoked. The debounced function comes with a `cancel` method to cancel\n * delayed `func` invocations and a `flush` method to immediately invoke them.\n * Provide `options` to indicate whether `func` should be invoked on the\n * leading and/or trailing edge of the `wait` timeout. The `func` is invoked\n * with the last arguments provided to the debounced function. Subsequent\n * calls to the debounced function return the result of the last `func`\n * invocation.\n *\n * **Note:** If `leading` and `trailing` options are `true`, `func` is\n * invoked on the trailing edge of the timeout only if the debounced function\n * is invoked more than once during the `wait` timeout.\n *\n * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred\n * until to the next tick, similar to `setTimeout` with a timeout of `0`.\n *\n * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)\n * for details over the differences between `_.debounce` and `_.throttle`.\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Function\n * @param {Function} func The function to debounce.\n * @param {number} [wait=0] The number of milliseconds to delay.\n * @param {Object} [options={}] The options object.\n * @param {boolean} [options.leading=false]\n *  Specify invoking on the leading edge of the timeout.\n * @param {number} [options.maxWait]\n *  The maximum time `func` is allowed to be delayed before it's invoked.\n * @param {boolean} [options.trailing=true]\n *  Specify invoking on the trailing edge of the timeout.\n * @returns {Function} Returns the new debounced function.\n * @example\n *\n * // Avoid costly calculations while the window size is in flux.\n * jQuery(window).on('resize', _.debounce(calculateLayout, 150));\n *\n * // Invoke `sendMail` when clicked, debouncing subsequent calls.\n * jQuery(element).on('click', _.debounce(sendMail, 300, {\n *   'leading': true,\n *   'trailing': false\n * }));\n *\n * // Ensure `batchLog` is invoked once after 1 second of debounced calls.\n * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });\n * var source = new EventSource('/stream');\n * jQuery(source).on('message', debounced);\n *\n * // Cancel the trailing debounced invocation.\n * jQuery(window).on('popstate', debounced.cancel);\n */\nfunction debounce(func, wait, options) {\n  var lastArgs,\n      lastThis,\n      maxWait,\n      result,\n      timerId,\n      lastCallTime,\n      lastInvokeTime = 0,\n      leading = false,\n      maxing = false,\n      trailing = true;\n\n  if (typeof func != 'function') {\n    throw new TypeError(FUNC_ERROR_TEXT);\n  }\n  wait = toNumber(wait) || 0;\n  if (isObject(options)) {\n    leading = !!options.leading;\n    maxing = 'maxWait' in options;\n    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;\n    trailing = 'trailing' in options ? !!options.trailing : trailing;\n  }\n\n  function invokeFunc(time) {\n    var args = lastArgs,\n        thisArg = lastThis;\n\n    lastArgs = lastThis = undefined;\n    lastInvokeTime = time;\n    result = func.apply(thisArg, args);\n    return result;\n  }\n\n  function leadingEdge(time) {\n    // Reset any `maxWait` timer.\n    lastInvokeTime = time;\n    // Start the timer for the trailing edge.\n    timerId = setTimeout(timerExpired, wait);\n    // Invoke the leading edge.\n    return leading ? invokeFunc(time) : result;\n  }\n\n  function remainingWait(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime,\n        result = wait - timeSinceLastCall;\n\n    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;\n  }\n\n  function shouldInvoke(time) {\n    var timeSinceLastCall = time - lastCallTime,\n        timeSinceLastInvoke = time - lastInvokeTime;\n\n    // Either this is the first call, activity has stopped and we're at the\n    // trailing edge, the system time has gone backwards and we're treating\n    // it as the trailing edge, or we've hit the `maxWait` limit.\n    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||\n      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));\n  }\n\n  function timerExpired() {\n    var time = now();\n    if (shouldInvoke(time)) {\n      return trailingEdge(time);\n    }\n    // Restart the timer.\n    timerId = setTimeout(timerExpired, remainingWait(time));\n  }\n\n  function trailingEdge(time) {\n    timerId = undefined;\n\n    // Only invoke if we have `lastArgs` which means `func` has been\n    // debounced at least once.\n    if (trailing && lastArgs) {\n      return invokeFunc(time);\n    }\n    lastArgs = lastThis = undefined;\n    return result;\n  }\n\n  function cancel() {\n    if (timerId !== undefined) {\n      clearTimeout(timerId);\n    }\n    lastInvokeTime = 0;\n    lastArgs = lastCallTime = lastThis = timerId = undefined;\n  }\n\n  function flush() {\n    return timerId === undefined ? result : trailingEdge(now());\n  }\n\n  function debounced() {\n    var time = now(),\n        isInvoking = shouldInvoke(time);\n\n    lastArgs = arguments;\n    lastThis = this;\n    lastCallTime = time;\n\n    if (isInvoking) {\n      if (timerId === undefined) {\n        return leadingEdge(lastCallTime);\n      }\n      if (maxing) {\n        // Handle invocations in a tight loop.\n        timerId = setTimeout(timerExpired, wait);\n        return invokeFunc(lastCallTime);\n      }\n    }\n    if (timerId === undefined) {\n      timerId = setTimeout(timerExpired, wait);\n    }\n    return result;\n  }\n  debounced.cancel = cancel;\n  debounced.flush = flush;\n  return debounced;\n}\n\n/**\n * Checks if `value` is the\n * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)\n * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)\n *\n * @static\n * @memberOf _\n * @since 0.1.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is an object, else `false`.\n * @example\n *\n * _.isObject({});\n * // => true\n *\n * _.isObject([1, 2, 3]);\n * // => true\n *\n * _.isObject(_.noop);\n * // => true\n *\n * _.isObject(null);\n * // => false\n */\nfunction isObject(value) {\n  var type = typeof value;\n  return !!value && (type == 'object' || type == 'function');\n}\n\n/**\n * Checks if `value` is object-like. A value is object-like if it's not `null`\n * and has a `typeof` result of \"object\".\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is object-like, else `false`.\n * @example\n *\n * _.isObjectLike({});\n * // => true\n *\n * _.isObjectLike([1, 2, 3]);\n * // => true\n *\n * _.isObjectLike(_.noop);\n * // => false\n *\n * _.isObjectLike(null);\n * // => false\n */\nfunction isObjectLike(value) {\n  return !!value && typeof value == 'object';\n}\n\n/**\n * Checks if `value` is classified as a `Symbol` primitive or object.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to check.\n * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.\n * @example\n *\n * _.isSymbol(Symbol.iterator);\n * // => true\n *\n * _.isSymbol('abc');\n * // => false\n */\nfunction isSymbol(value) {\n  return typeof value == 'symbol' ||\n    (isObjectLike(value) && objectToString.call(value) == symbolTag);\n}\n\n/**\n * Converts `value` to a number.\n *\n * @static\n * @memberOf _\n * @since 4.0.0\n * @category Lang\n * @param {*} value The value to process.\n * @returns {number} Returns the number.\n * @example\n *\n * _.toNumber(3.2);\n * // => 3.2\n *\n * _.toNumber(Number.MIN_VALUE);\n * // => 5e-324\n *\n * _.toNumber(Infinity);\n * // => Infinity\n *\n * _.toNumber('3.2');\n * // => 3.2\n */\nfunction toNumber(value) {\n  if (typeof value == 'number') {\n    return value;\n  }\n  if (isSymbol(value)) {\n    return NAN;\n  }\n  if (isObject(value)) {\n    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;\n    value = isObject(other) ? (other + '') : other;\n  }\n  if (typeof value != 'string') {\n    return value === 0 ? value : +value;\n  }\n  value = value.replace(reTrim, '');\n  var isBinary = reIsBinary.test(value);\n  return (isBinary || reIsOctal.test(value))\n    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)\n    : (reIsBadHex.test(value) ? NAN : +value);\n}\n\nmodule.exports = debounce;\n\n/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/global.js */ 5)))//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL25vZGVfbW9kdWxlcy9sb2Rhc2guZGVib3VuY2UvaW5kZXguanM/Y2I1YiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIGxvZGFzaCAoQ3VzdG9tIEJ1aWxkKSA8aHR0cHM6Ly9sb2Rhc2guY29tLz5cbiAqIEJ1aWxkOiBgbG9kYXNoIG1vZHVsYXJpemUgZXhwb3J0cz1cIm5wbVwiIC1vIC4vYFxuICogQ29weXJpZ2h0IGpRdWVyeSBGb3VuZGF0aW9uIGFuZCBvdGhlciBjb250cmlidXRvcnMgPGh0dHBzOi8vanF1ZXJ5Lm9yZy8+XG4gKiBSZWxlYXNlZCB1bmRlciBNSVQgbGljZW5zZSA8aHR0cHM6Ly9sb2Rhc2guY29tL2xpY2Vuc2U+XG4gKiBCYXNlZCBvbiBVbmRlcnNjb3JlLmpzIDEuOC4zIDxodHRwOi8vdW5kZXJzY29yZWpzLm9yZy9MSUNFTlNFPlxuICogQ29weXJpZ2h0IEplcmVteSBBc2hrZW5hcywgRG9jdW1lbnRDbG91ZCBhbmQgSW52ZXN0aWdhdGl2ZSBSZXBvcnRlcnMgJiBFZGl0b3JzXG4gKi9cblxuLyoqIFVzZWQgYXMgdGhlIGBUeXBlRXJyb3JgIG1lc3NhZ2UgZm9yIFwiRnVuY3Rpb25zXCIgbWV0aG9kcy4gKi9cbnZhciBGVU5DX0VSUk9SX1RFWFQgPSAnRXhwZWN0ZWQgYSBmdW5jdGlvbic7XG5cbi8qKiBVc2VkIGFzIHJlZmVyZW5jZXMgZm9yIHZhcmlvdXMgYE51bWJlcmAgY29uc3RhbnRzLiAqL1xudmFyIE5BTiA9IDAgLyAwO1xuXG4vKiogYE9iamVjdCN0b1N0cmluZ2AgcmVzdWx0IHJlZmVyZW5jZXMuICovXG52YXIgc3ltYm9sVGFnID0gJ1tvYmplY3QgU3ltYm9sXSc7XG5cbi8qKiBVc2VkIHRvIG1hdGNoIGxlYWRpbmcgYW5kIHRyYWlsaW5nIHdoaXRlc3BhY2UuICovXG52YXIgcmVUcmltID0gL15cXHMrfFxccyskL2c7XG5cbi8qKiBVc2VkIHRvIGRldGVjdCBiYWQgc2lnbmVkIGhleGFkZWNpbWFsIHN0cmluZyB2YWx1ZXMuICovXG52YXIgcmVJc0JhZEhleCA9IC9eWy0rXTB4WzAtOWEtZl0rJC9pO1xuXG4vKiogVXNlZCB0byBkZXRlY3QgYmluYXJ5IHN0cmluZyB2YWx1ZXMuICovXG52YXIgcmVJc0JpbmFyeSA9IC9eMGJbMDFdKyQvaTtcblxuLyoqIFVzZWQgdG8gZGV0ZWN0IG9jdGFsIHN0cmluZyB2YWx1ZXMuICovXG52YXIgcmVJc09jdGFsID0gL14wb1swLTddKyQvaTtcblxuLyoqIEJ1aWx0LWluIG1ldGhvZCByZWZlcmVuY2VzIHdpdGhvdXQgYSBkZXBlbmRlbmN5IG9uIGByb290YC4gKi9cbnZhciBmcmVlUGFyc2VJbnQgPSBwYXJzZUludDtcblxuLyoqIERldGVjdCBmcmVlIHZhcmlhYmxlIGBnbG9iYWxgIGZyb20gTm9kZS5qcy4gKi9cbnZhciBmcmVlR2xvYmFsID0gdHlwZW9mIGdsb2JhbCA9PSAnb2JqZWN0JyAmJiBnbG9iYWwgJiYgZ2xvYmFsLk9iamVjdCA9PT0gT2JqZWN0ICYmIGdsb2JhbDtcblxuLyoqIERldGVjdCBmcmVlIHZhcmlhYmxlIGBzZWxmYC4gKi9cbnZhciBmcmVlU2VsZiA9IHR5cGVvZiBzZWxmID09ICdvYmplY3QnICYmIHNlbGYgJiYgc2VsZi5PYmplY3QgPT09IE9iamVjdCAmJiBzZWxmO1xuXG4vKiogVXNlZCBhcyBhIHJlZmVyZW5jZSB0byB0aGUgZ2xvYmFsIG9iamVjdC4gKi9cbnZhciByb290ID0gZnJlZUdsb2JhbCB8fCBmcmVlU2VsZiB8fCBGdW5jdGlvbigncmV0dXJuIHRoaXMnKSgpO1xuXG4vKiogVXNlZCBmb3IgYnVpbHQtaW4gbWV0aG9kIHJlZmVyZW5jZXMuICovXG52YXIgb2JqZWN0UHJvdG8gPSBPYmplY3QucHJvdG90eXBlO1xuXG4vKipcbiAqIFVzZWQgdG8gcmVzb2x2ZSB0aGVcbiAqIFtgdG9TdHJpbmdUYWdgXShodHRwOi8vZWNtYS1pbnRlcm5hdGlvbmFsLm9yZy9lY21hLTI2Mi83LjAvI3NlYy1vYmplY3QucHJvdG90eXBlLnRvc3RyaW5nKVxuICogb2YgdmFsdWVzLlxuICovXG52YXIgb2JqZWN0VG9TdHJpbmcgPSBvYmplY3RQcm90by50b1N0cmluZztcblxuLyogQnVpbHQtaW4gbWV0aG9kIHJlZmVyZW5jZXMgZm9yIHRob3NlIHdpdGggdGhlIHNhbWUgbmFtZSBhcyBvdGhlciBgbG9kYXNoYCBtZXRob2RzLiAqL1xudmFyIG5hdGl2ZU1heCA9IE1hdGgubWF4LFxuICAgIG5hdGl2ZU1pbiA9IE1hdGgubWluO1xuXG4vKipcbiAqIEdldHMgdGhlIHRpbWVzdGFtcCBvZiB0aGUgbnVtYmVyIG9mIG1pbGxpc2Vjb25kcyB0aGF0IGhhdmUgZWxhcHNlZCBzaW5jZVxuICogdGhlIFVuaXggZXBvY2ggKDEgSmFudWFyeSAxOTcwIDAwOjAwOjAwIFVUQykuXG4gKlxuICogQHN0YXRpY1xuICogQG1lbWJlck9mIF9cbiAqIEBzaW5jZSAyLjQuMFxuICogQGNhdGVnb3J5IERhdGVcbiAqIEByZXR1cm5zIHtudW1iZXJ9IFJldHVybnMgdGhlIHRpbWVzdGFtcC5cbiAqIEBleGFtcGxlXG4gKlxuICogXy5kZWZlcihmdW5jdGlvbihzdGFtcCkge1xuICogICBjb25zb2xlLmxvZyhfLm5vdygpIC0gc3RhbXApO1xuICogfSwgXy5ub3coKSk7XG4gKiAvLyA9PiBMb2dzIHRoZSBudW1iZXIgb2YgbWlsbGlzZWNvbmRzIGl0IHRvb2sgZm9yIHRoZSBkZWZlcnJlZCBpbnZvY2F0aW9uLlxuICovXG52YXIgbm93ID0gZnVuY3Rpb24oKSB7XG4gIHJldHVybiByb290LkRhdGUubm93KCk7XG59O1xuXG4vKipcbiAqIENyZWF0ZXMgYSBkZWJvdW5jZWQgZnVuY3Rpb24gdGhhdCBkZWxheXMgaW52b2tpbmcgYGZ1bmNgIHVudGlsIGFmdGVyIGB3YWl0YFxuICogbWlsbGlzZWNvbmRzIGhhdmUgZWxhcHNlZCBzaW5jZSB0aGUgbGFzdCB0aW1lIHRoZSBkZWJvdW5jZWQgZnVuY3Rpb24gd2FzXG4gKiBpbnZva2VkLiBUaGUgZGVib3VuY2VkIGZ1bmN0aW9uIGNvbWVzIHdpdGggYSBgY2FuY2VsYCBtZXRob2QgdG8gY2FuY2VsXG4gKiBkZWxheWVkIGBmdW5jYCBpbnZvY2F0aW9ucyBhbmQgYSBgZmx1c2hgIG1ldGhvZCB0byBpbW1lZGlhdGVseSBpbnZva2UgdGhlbS5cbiAqIFByb3ZpZGUgYG9wdGlvbnNgIHRvIGluZGljYXRlIHdoZXRoZXIgYGZ1bmNgIHNob3VsZCBiZSBpbnZva2VkIG9uIHRoZVxuICogbGVhZGluZyBhbmQvb3IgdHJhaWxpbmcgZWRnZSBvZiB0aGUgYHdhaXRgIHRpbWVvdXQuIFRoZSBgZnVuY2AgaXMgaW52b2tlZFxuICogd2l0aCB0aGUgbGFzdCBhcmd1bWVudHMgcHJvdmlkZWQgdG8gdGhlIGRlYm91bmNlZCBmdW5jdGlvbi4gU3Vic2VxdWVudFxuICogY2FsbHMgdG8gdGhlIGRlYm91bmNlZCBmdW5jdGlvbiByZXR1cm4gdGhlIHJlc3VsdCBvZiB0aGUgbGFzdCBgZnVuY2BcbiAqIGludm9jYXRpb24uXG4gKlxuICogKipOb3RlOioqIElmIGBsZWFkaW5nYCBhbmQgYHRyYWlsaW5nYCBvcHRpb25zIGFyZSBgdHJ1ZWAsIGBmdW5jYCBpc1xuICogaW52b2tlZCBvbiB0aGUgdHJhaWxpbmcgZWRnZSBvZiB0aGUgdGltZW91dCBvbmx5IGlmIHRoZSBkZWJvdW5jZWQgZnVuY3Rpb25cbiAqIGlzIGludm9rZWQgbW9yZSB0aGFuIG9uY2UgZHVyaW5nIHRoZSBgd2FpdGAgdGltZW91dC5cbiAqXG4gKiBJZiBgd2FpdGAgaXMgYDBgIGFuZCBgbGVhZGluZ2AgaXMgYGZhbHNlYCwgYGZ1bmNgIGludm9jYXRpb24gaXMgZGVmZXJyZWRcbiAqIHVudGlsIHRvIHRoZSBuZXh0IHRpY2ssIHNpbWlsYXIgdG8gYHNldFRpbWVvdXRgIHdpdGggYSB0aW1lb3V0IG9mIGAwYC5cbiAqXG4gKiBTZWUgW0RhdmlkIENvcmJhY2hvJ3MgYXJ0aWNsZV0oaHR0cHM6Ly9jc3MtdHJpY2tzLmNvbS9kZWJvdW5jaW5nLXRocm90dGxpbmctZXhwbGFpbmVkLWV4YW1wbGVzLylcbiAqIGZvciBkZXRhaWxzIG92ZXIgdGhlIGRpZmZlcmVuY2VzIGJldHdlZW4gYF8uZGVib3VuY2VgIGFuZCBgXy50aHJvdHRsZWAuXG4gKlxuICogQHN0YXRpY1xuICogQG1lbWJlck9mIF9cbiAqIEBzaW5jZSAwLjEuMFxuICogQGNhdGVnb3J5IEZ1bmN0aW9uXG4gKiBAcGFyYW0ge0Z1bmN0aW9ufSBmdW5jIFRoZSBmdW5jdGlvbiB0byBkZWJvdW5jZS5cbiAqIEBwYXJhbSB7bnVtYmVyfSBbd2FpdD0wXSBUaGUgbnVtYmVyIG9mIG1pbGxpc2Vjb25kcyB0byBkZWxheS5cbiAqIEBwYXJhbSB7T2JqZWN0fSBbb3B0aW9ucz17fV0gVGhlIG9wdGlvbnMgb2JqZWN0LlxuICogQHBhcmFtIHtib29sZWFufSBbb3B0aW9ucy5sZWFkaW5nPWZhbHNlXVxuICogIFNwZWNpZnkgaW52b2tpbmcgb24gdGhlIGxlYWRpbmcgZWRnZSBvZiB0aGUgdGltZW91dC5cbiAqIEBwYXJhbSB7bnVtYmVyfSBbb3B0aW9ucy5tYXhXYWl0XVxuICogIFRoZSBtYXhpbXVtIHRpbWUgYGZ1bmNgIGlzIGFsbG93ZWQgdG8gYmUgZGVsYXllZCBiZWZvcmUgaXQncyBpbnZva2VkLlxuICogQHBhcmFtIHtib29sZWFufSBbb3B0aW9ucy50cmFpbGluZz10cnVlXVxuICogIFNwZWNpZnkgaW52b2tpbmcgb24gdGhlIHRyYWlsaW5nIGVkZ2Ugb2YgdGhlIHRpbWVvdXQuXG4gKiBAcmV0dXJucyB7RnVuY3Rpb259IFJldHVybnMgdGhlIG5ldyBkZWJvdW5jZWQgZnVuY3Rpb24uXG4gKiBAZXhhbXBsZVxuICpcbiAqIC8vIEF2b2lkIGNvc3RseSBjYWxjdWxhdGlvbnMgd2hpbGUgdGhlIHdpbmRvdyBzaXplIGlzIGluIGZsdXguXG4gKiBqUXVlcnkod2luZG93KS5vbigncmVzaXplJywgXy5kZWJvdW5jZShjYWxjdWxhdGVMYXlvdXQsIDE1MCkpO1xuICpcbiAqIC8vIEludm9rZSBgc2VuZE1haWxgIHdoZW4gY2xpY2tlZCwgZGVib3VuY2luZyBzdWJzZXF1ZW50IGNhbGxzLlxuICogalF1ZXJ5KGVsZW1lbnQpLm9uKCdjbGljaycsIF8uZGVib3VuY2Uoc2VuZE1haWwsIDMwMCwge1xuICogICAnbGVhZGluZyc6IHRydWUsXG4gKiAgICd0cmFpbGluZyc6IGZhbHNlXG4gKiB9KSk7XG4gKlxuICogLy8gRW5zdXJlIGBiYXRjaExvZ2AgaXMgaW52b2tlZCBvbmNlIGFmdGVyIDEgc2Vjb25kIG9mIGRlYm91bmNlZCBjYWxscy5cbiAqIHZhciBkZWJvdW5jZWQgPSBfLmRlYm91bmNlKGJhdGNoTG9nLCAyNTAsIHsgJ21heFdhaXQnOiAxMDAwIH0pO1xuICogdmFyIHNvdXJjZSA9IG5ldyBFdmVudFNvdXJjZSgnL3N0cmVhbScpO1xuICogalF1ZXJ5KHNvdXJjZSkub24oJ21lc3NhZ2UnLCBkZWJvdW5jZWQpO1xuICpcbiAqIC8vIENhbmNlbCB0aGUgdHJhaWxpbmcgZGVib3VuY2VkIGludm9jYXRpb24uXG4gKiBqUXVlcnkod2luZG93KS5vbigncG9wc3RhdGUnLCBkZWJvdW5jZWQuY2FuY2VsKTtcbiAqL1xuZnVuY3Rpb24gZGVib3VuY2UoZnVuYywgd2FpdCwgb3B0aW9ucykge1xuICB2YXIgbGFzdEFyZ3MsXG4gICAgICBsYXN0VGhpcyxcbiAgICAgIG1heFdhaXQsXG4gICAgICByZXN1bHQsXG4gICAgICB0aW1lcklkLFxuICAgICAgbGFzdENhbGxUaW1lLFxuICAgICAgbGFzdEludm9rZVRpbWUgPSAwLFxuICAgICAgbGVhZGluZyA9IGZhbHNlLFxuICAgICAgbWF4aW5nID0gZmFsc2UsXG4gICAgICB0cmFpbGluZyA9IHRydWU7XG5cbiAgaWYgKHR5cGVvZiBmdW5jICE9ICdmdW5jdGlvbicpIHtcbiAgICB0aHJvdyBuZXcgVHlwZUVycm9yKEZVTkNfRVJST1JfVEVYVCk7XG4gIH1cbiAgd2FpdCA9IHRvTnVtYmVyKHdhaXQpIHx8IDA7XG4gIGlmIChpc09iamVjdChvcHRpb25zKSkge1xuICAgIGxlYWRpbmcgPSAhIW9wdGlvbnMubGVhZGluZztcbiAgICBtYXhpbmcgPSAnbWF4V2FpdCcgaW4gb3B0aW9ucztcbiAgICBtYXhXYWl0ID0gbWF4aW5nID8gbmF0aXZlTWF4KHRvTnVtYmVyKG9wdGlvbnMubWF4V2FpdCkgfHwgMCwgd2FpdCkgOiBtYXhXYWl0O1xuICAgIHRyYWlsaW5nID0gJ3RyYWlsaW5nJyBpbiBvcHRpb25zID8gISFvcHRpb25zLnRyYWlsaW5nIDogdHJhaWxpbmc7XG4gIH1cblxuICBmdW5jdGlvbiBpbnZva2VGdW5jKHRpbWUpIHtcbiAgICB2YXIgYXJncyA9IGxhc3RBcmdzLFxuICAgICAgICB0aGlzQXJnID0gbGFzdFRoaXM7XG5cbiAgICBsYXN0QXJncyA9IGxhc3RUaGlzID0gdW5kZWZpbmVkO1xuICAgIGxhc3RJbnZva2VUaW1lID0gdGltZTtcbiAgICByZXN1bHQgPSBmdW5jLmFwcGx5KHRoaXNBcmcsIGFyZ3MpO1xuICAgIHJldHVybiByZXN1bHQ7XG4gIH1cblxuICBmdW5jdGlvbiBsZWFkaW5nRWRnZSh0aW1lKSB7XG4gICAgLy8gUmVzZXQgYW55IGBtYXhXYWl0YCB0aW1lci5cbiAgICBsYXN0SW52b2tlVGltZSA9IHRpbWU7XG4gICAgLy8gU3RhcnQgdGhlIHRpbWVyIGZvciB0aGUgdHJhaWxpbmcgZWRnZS5cbiAgICB0aW1lcklkID0gc2V0VGltZW91dCh0aW1lckV4cGlyZWQsIHdhaXQpO1xuICAgIC8vIEludm9rZSB0aGUgbGVhZGluZyBlZGdlLlxuICAgIHJldHVybiBsZWFkaW5nID8gaW52b2tlRnVuYyh0aW1lKSA6IHJlc3VsdDtcbiAgfVxuXG4gIGZ1bmN0aW9uIHJlbWFpbmluZ1dhaXQodGltZSkge1xuICAgIHZhciB0aW1lU2luY2VMYXN0Q2FsbCA9IHRpbWUgLSBsYXN0Q2FsbFRpbWUsXG4gICAgICAgIHRpbWVTaW5jZUxhc3RJbnZva2UgPSB0aW1lIC0gbGFzdEludm9rZVRpbWUsXG4gICAgICAgIHJlc3VsdCA9IHdhaXQgLSB0aW1lU2luY2VMYXN0Q2FsbDtcblxuICAgIHJldHVybiBtYXhpbmcgPyBuYXRpdmVNaW4ocmVzdWx0LCBtYXhXYWl0IC0gdGltZVNpbmNlTGFzdEludm9rZSkgOiByZXN1bHQ7XG4gIH1cblxuICBmdW5jdGlvbiBzaG91bGRJbnZva2UodGltZSkge1xuICAgIHZhciB0aW1lU2luY2VMYXN0Q2FsbCA9IHRpbWUgLSBsYXN0Q2FsbFRpbWUsXG4gICAgICAgIHRpbWVTaW5jZUxhc3RJbnZva2UgPSB0aW1lIC0gbGFzdEludm9rZVRpbWU7XG5cbiAgICAvLyBFaXRoZXIgdGhpcyBpcyB0aGUgZmlyc3QgY2FsbCwgYWN0aXZpdHkgaGFzIHN0b3BwZWQgYW5kIHdlJ3JlIGF0IHRoZVxuICAgIC8vIHRyYWlsaW5nIGVkZ2UsIHRoZSBzeXN0ZW0gdGltZSBoYXMgZ29uZSBiYWNrd2FyZHMgYW5kIHdlJ3JlIHRyZWF0aW5nXG4gICAgLy8gaXQgYXMgdGhlIHRyYWlsaW5nIGVkZ2UsIG9yIHdlJ3ZlIGhpdCB0aGUgYG1heFdhaXRgIGxpbWl0LlxuICAgIHJldHVybiAobGFzdENhbGxUaW1lID09PSB1bmRlZmluZWQgfHwgKHRpbWVTaW5jZUxhc3RDYWxsID49IHdhaXQpIHx8XG4gICAgICAodGltZVNpbmNlTGFzdENhbGwgPCAwKSB8fCAobWF4aW5nICYmIHRpbWVTaW5jZUxhc3RJbnZva2UgPj0gbWF4V2FpdCkpO1xuICB9XG5cbiAgZnVuY3Rpb24gdGltZXJFeHBpcmVkKCkge1xuICAgIHZhciB0aW1lID0gbm93KCk7XG4gICAgaWYgKHNob3VsZEludm9rZSh0aW1lKSkge1xuICAgICAgcmV0dXJuIHRyYWlsaW5nRWRnZSh0aW1lKTtcbiAgICB9XG4gICAgLy8gUmVzdGFydCB0aGUgdGltZXIuXG4gICAgdGltZXJJZCA9IHNldFRpbWVvdXQodGltZXJFeHBpcmVkLCByZW1haW5pbmdXYWl0KHRpbWUpKTtcbiAgfVxuXG4gIGZ1bmN0aW9uIHRyYWlsaW5nRWRnZSh0aW1lKSB7XG4gICAgdGltZXJJZCA9IHVuZGVmaW5lZDtcblxuICAgIC8vIE9ubHkgaW52b2tlIGlmIHdlIGhhdmUgYGxhc3RBcmdzYCB3aGljaCBtZWFucyBgZnVuY2AgaGFzIGJlZW5cbiAgICAvLyBkZWJvdW5jZWQgYXQgbGVhc3Qgb25jZS5cbiAgICBpZiAodHJhaWxpbmcgJiYgbGFzdEFyZ3MpIHtcbiAgICAgIHJldHVybiBpbnZva2VGdW5jKHRpbWUpO1xuICAgIH1cbiAgICBsYXN0QXJncyA9IGxhc3RUaGlzID0gdW5kZWZpbmVkO1xuICAgIHJldHVybiByZXN1bHQ7XG4gIH1cblxuICBmdW5jdGlvbiBjYW5jZWwoKSB7XG4gICAgaWYgKHRpbWVySWQgIT09IHVuZGVmaW5lZCkge1xuICAgICAgY2xlYXJUaW1lb3V0KHRpbWVySWQpO1xuICAgIH1cbiAgICBsYXN0SW52b2tlVGltZSA9IDA7XG4gICAgbGFzdEFyZ3MgPSBsYXN0Q2FsbFRpbWUgPSBsYXN0VGhpcyA9IHRpbWVySWQgPSB1bmRlZmluZWQ7XG4gIH1cblxuICBmdW5jdGlvbiBmbHVzaCgpIHtcbiAgICByZXR1cm4gdGltZXJJZCA9PT0gdW5kZWZpbmVkID8gcmVzdWx0IDogdHJhaWxpbmdFZGdlKG5vdygpKTtcbiAgfVxuXG4gIGZ1bmN0aW9uIGRlYm91bmNlZCgpIHtcbiAgICB2YXIgdGltZSA9IG5vdygpLFxuICAgICAgICBpc0ludm9raW5nID0gc2hvdWxkSW52b2tlKHRpbWUpO1xuXG4gICAgbGFzdEFyZ3MgPSBhcmd1bWVudHM7XG4gICAgbGFzdFRoaXMgPSB0aGlzO1xuICAgIGxhc3RDYWxsVGltZSA9IHRpbWU7XG5cbiAgICBpZiAoaXNJbnZva2luZykge1xuICAgICAgaWYgKHRpbWVySWQgPT09IHVuZGVmaW5lZCkge1xuICAgICAgICByZXR1cm4gbGVhZGluZ0VkZ2UobGFzdENhbGxUaW1lKTtcbiAgICAgIH1cbiAgICAgIGlmIChtYXhpbmcpIHtcbiAgICAgICAgLy8gSGFuZGxlIGludm9jYXRpb25zIGluIGEgdGlnaHQgbG9vcC5cbiAgICAgICAgdGltZXJJZCA9IHNldFRpbWVvdXQodGltZXJFeHBpcmVkLCB3YWl0KTtcbiAgICAgICAgcmV0dXJuIGludm9rZUZ1bmMobGFzdENhbGxUaW1lKTtcbiAgICAgIH1cbiAgICB9XG4gICAgaWYgKHRpbWVySWQgPT09IHVuZGVmaW5lZCkge1xuICAgICAgdGltZXJJZCA9IHNldFRpbWVvdXQodGltZXJFeHBpcmVkLCB3YWl0KTtcbiAgICB9XG4gICAgcmV0dXJuIHJlc3VsdDtcbiAgfVxuICBkZWJvdW5jZWQuY2FuY2VsID0gY2FuY2VsO1xuICBkZWJvdW5jZWQuZmx1c2ggPSBmbHVzaDtcbiAgcmV0dXJuIGRlYm91bmNlZDtcbn1cblxuLyoqXG4gKiBDaGVja3MgaWYgYHZhbHVlYCBpcyB0aGVcbiAqIFtsYW5ndWFnZSB0eXBlXShodHRwOi8vd3d3LmVjbWEtaW50ZXJuYXRpb25hbC5vcmcvZWNtYS0yNjIvNy4wLyNzZWMtZWNtYXNjcmlwdC1sYW5ndWFnZS10eXBlcylcbiAqIG9mIGBPYmplY3RgLiAoZS5nLiBhcnJheXMsIGZ1bmN0aW9ucywgb2JqZWN0cywgcmVnZXhlcywgYG5ldyBOdW1iZXIoMClgLCBhbmQgYG5ldyBTdHJpbmcoJycpYClcbiAqXG4gKiBAc3RhdGljXG4gKiBAbWVtYmVyT2YgX1xuICogQHNpbmNlIDAuMS4wXG4gKiBAY2F0ZWdvcnkgTGFuZ1xuICogQHBhcmFtIHsqfSB2YWx1ZSBUaGUgdmFsdWUgdG8gY2hlY2suXG4gKiBAcmV0dXJucyB7Ym9vbGVhbn0gUmV0dXJucyBgdHJ1ZWAgaWYgYHZhbHVlYCBpcyBhbiBvYmplY3QsIGVsc2UgYGZhbHNlYC5cbiAqIEBleGFtcGxlXG4gKlxuICogXy5pc09iamVjdCh7fSk7XG4gKiAvLyA9PiB0cnVlXG4gKlxuICogXy5pc09iamVjdChbMSwgMiwgM10pO1xuICogLy8gPT4gdHJ1ZVxuICpcbiAqIF8uaXNPYmplY3QoXy5ub29wKTtcbiAqIC8vID0+IHRydWVcbiAqXG4gKiBfLmlzT2JqZWN0KG51bGwpO1xuICogLy8gPT4gZmFsc2VcbiAqL1xuZnVuY3Rpb24gaXNPYmplY3QodmFsdWUpIHtcbiAgdmFyIHR5cGUgPSB0eXBlb2YgdmFsdWU7XG4gIHJldHVybiAhIXZhbHVlICYmICh0eXBlID09ICdvYmplY3QnIHx8IHR5cGUgPT0gJ2Z1bmN0aW9uJyk7XG59XG5cbi8qKlxuICogQ2hlY2tzIGlmIGB2YWx1ZWAgaXMgb2JqZWN0LWxpa2UuIEEgdmFsdWUgaXMgb2JqZWN0LWxpa2UgaWYgaXQncyBub3QgYG51bGxgXG4gKiBhbmQgaGFzIGEgYHR5cGVvZmAgcmVzdWx0IG9mIFwib2JqZWN0XCIuXG4gKlxuICogQHN0YXRpY1xuICogQG1lbWJlck9mIF9cbiAqIEBzaW5jZSA0LjAuMFxuICogQGNhdGVnb3J5IExhbmdcbiAqIEBwYXJhbSB7Kn0gdmFsdWUgVGhlIHZhbHVlIHRvIGNoZWNrLlxuICogQHJldHVybnMge2Jvb2xlYW59IFJldHVybnMgYHRydWVgIGlmIGB2YWx1ZWAgaXMgb2JqZWN0LWxpa2UsIGVsc2UgYGZhbHNlYC5cbiAqIEBleGFtcGxlXG4gKlxuICogXy5pc09iamVjdExpa2Uoe30pO1xuICogLy8gPT4gdHJ1ZVxuICpcbiAqIF8uaXNPYmplY3RMaWtlKFsxLCAyLCAzXSk7XG4gKiAvLyA9PiB0cnVlXG4gKlxuICogXy5pc09iamVjdExpa2UoXy5ub29wKTtcbiAqIC8vID0+IGZhbHNlXG4gKlxuICogXy5pc09iamVjdExpa2UobnVsbCk7XG4gKiAvLyA9PiBmYWxzZVxuICovXG5mdW5jdGlvbiBpc09iamVjdExpa2UodmFsdWUpIHtcbiAgcmV0dXJuICEhdmFsdWUgJiYgdHlwZW9mIHZhbHVlID09ICdvYmplY3QnO1xufVxuXG4vKipcbiAqIENoZWNrcyBpZiBgdmFsdWVgIGlzIGNsYXNzaWZpZWQgYXMgYSBgU3ltYm9sYCBwcmltaXRpdmUgb3Igb2JqZWN0LlxuICpcbiAqIEBzdGF0aWNcbiAqIEBtZW1iZXJPZiBfXG4gKiBAc2luY2UgNC4wLjBcbiAqIEBjYXRlZ29yeSBMYW5nXG4gKiBAcGFyYW0geyp9IHZhbHVlIFRoZSB2YWx1ZSB0byBjaGVjay5cbiAqIEByZXR1cm5zIHtib29sZWFufSBSZXR1cm5zIGB0cnVlYCBpZiBgdmFsdWVgIGlzIGEgc3ltYm9sLCBlbHNlIGBmYWxzZWAuXG4gKiBAZXhhbXBsZVxuICpcbiAqIF8uaXNTeW1ib2woU3ltYm9sLml0ZXJhdG9yKTtcbiAqIC8vID0+IHRydWVcbiAqXG4gKiBfLmlzU3ltYm9sKCdhYmMnKTtcbiAqIC8vID0+IGZhbHNlXG4gKi9cbmZ1bmN0aW9uIGlzU3ltYm9sKHZhbHVlKSB7XG4gIHJldHVybiB0eXBlb2YgdmFsdWUgPT0gJ3N5bWJvbCcgfHxcbiAgICAoaXNPYmplY3RMaWtlKHZhbHVlKSAmJiBvYmplY3RUb1N0cmluZy5jYWxsKHZhbHVlKSA9PSBzeW1ib2xUYWcpO1xufVxuXG4vKipcbiAqIENvbnZlcnRzIGB2YWx1ZWAgdG8gYSBudW1iZXIuXG4gKlxuICogQHN0YXRpY1xuICogQG1lbWJlck9mIF9cbiAqIEBzaW5jZSA0LjAuMFxuICogQGNhdGVnb3J5IExhbmdcbiAqIEBwYXJhbSB7Kn0gdmFsdWUgVGhlIHZhbHVlIHRvIHByb2Nlc3MuXG4gKiBAcmV0dXJucyB7bnVtYmVyfSBSZXR1cm5zIHRoZSBudW1iZXIuXG4gKiBAZXhhbXBsZVxuICpcbiAqIF8udG9OdW1iZXIoMy4yKTtcbiAqIC8vID0+IDMuMlxuICpcbiAqIF8udG9OdW1iZXIoTnVtYmVyLk1JTl9WQUxVRSk7XG4gKiAvLyA9PiA1ZS0zMjRcbiAqXG4gKiBfLnRvTnVtYmVyKEluZmluaXR5KTtcbiAqIC8vID0+IEluZmluaXR5XG4gKlxuICogXy50b051bWJlcignMy4yJyk7XG4gKiAvLyA9PiAzLjJcbiAqL1xuZnVuY3Rpb24gdG9OdW1iZXIodmFsdWUpIHtcbiAgaWYgKHR5cGVvZiB2YWx1ZSA9PSAnbnVtYmVyJykge1xuICAgIHJldHVybiB2YWx1ZTtcbiAgfVxuICBpZiAoaXNTeW1ib2wodmFsdWUpKSB7XG4gICAgcmV0dXJuIE5BTjtcbiAgfVxuICBpZiAoaXNPYmplY3QodmFsdWUpKSB7XG4gICAgdmFyIG90aGVyID0gdHlwZW9mIHZhbHVlLnZhbHVlT2YgPT0gJ2Z1bmN0aW9uJyA/IHZhbHVlLnZhbHVlT2YoKSA6IHZhbHVlO1xuICAgIHZhbHVlID0gaXNPYmplY3Qob3RoZXIpID8gKG90aGVyICsgJycpIDogb3RoZXI7XG4gIH1cbiAgaWYgKHR5cGVvZiB2YWx1ZSAhPSAnc3RyaW5nJykge1xuICAgIHJldHVybiB2YWx1ZSA9PT0gMCA/IHZhbHVlIDogK3ZhbHVlO1xuICB9XG4gIHZhbHVlID0gdmFsdWUucmVwbGFjZShyZVRyaW0sICcnKTtcbiAgdmFyIGlzQmluYXJ5ID0gcmVJc0JpbmFyeS50ZXN0KHZhbHVlKTtcbiAgcmV0dXJuIChpc0JpbmFyeSB8fCByZUlzT2N0YWwudGVzdCh2YWx1ZSkpXG4gICAgPyBmcmVlUGFyc2VJbnQodmFsdWUuc2xpY2UoMiksIGlzQmluYXJ5ID8gMiA6IDgpXG4gICAgOiAocmVJc0JhZEhleC50ZXN0KHZhbHVlKSA/IE5BTiA6ICt2YWx1ZSk7XG59XG5cbm1vZHVsZS5leHBvcnRzID0gZGVib3VuY2U7XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL25vZGVfbW9kdWxlcy9sb2Rhc2guZGVib3VuY2UvaW5kZXguanNcbi8vIG1vZHVsZSBpZCA9IDRcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOztBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///4\n");
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the `TypeError` message for "Functions" methods. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && objectToString.call(value) == symbolTag);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = debounce;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
 /* 5 */
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports) {
 
-eval("var g;\r\n\r\n// This works in non-strict mode\r\ng = (function() {\r\n\treturn this;\r\n})();\r\n\r\ntry {\r\n\t// This works if eval is allowed (see CSP)\r\n\tg = g || Function(\"return this\")() || (1,eval)(\"this\");\r\n} catch(e) {\r\n\t// This works if the window reference is available\r\n\tif(typeof window === \"object\")\r\n\t\tg = window;\r\n}\r\n\r\n// g can still be undefined, but nothing to do about it...\r\n// We return undefined, instead of nothing here, so it's\r\n// easier to handle this case. if(!global) { ...}\r\n\r\nmodule.exports = g;\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8od2VicGFjaykvYnVpbGRpbi9nbG9iYWwuanM/MzY5OCJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgZztcclxuXHJcbi8vIFRoaXMgd29ya3MgaW4gbm9uLXN0cmljdCBtb2RlXHJcbmcgPSAoZnVuY3Rpb24oKSB7XHJcblx0cmV0dXJuIHRoaXM7XHJcbn0pKCk7XHJcblxyXG50cnkge1xyXG5cdC8vIFRoaXMgd29ya3MgaWYgZXZhbCBpcyBhbGxvd2VkIChzZWUgQ1NQKVxyXG5cdGcgPSBnIHx8IEZ1bmN0aW9uKFwicmV0dXJuIHRoaXNcIikoKSB8fCAoMSxldmFsKShcInRoaXNcIik7XHJcbn0gY2F0Y2goZSkge1xyXG5cdC8vIFRoaXMgd29ya3MgaWYgdGhlIHdpbmRvdyByZWZlcmVuY2UgaXMgYXZhaWxhYmxlXHJcblx0aWYodHlwZW9mIHdpbmRvdyA9PT0gXCJvYmplY3RcIilcclxuXHRcdGcgPSB3aW5kb3c7XHJcbn1cclxuXHJcbi8vIGcgY2FuIHN0aWxsIGJlIHVuZGVmaW5lZCwgYnV0IG5vdGhpbmcgdG8gZG8gYWJvdXQgaXQuLi5cclxuLy8gV2UgcmV0dXJuIHVuZGVmaW5lZCwgaW5zdGVhZCBvZiBub3RoaW5nIGhlcmUsIHNvIGl0J3NcclxuLy8gZWFzaWVyIHRvIGhhbmRsZSB0aGlzIGNhc2UuIGlmKCFnbG9iYWwpIHsgLi4ufVxyXG5cclxubW9kdWxlLmV4cG9ydHMgPSBnO1xyXG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAod2VicGFjaykvYnVpbGRpbi9nbG9iYWwuanNcbi8vIG1vZHVsZSBpZCA9IDVcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///5\n");
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ }),
 /* 6 */
-/*!****************************!*\
-  !*** ./src/js/rwd-view.js ***!
-  \****************************/
-/*! no static exports found */
-/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/**\n * Module to handle input and control of RWD frame views.\n *\n * @package     Focus-App\n * @author      Colin Tester <office@z-omo.com>\n * \n * This file forms part of the installed @package and should not be copied \n * and/or distributed without the written consent from the file's author.\n *\n * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>\n *\n * This file and its @package are under version control.\n */\n'user strict';\n\nconst DOM = __webpack_require__(/*! ./dom-man.js */ 0);\n\nconst RWDView = {\n  viewModes:  ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],\n  selectors:  {\n    container:  'rwd-view',\n    controls:   'rwd-view-controls',\n    active:     'active',\n    device:     'rwd-device',\n    frame:      'rwd-view-frame',\n    index:      'data-index',\n    frameURL:   'data-src'\n  },\n\n  setup: function(container) {\n    RWDView.container = container;\n    setupViewControls();\n    //setupView();\n    console.log('RWD View setup completed.');\n  },\n};\n\nfunction buildViewControls(container)\n{\n  let controls = document.createElement('div');\n  DOM.addClass(RWDView.selectors.controls, controls);\n\n  RWDView.viewModes.forEach((mode, index) =>\n  {\n    let button = document.createElement('button');\n    setButtonText(mode, button);\n    button.setAttribute('data-index', index);\n    DOM.add(button, controls);\n\n    if (DOM.hasClass(mode, container)) { activateControl(button); }\n  });\n\n  DOM.prepend(controls, container);\n}\n\nfunction setupViewControls()\n{\n  RWDView.container.forEach((view) => {\n    buildViewControls(view);\n    view.addEventListener('click', onSelectControl);\n  });\n}\n\nfunction setButtonText(text, button)\n{\n  text = text.replace('rwd-', '');\n  text = text.toLowerCase().replace(/\\b[a-z]/g, function(letter)\n  {\n    return letter.toUpperCase();\n  });\n  button.innerHTML = text;\n}\n\nfunction onSelectControl(e)\n{\n  let control = e.target;\n  if ('button' !== control.tagName.toLowerCase()) { return; }\n\n  e.stopPropagation();\n  let modeIndex = Number(control.getAttribute(RWDView.selectors.index));\n\n  let view = getViewContainer(control);\n  if (view) { setViewMode(view, modeIndex); }\n  activateControl(control);\n}\n\nfunction activateControl(control)\n{\n  if (RWDView.activeControl)\n  {\n    DOM.removeClass(RWDView.selectors.active, RWDView.activeControl);\n  }\n\n  DOM.addClass(RWDView.selectors.active, control);\n  RWDView.activeControl = control;\n}\n\nfunction getViewFrame(element)\n{\n  let frame = element.querySelector('.' + RWDView.selectors.frame);\n  //if (!frame) { frame = buildFrame(element); }\n  return frame;\n}\n\n// function buildFrame(element)\n// {\n//   let device = getViewDevice(element);\n//   if (!device) { device = element; }\n\n//   let frame = document.createElement('iframe');\n//   DOM.add(frame, device);\n//   DOM.addClass(RWDView.selectors.frame, frame);\n\n//   return frame;\n// }\n\n// function getViewDevice(view) {\n//   return view.querySelector('.' + RWDView.selectors.device);\n// }\n\n// @TODO: rewrite so that element passed could be identified as container.\nfunction getViewContainer(element) {\n  let target = element;\n  let isContainer;\n  let parent\n  if (!element) { return; }\n\n  do\n  {\n    parent = target.parentNode;\n    if (!parent) { break; }\n\n    isContainer = DOM.hasClass(RWDView.selectors.container, parent);\n    target = parent;\n  } while (!isContainer && parent);\n\n  return parent;\n}\n\nfunction setViewMode(view, index)\n{\n  let mode = RWDView.viewModes[index];\n  if (!mode) { return; }\n\n  resetViewMode(view);\n  DOM.addClass(mode, view);\n\n  if (mode === RWDView.viewModes[0])\n  {\n    reloadFrame(view);\n  }\n}\n\nfunction resetViewMode(view)\n{\n  RWDView.viewModes.forEach(function(mode)\n  {\n    if (DOM.hasClass(mode, view)) { DOM.removeClass(mode, view); }\n  });\n}\n\nfunction reloadFrame(view)\n{\n  let frame = getViewFrame(view);\n  if (!frame) { return; }\n  \n  setTimeout(function()\n  {\n    frame.contentWindow.location.reload();\n  }, 400);\n}\n\n// function setupView()\n// {\n//   RWDView.container.forEach(function(view) {\n//     let frame = getViewFrame(view);\n//     if (!frame) { return; }\n\n//     console.log('frame: ', frame);\n//     let barWidth = frame.offsetWidth - frame.clientWidth;\n//     console.log('barWidth: ', barWidth);\n\n//     if (0 < barWidth)\n//     {\n//       let device = getViewDevice(view);\n//       if (!device) { return; }\n\n//       let frameWidth = 100 * ((frame.offsetWidth + barWidth) / device.offsetWidth);\n//       //frame.setAttribute('style', 'width: ' + frameWidth + '%;');\n//     }\n//     // let url = view.getAttribute(RWDView.selectors.frameURL);\n//     // if (!url) { return; }\n    \n//     // frame.setAttribute('src', url);    \n//   });\n//}\n\n// function setMobileAgent(targetWindow)\n// {\n//   let agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1';\n//   if (agent === targetWindow.parent.navigator.userAgent) { return; }\n\n//   let agentProp = { get: function(){ return agent; }};\n\n//   try {\n//     Object.defineProperty(targetWindow.parent.navigator, 'userAgent', agentProp);\n//   } catch (e) {\n//     targetWindow.parent.navigator = Object.create(navigator, { userAgent: agentProp });\n//   }\n//}\n\nmodule.exports = RWDView;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9yd2Qtdmlldy5qcz8yYzY5Il0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogTW9kdWxlIHRvIGhhbmRsZSBpbnB1dCBhbmQgY29udHJvbCBvZiBSV0QgZnJhbWUgdmlld3MuXG4gKlxuICogQHBhY2thZ2UgICAgIEZvY3VzLUFwcFxuICogQGF1dGhvciAgICAgIENvbGluIFRlc3RlciA8b2ZmaWNlQHotb21vLmNvbT5cbiAqIFxuICogVGhpcyBmaWxlIGZvcm1zIHBhcnQgb2YgdGhlIGluc3RhbGxlZCBAcGFja2FnZSBhbmQgc2hvdWxkIG5vdCBiZSBjb3BpZWQgXG4gKiBhbmQvb3IgZGlzdHJpYnV0ZWQgd2l0aG91dCB0aGUgd3JpdHRlbiBjb25zZW50IGZyb20gdGhlIGZpbGUncyBhdXRob3IuXG4gKlxuICogQGNvcHlyaWdodDogUGxlYXNlIHNlZTogPGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0Jlcm5lX0NvbnZlbnRpb24+XG4gKlxuICogVGhpcyBmaWxlIGFuZCBpdHMgQHBhY2thZ2UgYXJlIHVuZGVyIHZlcnNpb24gY29udHJvbC5cbiAqL1xuJ3VzZXIgc3RyaWN0JztcblxuY29uc3QgRE9NID0gcmVxdWlyZSgnLi9kb20tbWFuLmpzJyk7XG5cbmNvbnN0IFJXRFZpZXcgPSB7XG4gIHZpZXdNb2RlczogIFsncndkLW1vYmlsZScsICdyd2QtdGFibGV0JywgJ3J3ZC1kZXNrdG9wJ10sXG4gIHNlbGVjdG9yczogIHtcbiAgICBjb250YWluZXI6ICAncndkLXZpZXcnLFxuICAgIGNvbnRyb2xzOiAgICdyd2Qtdmlldy1jb250cm9scycsXG4gICAgYWN0aXZlOiAgICAgJ2FjdGl2ZScsXG4gICAgZGV2aWNlOiAgICAgJ3J3ZC1kZXZpY2UnLFxuICAgIGZyYW1lOiAgICAgICdyd2Qtdmlldy1mcmFtZScsXG4gICAgaW5kZXg6ICAgICAgJ2RhdGEtaW5kZXgnLFxuICAgIGZyYW1lVVJMOiAgICdkYXRhLXNyYydcbiAgfSxcblxuICBzZXR1cDogZnVuY3Rpb24oY29udGFpbmVyKSB7XG4gICAgUldEVmlldy5jb250YWluZXIgPSBjb250YWluZXI7XG4gICAgc2V0dXBWaWV3Q29udHJvbHMoKTtcbiAgICAvL3NldHVwVmlldygpO1xuICAgIGNvbnNvbGUubG9nKCdSV0QgVmlldyBzZXR1cCBjb21wbGV0ZWQuJyk7XG4gIH0sXG59O1xuXG5mdW5jdGlvbiBidWlsZFZpZXdDb250cm9scyhjb250YWluZXIpXG57XG4gIGxldCBjb250cm9scyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicpO1xuICBET00uYWRkQ2xhc3MoUldEVmlldy5zZWxlY3RvcnMuY29udHJvbHMsIGNvbnRyb2xzKTtcblxuICBSV0RWaWV3LnZpZXdNb2Rlcy5mb3JFYWNoKChtb2RlLCBpbmRleCkgPT5cbiAge1xuICAgIGxldCBidXR0b24gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdidXR0b24nKTtcbiAgICBzZXRCdXR0b25UZXh0KG1vZGUsIGJ1dHRvbik7XG4gICAgYnV0dG9uLnNldEF0dHJpYnV0ZSgnZGF0YS1pbmRleCcsIGluZGV4KTtcbiAgICBET00uYWRkKGJ1dHRvbiwgY29udHJvbHMpO1xuXG4gICAgaWYgKERPTS5oYXNDbGFzcyhtb2RlLCBjb250YWluZXIpKSB7IGFjdGl2YXRlQ29udHJvbChidXR0b24pOyB9XG4gIH0pO1xuXG4gIERPTS5wcmVwZW5kKGNvbnRyb2xzLCBjb250YWluZXIpO1xufVxuXG5mdW5jdGlvbiBzZXR1cFZpZXdDb250cm9scygpXG57XG4gIFJXRFZpZXcuY29udGFpbmVyLmZvckVhY2goKHZpZXcpID0+IHtcbiAgICBidWlsZFZpZXdDb250cm9scyh2aWV3KTtcbiAgICB2aWV3LmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgb25TZWxlY3RDb250cm9sKTtcbiAgfSk7XG59XG5cbmZ1bmN0aW9uIHNldEJ1dHRvblRleHQodGV4dCwgYnV0dG9uKVxue1xuICB0ZXh0ID0gdGV4dC5yZXBsYWNlKCdyd2QtJywgJycpO1xuICB0ZXh0ID0gdGV4dC50b0xvd2VyQ2FzZSgpLnJlcGxhY2UoL1xcYlthLXpdL2csIGZ1bmN0aW9uKGxldHRlcilcbiAge1xuICAgIHJldHVybiBsZXR0ZXIudG9VcHBlckNhc2UoKTtcbiAgfSk7XG4gIGJ1dHRvbi5pbm5lckhUTUwgPSB0ZXh0O1xufVxuXG5mdW5jdGlvbiBvblNlbGVjdENvbnRyb2woZSlcbntcbiAgbGV0IGNvbnRyb2wgPSBlLnRhcmdldDtcbiAgaWYgKCdidXR0b24nICE9PSBjb250cm9sLnRhZ05hbWUudG9Mb3dlckNhc2UoKSkgeyByZXR1cm47IH1cblxuICBlLnN0b3BQcm9wYWdhdGlvbigpO1xuICBsZXQgbW9kZUluZGV4ID0gTnVtYmVyKGNvbnRyb2wuZ2V0QXR0cmlidXRlKFJXRFZpZXcuc2VsZWN0b3JzLmluZGV4KSk7XG5cbiAgbGV0IHZpZXcgPSBnZXRWaWV3Q29udGFpbmVyKGNvbnRyb2wpO1xuICBpZiAodmlldykgeyBzZXRWaWV3TW9kZSh2aWV3LCBtb2RlSW5kZXgpOyB9XG4gIGFjdGl2YXRlQ29udHJvbChjb250cm9sKTtcbn1cblxuZnVuY3Rpb24gYWN0aXZhdGVDb250cm9sKGNvbnRyb2wpXG57XG4gIGlmIChSV0RWaWV3LmFjdGl2ZUNvbnRyb2wpXG4gIHtcbiAgICBET00ucmVtb3ZlQ2xhc3MoUldEVmlldy5zZWxlY3RvcnMuYWN0aXZlLCBSV0RWaWV3LmFjdGl2ZUNvbnRyb2wpO1xuICB9XG5cbiAgRE9NLmFkZENsYXNzKFJXRFZpZXcuc2VsZWN0b3JzLmFjdGl2ZSwgY29udHJvbCk7XG4gIFJXRFZpZXcuYWN0aXZlQ29udHJvbCA9IGNvbnRyb2w7XG59XG5cbmZ1bmN0aW9uIGdldFZpZXdGcmFtZShlbGVtZW50KVxue1xuICBsZXQgZnJhbWUgPSBlbGVtZW50LnF1ZXJ5U2VsZWN0b3IoJy4nICsgUldEVmlldy5zZWxlY3RvcnMuZnJhbWUpO1xuICAvL2lmICghZnJhbWUpIHsgZnJhbWUgPSBidWlsZEZyYW1lKGVsZW1lbnQpOyB9XG4gIHJldHVybiBmcmFtZTtcbn1cblxuLy8gZnVuY3Rpb24gYnVpbGRGcmFtZShlbGVtZW50KVxuLy8ge1xuLy8gICBsZXQgZGV2aWNlID0gZ2V0Vmlld0RldmljZShlbGVtZW50KTtcbi8vICAgaWYgKCFkZXZpY2UpIHsgZGV2aWNlID0gZWxlbWVudDsgfVxuXG4vLyAgIGxldCBmcmFtZSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2lmcmFtZScpO1xuLy8gICBET00uYWRkKGZyYW1lLCBkZXZpY2UpO1xuLy8gICBET00uYWRkQ2xhc3MoUldEVmlldy5zZWxlY3RvcnMuZnJhbWUsIGZyYW1lKTtcblxuLy8gICByZXR1cm4gZnJhbWU7XG4vLyB9XG5cbi8vIGZ1bmN0aW9uIGdldFZpZXdEZXZpY2Uodmlldykge1xuLy8gICByZXR1cm4gdmlldy5xdWVyeVNlbGVjdG9yKCcuJyArIFJXRFZpZXcuc2VsZWN0b3JzLmRldmljZSk7XG4vLyB9XG5cbi8vIEBUT0RPOiByZXdyaXRlIHNvIHRoYXQgZWxlbWVudCBwYXNzZWQgY291bGQgYmUgaWRlbnRpZmllZCBhcyBjb250YWluZXIuXG5mdW5jdGlvbiBnZXRWaWV3Q29udGFpbmVyKGVsZW1lbnQpIHtcbiAgbGV0IHRhcmdldCA9IGVsZW1lbnQ7XG4gIGxldCBpc0NvbnRhaW5lcjtcbiAgbGV0IHBhcmVudFxuICBpZiAoIWVsZW1lbnQpIHsgcmV0dXJuOyB9XG5cbiAgZG9cbiAge1xuICAgIHBhcmVudCA9IHRhcmdldC5wYXJlbnROb2RlO1xuICAgIGlmICghcGFyZW50KSB7IGJyZWFrOyB9XG5cbiAgICBpc0NvbnRhaW5lciA9IERPTS5oYXNDbGFzcyhSV0RWaWV3LnNlbGVjdG9ycy5jb250YWluZXIsIHBhcmVudCk7XG4gICAgdGFyZ2V0ID0gcGFyZW50O1xuICB9IHdoaWxlICghaXNDb250YWluZXIgJiYgcGFyZW50KTtcblxuICByZXR1cm4gcGFyZW50O1xufVxuXG5mdW5jdGlvbiBzZXRWaWV3TW9kZSh2aWV3LCBpbmRleClcbntcbiAgbGV0IG1vZGUgPSBSV0RWaWV3LnZpZXdNb2Rlc1tpbmRleF07XG4gIGlmICghbW9kZSkgeyByZXR1cm47IH1cblxuICByZXNldFZpZXdNb2RlKHZpZXcpO1xuICBET00uYWRkQ2xhc3MobW9kZSwgdmlldyk7XG5cbiAgaWYgKG1vZGUgPT09IFJXRFZpZXcudmlld01vZGVzWzBdKVxuICB7XG4gICAgcmVsb2FkRnJhbWUodmlldyk7XG4gIH1cbn1cblxuZnVuY3Rpb24gcmVzZXRWaWV3TW9kZSh2aWV3KVxue1xuICBSV0RWaWV3LnZpZXdNb2Rlcy5mb3JFYWNoKGZ1bmN0aW9uKG1vZGUpXG4gIHtcbiAgICBpZiAoRE9NLmhhc0NsYXNzKG1vZGUsIHZpZXcpKSB7IERPTS5yZW1vdmVDbGFzcyhtb2RlLCB2aWV3KTsgfVxuICB9KTtcbn1cblxuZnVuY3Rpb24gcmVsb2FkRnJhbWUodmlldylcbntcbiAgbGV0IGZyYW1lID0gZ2V0Vmlld0ZyYW1lKHZpZXcpO1xuICBpZiAoIWZyYW1lKSB7IHJldHVybjsgfVxuICBcbiAgc2V0VGltZW91dChmdW5jdGlvbigpXG4gIHtcbiAgICBmcmFtZS5jb250ZW50V2luZG93LmxvY2F0aW9uLnJlbG9hZCgpO1xuICB9LCA0MDApO1xufVxuXG4vLyBmdW5jdGlvbiBzZXR1cFZpZXcoKVxuLy8ge1xuLy8gICBSV0RWaWV3LmNvbnRhaW5lci5mb3JFYWNoKGZ1bmN0aW9uKHZpZXcpIHtcbi8vICAgICBsZXQgZnJhbWUgPSBnZXRWaWV3RnJhbWUodmlldyk7XG4vLyAgICAgaWYgKCFmcmFtZSkgeyByZXR1cm47IH1cblxuLy8gICAgIGNvbnNvbGUubG9nKCdmcmFtZTogJywgZnJhbWUpO1xuLy8gICAgIGxldCBiYXJXaWR0aCA9IGZyYW1lLm9mZnNldFdpZHRoIC0gZnJhbWUuY2xpZW50V2lkdGg7XG4vLyAgICAgY29uc29sZS5sb2coJ2JhcldpZHRoOiAnLCBiYXJXaWR0aCk7XG5cbi8vICAgICBpZiAoMCA8IGJhcldpZHRoKVxuLy8gICAgIHtcbi8vICAgICAgIGxldCBkZXZpY2UgPSBnZXRWaWV3RGV2aWNlKHZpZXcpO1xuLy8gICAgICAgaWYgKCFkZXZpY2UpIHsgcmV0dXJuOyB9XG5cbi8vICAgICAgIGxldCBmcmFtZVdpZHRoID0gMTAwICogKChmcmFtZS5vZmZzZXRXaWR0aCArIGJhcldpZHRoKSAvIGRldmljZS5vZmZzZXRXaWR0aCk7XG4vLyAgICAgICAvL2ZyYW1lLnNldEF0dHJpYnV0ZSgnc3R5bGUnLCAnd2lkdGg6ICcgKyBmcmFtZVdpZHRoICsgJyU7Jyk7XG4vLyAgICAgfVxuLy8gICAgIC8vIGxldCB1cmwgPSB2aWV3LmdldEF0dHJpYnV0ZShSV0RWaWV3LnNlbGVjdG9ycy5mcmFtZVVSTCk7XG4vLyAgICAgLy8gaWYgKCF1cmwpIHsgcmV0dXJuOyB9XG4gICAgXG4vLyAgICAgLy8gZnJhbWUuc2V0QXR0cmlidXRlKCdzcmMnLCB1cmwpOyAgICBcbi8vICAgfSk7XG4vL31cblxuLy8gZnVuY3Rpb24gc2V0TW9iaWxlQWdlbnQodGFyZ2V0V2luZG93KVxuLy8ge1xuLy8gICBsZXQgYWdlbnQgPSAnTW96aWxsYS81LjAgKGlQaG9uZTsgQ1BVIGlQaG9uZSBPUyAxMF8zXzMgbGlrZSBNYWMgT1MgWCkgQXBwbGVXZWJLaXQvNjAzLjMuOCAoS0hUTUwsIGxpa2UgR2Vja28pIFZlcnNpb24vMTAuMCBNb2JpbGUvMTRHNjAgU2FmYXJpLzYwMi4xJztcbi8vICAgaWYgKGFnZW50ID09PSB0YXJnZXRXaW5kb3cucGFyZW50Lm5hdmlnYXRvci51c2VyQWdlbnQpIHsgcmV0dXJuOyB9XG5cbi8vICAgbGV0IGFnZW50UHJvcCA9IHsgZ2V0OiBmdW5jdGlvbigpeyByZXR1cm4gYWdlbnQ7IH19O1xuXG4vLyAgIHRyeSB7XG4vLyAgICAgT2JqZWN0LmRlZmluZVByb3BlcnR5KHRhcmdldFdpbmRvdy5wYXJlbnQubmF2aWdhdG9yLCAndXNlckFnZW50JywgYWdlbnRQcm9wKTtcbi8vICAgfSBjYXRjaCAoZSkge1xuLy8gICAgIHRhcmdldFdpbmRvdy5wYXJlbnQubmF2aWdhdG9yID0gT2JqZWN0LmNyZWF0ZShuYXZpZ2F0b3IsIHsgdXNlckFnZW50OiBhZ2VudFByb3AgfSk7XG4vLyAgIH1cbi8vfVxuXG5tb2R1bGUuZXhwb3J0cyA9IFJXRFZpZXc7XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9qcy9yd2Qtdmlldy5qc1xuLy8gbW9kdWxlIGlkID0gNlxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///6\n");
+"use strict";
+
+/**
+ * Module to handle input and control of RWD frame views.
+ *
+ * @package     Focus-App
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+'user strict';
+
+var DOM = __webpack_require__(0);
+
+var RWDView = {
+  viewModes: ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
+
+  selectors: {
+    container: 'rwd-view',
+    controls: 'rwd-view-controls',
+    active: 'active',
+    device: 'rwd-device',
+    frame: 'rwd-view-frame',
+    index: 'data-index',
+    frameURL: 'data-src'
+  },
+
+  setup: function setup(container) {
+    RWDView.container = container;
+    setupViewControls();
+    //setupView();
+    console.log('RWD View setup completed.');
+  }
+};
+
+function buildViewControls(container) {
+  var controls = document.createElement('div');
+  DOM.addClass(RWDView.selectors.controls, controls);
+
+  RWDView.viewModes.forEach(function (mode, index) {
+    var button = document.createElement('button');
+    setButtonText(mode, button);
+    button.setAttribute('data-index', index);
+    DOM.add(button, controls);
+
+    if (DOM.hasClass(mode, container)) {
+      activateControl(button);
+    }
+  });
+
+  DOM.prepend(controls, container);
+}
+
+function setupViewControls() {
+  RWDView.container.forEach(function (view) {
+    buildViewControls(view);
+    view.addEventListener('click', onSelectControl);
+  });
+}
+
+function setButtonText(text, button) {
+  text = text.replace('rwd-', '');
+  text = text.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+    return letter.toUpperCase();
+  });
+  button.innerHTML = text;
+}
+
+function onSelectControl(e) {
+  var control = e.target;
+  if ('button' !== control.tagName.toLowerCase()) {
+    return;
+  }
+
+  e.stopPropagation();
+  var modeIndex = Number(control.getAttribute(RWDView.selectors.index));
+
+  var view = getViewContainer(control);
+  if (view) {
+    setViewMode(view, modeIndex);
+  }
+  activateControl(control);
+}
+
+function activateControl(control) {
+  if (RWDView.activeControl) {
+    DOM.removeClass(RWDView.selectors.active, RWDView.activeControl);
+  }
+
+  DOM.addClass(RWDView.selectors.active, control);
+  RWDView.activeControl = control;
+}
+
+function getViewFrame(element) {
+  var frame = element.querySelector('.' + RWDView.selectors.frame);
+  //if (!frame) { frame = buildFrame(element); }
+  return frame;
+}
+
+// function buildFrame(element)
+// {
+//   let device = getViewDevice(element);
+//   if (!device) { device = element; }
+
+//   let frame = document.createElement('iframe');
+//   DOM.add(frame, device);
+//   DOM.addClass(RWDView.selectors.frame, frame);
+
+//   return frame;
+// }
+
+// function getViewDevice(view) {
+//   return view.querySelector('.' + RWDView.selectors.device);
+// }
+
+// @TODO: rewrite so that element passed could be identified as container.
+function getViewContainer(element) {
+  var target = element;
+  var isContainer = void 0;
+  var parent = void 0;
+  if (!element) {
+    return;
+  }
+
+  do {
+    parent = target.parentNode;
+    if (!parent) {
+      break;
+    }
+
+    isContainer = DOM.hasClass(RWDView.selectors.container, parent);
+    target = parent;
+  } while (!isContainer && parent);
+
+  return parent;
+}
+
+function setViewMode(view, index) {
+  var mode = RWDView.viewModes[index];
+  if (!mode) {
+    return;
+  }
+
+  resetViewMode(view);
+  DOM.addClass(mode, view);
+
+  // if (mode === RWDView.viewModes[0])
+  // {
+  //   reloadFrame(view);
+  // }
+}
+
+function resetViewMode(view) {
+  RWDView.viewModes.forEach(function (mode) {
+    if (DOM.hasClass(mode, view)) {
+      DOM.removeClass(mode, view);
+    }
+  });
+}
+
+// function reloadFrame(view)
+// {
+//   let frame = getViewFrame(view);
+//   if (!frame) { return; }
+
+//   setTimeout(function()
+//   {
+//     frame.contentWindow.location.reload();
+//   }, 400);
+// }
+
+// function setupView()
+// {
+//   RWDView.container.forEach(function(view) {
+//     let frame = getViewFrame(view);
+//     if (!frame) { return; }
+
+//     console.log('frame: ', frame);
+//     let barWidth = frame.offsetWidth - frame.clientWidth;
+//     console.log('barWidth: ', barWidth);
+
+//     if (0 < barWidth)
+//     {
+//       let device = getViewDevice(view);
+//       if (!device) { return; }
+
+//       let frameWidth = 100 * ((frame.offsetWidth + barWidth) / device.offsetWidth);
+//       //frame.setAttribute('style', 'width: ' + frameWidth + '%;');
+//     }
+//     // let url = view.getAttribute(RWDView.selectors.frameURL);
+//     // if (!url) { return; }
+
+//     // frame.setAttribute('src', url);    
+//   });
+//}
+
+// function setMobileAgent(targetWindow)
+// {
+//   let agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1';
+//   if (agent === targetWindow.parent.navigator.userAgent) { return; }
+
+//   let agentProp = { get: function(){ return agent; }};
+
+//   try {
+//     Object.defineProperty(targetWindow.parent.navigator, 'userAgent', agentProp);
+//   } catch (e) {
+//     targetWindow.parent.navigator = Object.create(navigator, { userAgent: agentProp });
+//   }
+//}
+
+module.exports = RWDView;
+
+/***/ }),
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
+ * https://scottjehl.github.io/picturefill/
+ * Copyright (c) 2016 https://github.com/scottjehl/picturefill/blob/master/Authors.txt; Licensed MIT
+ */
+/*! Gecko-Picture - v1.0
+ * https://github.com/scottjehl/picturefill/tree/3.0/src/plugins/gecko-picture
+ * Firefox's early picture implementation (prior to FF41) is static and does
+ * not react to viewport changes. This tiny module fixes this.
+ */
+(function(window) {
+	/*jshint eqnull:true */
+	var ua = navigator.userAgent;
+
+	if ( window.HTMLPictureElement && ((/ecko/).test(ua) && ua.match(/rv\:(\d+)/) && RegExp.$1 < 45) ) {
+		addEventListener("resize", (function() {
+			var timer;
+
+			var dummySrc = document.createElement("source");
+
+			var fixRespimg = function(img) {
+				var source, sizes;
+				var picture = img.parentNode;
+
+				if (picture.nodeName.toUpperCase() === "PICTURE") {
+					source = dummySrc.cloneNode();
+
+					picture.insertBefore(source, picture.firstElementChild);
+					setTimeout(function() {
+						picture.removeChild(source);
+					});
+				} else if (!img._pfLastSize || img.offsetWidth > img._pfLastSize) {
+					img._pfLastSize = img.offsetWidth;
+					sizes = img.sizes;
+					img.sizes += ",100vw";
+					setTimeout(function() {
+						img.sizes = sizes;
+					});
+				}
+			};
+
+			var findPictureImgs = function() {
+				var i;
+				var imgs = document.querySelectorAll("picture > img, img[srcset][sizes]");
+				for (i = 0; i < imgs.length; i++) {
+					fixRespimg(imgs[i]);
+				}
+			};
+			var onResize = function() {
+				clearTimeout(timer);
+				timer = setTimeout(findPictureImgs, 99);
+			};
+			var mq = window.matchMedia && matchMedia("(orientation: landscape)");
+			var init = function() {
+				onResize();
+
+				if (mq && mq.addListener) {
+					mq.addListener(onResize);
+				}
+			};
+
+			dummySrc.srcset = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+
+			if (/^[c|i]|d$/.test(document.readyState || "")) {
+				init();
+			} else {
+				document.addEventListener("DOMContentLoaded", init);
+			}
+
+			return onResize;
+		})());
+	}
+})(window);
+
+/*! Picturefill - v3.0.2
+ * http://scottjehl.github.io/picturefill
+ * Copyright (c) 2015 https://github.com/scottjehl/picturefill/blob/master/Authors.txt;
+ *  License: MIT
+ */
+
+(function( window, document, undefined ) {
+	// Enable strict mode
+	"use strict";
+
+	// HTML shim|v it for old IE (IE9 will still need the HTML video tag workaround)
+	document.createElement( "picture" );
+
+	var warn, eminpx, alwaysCheckWDescriptor, evalId;
+	// local object for method references and testing exposure
+	var pf = {};
+	var isSupportTestReady = false;
+	var noop = function() {};
+	var image = document.createElement( "img" );
+	var getImgAttr = image.getAttribute;
+	var setImgAttr = image.setAttribute;
+	var removeImgAttr = image.removeAttribute;
+	var docElem = document.documentElement;
+	var types = {};
+	var cfg = {
+		//resource selection:
+		algorithm: ""
+	};
+	var srcAttr = "data-pfsrc";
+	var srcsetAttr = srcAttr + "set";
+	// ua sniffing is done for undetectable img loading features,
+	// to do some non crucial perf optimizations
+	var ua = navigator.userAgent;
+	var supportAbort = (/rident/).test(ua) || ((/ecko/).test(ua) && ua.match(/rv\:(\d+)/) && RegExp.$1 > 35 );
+	var curSrcProp = "currentSrc";
+	var regWDesc = /\s+\+?\d+(e\d+)?w/;
+	var regSize = /(\([^)]+\))?\s*(.+)/;
+	var setOptions = window.picturefillCFG;
+	/**
+	 * Shortcut property for https://w3c.github.io/webappsec/specs/mixedcontent/#restricts-mixed-content ( for easy overriding in tests )
+	 */
+	// baseStyle also used by getEmValue (i.e.: width: 1em is important)
+	var baseStyle = "position:absolute;left:0;visibility:hidden;display:block;padding:0;border:none;font-size:1em;width:1em;overflow:hidden;clip:rect(0px, 0px, 0px, 0px)";
+	var fsCss = "font-size:100%!important;";
+	var isVwDirty = true;
+
+	var cssCache = {};
+	var sizeLengthCache = {};
+	var DPR = window.devicePixelRatio;
+	var units = {
+		px: 1,
+		"in": 96
+	};
+	var anchor = document.createElement( "a" );
+	/**
+	 * alreadyRun flag used for setOptions. is it true setOptions will reevaluate
+	 * @type {boolean}
+	 */
+	var alreadyRun = false;
+
+	// Reusable, non-"g" Regexes
+
+	// (Don't use \s, to avoid matching non-breaking space.)
+	var regexLeadingSpaces = /^[ \t\n\r\u000c]+/,
+	    regexLeadingCommasOrSpaces = /^[, \t\n\r\u000c]+/,
+	    regexLeadingNotSpaces = /^[^ \t\n\r\u000c]+/,
+	    regexTrailingCommas = /[,]+$/,
+	    regexNonNegativeInteger = /^\d+$/,
+
+	    // ( Positive or negative or unsigned integers or decimals, without or without exponents.
+	    // Must include at least one digit.
+	    // According to spec tests any decimal point must be followed by a digit.
+	    // No leading plus sign is allowed.)
+	    // https://html.spec.whatwg.org/multipage/infrastructure.html#valid-floating-point-number
+	    regexFloatingPoint = /^-?(?:[0-9]+|[0-9]*\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/;
+
+	var on = function(obj, evt, fn, capture) {
+		if ( obj.addEventListener ) {
+			obj.addEventListener(evt, fn, capture || false);
+		} else if ( obj.attachEvent ) {
+			obj.attachEvent( "on" + evt, fn);
+		}
+	};
+
+	/**
+	 * simple memoize function:
+	 */
+
+	var memoize = function(fn) {
+		var cache = {};
+		return function(input) {
+			if ( !(input in cache) ) {
+				cache[ input ] = fn(input);
+			}
+			return cache[ input ];
+		};
+	};
+
+	// UTILITY FUNCTIONS
+
+	// Manual is faster than RegEx
+	// http://jsperf.com/whitespace-character/5
+	function isSpace(c) {
+		return (c === "\u0020" || // space
+		        c === "\u0009" || // horizontal tab
+		        c === "\u000A" || // new line
+		        c === "\u000C" || // form feed
+		        c === "\u000D");  // carriage return
+	}
+
+	/**
+	 * gets a mediaquery and returns a boolean or gets a css length and returns a number
+	 * @param css mediaqueries or css length
+	 * @returns {boolean|number}
+	 *
+	 * based on: https://gist.github.com/jonathantneal/db4f77009b155f083738
+	 */
+	var evalCSS = (function() {
+
+		var regLength = /^([\d\.]+)(em|vw|px)$/;
+		var replace = function() {
+			var args = arguments, index = 0, string = args[0];
+			while (++index in args) {
+				string = string.replace(args[index], args[++index]);
+			}
+			return string;
+		};
+
+		var buildStr = memoize(function(css) {
+
+			return "return " + replace((css || "").toLowerCase(),
+				// interpret `and`
+				/\band\b/g, "&&",
+
+				// interpret `,`
+				/,/g, "||",
+
+				// interpret `min-` as >=
+				/min-([a-z-\s]+):/g, "e.$1>=",
+
+				// interpret `max-` as <=
+				/max-([a-z-\s]+):/g, "e.$1<=",
+
+				//calc value
+				/calc([^)]+)/g, "($1)",
+
+				// interpret css values
+				/(\d+[\.]*[\d]*)([a-z]+)/g, "($1 * e.$2)",
+				//make eval less evil
+				/^(?!(e.[a-z]|[0-9\.&=|><\+\-\*\(\)\/])).*/ig, ""
+			) + ";";
+		});
+
+		return function(css, length) {
+			var parsedLength;
+			if (!(css in cssCache)) {
+				cssCache[css] = false;
+				if (length && (parsedLength = css.match( regLength ))) {
+					cssCache[css] = parsedLength[ 1 ] * units[parsedLength[ 2 ]];
+				} else {
+					/*jshint evil:true */
+					try{
+						cssCache[css] = new Function("e", buildStr(css))(units);
+					} catch(e) {}
+					/*jshint evil:false */
+				}
+			}
+			return cssCache[css];
+		};
+	})();
+
+	var setResolution = function( candidate, sizesattr ) {
+		if ( candidate.w ) { // h = means height: || descriptor.type === 'h' do not handle yet...
+			candidate.cWidth = pf.calcListLength( sizesattr || "100vw" );
+			candidate.res = candidate.w / candidate.cWidth ;
+		} else {
+			candidate.res = candidate.d;
+		}
+		return candidate;
+	};
+
+	/**
+	 *
+	 * @param opt
+	 */
+	var picturefill = function( opt ) {
+
+		if (!isSupportTestReady) {return;}
+
+		var elements, i, plen;
+
+		var options = opt || {};
+
+		if ( options.elements && options.elements.nodeType === 1 ) {
+			if ( options.elements.nodeName.toUpperCase() === "IMG" ) {
+				options.elements =  [ options.elements ];
+			} else {
+				options.context = options.elements;
+				options.elements =  null;
+			}
+		}
+
+		elements = options.elements || pf.qsa( (options.context || document), ( options.reevaluate || options.reselect ) ? pf.sel : pf.selShort );
+
+		if ( (plen = elements.length) ) {
+
+			pf.setupRun( options );
+			alreadyRun = true;
+
+			// Loop through all elements
+			for ( i = 0; i < plen; i++ ) {
+				pf.fillImg(elements[ i ], options);
+			}
+
+			pf.teardownRun( options );
+		}
+	};
+
+	/**
+	 * outputs a warning for the developer
+	 * @param {message}
+	 * @type {Function}
+	 */
+	warn = ( window.console && console.warn ) ?
+		function( message ) {
+			console.warn( message );
+		} :
+		noop
+	;
+
+	if ( !(curSrcProp in image) ) {
+		curSrcProp = "src";
+	}
+
+	// Add support for standard mime types.
+	types[ "image/jpeg" ] = true;
+	types[ "image/gif" ] = true;
+	types[ "image/png" ] = true;
+
+	function detectTypeSupport( type, typeUri ) {
+		// based on Modernizr's lossless img-webp test
+		// note: asynchronous
+		var image = new window.Image();
+		image.onerror = function() {
+			types[ type ] = false;
+			picturefill();
+		};
+		image.onload = function() {
+			types[ type ] = image.width === 1;
+			picturefill();
+		};
+		image.src = typeUri;
+		return "pending";
+	}
+
+	// test svg support
+	types[ "image/svg+xml" ] = document.implementation.hasFeature( "http://www.w3.org/TR/SVG11/feature#Image", "1.1" );
+
+	/**
+	 * updates the internal vW property with the current viewport width in px
+	 */
+	function updateMetrics() {
+
+		isVwDirty = false;
+		DPR = window.devicePixelRatio;
+		cssCache = {};
+		sizeLengthCache = {};
+
+		pf.DPR = DPR || 1;
+
+		units.width = Math.max(window.innerWidth || 0, docElem.clientWidth);
+		units.height = Math.max(window.innerHeight || 0, docElem.clientHeight);
+
+		units.vw = units.width / 100;
+		units.vh = units.height / 100;
+
+		evalId = [ units.height, units.width, DPR ].join("-");
+
+		units.em = pf.getEmValue();
+		units.rem = units.em;
+	}
+
+	function chooseLowRes( lowerValue, higherValue, dprValue, isCached ) {
+		var bonusFactor, tooMuch, bonus, meanDensity;
+
+		//experimental
+		if (cfg.algorithm === "saveData" ){
+			if ( lowerValue > 2.7 ) {
+				meanDensity = dprValue + 1;
+			} else {
+				tooMuch = higherValue - dprValue;
+				bonusFactor = Math.pow(lowerValue - 0.6, 1.5);
+
+				bonus = tooMuch * bonusFactor;
+
+				if (isCached) {
+					bonus += 0.1 * bonusFactor;
+				}
+
+				meanDensity = lowerValue + bonus;
+			}
+		} else {
+			meanDensity = (dprValue > 1) ?
+				Math.sqrt(lowerValue * higherValue) :
+				lowerValue;
+		}
+
+		return meanDensity > dprValue;
+	}
+
+	function applyBestCandidate( img ) {
+		var srcSetCandidates;
+		var matchingSet = pf.getSet( img );
+		var evaluated = false;
+		if ( matchingSet !== "pending" ) {
+			evaluated = evalId;
+			if ( matchingSet ) {
+				srcSetCandidates = pf.setRes( matchingSet );
+				pf.applySetCandidate( srcSetCandidates, img );
+			}
+		}
+		img[ pf.ns ].evaled = evaluated;
+	}
+
+	function ascendingSort( a, b ) {
+		return a.res - b.res;
+	}
+
+	function setSrcToCur( img, src, set ) {
+		var candidate;
+		if ( !set && src ) {
+			set = img[ pf.ns ].sets;
+			set = set && set[set.length - 1];
+		}
+
+		candidate = getCandidateForSrc(src, set);
+
+		if ( candidate ) {
+			src = pf.makeUrl(src);
+			img[ pf.ns ].curSrc = src;
+			img[ pf.ns ].curCan = candidate;
+
+			if ( !candidate.res ) {
+				setResolution( candidate, candidate.set.sizes );
+			}
+		}
+		return candidate;
+	}
+
+	function getCandidateForSrc( src, set ) {
+		var i, candidate, candidates;
+		if ( src && set ) {
+			candidates = pf.parseSet( set );
+			src = pf.makeUrl(src);
+			for ( i = 0; i < candidates.length; i++ ) {
+				if ( src === pf.makeUrl(candidates[ i ].url) ) {
+					candidate = candidates[ i ];
+					break;
+				}
+			}
+		}
+		return candidate;
+	}
+
+	function getAllSourceElements( picture, candidates ) {
+		var i, len, source, srcset;
+
+		// SPEC mismatch intended for size and perf:
+		// actually only source elements preceding the img should be used
+		// also note: don't use qsa here, because IE8 sometimes doesn't like source as the key part in a selector
+		var sources = picture.getElementsByTagName( "source" );
+
+		for ( i = 0, len = sources.length; i < len; i++ ) {
+			source = sources[ i ];
+			source[ pf.ns ] = true;
+			srcset = source.getAttribute( "srcset" );
+
+			// if source does not have a srcset attribute, skip
+			if ( srcset ) {
+				candidates.push( {
+					srcset: srcset,
+					media: source.getAttribute( "media" ),
+					type: source.getAttribute( "type" ),
+					sizes: source.getAttribute( "sizes" )
+				} );
+			}
+		}
+	}
+
+	/**
+	 * Srcset Parser
+	 * By Alex Bell |  MIT License
+	 *
+	 * @returns Array [{url: _, d: _, w: _, h:_, set:_(????)}, ...]
+	 *
+	 * Based super duper closely on the reference algorithm at:
+	 * https://html.spec.whatwg.org/multipage/embedded-content.html#parse-a-srcset-attribute
+	 */
+
+	// 1. Let input be the value passed to this algorithm.
+	// (TO-DO : Explain what "set" argument is here. Maybe choose a more
+	// descriptive & more searchable name.  Since passing the "set" in really has
+	// nothing to do with parsing proper, I would prefer this assignment eventually
+	// go in an external fn.)
+	function parseSrcset(input, set) {
+
+		function collectCharacters(regEx) {
+			var chars,
+			    match = regEx.exec(input.substring(pos));
+			if (match) {
+				chars = match[ 0 ];
+				pos += chars.length;
+				return chars;
+			}
+		}
+
+		var inputLength = input.length,
+		    url,
+		    descriptors,
+		    currentDescriptor,
+		    state,
+		    c,
+
+		    // 2. Let position be a pointer into input, initially pointing at the start
+		    //    of the string.
+		    pos = 0,
+
+		    // 3. Let candidates be an initially empty source set.
+		    candidates = [];
+
+		/**
+		* Adds descriptor properties to a candidate, pushes to the candidates array
+		* @return undefined
+		*/
+		// (Declared outside of the while loop so that it's only created once.
+		// (This fn is defined before it is used, in order to pass JSHINT.
+		// Unfortunately this breaks the sequencing of the spec comments. :/ )
+		function parseDescriptors() {
+
+			// 9. Descriptor parser: Let error be no.
+			var pError = false,
+
+			// 10. Let width be absent.
+			// 11. Let density be absent.
+			// 12. Let future-compat-h be absent. (We're implementing it now as h)
+			    w, d, h, i,
+			    candidate = {},
+			    desc, lastChar, value, intVal, floatVal;
+
+			// 13. For each descriptor in descriptors, run the appropriate set of steps
+			// from the following list:
+			for (i = 0 ; i < descriptors.length; i++) {
+				desc = descriptors[ i ];
+
+				lastChar = desc[ desc.length - 1 ];
+				value = desc.substring(0, desc.length - 1);
+				intVal = parseInt(value, 10);
+				floatVal = parseFloat(value);
+
+				// If the descriptor consists of a valid non-negative integer followed by
+				// a U+0077 LATIN SMALL LETTER W character
+				if (regexNonNegativeInteger.test(value) && (lastChar === "w")) {
+
+					// If width and density are not both absent, then let error be yes.
+					if (w || d) {pError = true;}
+
+					// Apply the rules for parsing non-negative integers to the descriptor.
+					// If the result is zero, let error be yes.
+					// Otherwise, let width be the result.
+					if (intVal === 0) {pError = true;} else {w = intVal;}
+
+				// If the descriptor consists of a valid floating-point number followed by
+				// a U+0078 LATIN SMALL LETTER X character
+				} else if (regexFloatingPoint.test(value) && (lastChar === "x")) {
+
+					// If width, density and future-compat-h are not all absent, then let error
+					// be yes.
+					if (w || d || h) {pError = true;}
+
+					// Apply the rules for parsing floating-point number values to the descriptor.
+					// If the result is less than zero, let error be yes. Otherwise, let density
+					// be the result.
+					if (floatVal < 0) {pError = true;} else {d = floatVal;}
+
+				// If the descriptor consists of a valid non-negative integer followed by
+				// a U+0068 LATIN SMALL LETTER H character
+				} else if (regexNonNegativeInteger.test(value) && (lastChar === "h")) {
+
+					// If height and density are not both absent, then let error be yes.
+					if (h || d) {pError = true;}
+
+					// Apply the rules for parsing non-negative integers to the descriptor.
+					// If the result is zero, let error be yes. Otherwise, let future-compat-h
+					// be the result.
+					if (intVal === 0) {pError = true;} else {h = intVal;}
+
+				// Anything else, Let error be yes.
+				} else {pError = true;}
+			} // (close step 13 for loop)
+
+			// 15. If error is still no, then append a new image source to candidates whose
+			// URL is url, associated with a width width if not absent and a pixel
+			// density density if not absent. Otherwise, there is a parse error.
+			if (!pError) {
+				candidate.url = url;
+
+				if (w) { candidate.w = w;}
+				if (d) { candidate.d = d;}
+				if (h) { candidate.h = h;}
+				if (!h && !d && !w) {candidate.d = 1;}
+				if (candidate.d === 1) {set.has1x = true;}
+				candidate.set = set;
+
+				candidates.push(candidate);
+			}
+		} // (close parseDescriptors fn)
+
+		/**
+		* Tokenizes descriptor properties prior to parsing
+		* Returns undefined.
+		* (Again, this fn is defined before it is used, in order to pass JSHINT.
+		* Unfortunately this breaks the logical sequencing of the spec comments. :/ )
+		*/
+		function tokenize() {
+
+			// 8.1. Descriptor tokeniser: Skip whitespace
+			collectCharacters(regexLeadingSpaces);
+
+			// 8.2. Let current descriptor be the empty string.
+			currentDescriptor = "";
+
+			// 8.3. Let state be in descriptor.
+			state = "in descriptor";
+
+			while (true) {
+
+				// 8.4. Let c be the character at position.
+				c = input.charAt(pos);
+
+				//  Do the following depending on the value of state.
+				//  For the purpose of this step, "EOF" is a special character representing
+				//  that position is past the end of input.
+
+				// In descriptor
+				if (state === "in descriptor") {
+					// Do the following, depending on the value of c:
+
+				  // Space character
+				  // If current descriptor is not empty, append current descriptor to
+				  // descriptors and let current descriptor be the empty string.
+				  // Set state to after descriptor.
+					if (isSpace(c)) {
+						if (currentDescriptor) {
+							descriptors.push(currentDescriptor);
+							currentDescriptor = "";
+							state = "after descriptor";
+						}
+
+					// U+002C COMMA (,)
+					// Advance position to the next character in input. If current descriptor
+					// is not empty, append current descriptor to descriptors. Jump to the step
+					// labeled descriptor parser.
+					} else if (c === ",") {
+						pos += 1;
+						if (currentDescriptor) {
+							descriptors.push(currentDescriptor);
+						}
+						parseDescriptors();
+						return;
+
+					// U+0028 LEFT PARENTHESIS (()
+					// Append c to current descriptor. Set state to in parens.
+					} else if (c === "\u0028") {
+						currentDescriptor = currentDescriptor + c;
+						state = "in parens";
+
+					// EOF
+					// If current descriptor is not empty, append current descriptor to
+					// descriptors. Jump to the step labeled descriptor parser.
+					} else if (c === "") {
+						if (currentDescriptor) {
+							descriptors.push(currentDescriptor);
+						}
+						parseDescriptors();
+						return;
+
+					// Anything else
+					// Append c to current descriptor.
+					} else {
+						currentDescriptor = currentDescriptor + c;
+					}
+				// (end "in descriptor"
+
+				// In parens
+				} else if (state === "in parens") {
+
+					// U+0029 RIGHT PARENTHESIS ())
+					// Append c to current descriptor. Set state to in descriptor.
+					if (c === ")") {
+						currentDescriptor = currentDescriptor + c;
+						state = "in descriptor";
+
+					// EOF
+					// Append current descriptor to descriptors. Jump to the step labeled
+					// descriptor parser.
+					} else if (c === "") {
+						descriptors.push(currentDescriptor);
+						parseDescriptors();
+						return;
+
+					// Anything else
+					// Append c to current descriptor.
+					} else {
+						currentDescriptor = currentDescriptor + c;
+					}
+
+				// After descriptor
+				} else if (state === "after descriptor") {
+
+					// Do the following, depending on the value of c:
+					// Space character: Stay in this state.
+					if (isSpace(c)) {
+
+					// EOF: Jump to the step labeled descriptor parser.
+					} else if (c === "") {
+						parseDescriptors();
+						return;
+
+					// Anything else
+					// Set state to in descriptor. Set position to the previous character in input.
+					} else {
+						state = "in descriptor";
+						pos -= 1;
+
+					}
+				}
+
+				// Advance position to the next character in input.
+				pos += 1;
+
+			// Repeat this step.
+			} // (close while true loop)
+		}
+
+		// 4. Splitting loop: Collect a sequence of characters that are space
+		//    characters or U+002C COMMA characters. If any U+002C COMMA characters
+		//    were collected, that is a parse error.
+		while (true) {
+			collectCharacters(regexLeadingCommasOrSpaces);
+
+			// 5. If position is past the end of input, return candidates and abort these steps.
+			if (pos >= inputLength) {
+				return candidates; // (we're done, this is the sole return path)
+			}
+
+			// 6. Collect a sequence of characters that are not space characters,
+			//    and let that be url.
+			url = collectCharacters(regexLeadingNotSpaces);
+
+			// 7. Let descriptors be a new empty list.
+			descriptors = [];
+
+			// 8. If url ends with a U+002C COMMA character (,), follow these substeps:
+			//		(1). Remove all trailing U+002C COMMA characters from url. If this removed
+			//         more than one character, that is a parse error.
+			if (url.slice(-1) === ",") {
+				url = url.replace(regexTrailingCommas, "");
+				// (Jump ahead to step 9 to skip tokenization and just push the candidate).
+				parseDescriptors();
+
+			//	Otherwise, follow these substeps:
+			} else {
+				tokenize();
+			} // (close else of step 8)
+
+		// 16. Return to the step labeled splitting loop.
+		} // (Close of big while loop.)
+	}
+
+	/*
+	 * Sizes Parser
+	 *
+	 * By Alex Bell |  MIT License
+	 *
+	 * Non-strict but accurate and lightweight JS Parser for the string value <img sizes="here">
+	 *
+	 * Reference algorithm at:
+	 * https://html.spec.whatwg.org/multipage/embedded-content.html#parse-a-sizes-attribute
+	 *
+	 * Most comments are copied in directly from the spec
+	 * (except for comments in parens).
+	 *
+	 * Grammar is:
+	 * <source-size-list> = <source-size># [ , <source-size-value> ]? | <source-size-value>
+	 * <source-size> = <media-condition> <source-size-value>
+	 * <source-size-value> = <length>
+	 * http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes
+	 *
+	 * E.g. "(max-width: 30em) 100vw, (max-width: 50em) 70vw, 100vw"
+	 * or "(min-width: 30em), calc(30vw - 15px)" or just "30vw"
+	 *
+	 * Returns the first valid <css-length> with a media condition that evaluates to true,
+	 * or "100vw" if all valid media conditions evaluate to false.
+	 *
+	 */
+
+	function parseSizes(strValue) {
+
+		// (Percentage CSS lengths are not allowed in this case, to avoid confusion:
+		// https://html.spec.whatwg.org/multipage/embedded-content.html#valid-source-size-list
+		// CSS allows a single optional plus or minus sign:
+		// http://www.w3.org/TR/CSS2/syndata.html#numbers
+		// CSS is ASCII case-insensitive:
+		// http://www.w3.org/TR/CSS2/syndata.html#characters )
+		// Spec allows exponential notation for <number> type:
+		// http://dev.w3.org/csswg/css-values/#numbers
+		var regexCssLengthWithUnits = /^(?:[+-]?[0-9]+|[0-9]*\.[0-9]+)(?:[eE][+-]?[0-9]+)?(?:ch|cm|em|ex|in|mm|pc|pt|px|rem|vh|vmin|vmax|vw)$/i;
+
+		// (This is a quick and lenient test. Because of optional unlimited-depth internal
+		// grouping parens and strict spacing rules, this could get very complicated.)
+		var regexCssCalc = /^calc\((?:[0-9a-z \.\+\-\*\/\(\)]+)\)$/i;
+
+		var i;
+		var unparsedSizesList;
+		var unparsedSizesListLength;
+		var unparsedSize;
+		var lastComponentValue;
+		var size;
+
+		// UTILITY FUNCTIONS
+
+		//  (Toy CSS parser. The goals here are:
+		//  1) expansive test coverage without the weight of a full CSS parser.
+		//  2) Avoiding regex wherever convenient.
+		//  Quick tests: http://jsfiddle.net/gtntL4gr/3/
+		//  Returns an array of arrays.)
+		function parseComponentValues(str) {
+			var chrctr;
+			var component = "";
+			var componentArray = [];
+			var listArray = [];
+			var parenDepth = 0;
+			var pos = 0;
+			var inComment = false;
+
+			function pushComponent() {
+				if (component) {
+					componentArray.push(component);
+					component = "";
+				}
+			}
+
+			function pushComponentArray() {
+				if (componentArray[0]) {
+					listArray.push(componentArray);
+					componentArray = [];
+				}
+			}
+
+			// (Loop forwards from the beginning of the string.)
+			while (true) {
+				chrctr = str.charAt(pos);
+
+				if (chrctr === "") { // ( End of string reached.)
+					pushComponent();
+					pushComponentArray();
+					return listArray;
+				} else if (inComment) {
+					if ((chrctr === "*") && (str[pos + 1] === "/")) { // (At end of a comment.)
+						inComment = false;
+						pos += 2;
+						pushComponent();
+						continue;
+					} else {
+						pos += 1; // (Skip all characters inside comments.)
+						continue;
+					}
+				} else if (isSpace(chrctr)) {
+					// (If previous character in loop was also a space, or if
+					// at the beginning of the string, do not add space char to
+					// component.)
+					if ( (str.charAt(pos - 1) && isSpace( str.charAt(pos - 1) ) ) || !component ) {
+						pos += 1;
+						continue;
+					} else if (parenDepth === 0) {
+						pushComponent();
+						pos +=1;
+						continue;
+					} else {
+						// (Replace any space character with a plain space for legibility.)
+						chrctr = " ";
+					}
+				} else if (chrctr === "(") {
+					parenDepth += 1;
+				} else if (chrctr === ")") {
+					parenDepth -= 1;
+				} else if (chrctr === ",") {
+					pushComponent();
+					pushComponentArray();
+					pos += 1;
+					continue;
+				} else if ( (chrctr === "/") && (str.charAt(pos + 1) === "*") ) {
+					inComment = true;
+					pos += 2;
+					continue;
+				}
+
+				component = component + chrctr;
+				pos += 1;
+			}
+		}
+
+		function isValidNonNegativeSourceSizeValue(s) {
+			if (regexCssLengthWithUnits.test(s) && (parseFloat(s) >= 0)) {return true;}
+			if (regexCssCalc.test(s)) {return true;}
+			// ( http://www.w3.org/TR/CSS2/syndata.html#numbers says:
+			// "-0 is equivalent to 0 and is not a negative number." which means that
+			// unitless zero and unitless negative zero must be accepted as special cases.)
+			if ((s === "0") || (s === "-0") || (s === "+0")) {return true;}
+			return false;
+		}
+
+		// When asked to parse a sizes attribute from an element, parse a
+		// comma-separated list of component values from the value of the element's
+		// sizes attribute (or the empty string, if the attribute is absent), and let
+		// unparsed sizes list be the result.
+		// http://dev.w3.org/csswg/css-syntax/#parse-comma-separated-list-of-component-values
+
+		unparsedSizesList = parseComponentValues(strValue);
+		unparsedSizesListLength = unparsedSizesList.length;
+
+		// For each unparsed size in unparsed sizes list:
+		for (i = 0; i < unparsedSizesListLength; i++) {
+			unparsedSize = unparsedSizesList[i];
+
+			// 1. Remove all consecutive <whitespace-token>s from the end of unparsed size.
+			// ( parseComponentValues() already omits spaces outside of parens. )
+
+			// If unparsed size is now empty, that is a parse error; continue to the next
+			// iteration of this algorithm.
+			// ( parseComponentValues() won't push an empty array. )
+
+			// 2. If the last component value in unparsed size is a valid non-negative
+			// <source-size-value>, let size be its value and remove the component value
+			// from unparsed size. Any CSS function other than the calc() function is
+			// invalid. Otherwise, there is a parse error; continue to the next iteration
+			// of this algorithm.
+			// http://dev.w3.org/csswg/css-syntax/#parse-component-value
+			lastComponentValue = unparsedSize[unparsedSize.length - 1];
+
+			if (isValidNonNegativeSourceSizeValue(lastComponentValue)) {
+				size = lastComponentValue;
+				unparsedSize.pop();
+			} else {
+				continue;
+			}
+
+			// 3. Remove all consecutive <whitespace-token>s from the end of unparsed
+			// size. If unparsed size is now empty, return size and exit this algorithm.
+			// If this was not the last item in unparsed sizes list, that is a parse error.
+			if (unparsedSize.length === 0) {
+				return size;
+			}
+
+			// 4. Parse the remaining component values in unparsed size as a
+			// <media-condition>. If it does not parse correctly, or it does parse
+			// correctly but the <media-condition> evaluates to false, continue to the
+			// next iteration of this algorithm.
+			// (Parsing all possible compound media conditions in JS is heavy, complicated,
+			// and the payoff is unclear. Is there ever an situation where the
+			// media condition parses incorrectly but still somehow evaluates to true?
+			// Can we just rely on the browser/polyfill to do it?)
+			unparsedSize = unparsedSize.join(" ");
+			if (!(pf.matchesMedia( unparsedSize ) ) ) {
+				continue;
+			}
+
+			// 5. Return size and exit this algorithm.
+			return size;
+		}
+
+		// If the above algorithm exhausts unparsed sizes list without returning a
+		// size value, return 100vw.
+		return "100vw";
+	}
+
+	// namespace
+	pf.ns = ("pf" + new Date().getTime()).substr(0, 9);
+
+	// srcset support test
+	pf.supSrcset = "srcset" in image;
+	pf.supSizes = "sizes" in image;
+	pf.supPicture = !!window.HTMLPictureElement;
+
+	// UC browser does claim to support srcset and picture, but not sizes,
+	// this extended test reveals the browser does support nothing
+	if (pf.supSrcset && pf.supPicture && !pf.supSizes) {
+		(function(image2) {
+			image.srcset = "data:,a";
+			image2.src = "data:,a";
+			pf.supSrcset = image.complete === image2.complete;
+			pf.supPicture = pf.supSrcset && pf.supPicture;
+		})(document.createElement("img"));
+	}
+
+	// Safari9 has basic support for sizes, but does't expose the `sizes` idl attribute
+	if (pf.supSrcset && !pf.supSizes) {
+
+		(function() {
+			var width2 = "data:image/gif;base64,R0lGODlhAgABAPAAAP///wAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==";
+			var width1 = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+			var img = document.createElement("img");
+			var test = function() {
+				var width = img.width;
+
+				if (width === 2) {
+					pf.supSizes = true;
+				}
+
+				alwaysCheckWDescriptor = pf.supSrcset && !pf.supSizes;
+
+				isSupportTestReady = true;
+				// force async
+				setTimeout(picturefill);
+			};
+
+			img.onload = test;
+			img.onerror = test;
+			img.setAttribute("sizes", "9px");
+
+			img.srcset = width1 + " 1w," + width2 + " 9w";
+			img.src = width1;
+		})();
+
+	} else {
+		isSupportTestReady = true;
+	}
+
+	// using pf.qsa instead of dom traversing does scale much better,
+	// especially on sites mixing responsive and non-responsive images
+	pf.selShort = "picture>img,img[srcset]";
+	pf.sel = pf.selShort;
+	pf.cfg = cfg;
+
+	/**
+	 * Shortcut property for `devicePixelRatio` ( for easy overriding in tests )
+	 */
+	pf.DPR = (DPR  || 1 );
+	pf.u = units;
+
+	// container of supported mime types that one might need to qualify before using
+	pf.types =  types;
+
+	pf.setSize = noop;
+
+	/**
+	 * Gets a string and returns the absolute URL
+	 * @param src
+	 * @returns {String} absolute URL
+	 */
+
+	pf.makeUrl = memoize(function(src) {
+		anchor.href = src;
+		return anchor.href;
+	});
+
+	/**
+	 * Gets a DOM element or document and a selctor and returns the found matches
+	 * Can be extended with jQuery/Sizzle for IE7 support
+	 * @param context
+	 * @param sel
+	 * @returns {NodeList|Array}
+	 */
+	pf.qsa = function(context, sel) {
+		return ( "querySelector" in context ) ? context.querySelectorAll(sel) : [];
+	};
+
+	/**
+	 * Shortcut method for matchMedia ( for easy overriding in tests )
+	 * wether native or pf.mMQ is used will be decided lazy on first call
+	 * @returns {boolean}
+	 */
+	pf.matchesMedia = function() {
+		if ( window.matchMedia && (matchMedia( "(min-width: 0.1em)" ) || {}).matches ) {
+			pf.matchesMedia = function( media ) {
+				return !media || ( matchMedia( media ).matches );
+			};
+		} else {
+			pf.matchesMedia = pf.mMQ;
+		}
+
+		return pf.matchesMedia.apply( this, arguments );
+	};
+
+	/**
+	 * A simplified matchMedia implementation for IE8 and IE9
+	 * handles only min-width/max-width with px or em values
+	 * @param media
+	 * @returns {boolean}
+	 */
+	pf.mMQ = function( media ) {
+		return media ? evalCSS(media) : true;
+	};
+
+	/**
+	 * Returns the calculated length in css pixel from the given sourceSizeValue
+	 * http://dev.w3.org/csswg/css-values-3/#length-value
+	 * intended Spec mismatches:
+	 * * Does not check for invalid use of CSS functions
+	 * * Does handle a computed length of 0 the same as a negative and therefore invalid value
+	 * @param sourceSizeValue
+	 * @returns {Number}
+	 */
+	pf.calcLength = function( sourceSizeValue ) {
+
+		var value = evalCSS(sourceSizeValue, true) || false;
+		if (value < 0) {
+			value = false;
+		}
+
+		return value;
+	};
+
+	/**
+	 * Takes a type string and checks if its supported
+	 */
+
+	pf.supportsType = function( type ) {
+		return ( type ) ? types[ type ] : true;
+	};
+
+	/**
+	 * Parses a sourceSize into mediaCondition (media) and sourceSizeValue (length)
+	 * @param sourceSizeStr
+	 * @returns {*}
+	 */
+	pf.parseSize = memoize(function( sourceSizeStr ) {
+		var match = ( sourceSizeStr || "" ).match(regSize);
+		return {
+			media: match && match[1],
+			length: match && match[2]
+		};
+	});
+
+	pf.parseSet = function( set ) {
+		if ( !set.cands ) {
+			set.cands = parseSrcset(set.srcset, set);
+		}
+		return set.cands;
+	};
+
+	/**
+	 * returns 1em in css px for html/body default size
+	 * function taken from respondjs
+	 * @returns {*|number}
+	 */
+	pf.getEmValue = function() {
+		var body;
+		if ( !eminpx && (body = document.body) ) {
+			var div = document.createElement( "div" ),
+				originalHTMLCSS = docElem.style.cssText,
+				originalBodyCSS = body.style.cssText;
+
+			div.style.cssText = baseStyle;
+
+			// 1em in a media query is the value of the default font size of the browser
+			// reset docElem and body to ensure the correct value is returned
+			docElem.style.cssText = fsCss;
+			body.style.cssText = fsCss;
+
+			body.appendChild( div );
+			eminpx = div.offsetWidth;
+			body.removeChild( div );
+
+			//also update eminpx before returning
+			eminpx = parseFloat( eminpx, 10 );
+
+			// restore the original values
+			docElem.style.cssText = originalHTMLCSS;
+			body.style.cssText = originalBodyCSS;
+
+		}
+		return eminpx || 16;
+	};
+
+	/**
+	 * Takes a string of sizes and returns the width in pixels as a number
+	 */
+	pf.calcListLength = function( sourceSizeListStr ) {
+		// Split up source size list, ie ( max-width: 30em ) 100%, ( max-width: 50em ) 50%, 33%
+		//
+		//                           or (min-width:30em) calc(30% - 15px)
+		if ( !(sourceSizeListStr in sizeLengthCache) || cfg.uT ) {
+			var winningLength = pf.calcLength( parseSizes( sourceSizeListStr ) );
+
+			sizeLengthCache[ sourceSizeListStr ] = !winningLength ? units.width : winningLength;
+		}
+
+		return sizeLengthCache[ sourceSizeListStr ];
+	};
+
+	/**
+	 * Takes a candidate object with a srcset property in the form of url/
+	 * ex. "images/pic-medium.png 1x, images/pic-medium-2x.png 2x" or
+	 *     "images/pic-medium.png 400w, images/pic-medium-2x.png 800w" or
+	 *     "images/pic-small.png"
+	 * Get an array of image candidates in the form of
+	 *      {url: "/foo/bar.png", resolution: 1}
+	 * where resolution is http://dev.w3.org/csswg/css-values-3/#resolution-value
+	 * If sizes is specified, res is calculated
+	 */
+	pf.setRes = function( set ) {
+		var candidates;
+		if ( set ) {
+
+			candidates = pf.parseSet( set );
+
+			for ( var i = 0, len = candidates.length; i < len; i++ ) {
+				setResolution( candidates[ i ], set.sizes );
+			}
+		}
+		return candidates;
+	};
+
+	pf.setRes.res = setResolution;
+
+	pf.applySetCandidate = function( candidates, img ) {
+		if ( !candidates.length ) {return;}
+		var candidate,
+			i,
+			j,
+			length,
+			bestCandidate,
+			curSrc,
+			curCan,
+			candidateSrc,
+			abortCurSrc;
+
+		var imageData = img[ pf.ns ];
+		var dpr = pf.DPR;
+
+		curSrc = imageData.curSrc || img[curSrcProp];
+
+		curCan = imageData.curCan || setSrcToCur(img, curSrc, candidates[0].set);
+
+		// if we have a current source, we might either become lazy or give this source some advantage
+		if ( curCan && curCan.set === candidates[ 0 ].set ) {
+
+			// if browser can abort image request and the image has a higher pixel density than needed
+			// and this image isn't downloaded yet, we skip next part and try to save bandwidth
+			abortCurSrc = (supportAbort && !img.complete && curCan.res - 0.1 > dpr);
+
+			if ( !abortCurSrc ) {
+				curCan.cached = true;
+
+				// if current candidate is "best", "better" or "okay",
+				// set it to bestCandidate
+				if ( curCan.res >= dpr ) {
+					bestCandidate = curCan;
+				}
+			}
+		}
+
+		if ( !bestCandidate ) {
+
+			candidates.sort( ascendingSort );
+
+			length = candidates.length;
+			bestCandidate = candidates[ length - 1 ];
+
+			for ( i = 0; i < length; i++ ) {
+				candidate = candidates[ i ];
+				if ( candidate.res >= dpr ) {
+					j = i - 1;
+
+					// we have found the perfect candidate,
+					// but let's improve this a little bit with some assumptions ;-)
+					if (candidates[ j ] &&
+						(abortCurSrc || curSrc !== pf.makeUrl( candidate.url )) &&
+						chooseLowRes(candidates[ j ].res, candidate.res, dpr, candidates[ j ].cached)) {
+
+						bestCandidate = candidates[ j ];
+
+					} else {
+						bestCandidate = candidate;
+					}
+					break;
+				}
+			}
+		}
+
+		if ( bestCandidate ) {
+
+			candidateSrc = pf.makeUrl( bestCandidate.url );
+
+			imageData.curSrc = candidateSrc;
+			imageData.curCan = bestCandidate;
+
+			if ( candidateSrc !== curSrc ) {
+				pf.setSrc( img, bestCandidate );
+			}
+			pf.setSize( img );
+		}
+	};
+
+	pf.setSrc = function( img, bestCandidate ) {
+		var origWidth;
+		img.src = bestCandidate.url;
+
+		// although this is a specific Safari issue, we don't want to take too much different code paths
+		if ( bestCandidate.set.type === "image/svg+xml" ) {
+			origWidth = img.style.width;
+			img.style.width = (img.offsetWidth + 1) + "px";
+
+			// next line only should trigger a repaint
+			// if... is only done to trick dead code removal
+			if ( img.offsetWidth + 1 ) {
+				img.style.width = origWidth;
+			}
+		}
+	};
+
+	pf.getSet = function( img ) {
+		var i, set, supportsType;
+		var match = false;
+		var sets = img [ pf.ns ].sets;
+
+		for ( i = 0; i < sets.length && !match; i++ ) {
+			set = sets[i];
+
+			if ( !set.srcset || !pf.matchesMedia( set.media ) || !(supportsType = pf.supportsType( set.type )) ) {
+				continue;
+			}
+
+			if ( supportsType === "pending" ) {
+				set = supportsType;
+			}
+
+			match = set;
+			break;
+		}
+
+		return match;
+	};
+
+	pf.parseSets = function( element, parent, options ) {
+		var srcsetAttribute, imageSet, isWDescripor, srcsetParsed;
+
+		var hasPicture = parent && parent.nodeName.toUpperCase() === "PICTURE";
+		var imageData = element[ pf.ns ];
+
+		if ( imageData.src === undefined || options.src ) {
+			imageData.src = getImgAttr.call( element, "src" );
+			if ( imageData.src ) {
+				setImgAttr.call( element, srcAttr, imageData.src );
+			} else {
+				removeImgAttr.call( element, srcAttr );
+			}
+		}
+
+		if ( imageData.srcset === undefined || options.srcset || !pf.supSrcset || element.srcset ) {
+			srcsetAttribute = getImgAttr.call( element, "srcset" );
+			imageData.srcset = srcsetAttribute;
+			srcsetParsed = true;
+		}
+
+		imageData.sets = [];
+
+		if ( hasPicture ) {
+			imageData.pic = true;
+			getAllSourceElements( parent, imageData.sets );
+		}
+
+		if ( imageData.srcset ) {
+			imageSet = {
+				srcset: imageData.srcset,
+				sizes: getImgAttr.call( element, "sizes" )
+			};
+
+			imageData.sets.push( imageSet );
+
+			isWDescripor = (alwaysCheckWDescriptor || imageData.src) && regWDesc.test(imageData.srcset || "");
+
+			// add normal src as candidate, if source has no w descriptor
+			if ( !isWDescripor && imageData.src && !getCandidateForSrc(imageData.src, imageSet) && !imageSet.has1x ) {
+				imageSet.srcset += ", " + imageData.src;
+				imageSet.cands.push({
+					url: imageData.src,
+					d: 1,
+					set: imageSet
+				});
+			}
+
+		} else if ( imageData.src ) {
+			imageData.sets.push( {
+				srcset: imageData.src,
+				sizes: null
+			} );
+		}
+
+		imageData.curCan = null;
+		imageData.curSrc = undefined;
+
+		// if img has picture or the srcset was removed or has a srcset and does not support srcset at all
+		// or has a w descriptor (and does not support sizes) set support to false to evaluate
+		imageData.supported = !( hasPicture || ( imageSet && !pf.supSrcset ) || (isWDescripor && !pf.supSizes) );
+
+		if ( srcsetParsed && pf.supSrcset && !imageData.supported ) {
+			if ( srcsetAttribute ) {
+				setImgAttr.call( element, srcsetAttr, srcsetAttribute );
+				element.srcset = "";
+			} else {
+				removeImgAttr.call( element, srcsetAttr );
+			}
+		}
+
+		if (imageData.supported && !imageData.srcset && ((!imageData.src && element.src) ||  element.src !== pf.makeUrl(imageData.src))) {
+			if (imageData.src === null) {
+				element.removeAttribute("src");
+			} else {
+				element.src = imageData.src;
+			}
+		}
+
+		imageData.parsed = true;
+	};
+
+	pf.fillImg = function(element, options) {
+		var imageData;
+		var extreme = options.reselect || options.reevaluate;
+
+		// expando for caching data on the img
+		if ( !element[ pf.ns ] ) {
+			element[ pf.ns ] = {};
+		}
+
+		imageData = element[ pf.ns ];
+
+		// if the element has already been evaluated, skip it
+		// unless `options.reevaluate` is set to true ( this, for example,
+		// is set to true when running `picturefill` on `resize` ).
+		if ( !extreme && imageData.evaled === evalId ) {
+			return;
+		}
+
+		if ( !imageData.parsed || options.reevaluate ) {
+			pf.parseSets( element, element.parentNode, options );
+		}
+
+		if ( !imageData.supported ) {
+			applyBestCandidate( element );
+		} else {
+			imageData.evaled = evalId;
+		}
+	};
+
+	pf.setupRun = function() {
+		if ( !alreadyRun || isVwDirty || (DPR !== window.devicePixelRatio) ) {
+			updateMetrics();
+		}
+	};
+
+	// If picture is supported, well, that's awesome.
+	if ( pf.supPicture ) {
+		picturefill = noop;
+		pf.fillImg = noop;
+	} else {
+
+		 // Set up picture polyfill by polling the document
+		(function() {
+			var isDomReady;
+			var regReady = window.attachEvent ? /d$|^c/ : /d$|^c|^i/;
+
+			var run = function() {
+				var readyState = document.readyState || "";
+
+				timerId = setTimeout(run, readyState === "loading" ? 200 :  999);
+				if ( document.body ) {
+					pf.fillImgs();
+					isDomReady = isDomReady || regReady.test(readyState);
+					if ( isDomReady ) {
+						clearTimeout( timerId );
+					}
+
+				}
+			};
+
+			var timerId = setTimeout(run, document.body ? 9 : 99);
+
+			// Also attach picturefill on resize and readystatechange
+			// http://modernjavascript.blogspot.com/2013/08/building-better-debounce.html
+			var debounce = function(func, wait) {
+				var timeout, timestamp;
+				var later = function() {
+					var last = (new Date()) - timestamp;
+
+					if (last < wait) {
+						timeout = setTimeout(later, wait - last);
+					} else {
+						timeout = null;
+						func();
+					}
+				};
+
+				return function() {
+					timestamp = new Date();
+
+					if (!timeout) {
+						timeout = setTimeout(later, wait);
+					}
+				};
+			};
+			var lastClientWidth = docElem.clientHeight;
+			var onResize = function() {
+				isVwDirty = Math.max(window.innerWidth || 0, docElem.clientWidth) !== units.width || docElem.clientHeight !== lastClientWidth;
+				lastClientWidth = docElem.clientHeight;
+				if ( isVwDirty ) {
+					pf.fillImgs();
+				}
+			};
+
+			on( window, "resize", debounce(onResize, 99 ) );
+			on( document, "readystatechange", run );
+		})();
+	}
+
+	pf.picturefill = picturefill;
+	//use this internally for easy monkey patching/performance testing
+	pf.fillImgs = picturefill;
+	pf.teardownRun = noop;
+
+	/* expose methods for testing */
+	picturefill._ = pf;
+
+	window.picturefillCFG = {
+		pf: pf,
+		push: function(args) {
+			var name = args.shift();
+			if (typeof pf[name] === "function") {
+				pf[name].apply(pf, args);
+			} else {
+				cfg[name] = args[0];
+				if (alreadyRun) {
+					pf.fillImgs( { reselect: true } );
+				}
+			}
+		}
+	};
+
+	while (setOptions && setOptions.length) {
+		window.picturefillCFG.push(setOptions.shift());
+	}
+
+	/* expose picturefill */
+	window.picturefill = picturefill;
+
+	/* expose picturefill */
+	if ( typeof module === "object" && typeof module.exports === "object" ) {
+		// CommonJS, just export
+		module.exports = picturefill;
+	} else if ( true ) {
+		// AMD support
+		!(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return picturefill; }.call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	}
+
+	// IE8 evals this sync, so it must be the last thing we do
+	if ( !pf.supPicture ) {
+		types[ "image/webp" ] = detectTypeSupport("image/webp", "data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==" );
+	}
+
+} )( window, document );
+
 
 /***/ })
 /******/ ]);

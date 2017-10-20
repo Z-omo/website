@@ -14,6 +14,7 @@
 'use strict';
 
 require('../sass/bootstrap.sass');
- 
+require('picturefill');
+
 const focus = require('./focus-app.js');
 focus.init();

@@ -17,6 +17,7 @@ const DOM = require('./dom-man.js');
 
 const RWDView = {
   viewModes:  ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
+
   selectors:  {
     container:  'rwd-view',
     controls:   'rwd-view-controls',
@@ -27,7 +28,7 @@ const RWDView = {
     frameURL:   'data-src'
   },
 
-  setup: function(container) {
+  setup(container) {
     RWDView.container = container;
     setupViewControls();
     //setupView();
@@ -145,10 +146,10 @@ function setViewMode(view, index)
   resetViewMode(view);
   DOM.addClass(mode, view);
 
-  if (mode === RWDView.viewModes[0])
-  {
-    reloadFrame(view);
-  }
+  // if (mode === RWDView.viewModes[0])
+  // {
+  //   reloadFrame(view);
+  // }
 }
 
 function resetViewMode(view)
@@ -159,16 +160,16 @@ function resetViewMode(view)
   });
 }
 
-function reloadFrame(view)
-{
-  let frame = getViewFrame(view);
-  if (!frame) { return; }
+// function reloadFrame(view)
+// {
+//   let frame = getViewFrame(view);
+//   if (!frame) { return; }
   
-  setTimeout(function()
-  {
-    frame.contentWindow.location.reload();
-  }, 400);
-}
+//   setTimeout(function()
+//   {
+//     frame.contentWindow.location.reload();
+//   }, 400);
+// }
 
 // function setupView()
 // {
