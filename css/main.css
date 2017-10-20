@@ -379,7 +379,9 @@ h1, h2, h3 {
   color: #0d1321; }
 
 .hilite {
-  font-size: 2em;
+  font-size: 3.236rem;
+  line-height: 3.236rem;
+  letter-spacing: -1pt;
   color: #8693ab; }
 
 main a {
@@ -828,9 +830,13 @@ button, .button {
     height: calc(100vw * 0.62103);
     max-width: 1417px;
     max-height: 880px;
-    transform: scale(0.82); }
+    transform: scale(0.86); }
     @media only screen and (min-width: 69em) {
       .rwd-desktop .rwd-device {
+        width: 90vw;
+        height: calc(90vw * 0.62103);
+        max-width: 1417px;
+        max-height: 880px;
         transform: scale(0.72); } }
   @media only screen and (min-width: 39em) {
     .rwd-device {
@@ -933,7 +939,7 @@ legend {
 
 input, textarea, select {
   font-family: "ff-tisa-sans-web-pro", "Trebuchet MS", sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
   color: #565a64; }
 
 label {

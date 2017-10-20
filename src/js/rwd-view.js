@@ -13,7 +13,7 @@
  */
 'user strict';
 
-const DOM = require('./dom-man.js');
+import DOM from './dom-man.js';
 
 const RWDView = {
   viewModes:  ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
@@ -58,7 +58,9 @@ function setupViewControls()
 {
   RWDView.container.forEach((view) => {
     buildViewControls(view);
+    setupRWDTitle(view);
     view.addEventListener('click', onSelectControl);
+
   });
 }
 
@@ -80,7 +82,8 @@ function onSelectControl(e)
   e.stopPropagation();
   let modeIndex = Number(control.getAttribute(RWDView.selectors.index));
 
-  let view = getViewContainer(control);
+  //let view = getViewContainer(control);
+  let view = DOM.parent(control, RWDView.selectors.container);
   if (view) { setViewMode(view, modeIndex); }
   activateControl(control);
 }
@@ -96,11 +99,33 @@ function activateControl(control)
   RWDView.activeControl = control;
 }
 
-function getViewFrame(element)
+function setupRWDTitle(view)
 {
-  let frame = element.querySelector('.' + RWDView.selectors.frame);
-  //if (!frame) { frame = buildFrame(element); }
-  return frame;
+  let box = DOM.parent(view, 'boxed');
+  if (!box) { return; }
+
+  let hilite = box.querySelector('.hilite');
+  if (!hilite) { return; }
+  
+  hilite.textContent = '3';
+  box.querySelector('.plural').textContent= 's';
+}
+
+function setViewMode(view, index)
+{
+  let mode = RWDView.viewModes[index];
+  if (!mode) { return; }
+
+  resetViewMode(view);
+  DOM.addClass(mode, view);
+}
+
+function resetViewMode(view)
+{
+  RWDView.viewModes.forEach(function(mode)
+  {
+    if (DOM.hasClass(mode, view)) { DOM.removeClass(mode, view); }
+  });
 }
 
 // function buildFrame(element)
@@ -120,56 +145,14 @@ function getViewFrame(element)
 // }
 
 // @TODO: rewrite so that element passed could be identified as container.
-function getViewContainer(element) {
-  let target = element;
-  let isContainer;
-  let parent
-  if (!element) { return; }
 
-  do
-  {
-    parent = target.parentNode;
-    if (!parent) { break; }
-
-    isContainer = DOM.hasClass(RWDView.selectors.container, parent);
-    target = parent;
-  } while (!isContainer && parent);
-
-  return parent;
-}
-
-function setViewMode(view, index)
-{
-  let mode = RWDView.viewModes[index];
-  if (!mode) { return; }
-
-  resetViewMode(view);
-  DOM.addClass(mode, view);
-
-  // if (mode === RWDView.viewModes[0])
-  // {
-  //   reloadFrame(view);
-  // }
-}
-
-function resetViewMode(view)
-{
-  RWDView.viewModes.forEach(function(mode)
-  {
-    if (DOM.hasClass(mode, view)) { DOM.removeClass(mode, view); }
-  });
-}
-
-// function reloadFrame(view)
+// function getViewFrame(element)
 // {
-//   let frame = getViewFrame(view);
-//   if (!frame) { return; }
-  
-//   setTimeout(function()
-//   {
-//     frame.contentWindow.location.reload();
-//   }, 400);
+//   let frame = element.querySelector('.' + RWDView.selectors.frame);
+//   //if (!frame) { frame = buildFrame(element); }
+//   return frame;
 // }
+
 
 // function setupView()
 // {
@@ -210,4 +193,4 @@ function resetViewMode(view)
 //   }
 //}
 
-module.exports = RWDView;
+export default RWDView;

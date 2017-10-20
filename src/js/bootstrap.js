@@ -16,5 +16,5 @@
 require('../sass/bootstrap.sass');
 require('picturefill');
 
-const focus = require('./focus-app.js');
+import focus from './focus-app.js';
 focus.init();

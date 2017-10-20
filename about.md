@@ -31,6 +31,7 @@ My skill set stack includes:
 : - HTML, XML, CSS, SASS, SVG
   - JavaScript (ES5, ES6), Node.js
   - PHP, Python
+  - MySQL, PostgreSQL, MongoDB
   - Software design patterns
   - Object Oriented Programming (OOP)
   - Test-driven development (TDD)

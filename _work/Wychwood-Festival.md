@@ -2,6 +2,7 @@
 layout: work-sample
 title: Wychwood Festival
 rwdURL: http://wychwoodfestival.com/
+rwdMode: mobile
 hideTileTitle: true
 headerImage: Wychwood-Festival-scene.jpg
 ---

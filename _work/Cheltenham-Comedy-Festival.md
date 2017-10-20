@@ -2,6 +2,7 @@
 layout: work-sample
 title: Cheltenham Comedy Festival
 rwdURL: http://cheltenhamcomedy.com/
+rwdMode: tablet
 hideTileTitle: true
 headerImage: Cheltenham-Comedy-Festival-backdrop.jpg
 ---

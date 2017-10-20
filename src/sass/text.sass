@@ -19,7 +19,10 @@ h1, h2, h3
   color: $primary
 
 .hilite
-  font-size: 1em * 2
+  $hiliteFontSize: ($contentFontSize * $gRatio) * 2
+  font-size: $hiliteFontSize
+  line-height: $hiliteFontSize
+  letter-spacing: -1pt
   color: $color2
 
 //—————————————————————————————————————————————: Links

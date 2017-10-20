@@ -25,10 +25,14 @@ $iFrameScrollBarWidth: 20
     +rwdDeviceRules(tablet)
 
   .rwd-desktop &
-    +rwdDeviceRules(desktop)
-    transform: scale(0.82)
+    +rwdDeviceRules(desktop, 100vw)
+    transform: scale(0.86)
   
+    // @media only screen and (min-width: $tabletWidth)
+    //   transform: scale(0.456)
+
     @media only screen and (min-width: $desktopWidth)
+      +rwdDeviceRules(desktop, 90vw)
       transform: scale(0.72)
 
   transform-origin: 0 0

@@ -14,9 +14,8 @@
 
 'use strict';
 
-const debounce = require('lodash.debounce');
-const DOM = require('./dom-man.js');
-const RWDView = require('./rwd-view.js');
+import DOM from './dom-man.js';
+import RWDView from './rwd-view.js';
 
 const focus = {
 
@@ -25,7 +24,7 @@ const focus = {
     scrolledClass:  'js-scrolled'
   },
 
-  init: function()
+  init()
   {
     focus.setViewParams();
     focus.setJSMode();    
@@ -35,7 +34,7 @@ const focus = {
     if (false === focus.view.smallView) { focus.setupRWDViews(); }
   },
 
-  setViewParams: function()
+  setViewParams()
   {
     let boundary = document.querySelector('.boundary');
     if (!boundary) { return; }
@@ -49,7 +48,7 @@ const focus = {
     focus.view.smallView = vpWidth < vpMobileMax;
   },
 
-  setJSMode: function()
+  setJSMode()
   {
     let html = document.querySelector('html');
     if (!html) { return; }
@@ -58,7 +57,7 @@ const focus = {
     focus.view.html = html;
   },
 
-  setupMobileMenu: function()
+  setupMobileMenu()
   {
     let nav = document.querySelector('#menu');
     if (!nav) { return; }
@@ -76,28 +75,27 @@ const focus = {
     focus.view.nav = nav;
   },
 
-  setupEvents: function()
+  setupEvents()
   {
-    //window.addEventListener('scroll', debounce(focus.onScroll, 80));
     window.addEventListener('scroll', focus.onScroll);
   },
 
-  onMenu: function()
+  onMenu()
   {
     focus.toggleMenu();
   },
 
-  toggleMenu: function()
+  toggleMenu()
   {
     DOM.toggleClass('open', focus.view.nav);
   },
 
-  onHome: function()
+  onHome()
   {
     window.location.href = './';
   },
 
-  onScroll: function()
+  onScroll()
   {
     if (!focus.view.scrolling)
    {
@@ -115,13 +113,13 @@ const focus = {
     focus.view.scrolling = true;
   },
 
-  requestScrollCheck: function()
+  requestScrollCheck()
   {
     focus.setScrollState();
     focus.view.scrolling = false;
   },
-  
-  setScrollState: function()
+
+  setScrollState()
   {
     let scroll = window.pageYOffset;
 
@@ -140,7 +138,7 @@ const focus = {
     focus.view.scrolled = true;
   },
 
-  setupRWDViews: function()
+  setupRWDViews()
   {
     let nodes = document.querySelectorAll('.rwd-view');
     if (!nodes || 0 === nodes.length) { return; }
@@ -151,4 +149,4 @@ const focus = {
   }
 };
 
-module.exports = focus;
+export default focus;

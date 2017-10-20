@@ -15,7 +15,7 @@
 
 const DOM = {
 
-  addClass: function(className, element)
+  addClass(className, element)
   {
     if (!element) { return; }
     if (element.classList)
@@ -26,17 +26,17 @@ const DOM = {
     }
   },
 
-  hasClass: function(className, element)
+  hasClass(className, element)
   {
     return (element.classList && element.classList.contains(className));
   },
 
-  toggleClass: function(className, element)
+  toggleClass(className, element)
   {
     element.classList.toggle(className);
   },
 
-  removeClass: function(className, element)
+  removeClass(className, element)
   {
     if (element.classList)
     {
@@ -47,21 +47,40 @@ const DOM = {
     }
   },
   
-  tagIS: function(tagName, element)
+  tagIS(tagName, element)
   {
     if (!element) { return; }
     return element.tagName.toLowerCase() === tagName.toLowerCase();
   },
   
-  add: function(element, container)
+  add(element, container)
   {
     container.appendChild(element);
   },
 
-  prepend: function(element, container)
+  prepend(element, container)
   {
     container.insertBefore(element, container.firstChild);
+  },
+
+  parent(element, selector)
+  {
+    if (!element) { return; }
+    let target = element;
+    let found;
+    let parent;
+    
+    do
+    {
+      parent = target.parentNode;
+      if (!parent) { break; }
+
+      found = !selector || DOM.hasClass(selector, parent);
+      target = parent;
+    } while (!found && parent);
+  
+    return parent;
   }
 };
 
-module.exports = DOM;
+export default DOM;
