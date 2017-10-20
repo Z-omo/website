@@ -6,18 +6,129 @@ html
   font-size: $baseFontSize
 
 body
-  font-family: $contentFont, $fallbackFont
-  //font-family: sans-serif
+  font-family: $contentFont
   font-size: $contentFontSize
   line-height: $bodyContentLineHeight
   color: $primary
 
 h1, h2, h3
   margin: 0 0 $contentMargin
-  font-family: $headingFont, $fallbackFont
+  font-family: $headingFont
   font-size: $contentFontSize * $gRatio
   font-weight: 700
   color: $primary
+
+.hilite
+  font-size: 1em * 2
+  color: $color2
+
+//—————————————————————————————————————————————: Links
+main a
+  color: $primary
+  text-decoration: none
+  border-bottom: dotted 1px $color5
+
+  &:hover
+    border-bottom-style: solid
+
+
+//—————————————————————————————————————————————: Lists
+=bulletPoint
+  content: '\2022'
+  display: inline-block
+  margin: 0 0.5rem 0 0 //-1rem
+  vertical-align: middle
+  font-family: sans-serif
+  color: rgba($primary, 0.5)
+  font-size: $contentFontSize * 1.8
+  line-height: $contentFontSize * 1.8
+
+ul, ol
+  padding: 0 0 0 $contentPadding / 2
+
+ul
+  list-style: none
+
+main ul li:before
+  +bulletPoint
+
+li
+  margin: 0
+  padding: 0
+
+dl
+  margin: 0 0 $contentMargin
+  padding: 0
+
+dt
+  font-weight: normal
+
+dd
+  margin: 0
+  padding: 0
+
+//—————————————————————————————————————————————: Quotes
+q
+  quotes: '\201C' '\201D' '\2018' '\2019'
+  
+q::before, q::after
+  color: $color5
+  font-family: $headingFont
+  font-size: 1.4em
+  line-height: 1em
+  
+q::before
+  content: open-quote
+
+q::after
+  content: close-quote
+
+blockquote
+  $quoteLineHeight: 2rem
+  
+  margin: $contentMargin 0
+  width: 100%
+  font-family: $headingFont
+  font-size: $contentFontSize * 1.1
+  font-style: italic
+  line-height: $quoteLineHeight
+  
+  //text-align: center
+  
+  &:first-child
+    margin-top: $contentMargin
+    
+  @media only screen and (min-width: $tabletWidth)
+    width: 80%
+    margin-left: $contentMargin
+    //margin-right: $contentMargin
+    text-align: left
+
+  @media only screen and (min-width: $desktopWidth)
+    max-width: 450px
+        
+  q::before, q::after
+    // position: relative
+    // top: 0rem // needs to be rem for IE to render position consistently.
+    // left: 0
+    display: inline // should always be inline so that they wrap with the text.
+    font-size: 3.6rem // needs to be rem for IE to render size consistently.
+    line-height: $quoteLineHeight / 2
+    font-weight: normal
+    vertical-align: middle
+
+  q::before
+    margin-right: 0.2em
+
+  .by-line
+    display: block
+    margin: $contentMargin / 2 0 0
+    //text-align: right
+    font-style: normal
+    font-size: 0.8em
+    line-height: 0.8em * $gRatio
+    font-weight: bold
+      
 
   // .collection &
   //   color: white

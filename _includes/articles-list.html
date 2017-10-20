@@ -1,6 +1,11 @@
 <div class="articles{% if include.group %} {{ include.group }}{% endif %}">
   {%- for article in include.articles -%}
   {% comment %}
+  Capture page URL component.
+  {% endcomment %}
+  {%- assign pageURL = page.url | replace: '/', '' -%}
+
+  {% comment %}
   Capture in var postPath the string: ‘/nnnn/‘; nnnn being the article date year value.
   {% endcomment %}
   {% comment %}
@@ -9,6 +14,8 @@
   
   {%- capture postPath -%}/{{ article.date | date: '%Y' }}/{% endcapture %}
   {%- assign tileName = article.id | replace: postPath, '' | replace: '/', '' -%}
+
+  {%- if tileName == pageURL -%}{% continue %}{% endif %}
   
   {% assign tileData = site.static_files | where: 'basename', tileName %}
 

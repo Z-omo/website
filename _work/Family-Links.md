@@ -1,7 +1,6 @@
 ---
 layout: work-sample
 title: Family Links
-rwdURL: http://dev.colintester.com:4000/
 hideTileTitle: true
 ---
 

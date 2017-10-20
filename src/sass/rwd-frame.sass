@@ -6,6 +6,7 @@
 
 .rwd-view
   position: relative
+  margin: $contentMargin 0
 
 $iFrameScrollBarWidth: 20
 
@@ -82,6 +83,11 @@ $iFrameScrollBarWidth: 20
 .rwd-view-controls
   display: none
   margin: 0 0 $contentMargin
+  
+  button
+    display: inline-block
+    vertical-align: top
+    margin: 0 0.8em 0 0
   
   .focus-js &
     display: block

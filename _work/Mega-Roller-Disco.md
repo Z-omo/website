@@ -7,3 +7,4 @@ hideTileTitle: true
 
 Ea suscipit in magna; eros eum ut te laoreet augue te. Nostrud nonummy nulla facilisis consequatvel eum aliquip odio, laoreet augue magna. Aliquip dignissim dolore quis ipsum enim exerci vulputate nulla ipsum. Velit illum tation vulputate augue suscipit.
 
+{% include rwd-picture-element.html picture="Mega-Roller-Disco-website.jpg" alt="Mega Roller Disco website." %}

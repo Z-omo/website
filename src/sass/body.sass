@@ -35,13 +35,19 @@ main
     +corners
     margin-bottom: ($contentMargin * 2)
 
+    .home &
+      &::after
+        content: ''
+        position: absolute
+        top: 10%
+        right: 40%
+        height: 80%
+        border-right: solid 1px rgba($primary, 0.2)
+
 .content
   margin: 0 0 $contentMargin
 
-  .collection &
-    //transform: translateY(-70px)
-
-  header, footer, h1, h2, h3, p, ul, ol, blockquote, code
+  header, footer, h1, h2, h3, p, ul, ol, code
     max-width: $maxContentWidth
 
 .side-bar
@@ -49,6 +55,7 @@ main
     margin: 0 auto
     padding: 0
     width: 90%
+    min-width: 170px
     max-width: 320px
 
     @media only screen and (min-width: $tabletWidth)
@@ -66,7 +73,7 @@ main
     font-size: 0.9rem
 
 @media only screen and (min-width: $tabletWidth)
-  .content, .side-bar
+  .content
     display: inline-block
     vertical-align: top
     margin: 0 -2px
@@ -76,11 +83,13 @@ main
     padding: 0 (2 * $contentPadding) 0 0
     width: 70%
 
-    .collection &
+    .collection &, .work-example &
       padding-right: 0
       width: 100%
 
-  .side-bar
+  .home .side-bar
+    display: inline-block
+    vertical-align: top
     box-sizing: border-box
     padding: 0
     width: 30%
@@ -91,3 +100,22 @@ main
 @media only screen and (min-width: $desktopWidth)
   .content
     padding-left: $contentPadding
+
+    .work-example &
+      padding-right: (2 * $contentPadding)
+      width: 80%
+
+  .side-bar
+    display: inline-block
+    vertical-align: top
+    width: 20%
+
+.boxed
+  border-top: solid 1px rgba($primary, 0.2)
+  padding: $contentPadding 0
+
+  @media only screen and (min-width: $tabletWidth)
+    +corners
+    border: solid 1px rgba($primary, 0.2)
+    padding: $contentPadding
+    background-color: white

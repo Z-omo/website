@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="boundary collection">
+  <div class="boundary work-example">
   {% include header.html %}
 
   <main>
@@ -21,6 +21,12 @@
       {%include rwd-device-view.html %}
       {% endif %}
     </div>
+
+    <aside class="side-bar">
+      <p>More examples of my work:</p>
+      {% include articles-list.html articles=site.work group='work-articles' %}
+      {% include get-in-touch.html %}
+    </aside>
   </main>
   
   {% include navigation.html %}

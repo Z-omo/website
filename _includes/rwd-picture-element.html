@@ -1,0 +1,14 @@
+<picture class="image">
+  <!--[if IE 9]>
+  <video style="display: none;"> 
+  <![endif]-->
+  <source srcset="resources/image/large/{{ include.picture }}" media="(min-width: 59em)">
+  <source srcset="resources/image/medium/{{ include.picture }}" media="(min-width: 39em)">
+  <!--[if IE 9]>
+  </video>
+  <![endif]-->
+  
+  <!--[if !IE 8]><!-->
+  <img src="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}">
+  <!--<![endif]-->
+</picture>
