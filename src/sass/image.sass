@@ -23,3 +23,20 @@
       &.float-left
         float: left
         margin-right: $contentMargin * 2
+
+.image-group
+  display: flex
+  flex-flow: row wrap
+  justify-content: flex-start
+
+  .image
+    margin: 0 ($contentMargin / 3) ($contentMargin / 2) 0
+
+    @media only screen and (min-width: $tabletWidth)
+      flex: 1 0 32.3%
+      max-width: 45%
+
+      // for browsers with no flex support:
+      display: inline-block
+
+  

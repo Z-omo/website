@@ -195,7 +195,6 @@ _focusApp2.default.init();
  */
 
 
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -218,112 +217,117 @@ var focus = {
   },
 
   init: function init() {
-    focus.setViewParams();
-    focus.setJSMode();
+    setViewParams();
+    setJSMode();
     if (true === focus.view.smallView) {
-      focus.setupMobileMenu();
+      setupMobileMenu();
     }
 
-    focus.setupEvents();
+    setupEvents();
     if (false === focus.view.smallView) {
-      focus.setupRWDViews();
+      setupRWDViews();
     }
-  },
-  setViewParams: function setViewParams() {
-    var boundary = document.querySelector('.boundary');
-    if (!boundary) {
-      return;
-    }
-
-    var compStyle = window.getComputedStyle(boundary);
-    var regexNumeric = /^\d+/;
-    var vpWidth = Number(regexNumeric.exec(compStyle.width));
-    var vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
-    var vpMobileMax = focus.view.smallViewEM * vpFontSize;
-
-    focus.view.smallView = vpWidth < vpMobileMax;
-  },
-  setJSMode: function setJSMode() {
-    var html = document.querySelector('html');
-    if (!html) {
-      return;
-    }
-
-    _domMan2.default.addClass('focus-js', html);
-    focus.view.html = html;
-  },
-  setupMobileMenu: function setupMobileMenu() {
-    var nav = document.querySelector('#menu');
-    if (!nav) {
-      return;
-    }
-
-    var menu = document.createElement('span');
-    nav.appendChild(menu);
-    menu.id = 'menuBtn';
-    menu.addEventListener('click', function () {
-      return _domMan2.default.toggleClass('open', focus.view.nav);
-    });
-
-    var home = document.createElement('span');
-    nav.appendChild(home);
-    _domMan2.default.addClass('home-link', home);
-    home.addEventListener('click', function () {
-      return window.location.href = './';
-    });
-
-    focus.view.nav = nav;
-  },
-  setupEvents: function setupEvents() {
-    window.addEventListener('scroll', focus.onScroll);
-  },
-  onScroll: function onScroll() {
-    if (!focus.view.scrolling) {
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(function () {
-          focus.requestScrollCheck();
-        });
-      } else {
-        setTimeout(function () {
-          focus.requestScrollCheck();
-        }, 200);
-      }
-    }
-
-    focus.view.scrolling = true;
-  },
-  requestScrollCheck: function requestScrollCheck() {
-    focus.setScrollState();
-    focus.view.scrolling = false;
-  },
-  setScrollState: function setScrollState() {
-    var scroll = window.pageYOffset;
-
-    if (0 === scroll) {
-      _domMan2.default.removeClass(focus.view.scrolledClass, focus.view.html);
-      focus.view.scrolled = false;
-      return;
-    }
-
-    if (!focus.view.scrolled) {
-      _domMan2.default.addClass(focus.view.scrolledClass, focus.view.html);
-    }
-
-    focus.view.scrolled = true;
-  },
-  setupRWDViews: function setupRWDViews() {
-    var nodes = document.querySelectorAll('.rwd-view');
-    if (!nodes || 0 === nodes.length) {
-      return;
-    }
-
-    // convert NodeList to an Array, otherwise IE throws error on forEach:
-    var rwd = Array.prototype.slice.call(nodes);
-    _rwdView2.default.setup(rwd, focus.view.smallView);
   }
 };
 
 exports.default = focus;
+
+
+function setViewParams() {
+  var boundary = document.querySelector('.boundary');
+  if (!boundary) {
+    return;
+  }
+
+  var compStyle = window.getComputedStyle(boundary);
+  var regexNumeric = /^\d+/;
+  var vpWidth = Number(regexNumeric.exec(compStyle.width));
+  var vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
+  var vpMobileMax = focus.view.smallViewEM * vpFontSize;
+
+  focus.view.smallView = vpWidth < vpMobileMax;
+}
+
+function setJSMode() {
+  var html = document.querySelector('html');
+  if (!html) {
+    return;
+  }
+
+  _domMan2.default.addClass('focus-js', html);
+  focus.view.html = html;
+}
+
+function setupMobileMenu() {
+  var nav = document.querySelector('#menu');
+  if (!nav) {
+    return;
+  }
+
+  var menu = document.createElement('span');
+  nav.appendChild(menu);
+  menu.id = 'menuBtn';
+  menu.addEventListener('click', function () {
+    return _domMan2.default.toggleClass('open', focus.view.nav);
+  });
+
+  var home = document.createElement('span');
+  nav.appendChild(home);
+  _domMan2.default.addClass('home-link', home);
+  home.addEventListener('click', function () {
+    return window.location.href = './';
+  });
+
+  focus.view.nav = nav;
+}
+
+function setupEvents() {
+  window.addEventListener('scroll', onScroll);
+}
+
+function onScroll() {
+  if (!focus.view.scrolling) {
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(requestScrollCheck);
+    } else {
+      setTimeout(requestScrollCheck, 200);
+    }
+  }
+
+  focus.view.scrolling = true;
+}
+
+function requestScrollCheck() {
+  setScrollState();
+  focus.view.scrolling = false;
+}
+
+function setScrollState() {
+  var scroll = window.pageYOffset;
+
+  if (0 === scroll) {
+    _domMan2.default.removeClass(focus.view.scrolledClass, focus.view.html);
+    focus.view.scrolled = false;
+    return;
+  }
+
+  if (!focus.view.scrolled) {
+    _domMan2.default.addClass(focus.view.scrolledClass, focus.view.html);
+  }
+
+  focus.view.scrolled = true;
+}
+
+function setupRWDViews() {
+  var nodes = document.querySelectorAll('.rwd-view');
+  if (!nodes || 0 === nodes.length) {
+    return;
+  }
+
+  // convert NodeList to an Array, otherwise IE throws error on forEach:
+  var rwd = Array.prototype.slice.call(nodes);
+  _rwdView2.default.setup(rwd, focus.view.smallView);
+}
 
 /***/ }),
 /* 3 */
