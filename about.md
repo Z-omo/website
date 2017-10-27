@@ -26,21 +26,18 @@ Software development:
 : - [Don't Repeat Yourself](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) (DRY)
   - [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter)
   - [Design by Contract](https://en.wikipedia.org/wiki/Design_by_contract)
+  - Design patterns
+  - Object Oriented Programming (OOP)
+  - Test-driven development (TDD)
 
 My skill set stack includes:
 : - HTML, XML, CSS, SASS, SVG
   - JavaScript (ES5, ES6), Node.js
   - PHP, Python
   - MySQL, PostgreSQL, MongoDB
-  - Software design patterns
-  - Object Oriented Programming (OOP)
-  - Test-driven development (TDD)
-
-Reference materials on my bookshelf include:
-: - [_Clean Code_](https://books.google.co.uk/books/about/Clean_Code.html?id=_i6bDeoCQzsC&source=kp_cover&redir_esc=y)
-  - [_The Pragmatic Programmer_](https://en.wikipedia.org/wiki/The_Pragmatic_Programmer)
-  - [_Practices of an Agile Programmer_](https://pragprog.com/book/pad/practices-of-an-agile-developer)
-  - [_JavaScript: The Good Parts_](http://shop.oreilly.com/product/9780596517748.do)
+  - REST, GraphQL
+  - JSON, YAML
+  - Mustache, Handlebars
 
 Tools I use regularly:
 : - Bash, npm, webpack, Grunt
@@ -48,6 +45,12 @@ Tools I use regularly:
   - Git, Github
   - VS Code, Vi
   - Photoshop, Illustrator
+
+Reference materials on my bookshelf include:
+: - [_Clean Code_](https://books.google.co.uk/books/about/Clean_Code.html?id=_i6bDeoCQzsC&source=kp_cover&redir_esc=y)
+  - [_The Pragmatic Programmer_](https://en.wikipedia.org/wiki/The_Pragmatic_Programmer)
+  - [_Practices of an Agile Programmer_](https://pragprog.com/book/pad/practices-of-an-agile-developer)
+  - [_JavaScript: The Good Parts_](http://shop.oreilly.com/product/9780596517748.do)
 
 Resources available online that I have found to be invaluable:
 : - [_You Don't Know JS_](https://github.com/getify/You-Dont-Know-JS)
@@ -62,5 +65,10 @@ Podcasts listened to:
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
   - [JavaScript Jabber](https://devchat.tv/js-jabber)
   - [JavaScript Party](https://changelog.com/jsparty)
+
+Tinkering currently with:
+: - Elm
+  - Web Components
+  - Functional Programming
 
 </div>

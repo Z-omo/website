@@ -65,12 +65,14 @@ const focus = {
     let menu = document.createElement('span');
     nav.appendChild(menu);
     menu.id = 'menuBtn';
-    menu.addEventListener('click', focus.onMenu);
+    menu.addEventListener(
+      'click', () => DOM.toggleClass('open', focus.view.nav)
+    );
 
     let home = document.createElement('span');
     nav.appendChild(home);
     DOM.addClass('home-link', home);
-    home.addEventListener('click', focus.onHome);
+    home.addEventListener('click', () => window.location.href = './');
 
     focus.view.nav = nav;
   },
@@ -78,21 +80,6 @@ const focus = {
   setupEvents()
   {
     window.addEventListener('scroll', focus.onScroll);
-  },
-
-  onMenu()
-  {
-    focus.toggleMenu();
-  },
-
-  toggleMenu()
-  {
-    DOM.toggleClass('open', focus.view.nav);
-  },
-
-  onHome()
-  {
-    window.location.href = './';
   },
 
   onScroll()

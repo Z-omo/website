@@ -86,7 +86,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var DOM = {
+exports.default = {
   addClass: function addClass(className, element) {
     if (!element) {
       return;
@@ -136,15 +136,13 @@ var DOM = {
         break;
       }
 
-      found = !selector || DOM.hasClass(selector, parent);
+      found = !selector || this.hasClass(selector, parent);
       target = parent;
     } while (!found && parent);
 
     return parent;
   }
 };
-
-exports.default = DOM;
 
 /***/ }),
 /* 1 */
@@ -166,25 +164,19 @@ exports.default = DOM;
  */
 
 
-var _focusApp = __webpack_require__(3);
+var _focusApp = __webpack_require__(2);
 
 var _focusApp2 = _interopRequireDefault(_focusApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(2);
-__webpack_require__(11);
+__webpack_require__(4);
+__webpack_require__(5);
 
 _focusApp2.default.init();
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -212,7 +204,7 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
-var _rwdView = __webpack_require__(6);
+var _rwdView = __webpack_require__(3);
 
 var _rwdView2 = _interopRequireDefault(_rwdView);
 
@@ -269,26 +261,21 @@ var focus = {
     var menu = document.createElement('span');
     nav.appendChild(menu);
     menu.id = 'menuBtn';
-    menu.addEventListener('click', focus.onMenu);
+    menu.addEventListener('click', function () {
+      return _domMan2.default.toggleClass('open', focus.view.nav);
+    });
 
     var home = document.createElement('span');
     nav.appendChild(home);
     _domMan2.default.addClass('home-link', home);
-    home.addEventListener('click', focus.onHome);
+    home.addEventListener('click', function () {
+      return window.location.href = './';
+    });
 
     focus.view.nav = nav;
   },
   setupEvents: function setupEvents() {
     window.addEventListener('scroll', focus.onScroll);
-  },
-  onMenu: function onMenu() {
-    focus.toggleMenu();
-  },
-  toggleMenu: function toggleMenu() {
-    _domMan2.default.toggleClass('open', focus.view.nav);
-  },
-  onHome: function onHome() {
-    window.location.href = './';
   },
   onScroll: function onScroll() {
     if (!focus.view.scrolling) {
@@ -339,9 +326,7 @@ var focus = {
 exports.default = focus;
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -553,11 +538,13 @@ function resetViewMode(view) {
 exports.default = RWDView;
 
 /***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 4 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12

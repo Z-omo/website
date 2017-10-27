@@ -33,7 +33,9 @@ $iFrameScrollBarWidth: 20
 
     @media only screen and (min-width: $desktopWidth)
       +rwdDeviceRules(desktop, 90vw)
-      transform: scale(0.72)
+      transform: scale(0.658)
+      +corners
+      box-shadow: 0px 0px 0px 1px rgba($primary, 0.2)
 
   transform-origin: 0 0
   transform: scale(0.62)
@@ -69,20 +71,17 @@ $iFrameScrollBarWidth: 20
     
 .rwd-view-frame // <iframe>
   background-color: white
-  opacity: 0
-  transition: opacity $transDurationOut
+  // opacity: 0
+  // transition: opacity $transDurationOut * 5 ease-out 1s
 
   .rwd-mobile &
     +rwdIFrameRules(mobile)
-    opacity: 1
 
   .rwd-tablet &
     +rwdIFrameRules(tablet)
-    opacity: 1
 
   .rwd-desktop &
     +rwdIFrameRules(desktop)
-    opacity: 1
   
 .rwd-view-controls
   display: none

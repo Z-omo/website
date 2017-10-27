@@ -7,6 +7,8 @@ hideTileTitle: true
 headerImage: Cheltenham-Comedy-Festival-backdrop.jpg
 ---
 
+## Website and Festival Line Up Manager
+
 A flagship event from [Tribe Festivals Ltd](http://www.tribefestivals.com/ "To: the website of Tribe – the event producers.") and Mark and Penny Makin of [Makin Projects](http://www.makinprojects.co.uk/ "To: the website of Makin Projects, working with outstanding theatre, dance and comedy."), the Cheltenham Comedy Festival presents an enviable line up of top comedians and up and coming stars.
 
 {% include rwd-picture-element.html picture="Cheltenham-Comedy-Festival-whats-on.jpg" alt="Cheltenham Comedy Festival – what's on." %}

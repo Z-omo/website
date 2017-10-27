@@ -171,8 +171,9 @@ main {
         border-right: solid 1px rgba(13, 19, 33, 0.2); } }
 
 .content {
-  margin: 0 0 2rem; }
-  .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content code {
+  margin: 0 0 2rem;
+  max-width: 69em; }
+  .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content code, .content .float-group {
     max-width: 55.62423rem; }
 
 .side-bar figure {
@@ -201,18 +202,19 @@ main {
   .content {
     display: inline-block;
     vertical-align: top;
-    margin: 0 -2px; }
-  .content {
     box-sizing: border-box;
+    margin: 0 -2px;
     padding: 0 4rem 0 0;
     width: 70%; }
     .collection .content, .work-example .content {
       padding-right: 0;
-      width: 100%; }
+      width: 100%;
+      max-width: none; }
   .home .side-bar {
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
+    margin: 0 auto;
     padding: 0;
     width: 30%;
     max-width: 320px;
@@ -227,6 +229,7 @@ main {
   .side-bar {
     display: inline-block;
     vertical-align: top;
+    margin: 0 2.5%;
     width: 20%; } }
 
 .boxed {
@@ -644,6 +647,18 @@ nav {
   max-width: 55.62423rem; }
   .image img {
     width: 100%; }
+  .image.float-image {
+    margin: 0 auto 2rem;
+    width: 70%; }
+    @media only screen and (min-width: 30em) {
+      .image.float-image {
+        width: 30%; }
+        .image.float-image.float-right {
+          float: right;
+          margin-left: 4rem; }
+        .image.float-image.float-left {
+          float: left;
+          margin-right: 4rem; } }
 
 /*
  * SASS for footer element - website.com
@@ -837,7 +852,10 @@ button, .button {
         height: calc(90vw * 0.62103);
         max-width: 1417px;
         max-height: 880px;
-        transform: scale(0.72); } }
+        transform: scale(0.658);
+        -webkit-border-radius: 0.26em;
+        border-radius: 0.26em;
+        box-shadow: 0px 0px 0px 1px rgba(13, 19, 33, 0.2); } }
   @media only screen and (min-width: 39em) {
     .rwd-device {
       margin: 0; } }
@@ -862,33 +880,28 @@ button, .button {
       background-image: url("/resources/image/browser-frame.png"); }
 
 .rwd-view-frame {
-  background-color: white;
-  opacity: 0;
-  transition: opacity 1s; }
+  background-color: white; }
   .rwd-mobile .rwd-view-frame {
     position: absolute;
     top: 17.70833%;
     left: 7.32984%;
     width: 83.76963%;
     height: 68.88021%;
-    border: solid 3px black;
-    opacity: 1; }
+    border: solid 3px black; }
   .rwd-tablet .rwd-view-frame {
     position: absolute;
     top: 12.55526%;
     left: 5%;
     width: 88.78049%;
     height: 80.45977%;
-    border: solid 3px black;
-    opacity: 1; }
+    border: solid 3px black; }
   .rwd-desktop .rwd-view-frame {
     position: absolute;
     top: 8.40909%;
     left: 0%;
     width: 100%;
     height: 91.59091%;
-    border: none;
-    opacity: 1; }
+    border: none; }
 
 .rwd-view-controls {
   display: none;

@@ -60,7 +60,6 @@ function setupViewControls()
     buildViewControls(view);
     setupRWDTitle(view);
     view.addEventListener('click', onSelectControl);
-
   });
 }
 
@@ -193,4 +192,4 @@ function resetViewMode(view)
 //   }
 //}
 
-export default RWDView;
+export default RWDView

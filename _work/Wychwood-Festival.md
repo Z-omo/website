@@ -7,7 +7,9 @@ hideTileTitle: true
 headerImage: Wychwood-Festival-scene.jpg
 ---
 
-Considered to be one of the best family friendly festivals in the UK, providing a wide range of music, comedy, literature and workshops over 3 days, and set beneath the idyllic Prestbury Hills.
+## Website and Festival Line Up Manager
+
+Considered to be one of the best family friendly festivals in the UK: with its laid back atmosphere, wide range of music, comedy, literature and workshops over 3 days, and set beneath the idyllic Prestbury Hills.
 
 {% include rwd-picture-element.html picture="Wychwood-Festival-website.jpg" alt="Wychwood Festival website." %}
 

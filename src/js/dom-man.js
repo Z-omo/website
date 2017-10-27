@@ -13,7 +13,7 @@
  */
 'use strict';
 
-const DOM = {
+export default {
 
   addClass(className, element)
   {
@@ -75,12 +75,10 @@ const DOM = {
       parent = target.parentNode;
       if (!parent) { break; }
 
-      found = !selector || DOM.hasClass(selector, parent);
+      found = !selector || this.hasClass(selector, parent);
       target = parent;
     } while (!found && parent);
   
     return parent;
   }
-};
-
-export default DOM;
+}
