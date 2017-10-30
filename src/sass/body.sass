@@ -48,8 +48,11 @@ main
   margin: 0 0 $contentMargin
   max-width: $desktopWidth
 
-  header, footer, h1, h2, h3, p, ul, ol, code, .float-group
+  header, footer, h1, h2, h3, p, ul, ol, code//, .float-group
     max-width: $maxContentWidth
+
+  .float-group
+    overflow: hidden // expand to height of floated children.
 
 .side-bar
   figure

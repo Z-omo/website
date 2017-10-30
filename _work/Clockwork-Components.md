@@ -8,9 +8,9 @@ hideTileTitle: true
 
 ## Website and Products Manager
 
-Clockwork Components is the UK's leading supplier of components to furniture makers, large and small. Clockwork Components's extensive range of established and new products required a system to manage and deliver crucial information to their customers in a fast and efficient manner.
+Clockwork Components is the UK's leading supplier of components to furniture makers, large and small. Clockwork Components required a system to manage data and deliver views in a fast and efficient manner for their extensive range of established and new products.
 
-Working with designer Steve Foote of [Tin Racer Design](https://www.tinracer.com/), we considered carefully how to optimise product data for fast delivery to handheld and desktop devices.
+Working with Steve Foote of design agency [Tin Racer Design](https://www.tinracer.com/), we considered carefully how to optimise product data and user friendly views for fast delivery to handheld and desktop devices.
 
 <div class="image-group">
   {% include group-image-element.html picture='Clockwork-Components-products-view.jpg' %}
@@ -18,6 +18,22 @@ Working with designer Steve Foote of [Tin Racer Design](https://www.tinracer.com
   {% include group-image-element.html picture='Clockwork-Components-product-zoom.jpg' %}
 </div>
 
-Clockwork Components know their customer base very well and understood how their customers prefer to source components. That understanding, led Steve and I, to design an interface and delivery mechanism that would not overwhelm customers with vast amounts of preliminary data; either through an initial download, or how the product data is presented in browser. Instead, users can choose easily to focus on specific component types and are rewarded with pertinent results quickly. Returned results are cached by the client-side app, thus avoiding the need to reload data from the server during the user’s browsing session.
+Clockwork Components know their customer base very well; with a clear understanding of how customers prefer to source furniture components. That understanding, led Steve and I, to design an interface and delivery mechanism that would not overwhelm customers with vast amounts of preliminary data; either through an initial download, or how products are presented in the browser. Instead, users can choose easily to focus on components with specific attributes and are rewarded with pertinent results quickly. 
 
-Crucial to the user experience, was the desire for customers to be able to zoom into a product image and see finer details. Steve and I developed a strategy for preparing and optimising product images for use on small, medium and large screen dimensions, and present *real* image enlargements when the user chooses to zoom – we did not want to disappoint users.
+One of the desired outcomes of the project and crucial to the user experience, was to allow customers to be able to zoom into a product image and see the finer details. Steve and I developed a strategy for preparing and optimising product images for use on small, medium and large screen dimensions, and utlilised the pinch-to-zoom features found on touch-based devices to present *real* image enlargements when the user chooses to zoom – it was important not to disappoint users.
+
+### Products Manager.
+
+<div class="float-group" markdown="1">
+  {% include rwd-floated-image.html align="right" picture="Clockwork-Components-pm-view.jpg" %}
+
+  I also developed an app, the _Products Manager_, to allow Clockwork Components staff to manage products data and set the parameters for how product views are presented and operate.
+
+  The _Products Manager_ provided various tools for:
+
+  * direct access to an individual product record for editing
+  * organising product categories and related operating parameters
+  * exporting of products data in CSV format
+  * importing of products data from CSV format
+</div>>
+

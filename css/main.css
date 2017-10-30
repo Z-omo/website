@@ -173,8 +173,10 @@ main {
 .content {
   margin: 0 0 2rem;
   max-width: 69em; }
-  .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content code, .content .float-group {
+  .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content code {
     max-width: 55.62423rem; }
+  .content .float-group {
+    overflow: hidden; }
 
 .side-bar figure {
   margin: 0 auto;
@@ -378,6 +380,7 @@ h1, h2, h3 {
   margin: 0 0 2rem;
   font-family: "ff-meta-web-pro", "Trebuchet MS", sans-serif;
   font-size: 1.618rem;
+  line-height: 2.61792rem;
   font-weight: 700;
   color: #0d1321; }
 
@@ -386,6 +389,9 @@ h1, h2, h3 {
   line-height: 3.236rem;
   letter-spacing: -1pt;
   color: #8693ab; }
+
+p, ul, ol {
+  margin: 0 0 1.618rem; }
 
 main a {
   color: #0d1321;
@@ -398,12 +404,16 @@ ul, ol {
   padding: 0 0 0 1rem; }
 
 ul {
+  margin-left: 1rem;
   list-style: none; }
+
+p + ul, p + ol {
+  margin-top: -0.4rem; }
 
 main ul li:before {
   content: '\2022';
   display: inline-block;
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.5rem 0 -1rem;
   vertical-align: middle;
   font-family: sans-serif;
   color: rgba(13, 19, 33, 0.5);
@@ -462,9 +472,12 @@ blockquote {
     font-size: 3.6rem;
     line-height: 1rem;
     font-weight: normal;
+    font-style: normal;
     vertical-align: middle; }
   blockquote q::before {
-    margin-right: 0.2em; }
+    margin: 0 0.1em 0 0; }
+  blockquote q::after {
+    margin: 0 0 0 0.1em; }
   blockquote .by-line {
     display: block;
     margin: 1rem 0 0;
@@ -472,6 +485,15 @@ blockquote {
     font-size: 0.8em;
     line-height: 1.2944em;
     font-weight: bold; }
+  blockquote.long-format {
+    font-family: "ff-tisa-sans-web-pro", "Trebuchet MS", sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.618rem;
+    font-weight: normal;
+    font-style: normal;
+    max-width: 39.62423rem; }
+    blockquote.long-format q::before, blockquote.long-format q::after {
+      font-size: 2.6rem; }
 
 ::-moz-selection {
   background: #0d1321;
@@ -645,6 +667,8 @@ nav {
   display: block;
   margin: 0 0 2rem;
   max-width: 55.62423rem; }
+  .image .image {
+    margin-bottom: 0; }
   .image img {
     width: 100%; }
   .image.float-image {
@@ -652,7 +676,7 @@ nav {
     width: 70%; }
     @media only screen and (min-width: 30em) {
       .image.float-image {
-        width: 30%; }
+        width: 50%; }
         .image.float-image.float-right {
           float: right;
           margin-left: 4rem; }
@@ -857,7 +881,8 @@ button, .button {
     height: calc(100vw * 0.62103);
     max-width: 1417px;
     max-height: 880px;
-    transform: scale(0.86); }
+    transform: scale(0.86);
+    box-shadow: 0px 0px 0px 1px rgba(13, 19, 33, 0.2); }
     @media only screen and (min-width: 69em) {
       .rwd-desktop .rwd-device {
         width: 90vw;
@@ -866,8 +891,7 @@ button, .button {
         max-height: 880px;
         transform: scale(0.658);
         -webkit-border-radius: 0.26em;
-        border-radius: 0.26em;
-        box-shadow: 0px 0px 0px 1px rgba(13, 19, 33, 0.2); } }
+        border-radius: 0.26em; } }
   @media only screen and (min-width: 39em) {
     .rwd-device {
       margin: 0; } }

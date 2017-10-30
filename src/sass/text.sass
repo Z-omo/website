@@ -15,6 +15,7 @@ h1, h2, h3
   margin: 0 0 $contentMargin
   font-family: $headingFont
   font-size: $contentFontSize * $gRatio
+  line-height: ($contentFontSize * $gRatio) * $gRatio
   font-weight: 700
   color: $primary
 
@@ -25,6 +26,9 @@ h1, h2, h3
   letter-spacing: -1pt
   color: $color2
 
+p, ul , ol
+  margin: 0 0 $bodyContentLineHeight
+  
 //—————————————————————————————————————————————: Links
 main a
   color: $primary
@@ -39,7 +43,7 @@ main a
 =bulletPoint
   content: '\2022'
   display: inline-block
-  margin: 0 0.5rem 0 0 //-1rem
+  margin: 0 0.5rem 0 -1rem
   vertical-align: middle
   font-family: sans-serif
   color: rgba($primary, 0.5)
@@ -50,7 +54,11 @@ ul, ol
   padding: 0 0 0 $contentPadding / 2
 
 ul
+  margin-left: 1rem
   list-style: none
+
+p + ul, p + ol
+  margin-top: -0.4rem
 
 main ul li:before
   +bulletPoint
@@ -111,17 +119,17 @@ blockquote
     max-width: 450px
         
   q::before, q::after
-    // position: relative
-    // top: 0rem // needs to be rem for IE to render position consistently.
-    // left: 0
     display: inline // should always be inline so that they wrap with the text.
     font-size: 3.6rem // needs to be rem for IE to render size consistently.
     line-height: $quoteLineHeight / 2
     font-weight: normal
+    font-style: normal
     vertical-align: middle
 
   q::before
-    margin-right: 0.2em
+    margin: 0 0.1em 0 0
+  q::after
+    margin: 0 0 0 0.1em
 
   .by-line
     display: block
@@ -132,13 +140,18 @@ blockquote
     line-height: 0.8em * $gRatio
     font-weight: bold
       
+  &.long-format
+    font-family: $contentFont
+    font-size: $contentFontSize * 0.92
+    line-height: $bodyContentLineHeight
+    font-weight: normal
+    font-style: normal
+    max-width: $maxContentWidth - ($contentMargin * 8)
 
-  // .collection &
-  //   color: white
-  //   opacity: 0.8
-  //   //text-shadow: $textShadow
+    q::before, q::after
+      font-size: 2.6rem
 
-// selected text:
+//—————————————————————————————————————————————: Selection
 ::-moz-selection
   background: $primary
   text-shadow: none

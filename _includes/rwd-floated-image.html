@@ -1,4 +1,4 @@
-<figure class="image float-image{% if include.align %} float-{{ include.align }}{% endif %}">
+<figure class="image float-image{% if include.align %} float-{{ include.align }}{% endif %}"{% if include.maxWidth %} style="max-width:{{ include.maxWidth }};"{% endif %}>
   <picture class="image">
       <!--[if IE 9]>
       <video style="display: none;"> 
