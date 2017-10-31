@@ -22,6 +22,12 @@ Clockwork Components know their customer base very well; with a clear understand
 
 One of the desired outcomes of the project and crucial to the user experience, was to allow customers to be able to zoom into a product image and see the finer details. Steve and I developed a strategy for preparing and optimising product images for use on small, medium and large screen dimensions, and utlilised the pinch-to-zoom features found on touch-based devices to present *real* image enlargements when the user chooses to zoom – it was important not to disappoint users.
 
+<div class="image-group">
+  {% include group-image-element.html picture='Clockwork-Components-products-view.jpg' %}
+  {% include group-image-element.html picture='Clockwork-Components-product-view.jpg' %}
+  {% include group-image-element.html picture='Clockwork-Components-product-zoom.jpg' %}
+</div>
+
 ### Products Manager.
 
 <div class="float-group" markdown="1">

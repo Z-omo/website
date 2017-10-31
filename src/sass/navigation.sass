@@ -142,9 +142,10 @@ nav
     left: 0
     background-color: rgba($primary, 0.8)
     z-index: -1
-    opacity: 0
     transition: opacity $transDurationIn ease-out
-    
+  
+  .focus-js nav::before
+    opacity: 0
   .js-scrolled nav::before
     opacity: 1
 

@@ -31,7 +31,6 @@
     z-index: 101
     border: none
 
-
     img
       width: 100%
 
@@ -40,13 +39,19 @@
       width: 5.4em
       transition: transform $transDurationIn ease-out
       transform-origin: top left
-      transform: scale(1)
+      transform: scale(0.72)
+      
+      .focus-js &
+        transform: scale(1)
       
       .js-scrolled &
         transform: scale(0.72)
 
-        @media only screen and (min-width: $desktopWidth)
-          transform: scale(0.84)
+    @media only screen and (min-width: $desktopWidth)
+      transform: scale(0.84)
+
+      .js-scrolled &
+        transform: scale(0.84)
 
     @media only screen and (min-width: $maxWidth)
       left: auto
@@ -92,7 +97,8 @@
       .wf-active &
         font-size: 4rem
 
-
+//—————————————————————————————————————————————: Header image
+.boundary > header
   .page-header-image
     position: absolute
     top: 0

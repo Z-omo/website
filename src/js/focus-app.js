@@ -13,8 +13,9 @@
  */
 'use strict';
 
-import DOM from './dom-man.js';
-import RWDView from './rwd-view.js';
+import DOM from './dom-man';
+import Lazlo from './Lazlo';
+import RWDView from './rwd-view';
 
 const focus = {
 
@@ -30,6 +31,7 @@ const focus = {
     if (true === focus.view.smallView) { setupMobileMenu(); }
 
     setupEvents();
+    setupLazyLoad();
     if (false === focus.view.smallView) { setupRWDViews(); }
   }
 }
@@ -124,12 +126,18 @@ function setScrollState()
   focus.view.scrolled = true;
 }
 
+function setupLazyLoad()
+{
+  let toLoad = DOM.getAll('[data-lazlo]');
+  if (!toLoad) { return; }
+
+  Lazlo.watch(toLoad);
+}
+
 function setupRWDViews()
 {
-  let nodes = document.querySelectorAll('.rwd-view');
-  if (!nodes || 0 === nodes.length) { return; }
+  let rwd = DOM.getAll('.rwd-view');
+  if (!rwd) { return; }
 
-  // convert NodeList to an Array, otherwise IE throws error on forEach:
-  let rwd = Array.prototype.slice.call(nodes);
   RWDView.setup(rwd, focus.view.smallView);
 }

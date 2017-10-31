@@ -109,12 +109,30 @@ exports.default = {
     } else {
       element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
     }
+
+    if ('' === element.className) {
+      element.removeAttribute('class');
+    }
+  },
+  hasAttr: function hasAttr(attrName, element) {
+    return element.getAttribute(attrName);
   },
   tagIS: function tagIS(tagName, element) {
     if (!element) {
       return;
     }
     return element.tagName.toLowerCase() === tagName.toLowerCase();
+  },
+  getAll: function getAll(selector) {
+    var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+
+    var nodes = element.querySelectorAll(selector);
+    if (!nodes || 0 === nodes.length) {
+      return;
+    }
+
+    // convert NodeList to an Array, otherwise IE throws error on forEach:
+    return Array.prototype.slice.call(nodes);
   },
   add: function add(element, container) {
     container.appendChild(element);
@@ -141,6 +159,23 @@ exports.default = {
     } while (!found && parent);
 
     return parent;
+  },
+  viewDims: function viewDims(element) {
+    var dims = void 0;
+
+    if (!element) {
+      dims = {
+        top: window.pageYOffset,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        bottom: window.pageYOffset + window.innerHeight
+      };
+    } else {
+
+      dims = element.getBoundingClientRect();
+    }
+
+    return dims;
   }
 };
 
@@ -203,6 +238,10 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
+var _Lazlo = __webpack_require__(10);
+
+var _Lazlo2 = _interopRequireDefault(_Lazlo);
+
 var _rwdView = __webpack_require__(3);
 
 var _rwdView2 = _interopRequireDefault(_rwdView);
@@ -224,6 +263,7 @@ var focus = {
     }
 
     setupEvents();
+    setupLazyLoad();
     if (false === focus.view.smallView) {
       setupRWDViews();
     }
@@ -318,14 +358,21 @@ function setScrollState() {
   focus.view.scrolled = true;
 }
 
-function setupRWDViews() {
-  var nodes = document.querySelectorAll('.rwd-view');
-  if (!nodes || 0 === nodes.length) {
+function setupLazyLoad() {
+  var toLoad = _domMan2.default.getAll('[data-lazlo]');
+  if (!toLoad) {
     return;
   }
 
-  // convert NodeList to an Array, otherwise IE throws error on forEach:
-  var rwd = Array.prototype.slice.call(nodes);
+  _Lazlo2.default.watch(toLoad);
+}
+
+function setupRWDViews() {
+  var rwd = _domMan2.default.getAll('.rwd-view');
+  if (!rwd) {
+    return;
+  }
+
   _rwdView2.default.setup(rwd, focus.view.smallView);
 }
 
@@ -2097,6 +2144,176 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
 
 } )( window, document );
 
+
+/***/ }),
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * ES6 class to handle the lazy loading of content.
+ *
+ * @package     Focus
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Lazlo = {
+
+  selectors: {
+    resource: 'data-lazlo',
+    watching: 'lazlo',
+    loading: 'lazlo-loading',
+    loaded: 'lazlo-loaded'
+  },
+  watching: [],
+  loaded: [],
+  viewPort: null,
+  watchCount: 0,
+
+  watch: function watch(elements) {
+    if (!elements || 0 === elements.lenth) {
+      return;
+    }
+
+    this.setupWatch();
+    this.addToWatch(elements);
+    this.checkView();
+  },
+  setupWatch: function setupWatch() {
+    if (this.scrollHandler) {
+      return;
+    }
+    this.scrollHandler = this.onScroll.bind(this);
+    window.addEventListener('scroll', this.scrollHandler);
+
+    this.loadedHandler = this.onResourceLoaded.bind(this);
+  },
+  onScroll: function onScroll() {
+    if (true === this.checking) {
+      return;
+    }
+
+    setTimeout(this.checkView.bind(this), 200); // debounced.
+    this.checking = true;
+  },
+  addToWatch: function addToWatch(elements) {
+    var _this = this;
+
+    elements.forEach(function (element) {
+      if (_domMan2.default.hasAttr(_this.selectors.resource, element)) {
+        _this.watching.push(element);
+        _this.watchCount += 1;
+        _domMan2.default.addClass(_this.selectors.watching, element);
+      }
+    });
+  },
+  checkView: function checkView() {
+    var _this2 = this;
+
+    this.viewPort = _domMan2.default.viewDims();
+    var waiting = [];
+
+    var remaining = this.watching.filter(function (element) {
+      return !(_this2.isWithinView(element) && waiting.push(element));
+    });
+
+    this.watching = remaining;
+    this.checking = false;
+
+    if (0 === waiting.length) {
+      return;
+    }
+    this.processLoading(waiting);
+  },
+  isWithinView: function isWithinView(element) {
+    var dims = _domMan2.default.viewDims(element);
+    return dims.top <= this.viewPort.height && dims.bottom >= 0;
+  },
+  processLoading: function processLoading(elements) {
+    var _this3 = this;
+
+    elements.forEach(function (element) {
+      _domMan2.default.addClass(_this3.selectors.loading, element);
+      element.addEventListener('load', _this3.loadedHandler);
+
+      var resource = element.getAttribute(_this3.selectors.resource);
+      if (!resource) {
+        return;
+      }
+
+      element.setAttribute('src', resource);
+      _this3.prepareSrcSet(element);
+    });
+  },
+  prepareSrcSet: function prepareSrcSet(element) {
+    var attr = 'data-srcset';
+    var srcSet = element.getAttribute(attr);
+    var sources = [element];
+
+    if (!srcSet) {
+      var parent = _domMan2.default.parent(element, 'image');
+      if (!parent) {
+        return;
+      }
+      sources = _domMan2.default.getAll('source[' + attr + ']', parent);
+      if (!sources) {
+        return;
+      }
+    }
+
+    sources.forEach(function (source) {
+      source.setAttribute('srcset', source.getAttribute(attr));
+      source.removeAttribute(attr);
+    });
+
+    if (window.picturefill) {
+      window.picturefill({ elements: [element], reevaluate: true });
+    }
+  },
+  onResourceLoaded: function onResourceLoaded(e) {
+    var element = e.target;
+
+    element.removeEventListener('load', this.loadedHandler);
+    _domMan2.default.removeClass(this.selectors.loading, element);
+    element.removeAttribute(this.selectors.resource);
+
+    _domMan2.default.addClass(this.selectors.loaded, element);
+    this.loaded.push(element);
+
+    if (this.watchCount === this.loaded.length) {
+      this.standDown();
+    }
+  },
+  standDown: function standDown() {
+    window.removeEventListener('scroll', this.scrollHandler);
+    this.scrollHandler = null;
+    this.loadedHandler = null;
+  }
+};
+
+exports.default = Lazlo;
 
 /***/ })
 /******/ ]);
