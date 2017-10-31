@@ -71,7 +71,6 @@ const Lazlo = {
         this.watching.push(element);
         this.watchCount += 1;
         DOM.addClass(this.selectors.watching, element);
-
       }
     });
   },
