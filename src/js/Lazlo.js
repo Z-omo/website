@@ -19,10 +19,12 @@ import imageDims from './image-dims';
 const Lazlo = {
 
   selectors: {
-    resource: 'data-lazlo',
-    watching: 'lazlo',
-    loading:  'lazlo-loading',
-    loaded:   'lazlo-loaded'
+    resource:     'data-lazlo',
+    resourceAttr: 'data-lazlo-attr',
+    defaultAttr:  'src',
+    watching:     'lazlo',
+    loading:      'lazlo-loading',
+    loaded:       'lazlo-loaded'
   },
   watching: [],
   loaded: [],
@@ -101,13 +103,25 @@ const Lazlo = {
   {
     elements.forEach(element => {
       DOM.addClass(this.selectors.loading, element);
-      element.addEventListener('load', this.loadedHandler);
 
       let resource = element.getAttribute(this.selectors.resource);
       if (!resource) { return; }
       
-      element.setAttribute('src', resource);
-      this.prepareSrcSet(element);
+      let attr = element.getAttribute(this.selectors.resourceAttr) ||   
+        this.selectors.defaultAttr;
+      if (this.selectors.defaultAttr === attr)
+      {
+        element.addEventListener('load', this.loadedHandler);
+      }
+      
+      element.setAttribute(attr, resource);
+
+      if (this.selectors.defaultAttr === attr)
+      {
+        this.prepareSrcSet(element);
+      } else {
+        this.setAsLoaded(element);
+      }
     })
   },
 
@@ -141,13 +155,20 @@ const Lazlo = {
     let element = e.target;
 
     element.removeEventListener('load', this.loadedHandler);
+    this.setAsLoaded(element);
+
+    if ('IMG' === element.nodeName) { this.removeImageDims(element); }
+  },
+
+  setAsLoaded(element)
+  {
     DOM.removeClass(this.selectors.loading, element);
     element.removeAttribute(this.selectors.resource);
+    element.removeAttribute(this.selectors.resourceAttr);
 
     DOM.addClass(this.selectors.loaded, element);
     this.loaded.push(element);
 
-    this.removeImageDims(element);
     if (this.watchCount === this.loaded.length) { this.standDown(); }
   },
 
@@ -164,6 +185,7 @@ const Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
+    console.log('Lazlo has stood down.');
   }
 };
 

@@ -705,13 +705,13 @@ nav {
         max-width: 45%;
         display: inline-block; } }
 
-.image img[data-lazlo], .image .lazlo {
+*[data-lazlo], .lazlo {
   opacity: 0;
   transition-property: opacity;
   transition-duration: 1s;
   transition-delay: 200ms; }
 
-.image .lazlo-loaded {
+.lazlo-loaded {
   opacity: 1; }
 
 /*
@@ -742,9 +742,7 @@ footer {
   border: solid 1px rgba(255, 255, 255, 0.7);
   -webkit-border-radius: 0.26em;
   border-radius: 0.26em;
-  height: 8rem;
-  background-color: transparent;
-  transition: background-color 1s ease-out; }
+  height: 8rem; }
   .articles article a {
     position: absolute;
     top: 0;
@@ -752,7 +750,9 @@ footer {
     bottom: 0;
     left: 0;
     text-decoration: none;
-    border: none; }
+    border: none;
+    background-color: transparent;
+    transition: background-color 1s ease-out; }
   .articles article h1 {
     padding: 0.66667rem 1rem;
     font-size: 1.2rem;
@@ -773,7 +773,7 @@ footer {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover; }
-  .articles article:hover {
+  .articles article:hover a {
     background-color: rgba(134, 147, 171, 0.2);
     transition-duration: 200ms; }
   .articles article.with-image:hover h1 {

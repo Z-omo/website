@@ -47,12 +47,11 @@
       display: inline-block
 
 //—————————————————————————————————————————————: Lazy loading
-.image
-  img[data-lazlo], .lazlo
-    opacity: 0
-    transition-property: opacity
-    transition-duration: $transDurationOut
-    transition-delay: $transDurationIn
+*[data-lazlo], .lazlo
+  opacity: 0
+  transition-property: opacity
+  transition-duration: $transDurationOut
+  transition-delay: $transDurationIn
 
-  .lazlo-loaded
-    opacity: 1
+.lazlo-loaded
+  opacity: 1

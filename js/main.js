@@ -423,6 +423,8 @@ var Lazlo = {
 
   selectors: {
     resource: 'data-lazlo',
+    resourceAttr: 'data-lazlo-attr',
+    defaultAttr: 'src',
     watching: 'lazlo',
     loading: 'lazlo-loading',
     loaded: 'lazlo-loaded'
@@ -502,15 +504,24 @@ var Lazlo = {
 
     elements.forEach(function (element) {
       _domMan2.default.addClass(_this3.selectors.loading, element);
-      element.addEventListener('load', _this3.loadedHandler);
 
       var resource = element.getAttribute(_this3.selectors.resource);
       if (!resource) {
         return;
       }
 
-      element.setAttribute('src', resource);
-      _this3.prepareSrcSet(element);
+      var attr = element.getAttribute(_this3.selectors.resourceAttr) || _this3.selectors.defaultAttr;
+      if (_this3.selectors.defaultAttr === attr) {
+        element.addEventListener('load', _this3.loadedHandler);
+      }
+
+      element.setAttribute(attr, resource);
+
+      if (_this3.selectors.defaultAttr === attr) {
+        _this3.prepareSrcSet(element);
+      } else {
+        _this3.setAsLoaded(element);
+      }
     });
   },
   prepareSrcSet: function prepareSrcSet(element) {
@@ -542,13 +553,20 @@ var Lazlo = {
     var element = e.target;
 
     element.removeEventListener('load', this.loadedHandler);
+    this.setAsLoaded(element);
+
+    if ('IMG' === element.nodeName) {
+      this.removeImageDims(element);
+    }
+  },
+  setAsLoaded: function setAsLoaded(element) {
     _domMan2.default.removeClass(this.selectors.loading, element);
     element.removeAttribute(this.selectors.resource);
+    element.removeAttribute(this.selectors.resourceAttr);
 
     _domMan2.default.addClass(this.selectors.loaded, element);
     this.loaded.push(element);
 
-    this.removeImageDims(element);
     if (this.watchCount === this.loaded.length) {
       this.standDown();
     }
@@ -565,6 +583,7 @@ var Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
+    console.log('Lazlo has stood down.');
   }
 };
 
