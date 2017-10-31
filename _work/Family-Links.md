@@ -10,10 +10,10 @@ Family Links is a national charity dedicated to creating an emotionally healthy,
 
 <blockquote class="long-format"><q>Colin, provides a very high level of service and takes a genuine interest in the task of supporting the promotion of our work. He spends time understanding and discussing our requirements and is extremely flexible in his approach. All the work has been delivered on time and to budget and is off a very high quality. I would recommend Colin Tester very highly.</q><p class="by-line">Gail Allan, Busines Development Director, Family Links</p></blockquote>
 
-{% include rwd-picture-element.html picture="Family-Links-home-desktop.jpg" alt="Family Links website home – desktop view." %}
+{% include rwd-picture-element.html picture="Family-Links-home-desktop.jpg" alt="Family Links website home – desktop view." dims="1302,821" %}
 
 <div class="float-group" markdown="1">
-{% include rwd-floated-image.html align="right" picture="Family-Links-home-mobile.png" alt="Family Links website home – mobile view." maxWidth="240px" %}
+{% include rwd-floated-image.html align="right" picture="Family-Links-home-mobile.png" alt="Family Links website home – mobile view." maxWidth="240px" dims="520,1048" %}
 
 Following best practises of Responsive Web Design (RWD), careful consideration was made to how content resources should be prepared and managed. A pattern library was developed to document the repeatable and consistent methods used to present various kinds of content. The library became an invaluable resource for maintaining content accessibility; driven by compliance with web standards and the reliable display throughout the website.
 

@@ -14,6 +14,7 @@
 'use strict';
 
 import DOM from './dom-man';
+import imageDims from './image-dims';
 
 const Lazlo = {
 
@@ -28,10 +29,18 @@ const Lazlo = {
   viewPort: null,
   watchCount: 0,
 
+  resetClient()
+  {
+    console.log('Lazlo => resetClient');
+    window.removeEventListener('scroll', this.scrollHandler);
+    imageDims.resetClient();
+  },
+
   watch(elements)
   {
     if (!elements || 0 === elements.lenth) { return; }
 
+    imageDims.setup();
     this.setupWatch();
     this.addToWatch(elements);
     this.checkView();
@@ -62,6 +71,7 @@ const Lazlo = {
         this.watching.push(element);
         this.watchCount += 1;
         DOM.addClass(this.selectors.watching, element);
+
       }
     });
   },
@@ -138,7 +148,16 @@ const Lazlo = {
     DOM.addClass(this.selectors.loaded, element);
     this.loaded.push(element);
 
+    this.removeImageDims(element);
     if (this.watchCount === this.loaded.length) { this.standDown(); }
+  },
+
+  removeImageDims(element)
+  {
+    if (!DOM.hasAttr('data-dims', element)) { return; }
+
+    element.removeAttribute('data-dims');
+    element.removeAttribute('height');
   },
 
   standDown()

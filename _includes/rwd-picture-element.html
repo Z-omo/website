@@ -9,7 +9,7 @@
   <![endif]-->
   
   <!--[if !IE 8]><!-->
-  <img data-lazlo="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}">
+  <img src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" data-lazlo="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}"{% if include.dims %} data-dims="{{ include.dims }}"{% endif %}>
   <noscript><img src="resources/image/medium/{{ include.picture }}" alt="{{ include.alt }}"></noscript>
   <!--<![endif]-->
 </picture>

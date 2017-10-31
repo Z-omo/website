@@ -4,12 +4,13 @@
       <video style="display: none;"> 
       <![endif]-->
       <source data-srcset="resources/image/medium/{{ include.picture }}" media="(min-width: 39em)">
+      <source data-srcset="resources/image/small/{{ include.picture }}" media="(max-width: 39em)">
       <!--[if IE 9]>
       </video>
       <![endif]-->
       
       <!--[if !IE 8]><!-->
-      <img data-lazlo="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}">
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" data-lazlo="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}"{% if include.dims %} data-dims="{{ include.dims }}"{% endif %}>
       <noscript><img src="resources/image/medium/{{ include.picture }}" alt="{{ include.alt }}"></noscript>
       <!--<![endif]-->
     </picture>      

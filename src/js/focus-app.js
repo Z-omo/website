@@ -17,6 +17,8 @@ import DOM from './dom-man';
 import Lazlo from './Lazlo';
 import RWDView from './rwd-view';
 
+//window.addEventListener('beforeunload', resetClient);
+
 const focus = {
 
   view: {
@@ -37,6 +39,13 @@ const focus = {
 }
 
 export default focus
+
+function resetClient(e)
+{
+  window.removeEventListener('scroll', onScroll);
+  Lazlo.resetClient();
+  e.returnValue = '';
+}
 
 function setViewParams()
 {
@@ -129,6 +138,7 @@ function setScrollState()
 function setupLazyLoad()
 {
   let toLoad = DOM.getAll('[data-lazlo]');
+  console.log('toLoad: ', toLoad);
   if (!toLoad) { return; }
 
   Lazlo.watch(toLoad);

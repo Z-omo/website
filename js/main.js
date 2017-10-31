@@ -205,8 +205,8 @@ var _focusApp2 = _interopRequireDefault(_focusApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(4);
 __webpack_require__(5);
+__webpack_require__(6);
 
 _focusApp2.default.init();
 
@@ -238,15 +238,17 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
-var _Lazlo = __webpack_require__(10);
+var _Lazlo = __webpack_require__(3);
 
 var _Lazlo2 = _interopRequireDefault(_Lazlo);
 
-var _rwdView = __webpack_require__(3);
+var _rwdView = __webpack_require__(4);
 
 var _rwdView2 = _interopRequireDefault(_rwdView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//window.addEventListener('beforeunload', resetClient);
 
 var focus = {
 
@@ -272,6 +274,12 @@ var focus = {
 
 exports.default = focus;
 
+
+function resetClient(e) {
+  window.removeEventListener('scroll', onScroll);
+  _Lazlo2.default.resetClient();
+  e.returnValue = '';
+}
 
 function setViewParams() {
   var boundary = document.querySelector('.boundary');
@@ -360,6 +368,7 @@ function setScrollState() {
 
 function setupLazyLoad() {
   var toLoad = _domMan2.default.getAll('[data-lazlo]');
+  console.log('toLoad: ', toLoad);
   if (!toLoad) {
     return;
   }
@@ -378,6 +387,191 @@ function setupRWDViews() {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * ES6 class to handle the lazy loading of content.
+ *
+ * @package     Focus
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+var _imageDims = __webpack_require__(11);
+
+var _imageDims2 = _interopRequireDefault(_imageDims);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Lazlo = {
+
+  selectors: {
+    resource: 'data-lazlo',
+    watching: 'lazlo',
+    loading: 'lazlo-loading',
+    loaded: 'lazlo-loaded'
+  },
+  watching: [],
+  loaded: [],
+  viewPort: null,
+  watchCount: 0,
+
+  resetClient: function resetClient() {
+    console.log('Lazlo => resetClient');
+    window.removeEventListener('scroll', this.scrollHandler);
+    _imageDims2.default.resetClient();
+  },
+  watch: function watch(elements) {
+    if (!elements || 0 === elements.lenth) {
+      return;
+    }
+
+    _imageDims2.default.setup();
+    this.setupWatch();
+    this.addToWatch(elements);
+    this.checkView();
+  },
+  setupWatch: function setupWatch() {
+    if (this.scrollHandler) {
+      return;
+    }
+    this.scrollHandler = this.onScroll.bind(this);
+    window.addEventListener('scroll', this.scrollHandler);
+
+    this.loadedHandler = this.onResourceLoaded.bind(this);
+  },
+  onScroll: function onScroll() {
+    if (true === this.checking) {
+      return;
+    }
+
+    setTimeout(this.checkView.bind(this), 200); // debounced.
+    this.checking = true;
+  },
+  addToWatch: function addToWatch(elements) {
+    var _this = this;
+
+    elements.forEach(function (element) {
+      if (_domMan2.default.hasAttr(_this.selectors.resource, element)) {
+        _this.watching.push(element);
+        _this.watchCount += 1;
+        _domMan2.default.addClass(_this.selectors.watching, element);
+      }
+    });
+  },
+  checkView: function checkView() {
+    var _this2 = this;
+
+    this.viewPort = _domMan2.default.viewDims();
+    var waiting = [];
+
+    var remaining = this.watching.filter(function (element) {
+      return !(_this2.isWithinView(element) && waiting.push(element));
+    });
+
+    this.watching = remaining;
+    this.checking = false;
+
+    if (0 === waiting.length) {
+      return;
+    }
+    this.processLoading(waiting);
+  },
+  isWithinView: function isWithinView(element) {
+    var dims = _domMan2.default.viewDims(element);
+    return dims.top <= this.viewPort.height && dims.bottom >= 0;
+  },
+  processLoading: function processLoading(elements) {
+    var _this3 = this;
+
+    elements.forEach(function (element) {
+      _domMan2.default.addClass(_this3.selectors.loading, element);
+      element.addEventListener('load', _this3.loadedHandler);
+
+      var resource = element.getAttribute(_this3.selectors.resource);
+      if (!resource) {
+        return;
+      }
+
+      element.setAttribute('src', resource);
+      _this3.prepareSrcSet(element);
+    });
+  },
+  prepareSrcSet: function prepareSrcSet(element) {
+    var attr = 'data-srcset';
+    var srcSet = element.getAttribute(attr);
+    var sources = [element];
+
+    if (!srcSet) {
+      var parent = _domMan2.default.parent(element, 'image');
+      if (!parent) {
+        return;
+      }
+      sources = _domMan2.default.getAll('source[' + attr + ']', parent);
+      if (!sources) {
+        return;
+      }
+    }
+
+    sources.forEach(function (source) {
+      source.setAttribute('srcset', source.getAttribute(attr));
+      source.removeAttribute(attr);
+    });
+
+    if (window.picturefill) {
+      window.picturefill({ elements: [element], reevaluate: true });
+    }
+  },
+  onResourceLoaded: function onResourceLoaded(e) {
+    var element = e.target;
+
+    element.removeEventListener('load', this.loadedHandler);
+    _domMan2.default.removeClass(this.selectors.loading, element);
+    element.removeAttribute(this.selectors.resource);
+
+    _domMan2.default.addClass(this.selectors.loaded, element);
+    this.loaded.push(element);
+
+    this.removeImageDims(element);
+    if (this.watchCount === this.loaded.length) {
+      this.standDown();
+    }
+  },
+  removeImageDims: function removeImageDims(element) {
+    if (!_domMan2.default.hasAttr('data-dims', element)) {
+      return;
+    }
+
+    element.removeAttribute('data-dims');
+    element.removeAttribute('height');
+  },
+  standDown: function standDown() {
+    window.removeEventListener('scroll', this.scrollHandler);
+    this.scrollHandler = null;
+    this.loadedHandler = null;
+  }
+};
+
+exports.default = Lazlo;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -589,13 +783,13 @@ function resetViewMode(view) {
 exports.default = RWDView;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
@@ -2146,18 +2340,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
 
 
 /***/ }),
-/* 6 */,
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
 /**
- * ES6 class to handle the lazy loading of content.
+ * Module to handle exact dimensions of image tags.
  *
- * @package     Focus
+ * @package     ZLibrary
  * @author      Colin Tester <office@z-omo.com>
  * 
  * This file forms part of the installed @package and should not be copied 
@@ -2167,7 +2362,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
  *
  * This file and its @package are under version control.
  */
-
+"user strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2179,141 +2374,86 @@ var _domMan2 = _interopRequireDefault(_domMan);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Lazlo = {
+var imgDims = {
 
   selectors: {
-    resource: 'data-lazlo',
-    watching: 'lazlo',
-    loading: 'lazlo-loading',
-    loaded: 'lazlo-loaded'
+    attr: 'data-dims'
   },
-  watching: [],
-  loaded: [],
-  viewPort: null,
-  watchCount: 0,
 
-  watch: function watch(elements) {
-    if (!elements || 0 === elements.lenth) {
+  resetClient: function resetClient() {
+    console.log('imageDims => resetClient');
+    window.removeEventListener('resize', this.resizeHandler);
+  },
+  setup: function setup() {
+    if (!this.resizeHandler) {
+      this.resizeHandler = this.onResize.bind(this);
+      window.addEventListener('resize', this.resizeHandler);
+    }
+
+    this.process();
+  },
+  onResize: function onResize() {
+    if (true === this.resizing) {
       return;
     }
 
-    this.setupWatch();
-    this.addToWatch(elements);
-    this.checkView();
+    setTimeout(this.process.bind(this), 200); // debounced.
+    this.resizing = true;
   },
-  setupWatch: function setupWatch() {
-    if (this.scrollHandler) {
-      return;
-    }
-    this.scrollHandler = this.onScroll.bind(this);
-    window.addEventListener('scroll', this.scrollHandler);
-
-    this.loadedHandler = this.onResourceLoaded.bind(this);
-  },
-  onScroll: function onScroll() {
-    if (true === this.checking) {
+  process: function process() {
+    var images = this.findImages();
+    if (!images || 0 === images.length) {
       return;
     }
 
-    setTimeout(this.checkView.bind(this), 200); // debounced.
-    this.checking = true;
+    var imageData = this.getImageData(images);
+    console.log('imageData: ', imageData);
+    this.setImageDims(imageData);
+    this.resizing = false;
   },
-  addToWatch: function addToWatch(elements) {
+  findImages: function findImages() {
+    var images = _domMan2.default.getAll('img[' + this.selectors.attr + ']');
+    return images;
+  },
+  getImageData: function getImageData(imgs) {
     var _this = this;
 
-    elements.forEach(function (element) {
-      if (_domMan2.default.hasAttr(_this.selectors.resource, element)) {
-        _this.watching.push(element);
-        _this.watchCount += 1;
-        _domMan2.default.addClass(_this.selectors.watching, element);
-      }
-    });
-  },
-  checkView: function checkView() {
-    var _this2 = this;
+    var imageData = [];
 
-    this.viewPort = _domMan2.default.viewDims();
-    var waiting = [];
-
-    var remaining = this.watching.filter(function (element) {
-      return !(_this2.isWithinView(element) && waiting.push(element));
+    imgs.forEach(function (img) {
+      var dims = _this.getDefinedDims(img);
+      _this.addComputedDims(dims);
+      imageData.push(dims);
     });
 
-    this.watching = remaining;
-    this.checking = false;
-
-    if (0 === waiting.length) {
-      return;
-    }
-    this.processLoading(waiting);
+    return imageData;
   },
-  isWithinView: function isWithinView(element) {
-    var dims = _domMan2.default.viewDims(element);
-    return dims.top <= this.viewPort.height && dims.bottom >= 0;
+  getDefinedDims: function getDefinedDims(img) {
+    var values = img.getAttribute(this.selectors.attr).split(',');
+    var dims = {
+      element: img,
+      defWidth: Number(values[0]),
+      defHeight: Number(values[1])
+    };
+
+    return dims;
   },
-  processLoading: function processLoading(elements) {
-    var _this3 = this;
+  addComputedDims: function addComputedDims(dims) {
+    dims.parent = _domMan2.default.parent(dims.element);
+    var rect = dims.parent.getBoundingClientRect();
 
-    elements.forEach(function (element) {
-      _domMan2.default.addClass(_this3.selectors.loading, element);
-      element.addEventListener('load', _this3.loadedHandler);
-
-      var resource = element.getAttribute(_this3.selectors.resource);
-      if (!resource) {
-        return;
-      }
-
-      element.setAttribute('src', resource);
-      _this3.prepareSrcSet(element);
+    dims.width = rect.width;
+    dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
+    dims.height = Math.floor(dims.ratio * dims.width);
+  },
+  setImageDims: function setImageDims(imageData) {
+    imageData.forEach(function (image) {
+      image.element.setAttribute('height', image.height);
     });
-  },
-  prepareSrcSet: function prepareSrcSet(element) {
-    var attr = 'data-srcset';
-    var srcSet = element.getAttribute(attr);
-    var sources = [element];
-
-    if (!srcSet) {
-      var parent = _domMan2.default.parent(element, 'image');
-      if (!parent) {
-        return;
-      }
-      sources = _domMan2.default.getAll('source[' + attr + ']', parent);
-      if (!sources) {
-        return;
-      }
-    }
-
-    sources.forEach(function (source) {
-      source.setAttribute('srcset', source.getAttribute(attr));
-      source.removeAttribute(attr);
-    });
-
-    if (window.picturefill) {
-      window.picturefill({ elements: [element], reevaluate: true });
-    }
-  },
-  onResourceLoaded: function onResourceLoaded(e) {
-    var element = e.target;
-
-    element.removeEventListener('load', this.loadedHandler);
-    _domMan2.default.removeClass(this.selectors.loading, element);
-    element.removeAttribute(this.selectors.resource);
-
-    _domMan2.default.addClass(this.selectors.loaded, element);
-    this.loaded.push(element);
-
-    if (this.watchCount === this.loaded.length) {
-      this.standDown();
-    }
-  },
-  standDown: function standDown() {
-    window.removeEventListener('scroll', this.scrollHandler);
-    this.scrollHandler = null;
-    this.loadedHandler = null;
   }
 };
 
-exports.default = Lazlo;
+exports.default = imgDims;
 
 /***/ })
 /******/ ]);
