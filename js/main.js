@@ -205,8 +205,8 @@ var _focusApp2 = _interopRequireDefault(_focusApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(5);
 __webpack_require__(6);
+__webpack_require__(7);
 
 _focusApp2.default.init();
 
@@ -242,7 +242,7 @@ var _Lazlo = __webpack_require__(3);
 
 var _Lazlo2 = _interopRequireDefault(_Lazlo);
 
-var _rwdView = __webpack_require__(4);
+var _rwdView = __webpack_require__(5);
 
 var _rwdView2 = _interopRequireDefault(_rwdView);
 
@@ -413,7 +413,7 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
-var _imageDims = __webpack_require__(11);
+var _imageDims = __webpack_require__(4);
 
 var _imageDims2 = _interopRequireDefault(_imageDims);
 
@@ -591,6 +591,118 @@ exports.default = Lazlo;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Module to handle exact dimensions of image tags.
+ *
+ * @package     ZLibrary
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+"user strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var imgDims = {
+
+  selectors: {
+    attr: 'data-dims'
+  },
+
+  resetClient: function resetClient() {
+    console.log('imageDims => resetClient');
+    window.removeEventListener('resize', this.resizeHandler);
+  },
+  setup: function setup() {
+    if (!this.resizeHandler) {
+      this.resizeHandler = this.onResize.bind(this);
+      window.addEventListener('resize', this.resizeHandler);
+    }
+
+    this.process();
+  },
+  onResize: function onResize() {
+    if (true === this.resizing) {
+      return;
+    }
+
+    setTimeout(this.process.bind(this), 200); // debounced.
+    this.resizing = true;
+  },
+  process: function process() {
+    var images = this.findImages();
+    if (!images || 0 === images.length) {
+      return;
+    }
+
+    var imageData = this.getImageData(images);
+    console.log('imageData: ', imageData);
+    this.setImageDims(imageData);
+    this.resizing = false;
+  },
+  findImages: function findImages() {
+    var images = _domMan2.default.getAll('img[' + this.selectors.attr + ']');
+    return images;
+  },
+  getImageData: function getImageData(imgs) {
+    var _this = this;
+
+    var imageData = [];
+
+    imgs.forEach(function (img) {
+      var dims = _this.getDefinedDims(img);
+      _this.addComputedDims(dims);
+      imageData.push(dims);
+    });
+
+    return imageData;
+  },
+  getDefinedDims: function getDefinedDims(img) {
+    var values = img.getAttribute(this.selectors.attr).split(',');
+    var dims = {
+      element: img,
+      defWidth: Number(values[0]),
+      defHeight: Number(values[1])
+    };
+
+    return dims;
+  },
+  addComputedDims: function addComputedDims(dims) {
+    dims.parent = _domMan2.default.parent(dims.element);
+    var rect = dims.parent.getBoundingClientRect();
+
+    dims.width = rect.width;
+    dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
+    dims.height = Math.floor(dims.ratio * dims.width);
+  },
+  setImageDims: function setImageDims(imageData) {
+    imageData.forEach(function (image) {
+      image.element.setAttribute('height', image.height);
+    });
+  }
+};
+
+exports.default = imgDims;
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -802,13 +914,13 @@ function resetViewMode(view) {
 exports.default = RWDView;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
@@ -2357,122 +2469,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
 
 } )( window, document );
 
-
-/***/ }),
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/**
- * Module to handle exact dimensions of image tags.
- *
- * @package     ZLibrary
- * @author      Colin Tester <office@z-omo.com>
- * 
- * This file forms part of the installed @package and should not be copied 
- * and/or distributed without the written consent from the file's author.
- *
- * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
- *
- * This file and its @package are under version control.
- */
-"user strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _domMan = __webpack_require__(0);
-
-var _domMan2 = _interopRequireDefault(_domMan);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var imgDims = {
-
-  selectors: {
-    attr: 'data-dims'
-  },
-
-  resetClient: function resetClient() {
-    console.log('imageDims => resetClient');
-    window.removeEventListener('resize', this.resizeHandler);
-  },
-  setup: function setup() {
-    if (!this.resizeHandler) {
-      this.resizeHandler = this.onResize.bind(this);
-      window.addEventListener('resize', this.resizeHandler);
-    }
-
-    this.process();
-  },
-  onResize: function onResize() {
-    if (true === this.resizing) {
-      return;
-    }
-
-    setTimeout(this.process.bind(this), 200); // debounced.
-    this.resizing = true;
-  },
-  process: function process() {
-    var images = this.findImages();
-    if (!images || 0 === images.length) {
-      return;
-    }
-
-    var imageData = this.getImageData(images);
-    console.log('imageData: ', imageData);
-    this.setImageDims(imageData);
-    this.resizing = false;
-  },
-  findImages: function findImages() {
-    var images = _domMan2.default.getAll('img[' + this.selectors.attr + ']');
-    return images;
-  },
-  getImageData: function getImageData(imgs) {
-    var _this = this;
-
-    var imageData = [];
-
-    imgs.forEach(function (img) {
-      var dims = _this.getDefinedDims(img);
-      _this.addComputedDims(dims);
-      imageData.push(dims);
-    });
-
-    return imageData;
-  },
-  getDefinedDims: function getDefinedDims(img) {
-    var values = img.getAttribute(this.selectors.attr).split(',');
-    var dims = {
-      element: img,
-      defWidth: Number(values[0]),
-      defHeight: Number(values[1])
-    };
-
-    return dims;
-  },
-  addComputedDims: function addComputedDims(dims) {
-    dims.parent = _domMan2.default.parent(dims.element);
-    var rect = dims.parent.getBoundingClientRect();
-
-    dims.width = rect.width;
-    dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
-    dims.height = Math.floor(dims.ratio * dims.width);
-  },
-  setImageDims: function setImageDims(imageData) {
-    imageData.forEach(function (image) {
-      image.element.setAttribute('height', image.height);
-    });
-  }
-};
-
-exports.default = imgDims;
 
 /***/ })
 /******/ ]);
