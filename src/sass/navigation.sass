@@ -40,7 +40,7 @@ nav
     bottom: 0
     left: 0
     width: 100%
-    height: $mobileRibbonHeight
+    height: 0//$mobileRibbonHeight
     background-color: transparent
     +gradientBackground(rgba($primary, 0.8), $primary)
     z-index: 100
@@ -61,18 +61,30 @@ nav
       opacity: 1
 
     #menuBtn
-      +setAsIcon
-      +setIcon(menu)
+      position: fixed
       top: auto
-      right: $viewEdgePos
-      bottom: $viewEdgePos
+      right: -$iconSize / 1.2
+      bottom: 3rem
       left: auto
-      opacity: 0.8
-      transition: transform $transDurationIn $easeSpecial
+      +corners(50% 0 0 50%)
+      width: $iconSize * 2
+      height: $iconSize * 2
+      background-color: rgba($primary, 0.8)
+      box-shadow: -1px 0px 1px 1px rgba($primary, 0.3)
+      
+      &::after
+        content: ''
+        +setAsIcon
+        +setIcon(menu)
+        top: $iconSize / 2
+        left: $iconSize / 6
+        transition: transform $transDurationIn $easeSpecial  
 
     &.open #menuBtn
-      transition-duration: $transDurationIn * 2
-      transform: rotate(45deg)
+      background-color: $primary
+      &::after
+        transition-duration: $transDurationIn * 2
+        transform: rotate(145deg)
 
     .home-link
       +setAsIcon

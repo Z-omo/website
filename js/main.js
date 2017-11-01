@@ -319,12 +319,10 @@ function setupMobileMenu() {
     return _domMan2.default.toggleClass('open', focus.view.nav);
   });
 
-  var home = document.createElement('span');
-  nav.appendChild(home);
-  _domMan2.default.addClass('home-link', home);
-  home.addEventListener('click', function () {
-    return window.location.href = './';
-  });
+  // let home = document.createElement('span');
+  // nav.appendChild(home);
+  // DOM.addClass('home-link', home);
+  // home.addEventListener('click', () => window.location.href = './');
 
   focus.view.nav = nav;
 }

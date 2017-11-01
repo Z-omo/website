@@ -82,10 +82,10 @@ function setupMobileMenu()
     'click', () => DOM.toggleClass('open', focus.view.nav)
   );
 
-  let home = document.createElement('span');
-  nav.appendChild(home);
-  DOM.addClass('home-link', home);
-  home.addEventListener('click', () => window.location.href = './');
+  // let home = document.createElement('span');
+  // nav.appendChild(home);
+  // DOM.addClass('home-link', home);
+  // home.addEventListener('click', () => window.location.href = './');
 
   focus.view.nav = nav;
 }
