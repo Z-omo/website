@@ -69,11 +69,10 @@ $iFrameScrollBarWidth: 20
     .rwd-desktop &
       background-size: 100% auto
       background-image: url('#{$imagePath}browser-frame.png')
-    
-.rwd-view-frame // <iframe>
+
+//—————————————————————————————————————————————: iframe element
+.rwd-view-frame
   background-color: white
-  // opacity: 0
-  // transition: opacity $transDurationOut * 5 ease-out 1s
 
   .rwd-mobile &
     +rwdIFrameRules(mobile)

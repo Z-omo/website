@@ -17,8 +17,8 @@ links:
     url: /
   - title: About
     url: /about
-  - title: Blog
-    url: /blog
+  #- title: Blog
+  #  url: /blog
   - title: Work
     url: /work
 

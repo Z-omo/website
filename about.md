@@ -10,6 +10,8 @@ I continue to be inspired by prescribed engineering best practices and my aim al
 
 {% include get-in-touch.html %}
 
+Technology and the numerous ways that information is being communicated is changing constantly, which means it's important to keep abreast of developments in good practices, accessibility and security. I find that 50% of my working life is spent on research and training, something I beleive is true for most practitioners in the web and software industry, but the work I put into improving my knowledge helps inform the benefits I aim to provide to my clients.
+
 <div class="boxed" markdown="1">
 
 ## My guiding principles, tools and practices
@@ -58,13 +60,12 @@ Resources available online that I have found to be invaluable:
   - [HTML5 Doctor](http://html5doctor.com/)
   - [Can I Use](https://caniuse.com/)
 
-Podcasts listened to:
+I listen to many Podcasts and would recommmend the following:
 : - [Security Now](https://twit.tv/shows/security-now)
   - [Software Engineering Radio](http://www.se-radio.net/)
   - [The Changelog](https://changelog.com/podcast)
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
   - [JavaScript Jabber](https://devchat.tv/js-jabber)
-  - [JavaScript Party](https://changelog.com/jsparty)
 
 Tinkering currently with:
 : - Elm
