@@ -248,8 +248,6 @@ var _rwdView2 = _interopRequireDefault(_rwdView);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//window.addEventListener('beforeunload', resetClient);
-
 var focus = {
 
   view: {
@@ -274,12 +272,6 @@ var focus = {
 
 exports.default = focus;
 
-
-function resetClient(e) {
-  window.removeEventListener('scroll', onScroll);
-  _Lazlo2.default.resetClient();
-  e.returnValue = '';
-}
 
 function setViewParams() {
   var boundary = document.querySelector('.boundary');
@@ -319,12 +311,10 @@ function setupMobileMenu() {
     return _domMan2.default.toggleClass('open', focus.view.nav);
   });
 
-  var home = document.createElement('span');
-  nav.appendChild(home);
-  _domMan2.default.addClass('home-link', home);
-  home.addEventListener('click', function () {
-    return window.location.href = './';
-  });
+  // let home = document.createElement('span');
+  // nav.appendChild(home);
+  // DOM.addClass('home-link', home);
+  // home.addEventListener('click', () => window.location.href = './');
 
   focus.view.nav = nav;
 }
@@ -368,7 +358,6 @@ function setScrollState() {
 
 function setupLazyLoad() {
   var toLoad = _domMan2.default.getAll('[data-lazlo]');
-  console.log('toLoad: ', toLoad);
   if (!toLoad) {
     return;
   }
@@ -434,11 +423,6 @@ var Lazlo = {
   viewPort: null,
   watchCount: 0,
 
-  resetClient: function resetClient() {
-    console.log('Lazlo => resetClient');
-    window.removeEventListener('scroll', this.scrollHandler);
-    _imageDims2.default.resetClient();
-  },
   watch: function watch(elements) {
     if (!elements || 0 === elements.lenth) {
       return;
@@ -489,6 +473,8 @@ var Lazlo = {
 
     this.watching = remaining;
     this.checking = false;
+
+    //console.log('lazlo: ', waiting.length, remaining.length);
 
     if (0 === waiting.length) {
       return;
@@ -626,10 +612,6 @@ var imgDims = {
     attr: 'data-dims'
   },
 
-  resetClient: function resetClient() {
-    console.log('imageDims => resetClient');
-    window.removeEventListener('resize', this.resizeHandler);
-  },
   setup: function setup() {
     if (!this.resizeHandler) {
       this.resizeHandler = this.onResize.bind(this);

@@ -31,13 +31,6 @@ const Lazlo = {
   viewPort: null,
   watchCount: 0,
 
-  resetClient()
-  {
-    console.log('Lazlo => resetClient');
-    window.removeEventListener('scroll', this.scrollHandler);
-    imageDims.resetClient();
-  },
-
   watch(elements)
   {
     if (!elements || 0 === elements.lenth) { return; }
@@ -88,6 +81,8 @@ const Lazlo = {
 
     this.watching = remaining;
     this.checking = false;
+
+    //console.log('lazlo: ', waiting.length, remaining.length);
 
     if (0 === waiting.length) { return; }
     this.processLoading(waiting);

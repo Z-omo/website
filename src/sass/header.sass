@@ -13,15 +13,6 @@
     .home &
       min-height: 320px
 
-  
-  a[href="#menu"]
-    +setAsIcon
-    +setIcon(menu)
-
-    top: $viewEdgePos
-    right: $viewEdgePos
-    left: auto    
-
   .logo
     position: absolute
     top: $viewEdgePos
@@ -31,27 +22,31 @@
     z-index: 101
     border: none
 
+    .focus-js &
+      position: fixed
+
     img
       width: 100%
 
-    @media only screen and (min-width: $tabletWidth)
-      position: fixed
-      width: 5.4em
-      transition: transform $transDurationIn ease-out
-      transform-origin: top left
-      transform: scale(0.72)
-      
-      .focus-js &
-        transform: scale(1)
-      
-      .js-scrolled &
-        transform: scale(0.72)
+    //@media only screen and (min-width: $tabletWidth)
+    //position: fixed
+    //width: 5.4em
+    transition: transform $transDurationIn ease-out
+    -webkit-transform-origin: top left
+    transform-origin: top left
+    //+transformThis(scale(0.72))
+    
+    .focus-js &
+      +transformThis(scale(1))
+    
+    .js-scrolled &
+      +transformThis(scale(0.72))
 
     @media only screen and (min-width: $desktopWidth)
-      transform: scale(0.84)
+      //transform: scale(0.84)
 
       .js-scrolled &
-        transform: scale(0.84)
+        transform: scale(0.72)
 
     @media only screen and (min-width: $maxWidth)
       left: auto
