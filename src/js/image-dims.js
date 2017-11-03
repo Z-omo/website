@@ -21,12 +21,6 @@ const imgDims = {
     attr: 'data-dims'
   },
 
-  resetClient()
-  {
-    console.log('imageDims => resetClient');
-    window.removeEventListener('resize', this.resizeHandler);
-  },
-
   setup()
   {
     if (!this.resizeHandler)

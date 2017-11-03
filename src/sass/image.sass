@@ -47,11 +47,12 @@
       display: inline-block
 
 //—————————————————————————————————————————————: Lazy loading
-*[data-lazlo], .lazlo
-  opacity: 0
-  transition-property: opacity
-  transition-duration: $transDurationOut
-  transition-delay: $transDurationIn
+.focus-js
+  *[data-lazlo], .lazlo
+    opacity: 0.05
 
-.lazlo-loaded
-  opacity: 1
+  .lazlo-loaded
+    transition-property: opacity
+    transition-duration: $transDurationOut
+    transition-delay: $transDurationIn
+    opacity: 1
