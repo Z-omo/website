@@ -1,9 +1,9 @@
 ---
 layout: work-sample
 title: Clockwork Components
-rwdURL: http://clockworkcomponents.com/
-rwdMode: mobile
 hideTileTitle: true
+#rwdURL: http://clockworkcomponents.com/
+#rwdMode: mobile
 ---
 
 ## Website and Products Manager
