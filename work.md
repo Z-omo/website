@@ -4,7 +4,7 @@ title: Work
 permalink: /work
 ---
 
-Herein are the most recent projects I have been involved.
+Herein are recent examples of my work.
 
 {% include articles-list.html articles=site.work group='work-articles' %}
 

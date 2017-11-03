@@ -4,13 +4,15 @@ title: About
 permalink: /about
 ---
 
-I have been building web-based software since 2002 and my work is informed by the mantra: keep it simple, but elegant.
+I have been building web-based software since 2002 and my work is informed by the mantra: keep it simple, but make it elegant.
 
 I continue to be inspired by prescribed engineering best practices and my aim always is to produce software which is clean, modular, extensible and stable. I care about the finer details.
 
 {% include get-in-touch.html %}
 
-Technology and the numerous ways that information is being communicated is changing constantly, which means it's important to keep abreast of developments in good practices, accessibility and security. I find that 50% of my working life is spent on research and training, something I beleive is true for most practitioners in the web and software industry, but the work I put into improving my knowledge helps inform the benefits I aim to provide to my clients.
+The technology of the web and the numerous ways information is communicated is changing constantly, which means it's important to keep abreast of developments in order to maintain good practice, and a professional attitude.
+
+I find that 50% of my working life is spent on research and learning, something I expect is true for most practitioners in the web and software industry, but I believe it is time well spent; it helps inform the benefits I aim to bring to a client's project.
 
 <div class="boxed" markdown="1">
 
@@ -42,11 +44,11 @@ My skill set stack includes:
   - Mustache, Handlebars
 
 Tools I use regularly:
-: - Bash, npm, webpack, Grunt
-  - ssh, rsync
-  - Git, Github
+: - Git, Github
+  - Bash, npm, webpack, Grunt
   - VS Code, Vi
   - Photoshop, Illustrator
+  - ssh, rsync
 
 Reference materials on my bookshelf include:
 : - [_Clean Code_](https://books.google.co.uk/books/about/Clean_Code.html?id=_i6bDeoCQzsC&source=kp_cover&redir_esc=y)
@@ -60,7 +62,7 @@ Resources available online that I have found to be invaluable:
   - [HTML5 Doctor](http://html5doctor.com/)
   - [Can I Use](https://caniuse.com/)
 
-I listen to many Podcasts and would recommmend the following:
+I listen to many Podcasts and would recommend the following:
 : - [Security Now](https://twit.tv/shows/security-now)
   - [Software Engineering Radio](http://www.se-radio.net/)
   - [The Changelog](https://changelog.com/podcast)

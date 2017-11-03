@@ -244,8 +244,7 @@ main {
       -webkit-border-radius: 0.26em;
       border-radius: 0.26em;
       border: solid 1px rgba(13, 19, 33, 0.2);
-      padding: 2rem;
-      background-color: white; } }
+      padding: 2rem; } }
 
 /*
  * SASS for page header element – website.com
