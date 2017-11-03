@@ -1,5 +1,9 @@
-<div class="rwd-view rwd-mobile">
-  <figure class="rwd-device">
-    <iframe class="rwd-view-frame" src="{{ page.rwdURL }}"></iframe>
-  </figure>
-</div>    
+<div class="boxed">
+  <h1>{{ page.title }} – in <span class="hilite">{{ include.mode }}</span> view<span class="plural"></span></h1>
+  <p>Have a play with the live and interactive view below or <a href="{{ page.rwdURL }}">go straight to the {{ page.title }} website</a>.</p>
+  <div class="rwd-view rwd-{{ include.mode }}">
+    <figure class="rwd-device">
+      <iframe class="rwd-view-frame" data-lazlo="{{ page.rwdURL }}"></iframe>
+    </figure>
+  </div>
+</div>

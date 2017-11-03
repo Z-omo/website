@@ -10,7 +10,10 @@ body
   margin: 0
   padding: 0
   height: 100%
-  overflow-y: scroll
+  //overflow-y: scroll
+
+  @media only screen and (min-width: $desktopWidth)
+   overflow-y: scroll
 
 .boundary
   position: relative
@@ -28,62 +31,76 @@ main
   padding: $contentPadding
   min-height: 40vh
   max-width: $maxMainElementWidth
-  background-color: rgba(#EFEFFF, 0.9)
+  //background-color: rgba(#EFEFFF, 0.9)
+  background-color: rgba(white, 0.9)
   z-index: 1
 
   @media only screen and (min-width: $maxMainElementWidth)
     +corners
     margin-bottom: ($contentMargin * 2)
 
+    .home &
+      &::after
+        content: ''
+        position: absolute
+        top: 10%
+        right: 40%
+        height: 80%
+        border-right: solid 1px rgba($primary, 0.2)
+
 .content
   margin: 0 0 $contentMargin
+  max-width: $desktopWidth
 
-  .collection &
-    //transform: translateY(-70px)
-
-  header, footer, h1, h2, h3, p, ul, ol, blockquote, code
+  header, footer, h1, h2, h3, p, ul, ol, code//, .float-group
     max-width: $maxContentWidth
+
+  .float-group
+    overflow: hidden // expand to height of floated children.
 
 .side-bar
   figure
     margin: 0 auto
     padding: 0
     width: 90%
+    min-width: 170px
     max-width: 320px
 
     @media only screen and (min-width: $tabletWidth)
-      width: 70%
+      width: 71.2%
 
   img
     display: block
     margin: 0
     +corners
-    border: solid 6px rgba($primary, 0.8)
+    border: solid 0.4rem rgba($primary, 0.8)
     width: 100%
 
   figcaption
     padding: 0.4em
-    font-size: 0.8rem
+    font-size: 0.9rem
 
 @media only screen and (min-width: $tabletWidth)
-  .content, .side-bar
+  .content
     display: inline-block
     vertical-align: top
-    margin: 0 -2px
-    
-  .content
     box-sizing: border-box
+    margin: 0 -2px
     padding: 0 (2 * $contentPadding) 0 0
     width: 70%
 
-    .collection &
+    .collection &, .work-example &
       padding-right: 0
       width: 100%
+      max-width: none
 
-  .side-bar
+  .home .side-bar
+    display: inline-block
+    vertical-align: top
     box-sizing: border-box
+    margin: 0 auto
     padding: 0
-    width: 30%
+    width: 29.9%
     max-width: 320px
 
     transform: translateY(-20%)
@@ -91,3 +108,23 @@ main
 @media only screen and (min-width: $desktopWidth)
   .content
     padding-left: $contentPadding
+
+    .work-example &
+      padding-right: (2 * $contentPadding)
+      width: 75%
+
+  .side-bar
+    display: inline-block
+    vertical-align: top
+    margin: 0 2.5%
+    width: 20%
+
+.boxed
+  border-top: solid 1px rgba($primary, 0.2)
+  padding: $contentPadding 0
+
+  @media only screen and (min-width: $tabletWidth)
+    +corners
+    border: solid 1px rgba($primary, 0.2)
+    padding: $contentPadding
+    //background-color: $color4

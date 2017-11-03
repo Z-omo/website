@@ -6,6 +6,7 @@
 
 .rwd-view
   position: relative
+  margin: $contentMargin 0
 
 $iFrameScrollBarWidth: 20
 
@@ -24,16 +25,26 @@ $iFrameScrollBarWidth: 20
     +rwdDeviceRules(tablet)
 
   .rwd-desktop &
-    +rwdDeviceRules(desktop)
-    transform: scale(0.72)
+    +rwdDeviceRules(desktop, 100vw)
+    transform: scale(0.86)
+    box-shadow: 0px 0px 0px 1px rgba($primary, 0.2)
   
+    // @media only screen and (min-width: $tabletWidth)
+    //   transform: scale(0.456)
+
+    @media only screen and (min-width: $desktopWidth)
+      +rwdDeviceRules(desktop, 90vw)
+      transform: scale(0.658)
+      +corners
+      //box-shadow: 0px 0px 0px 1px rgba($primary, 0.2)
+
   transform-origin: 0 0
   transform: scale(0.62)
   transition: all $transDurationIn * 2 $easeSpecial
 
   @media only screen and (min-width: $tabletWidth)
-    margin: 0 auto
-    transform-origin: center 0
+    margin: 0
+    //transform-origin: center 0
 
   &::before // device skin
     content: ''
@@ -58,27 +69,28 @@ $iFrameScrollBarWidth: 20
     .rwd-desktop &
       background-size: 100% auto
       background-image: url('#{$imagePath}browser-frame.png')
-    
-.rwd-view-frame // <iframe>
+
+//—————————————————————————————————————————————: iframe element
+.rwd-view-frame
   background-color: white
-  opacity: 0
-  transition: opacity $transDurationOut
 
   .rwd-mobile &
     +rwdIFrameRules(mobile)
-    opacity: 1
 
   .rwd-tablet &
     +rwdIFrameRules(tablet)
-    opacity: 1
 
   .rwd-desktop &
     +rwdIFrameRules(desktop)
-    opacity: 1
   
 .rwd-view-controls
   display: none
-  margin: 0 0 $contentMargin / 2
+  margin: 0 0 $contentMargin
+  
+  button
+    display: inline-block
+    vertical-align: top
+    margin: 0 0.8em 0 0
   
   .focus-js &
     display: block

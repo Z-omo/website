@@ -4,13 +4,13 @@
   <base href="{{ site.baseurl }}">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Website.com</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Colin Tester – {% if page.title %}{{ page.title }}{% else %}{{ page.heading }}{% endif %}</title>
   {% include typekit-font.html %}  
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="boundary collection">
+  <div class="boundary work-example">
   {% include header.html %}
 
   <main>
@@ -18,9 +18,15 @@
       {{content}}
       
       {%- if page.rwdURL -%}
-      {%include rwd-device-view.html %}
+      {%include rwd-device-view.html mode=page.rwdMode %}
       {% endif %}
     </div>
+
+    <aside class="side-bar">
+      <p>More examples of my work:</p>
+      {% include articles-list.html articles=site.work group='work-articles' %}
+      {% include get-in-touch.html %}
+    </aside>
   </main>
   
   {% include navigation.html %}

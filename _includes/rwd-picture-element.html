@@ -1,0 +1,15 @@
+<picture class="image{% if include.align %} image-{{ include.align }}{% endif %}">
+  <!--[if IE 9]>
+  <video style="display: none;"> 
+  <![endif]-->
+  <source data-srcset="resources/image/large/{{ include.picture }}" media="(min-width: 69em)">
+  <source data-srcset="resources/image/medium/{{ include.picture }}" media="(min-width: 39em)">
+  <!--[if IE 9]>
+  </video>
+  <![endif]-->
+  
+  <!--[if !IE 8]><!-->
+  <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" data-lazlo="resources/image/small/{{ include.picture }}" alt="{{ include.alt }}"{% if include.dims %} data-dims="{{ include.dims }}"{% endif %}>
+  <noscript><img src="resources/image/medium/{{ include.picture }}" alt="{{ include.alt }}"></noscript>
+  <!--<![endif]-->
+</picture>

@@ -6,27 +6,152 @@ html
   font-size: $baseFontSize
 
 body
-  font-family: $contentFont, $fallbackFont
-  //font-family: sans-serif
+  font-family: $contentFont
   font-size: $contentFontSize
   line-height: $bodyContentLineHeight
   color: $primary
 
 h1, h2, h3
   margin: 0 0 $contentMargin
-  font-family: $headingFont, $fallbackFont
-  //font-family: "Seravek", "ff-meta-web-pro", 'Trebuchet MS', sans-serif
-  //font-family: 'Trebuchet MS', sans-serif
+  font-family: $headingFont
   font-size: $contentFontSize * $gRatio
+  line-height: ($contentFontSize * $gRatio) * $gRatio
   font-weight: 700
   color: $primary
 
-  // .collection &
-  //   color: white
-  //   opacity: 0.8
-  //   //text-shadow: $textShadow
+.hilite
+  $hiliteFontSize: ($contentFontSize * $gRatio) * 2
+  font-size: $hiliteFontSize
+  line-height: $hiliteFontSize
+  letter-spacing: -1pt
+  color: $color2
 
-// selected text:
+p, ul , ol
+  margin: 0 0 $bodyContentLineHeight
+  
+//—————————————————————————————————————————————: Links
+main a
+  color: $primary
+  text-decoration: none
+  border-bottom: dotted 1px $color5
+
+  &:hover
+    border-bottom-style: solid
+
+
+//—————————————————————————————————————————————: Lists
+=bulletPoint
+  content: '\2022'
+  display: inline-block
+  margin: 0 0.5rem 0 -1rem
+  vertical-align: middle
+  font-family: sans-serif
+  color: rgba($primary, 0.5)
+  font-size: $contentFontSize * 1.8
+  line-height: $contentFontSize * 1.8
+
+ul, ol
+  padding: 0 0 0 $contentPadding / 2
+
+ul
+  margin-left: 1rem
+  list-style: none
+
+p + ul, p + ol
+  margin-top: -0.4rem
+
+main ul li:before
+  +bulletPoint
+
+li
+  margin: 0
+  padding: 0
+
+dl
+  margin: 0 0 $contentMargin
+  padding: 0
+
+dt
+  font-weight: normal
+
+dd
+  margin: 0
+  padding: 0
+
+//—————————————————————————————————————————————: Quotes
+q
+  quotes: '\201C' '\201D' '\2018' '\2019'
+  
+q::before, q::after
+  color: $color5
+  font-family: $headingFont
+  font-size: 1.4em
+  line-height: 1em
+  
+q::before
+  content: open-quote
+
+q::after
+  content: close-quote
+
+blockquote
+  $quoteLineHeight: 2rem
+  
+  margin: $contentMargin 0
+  width: 100%
+  font-family: $headingFont
+  font-size: $contentFontSize * 1.1
+  font-style: italic
+  line-height: $quoteLineHeight
+  
+  //text-align: center
+  
+  &:first-child
+    margin-top: $contentMargin
+    
+  @media only screen and (min-width: $tabletWidth)
+    width: 80%
+    margin-left: $contentMargin
+    //margin-right: $contentMargin
+    text-align: left
+
+  @media only screen and (min-width: $desktopWidth)
+    max-width: 450px
+        
+  q::before, q::after
+    display: inline // should always be inline so that they wrap with the text.
+    font-size: 3.6rem // needs to be rem for IE to render size consistently.
+    line-height: $quoteLineHeight / 2
+    font-weight: normal
+    font-style: normal
+    vertical-align: middle
+
+  q::before
+    margin: 0 0.1em 0 0
+  q::after
+    margin: 0 0 0 0.1em
+
+  .by-line
+    display: block
+    margin: $contentMargin / 2 0 0
+    //text-align: right
+    font-style: normal
+    font-size: 0.8em
+    line-height: 0.8em * $gRatio
+    font-weight: bold
+      
+  &.long-format
+    font-family: $contentFont
+    font-size: $contentFontSize * 0.92
+    line-height: $bodyContentLineHeight
+    font-weight: normal
+    font-style: normal
+    max-width: $maxContentWidth - ($contentMargin * 8)
+
+    q::before, q::after
+      font-size: 2.6rem
+
+//—————————————————————————————————————————————: Selection
 ::-moz-selection
   background: $primary
   text-shadow: none

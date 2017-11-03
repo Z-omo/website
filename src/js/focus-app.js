@@ -13,9 +13,9 @@
  */
 'use strict';
 
-const debounce = require('lodash.debounce');
-const DOM = require('./dom-man.js');
-const RWDView = require('./rwd-view.js');
+import DOM from './dom-man';
+import Lazlo from './Lazlo';
+import RWDView from './rwd-view';
 
 const focus = {
 
@@ -24,99 +24,120 @@ const focus = {
     scrolledClass:  'js-scrolled'
   },
 
-  init: function()
+  init()
   {
-    focus.setViewParams();
-    focus.setJSMode();    
-    if (true === focus.view.smallView) { focus.setupMobileMenu(); }
+    setViewParams();
+    setJSMode();    
+    if (true === focus.view.smallView) { setupMobileMenu(); }
 
-    focus.setupEvents();
-    if (false === focus.view.smallView) { focus.setupRWDViews(); }
-  },
-
-  setViewParams: function()
-  {
-    let boundary = document.querySelector('.boundary');
-    if (!boundary) { return; }
-
-    let compStyle = window.getComputedStyle(boundary);
-    let regexNumeric = /^\d+/;
-    let vpWidth = Number(regexNumeric.exec(compStyle.width));
-    let vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
-    let vpMobileMax = focus.view.smallViewEM * vpFontSize;
-
-    focus.view.smallView = vpWidth < vpMobileMax;
-  },
-
-  setJSMode: function()
-  {
-    let html = document.querySelector('html');
-    if (!html) { return; }
-
-    DOM.addClass('focus-js', html);
-    focus.view.html = html;
-  },
-
-  setupMobileMenu: function()
-  {
-    let nav = document.querySelector('#menu');
-    if (!nav) { return; }
-
-    let menu = document.createElement('span');
-    nav.appendChild(menu);
-    menu.id = 'menuBtn';
-    menu.addEventListener('click', focus.onMenu);
-
-    let home = document.createElement('span');
-    nav.appendChild(home);
-    DOM.addClass('home-link', home);
-    home.addEventListener('click', focus.onHome);
-
-    focus.view.nav = nav;
-  },
-
-  setupEvents: function()
-  {
-    window.addEventListener('scroll', debounce(focus.onScroll, 120));
-  },
-
-  onMenu: function()
-  {
-    focus.toggleMenu();
-  },
-
-  toggleMenu: function()
-  {
-    DOM.toggleClass('open', focus.view.nav);
-  },
-
-  onHome: function()
-  {
-    window.location.href = './';
-  },
-
-  onScroll: function()
-  {
-    let scroll = window.scrollY;
-    let html = focus.view.html;
-    let scrollClass = focus.view.scrolledClass;
-
-    if (0 === scroll)
-    {
-      DOM.removeClass(scrollClass, html);
-      return;
-    }
-
-    DOM.addClass(scrollClass, html);
-  },
-
-  setupRWDViews: function()
-  {
-    let rwd = document.querySelectorAll('.rwd-view');
-    if (!rwd || 0 === rwd.length) { return; }
-
-    RWDView.setup(rwd, focus.view.smallView);
+    setupEvents();
+    setupLazyLoad();
+    if (false === focus.view.smallView) { setupRWDViews(); }
   }
-};
+}
 
-module.exports = focus;
+export default focus
+
+function setViewParams()
+{
+  let boundary = document.querySelector('.boundary');
+  if (!boundary) { return; }
+
+  let compStyle = window.getComputedStyle(boundary);
+  let regexNumeric = /^\d+/;
+  let vpWidth = Number(regexNumeric.exec(compStyle.width));
+  let vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
+  let vpMobileMax = focus.view.smallViewEM * vpFontSize;
+
+  focus.view.smallView = vpWidth < vpMobileMax;
+}
+
+function setJSMode()
+{
+  let html = document.querySelector('html');
+  if (!html) { return; }
+
+  DOM.addClass('focus-js', html);
+  focus.view.html = html;
+}
+
+function setupMobileMenu()
+{
+  let nav = document.querySelector('#menu');
+  if (!nav) { return; }
+
+  let menu = document.createElement('span');
+  nav.appendChild(menu);
+  menu.id = 'menuBtn';
+  menu.addEventListener(
+    'click', () => DOM.toggleClass('open', focus.view.nav)
+  );
+
+  // let home = document.createElement('span');
+  // nav.appendChild(home);
+  // DOM.addClass('home-link', home);
+  // home.addEventListener('click', () => window.location.href = './');
+
+  focus.view.nav = nav;
+}
+
+function setupEvents()
+{
+  window.addEventListener('scroll', onScroll);
+}
+
+function onScroll()
+{
+  if (!focus.view.scrolling)
+  {
+    if (window.requestAnimationFrame)
+    {
+      window.requestAnimationFrame(requestScrollCheck);
+    } else {
+      setTimeout(requestScrollCheck, 200);
+    }
+  }
+
+  focus.view.scrolling = true;
+}
+
+function requestScrollCheck()
+{
+  setScrollState();
+  focus.view.scrolling = false;
+}
+
+function setScrollState()
+{
+  let scroll = window.pageYOffset;
+
+  if (0 === scroll)
+  {
+    DOM.removeClass(focus.view.scrolledClass, focus.view.html);
+    focus.view.scrolled = false;
+    return;
+  }
+
+  if (!focus.view.scrolled)
+  {
+    DOM.addClass(focus.view.scrolledClass, focus.view.html);
+  }
+  
+  focus.view.scrolled = true;
+}
+
+function setupLazyLoad()
+{
+  let toLoad = DOM.getAll('[data-lazlo]');
+  if (!toLoad) { return; }
+
+  Lazlo.watch(toLoad);
+}
+
+function setupRWDViews()
+{
+  let rwd = DOM.getAll('.rwd-view');
+  if (!rwd) { return; }
+
+  RWDView.setup(rwd, focus.view.smallView);
+}

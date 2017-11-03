@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Website.com</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Colin Tester – {{ page.heading }}</title>
   {% include typekit-font.html %}
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -18,11 +18,13 @@
     </div>
     
     <aside class="side-bar">
-      <figure>
-        <img src="resources/image/colin-tester.jpg" alt="Colin Tester - helping to build a more robust and inclusive web.">
+      <figure class="image">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAADs=" data-lazlo="resources/image/colin-tester.jpg" alt="Colin Tester - helping to build a more robust and inclusive web." data-dims="640,773">
+        <noscript><img src="resources/image/colin-tester.jpg" alt="Colin Tester - helping to build a more robust and inclusive web."></noscript>
         <figcaption>Colin Tester</figcaption>
+        {% include get-in-touch.html %}
       </figure>
-      <p>Ea suscipit in magna; eros eum ut te laoreet augue te. Nostrud nonummy nulla facilisis consequatvel eum aliquip odio, laoreet augue magna. Aliquip dignissim dolore quis ipsum enim exerci vulputate nulla ipsum. Velit illum tation vulputate augue suscipit.</p></aside>
+    </aside>
   </main>
   
   {% include navigation.html %}

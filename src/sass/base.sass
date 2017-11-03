@@ -27,9 +27,9 @@ $baseFontSize: 93.75%
  * Preference is Seravek, but not available through paid plan, 
  * perhaps buy it when funds allow?available?
  */
-$contentFont: "ff-tisa-sans-web-pro"
-$headingFont: "ff-meta-web-pro"
 $fallbackFont: "Trebuchet MS", sans-serif
+$contentFont: "ff-tisa-sans-web-pro", $fallbackFont
+$headingFont: "ff-meta-web-pro", $fallbackFont
 
 $contentFontSize: 1rem
 $bodyContentLineHeight: $contentFontSize * $gRatio
@@ -47,6 +47,7 @@ $textShadow: 2px 1px 1px rgba($primary, 0.8)
 $transDurationIn: 200ms
 $transDurationOut: 1s
 
+$easeOutQuint:  cubic-bezier(0.23, 1, 0.32, 1)
 $easeSpecial:   cubic-bezier(.9, 0, .13, 1.17)
 
 //—————————————————————————————————————————————: Image paths

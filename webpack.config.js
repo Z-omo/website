@@ -1,5 +1,5 @@
 /**
- * Webpack configuration file for website.com project.
+ * Webpack configuration file for colintester.com project.
  *
  * @package     Website
  * @author      Colin Tester <office@z-omo.com>
@@ -13,6 +13,7 @@
  */
 
  // Note: __dirname refers to the path where webpack.config.js file is located.
+const webpack = require('webpack');
 const path = require('path');
 const srcDir = __dirname + '/src/';
 const webRoot = __dirname + '/';
@@ -20,8 +21,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 //Only load this for production build, as webpack -p throws an error when processing ES6.
 //const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-
-console.log('__dirname: ', __dirname);
 
 const config = {
   resolve: {
@@ -44,12 +43,20 @@ const config = {
     rules: [
       {
         test: /\.sass$/,
-        //include: [path.resolve(__dirname, 'src/sass')],
-        //exclude: [path.resolve(__dirname, 'resources/images')],
+        include: [path.resolve(__dirname, 'src/sass')],
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'sass-loader']
         })
+      },
+
+      {
+        test: /\.js$/,
+        include: [path.resolve(__dirname, 'src/js')],
+        use: [{
+          loader: 'babel-loader',
+          options: { presets: ['env'] }
+        }]
       }
     ]
   },
@@ -65,6 +72,11 @@ const config = {
     //   exclude: /\/node_modules/,
     //   uglifyOptions: { ecma: 6, mangle: true, compress: true }
     // })
+
+    /*
+     * with webpack 3: provides scope hoisting feature, where appropriate.
+     */
+    new webpack.optimize.ModuleConcatenationPlugin()
   ]
 };
 
