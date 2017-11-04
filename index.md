@@ -1,6 +1,6 @@
 ---
 layout: home-page
-heading: Helping to build a more robust and inclusive web
+title: Helping to build a more robust and inclusive web
 headerImage: header-image.jpg
 ---
 

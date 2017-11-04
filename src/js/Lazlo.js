@@ -180,7 +180,7 @@ const Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
-    console.log('Lazlo has stood down.');
+    //console.log('Lazlo has stood down.');
   }
 };
 
