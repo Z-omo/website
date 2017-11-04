@@ -11,6 +11,8 @@ exclude: [
   'webpack.config.js'
 ]
 
+focused: Focused on the finer details whilst maintaining a comprehensive view.
+
 # site navigation links:
 links:
   - title: Home
