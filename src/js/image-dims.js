@@ -46,7 +46,6 @@ const imgDims = {
     if (!images || 0 === images.length) { return; }
 
     let imageData = this.getImageData(images);
-    console.log('imageData: ', imageData);
     this.setImageDims(imageData);
     this.resizing = false;
   },

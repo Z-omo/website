@@ -32,7 +32,6 @@ const RWDView = {
     RWDView.container = container;
     setupViewControls();
     //setupView();
-    console.log('RWD View setup completed.');
   },
 };
 

@@ -569,7 +569,7 @@ var Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
-    console.log('Lazlo has stood down.');
+    //console.log('Lazlo has stood down.');
   }
 };
 
@@ -635,7 +635,6 @@ var imgDims = {
     }
 
     var imageData = this.getImageData(images);
-    console.log('imageData: ', imageData);
     this.setImageDims(imageData);
     this.resizing = false;
   },
@@ -731,7 +730,6 @@ var RWDView = {
     RWDView.container = container;
     setupViewControls();
     //setupView();
-    console.log('RWD View setup completed.');
   }
 };
 
