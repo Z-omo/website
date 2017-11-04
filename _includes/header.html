@@ -15,6 +15,6 @@
   </div>
   {%- endif -%}
   {% if  page.title or page.heading %}
-  <h2>{% if page.heading %}{{ page.heading }}{% else %}{{ page.title }}{% endif %}</h2>
+  <h2>{% include page-main-title.html %}</h2>
   {% endif %}
 </header>
