@@ -1,7 +1,7 @@
 <header>
   <h1>Colin Tester</h1>
   <a class="logo" href="./" title="Jump to the home page of website.com">
-    <img src="resources/image/on-focus-logo.svg" alt="Focus on the finer details whilst taking in the fuller view.">
+    <img src="resources/image/on-focus-logo.svg" alt="Colin tester – {{ site.focused }}">
   </a>
 
   <noscript><a href="#menu">Menu</a></noscript>
@@ -15,6 +15,6 @@
   </div>
   {%- endif -%}
   {% if  page.title or page.heading %}
-  <h2>{% if page.title %}{{ page.title }}{% else %}{{ page.heading }}{% endif %}</h2>
+  <h2>{% if page.heading %}{{ page.heading }}{% else %}{{ page.title }}{% endif %}</h2>
   {% endif %}
 </header>
