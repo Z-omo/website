@@ -190,6 +190,9 @@ main {
     .side-bar figure {
       width: 71.2%; } }
 
+.side-bar figcaption {
+  margin: 0 0 2rem; }
+
 .side-bar img {
   display: block;
   margin: 0;

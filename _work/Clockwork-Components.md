@@ -35,5 +35,5 @@ One of the desired outcomes of the project and crucial to the user experience, w
   * organising product categories and related operating parameters
   * exporting of products data in CSV format
   * importing of products data from CSV format
-</div>>
+</div>
 
