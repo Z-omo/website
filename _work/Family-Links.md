@@ -21,7 +21,7 @@ Following best practises of Responsive Web Design (RWD), careful consideration w
 
 {% include rwd-picture-element.html picture="Family-Links-Pattern-Library.png" alt="Family Links Pattern Library view." dims="650,441" %}
 
-A dedicated website API (Application Programming Interface) was developed to provide services for :
+A dedicated website API (Application Programming Interface) was developed to provide services for:
 
 - loading dynamic content such as the integration of Twitter feeds
 - interfacing with the Family Links CMS (content Management System)
