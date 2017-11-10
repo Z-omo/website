@@ -19,7 +19,7 @@ I continue to be inspired by prescribed engineering best practices and my aim al
 
 <div class="boxed" markdown="1">
 
-## My guiding principles, tools and practices
+## My guiding principles, practices and tools
 
 Website/Web app development:
 : - Content and users first
