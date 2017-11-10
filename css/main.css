@@ -1010,17 +1010,23 @@ fieldset {
   top: 0;
   left: 0;
   box-sizing: border-box;
-  margin: 0 0 1rem -2rem;
-  -webkit-border-radius: 0.26em;
-  border-radius: 0.26em;
-  padding: 2rem;
+  margin: 0 0 0 -2rem;
   border: none;
+  border-top: solid 1px rgba(13, 19, 33, 0.2);
+  padding: 2rem;
   width: 100vw;
   background-color: white; }
+  fieldset:first-of-type {
+    border: none; }
   @media only screen and (min-width: 39em) {
     fieldset {
+      margin-bottom: 1rem;
       margin-left: 0;
-      width: auto; } }
+      border: none;
+      -webkit-border-radius: 0.26em;
+      border-radius: 0.26em;
+      width: auto;
+      background-color: rgba(189, 212, 231, 0.2); } }
   fieldset button {
     margin: 0; }
 
@@ -1055,9 +1061,12 @@ label {
   margin: 0 0 1rem; }
   .checkbox label, .checkbox input {
     display: inline;
-    vertical-align: middle; }
+    vertical-align: top; }
+  .checkbox label {
+    display: inline-block;
+    width: 86%; }
   .checkbox input {
-    margin-right: 0.5rem; }
+    margin: 0.4045rem 0.5rem 0 0; }
 
 .required > label:after {
   display: inline-block;
