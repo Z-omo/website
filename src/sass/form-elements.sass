@@ -14,16 +14,24 @@ fieldset
   top: 0
   left: 0
   box-sizing: border-box
-  margin: 0 0 $contentMargin / 2 -#{$contentPadding}
-  +corners
-  padding: $contentPadding
+  margin: 0 0 0 -#{$contentPadding}
   border: none
+  border-top: solid 1px rgba($primary, 0.2)
+  //+corners
+  padding: $contentPadding
   width: 100vw
   background-color: white
 
+  &:first-of-type
+    border: none
+
   @media only screen and (min-width: $tabletWidth)
+    margin-bottom: $contentMargin / 2
     margin-left: 0
+    border: none
+    +corners
     width: auto
+    background-color: rgba($color4, 0.2)
 
   button
     margin: 0
@@ -61,10 +69,14 @@ label
 
   label, input
     display: inline
-    vertical-align: middle
+    vertical-align: top
+
+  label
+    display: inline-block
+    width: 86%
 
   input
-    margin-right: $contentFontSize / 2
+    margin: $bodyContentLineHeight / 4 $contentFontSize / 2 0 0
 
 //—————————————————————————————————————————————: Required
 .required
