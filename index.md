@@ -14,4 +14,4 @@ The desirable outcomes of a project, of any size, will always evolve over time. 
 
 <blockquote><q>Colin's delivery was very punctual, and his attention to detail an added bonus.</q><p class="by-line">Graeme Merifield, Managing Director, Tribe Festivals Ltd</p></blockquote>
 
-
+<a href="/work" class="button" title="See recent examples of Colin Tester's work.">Work Examples</a>
