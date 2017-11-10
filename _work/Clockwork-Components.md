@@ -33,7 +33,6 @@ One of the desired outcomes of the project and crucial to the user experience, w
 
   * direct access to an individual product record for editing
   * organising product categories and related operating parameters
-  * exporting of products data in CSV format
-  * importing of products data from CSV format
+  * exporting and importing of product data in CSV format
 </div>
 
