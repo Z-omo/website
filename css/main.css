@@ -1074,12 +1074,12 @@ label {
   content: '\2022';
   margin-top: -0.5rem;
   margin-left: 0.3rem;
-  font-size: 1.618rem;
+  font-size: 2.5888rem;
   font-weight: bold;
   color: rgba(13, 19, 33, 0.3); }
 
 .required.required-notice {
-  margin: -0.66667rem 0 0;
+  margin: 0.66667rem 0 0;
   text-align: right; }
 
 button[type=submit] {
