@@ -6,7 +6,7 @@ headerImage: header-image.jpg
 
 # Welcome
 
-I am Colin Tester, I work with organisations to help build better web experiences. I am fortunate to maintain a reputation for producing well-crafted, consistent and user friendly solutions for mobile, tablet and desktop devices.
+I am Colin Tester and I work with organisations to help build better web experiences. I am fortunate to maintain a reputation for producing carefully crafted, consistent and user friendly solutions for mobile, tablet and desktop devices.
 
 <blockquote><q>I was looking for high quality, value-for-money and flexible support…Colin has provided an excellent service in all areas, and often exceeded my expectations.</q><p class="by-line">Gail Allan, Busines Development Director, Family Links</p></blockquote>
 
