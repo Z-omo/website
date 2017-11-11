@@ -20,7 +20,7 @@ Working with Steve Foote of design agency [Tin Racer Design](https://www.tinrace
 
 Clockwork Components know their customer base very well, with a clear understanding of how customers prefer to source furniture components. That understanding, led us to design an interface and delivery mechanism that would not overwhelm customers with vast amounts of preliminary data and a complex visual representation of the data. Instead, users can choose easily to focus on components with specific attributes and are rewarded with pertinent results quickly. 
 
-One of the desired outcomes of the project and crucial to the user experience, was to allow customers to be able to zoom into a product image and see the finer details. Steve and I developed a strategy for preparing and optimising product images for use on small, medium and large screen dimensions, and utlilised the pinch-to-zoom features found on touch-based devices to present *real* image enlargements when the user chooses to zoom – it was important not to disappoint users.
+One of the desired outcomes of the project and crucial to the user experience, was to allow customers to be able to zoom into a product image and see the finer details. Steve and I developed a strategy for preparing and optimising product images for use on small, medium and large screen dimensions, and utilised the pinch-to-zoom features found on touch-based devices to present *real* image enlargements when the user chooses to zoom – it was important not to disappoint users.
 
 ### Products Manager.
 

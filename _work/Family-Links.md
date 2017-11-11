@@ -6,7 +6,7 @@ hideTileTitle: true
 
 # Website, API, Online Shop and Pattern Library
 
-Family Links is a national charity dedicated to creating an emotionally healthy, resilient and responsible society. Family Links produces a wealth of valuable resources, and thier need to allow content to be accessibile from any device with ease of use was foremost in the desired outcomes.
+Family Links is a national charity dedicated to creating an emotionally healthy, resilient and responsible society. Family Links produces a wealth of valuable resources, and their need to allow content to be accessible from any device with ease of use was foremost in the desired outcomes.
 
 {% include rwd-picture-element.html picture="Family-Links-home-desktop.jpg" alt="Family Links website home – desktop view." dims="1302,821" %}
 
@@ -15,7 +15,7 @@ Family Links is a national charity dedicated to creating an emotionally healthy,
 
 Family Links invited me to join their web team to help implement a content strategy and visual redesign which would present users with a much improved experience.
 
-<blockquote class="long-format"><q>Colin provides a very high level of service and takes a genuine interest in the task of supporting the promotion of our work. He spends time understanding and discussing our requirements and is extremely flexible in his approach. All the work has been delivered on time and to budget and is of a very high quality. I would recommend Colin Tester very highly.</q><p class="by-line">Gail Allan, Busines Development Director, Family Links</p></blockquote>
+<blockquote class="long-format"><q>Colin provides a very high level of service and takes a genuine interest in the task of supporting the promotion of our work. He spends time understanding and discussing our requirements and is extremely flexible in his approach. All the work has been delivered on time and to budget and is of a very high quality. I would recommend Colin Tester very highly.</q><p class="by-line">Gail Allan, Business Development Director, Family Links</p></blockquote>
 
 Following best practice of Responsive Web Design (RWD), careful consideration was made as to how content resources should be prepared and managed. A pattern library was developed to document the repeatable and consistent methods used to present various kinds of content. The library became an invaluable resource for maintaining content accessibility; driven by compliance with web standards and the reliable display throughout the website.
 
