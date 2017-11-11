@@ -13,6 +13,6 @@ A flagship event from [Tribe Festivals Ltd](http://www.tribefestivals.com/ "To: 
 
 {% include rwd-picture-element.html picture="Cheltenham-Comedy-Festival-whats-on.jpg" alt="Cheltenham Comedy Festival – what's on." dims="1043,777" %}
 
-I took the festival's core visual elements, developing them into a multi-device experience, focusing on providing content to the end user in a fast and elegant way. The views were enhanced with CSS animation and backed by a back-end app, which I developed, to manage and control the presentation of performer and event content.
+I took the festival's core visual elements, developing them into a multi-device experience, focusing on providing content to the end user in a fast and elegant way. The views were enhanced with CSS animation and supported by a back-end app, which I developed to manage and control the presentation of performer and event content.
 
 {% include rwd-picture-element.html picture="CCF-Backstage-app-view.jpg" alt="Cheltenham Comedy Festival – Backstage app." dims="1043,805" %}

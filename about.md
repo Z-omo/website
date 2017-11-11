@@ -4,13 +4,13 @@ title: About
 permalink: /about
 ---
 
-The technology of the web and the numerous ways information is communicated is changing constantly, which means it's important to keep abreast of developments in order to maintain good practice and a professional attitude.
+The technology of the web and the numerous ways information is communicated is changing constantly, which means it's important to keep abreast of developments in order to maintain good practice and a professional viewpoint.
 
 <blockquote><q>We were incredibly impressed with Colin’s knowledge in a continuously evolving market place.</q><p class="by-line">Graeme Merifield, Managing Director, Tribe Festivals Ltd</p></blockquote>
 
-Half of my working life is spent on research and learning, something I expect is true for most practitioners in the web and software industry, but I believe it is time well spent; it helps inform the benefits I aim to bring to a client's project.
+Half of my working life is spent on research and learning, something I expect is true of most practitioners in the web and software industry, but I believe it is time well spent, as it helps inform the benefits I aim to bring to a client's project.
 
-I have been building web-based software since 2002 and my work is informed by the mantra: keep it simple, but make it elegant.
+I have been building web-based software since 2002 and my work is driven by the mantra: keep it simple, but make it elegant.
 
 I continue to be inspired by prescribed engineering best practices and my aim always is to produce software which is clean, modular, extensible and stable. I care about the finer details.
 
