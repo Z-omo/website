@@ -83,7 +83,7 @@ q
   quotes: '\201C' '\201D' '\2018' '\2019'
   
 q::before, q::after
-  color: theme(tert-blend80)//$color5
+  color: theme(sec-blend80)//$color5
   font-family: $headingFont
   font-size: 1.4em
   line-height: 1em
@@ -161,3 +161,29 @@ blockquote
   background: theme(primary)
   text-shadow: none
   color: white
+
+//—————————————————————————————————————————————: Special cases
+.copyright
+  position: relative
+  display: inline-block
+  vertical-align: middle
+  margin: 0 0.2em 0 0
+  +corners(50%)
+  padding: 0
+  font-family: $contentFont
+  font-size: 2rem
+  //line-height: 2rem
+  font-weight: normal
+
+  &::after
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    +corners(50%)
+    z-index: -1
+    width: 1.24rem
+    height: 1.24rem
+    +transformThis(translate(-50%, -50%))
+    background-color: theme(prim-blend80)
+    

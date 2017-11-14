@@ -6,7 +6,9 @@ button, .button
   margin: $contentMargin 0
   max-width: 8rem
   +corners(2em)
-  border: solid 1px theme(prim-tint50)//$color4
+  //border: solid 1px theme(sec-blend20)//$color4
+  border: none
+  box-shadow: 0 0 0 1px theme(tert-blend20)
   padding: 0.5em 2em
   font-family: $headingFont, $fallbackFont
   text-decoration: none
@@ -22,6 +24,7 @@ button, .button
     margin-right: 0
 
   &:hover
+    border: none
     background-color: white
     transition-duration: $transDurationIn
 
