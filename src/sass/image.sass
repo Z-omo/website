@@ -54,7 +54,13 @@
       display: inline-block
 
 //—————————————————————————————————————————————: Lazy loading
+img[data-lazlo]
+  display: none
+
 .focus-js
+  img[data-lazlo]
+    display: block
+
   *[data-lazlo], .lazlo
     opacity: 0.05
 

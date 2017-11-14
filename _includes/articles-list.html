@@ -28,10 +28,10 @@
     {% assign articleClass = articleClass | append: ' hide-title' %}
   {%- endif -%}
 
-  <article id="{{ tileName }}" {% if articleClass %} class="{{ articleClass }}"{% endif %}{% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
+  <article {% if articleClass %} class="{{ articleClass }}"{% endif %}>
   <noscript><style>#{{ tileName }} { background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}); }</style></noscript>
     <header>
-      <a href="{{ article.url | relative_url }}"><h1>{{ article.title }}</h1></a>
+      <a id="{{ tileName }}" href="{{ article.url | relative_url }}" {% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}><h1>{{ article.title }}</h1></a>
     </header>
   </article>
   {%- endfor -%}

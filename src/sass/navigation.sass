@@ -3,13 +3,13 @@
  */
 
 // @TODO move to colour theme:
-$navBGColour: rgba($color4, 0.8)
+//$navBGColour: rgba($color4, 0.8)
 
 $mobileRibbonHeight: $iconSize + (2 * $viewEdgePos)
 
 //—————————————————————————————————————————————: Default view
 nav
-  background-color: $primary
+  background-color: theme(tertiary)//primary
 
   ul
     list-style: none
@@ -23,15 +23,15 @@ nav
   a
     display: block
     +corners(2em)
-    border: solid 1px $color4
+    border: solid 1px theme(prim-blend20)//$color4
     padding: 0.8em 2em
     text-decoration: none
     font-size: 1.2rem
-    color: white
+    color: theme(secondary)
     //text-transform: uppercase
     //font-family: "ff-meta-web-pro", sans-serif
     text-align: center
-    background-color: $navBGColour
+    background-color: theme(prim-tint50)//$navBGColour
 
 .boundary > header
   a[href="#menu"] // <noscript>
@@ -69,7 +69,7 @@ nav
     right: 0
     bottom: 0
     left: 0
-    background-color: rgba($primary, 0.8)
+    background-color: theme(sec-blend80)//rgba($primary, 0.8)
     z-index: -1
     transition: opacity $transDurationIn ease-out
     opacity: 0
@@ -175,18 +175,19 @@ nav
       border: none
       padding: 0 1.8em
       font-size: 1.1rem
+      color: white
       background-color: transparent
       transition-property: background-color, color
       transition-duration: $transDurationOut, $transDurationOut * 2
       transition-timing-function: ease-out, ease-out
       
       &:hover
-        background-color: $navBGColour
+        background-color: theme(prim-tint30)//$navBGColour
         transition-duration: $transDurationIn, $transDurationIn * 2
-        color: $primary
+        color: theme(secondary)//$primary
 
     .active a
-        background-color: rgba($color2, 0.4)
+        background-color: theme(prim-blend80)//rgba($color2, 0.4)
         color: white
 
   // nav::before
