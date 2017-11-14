@@ -6,15 +6,17 @@ button, .button
   margin: $contentMargin 0
   max-width: 8rem
   +corners(2em)
-  border: solid 1px $color4
+  //border: solid 1px theme(sec-blend20)//$color4
+  border: none
+  box-shadow: 0 0 0 1px theme(tert-blend20)
   padding: 0.5em 2em
   font-family: $headingFont, $fallbackFont
   text-decoration: none
   font-size: 1.1rem
   line-height: 1.1rem
-  color: $primary
+  color: theme(secondary)//$primary
   text-align: center
-  background-color: $navBGColour
+  background-color: theme(prim-tint30)//$navBGColour
   outline: none
   transition: background-color $transDurationOut
 
@@ -22,9 +24,11 @@ button, .button
     margin-right: 0
 
   &:hover
+    border: none
     background-color: white
     transition-duration: $transDurationIn
 
-  &.active
-    background-color: $color5
-    color: white
+  // @TODO: do we need this?
+  // &.active
+  //   background-color: $color5
+  //   color: white

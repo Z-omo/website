@@ -9,7 +9,7 @@ body
   font-family: $contentFont
   font-size: $contentFontSize
   line-height: $bodyContentLineHeight
-  color: $primary
+  color: theme(secondary)
 
 h1, h2, h3
   margin: 0 0 $contentMargin
@@ -17,23 +17,23 @@ h1, h2, h3
   font-size: $contentFontSize * $gRatio
   line-height: ($contentFontSize * $gRatio) * $gRatio
   font-weight: 700
-  color: $primary
+  color: theme(secondary)
 
 .hilite
   $hiliteFontSize: ($contentFontSize * $gRatio) * 2
   font-size: $hiliteFontSize
   line-height: $hiliteFontSize
   letter-spacing: -1pt
-  color: $color2
+  color: theme(primary)
 
 p, ul , ol
   margin: 0 0 $bodyContentLineHeight
   
 //—————————————————————————————————————————————: Links
 main a
-  color: $primary
+  color: theme(tertiary)//$primary
   text-decoration: none
-  border-bottom: dotted 1px $color5
+  border-bottom: dotted 1px theme(primary)
 
   &:hover
     border-bottom-style: solid
@@ -46,7 +46,7 @@ main a
   margin: 0 0.5rem 0 -1rem
   vertical-align: middle
   font-family: sans-serif
-  color: rgba($primary, 0.5)
+  color: theme(primary)//rgba($primary, 0.5)
   font-size: $contentFontSize * 1.8
   line-height: $contentFontSize * 1.8
 
@@ -83,7 +83,7 @@ q
   quotes: '\201C' '\201D' '\2018' '\2019'
   
 q::before, q::after
-  color: $color5
+  color: theme(sec-blend80)//$color5
   font-family: $headingFont
   font-size: 1.4em
   line-height: 1em
@@ -153,11 +153,37 @@ blockquote
 
 //—————————————————————————————————————————————: Selection
 ::-moz-selection
-  background: $primary
+  background: theme(primary)
   text-shadow: none
   color: white
 
 ::selection
-  background: $primary
+  background: theme(primary)
   text-shadow: none
   color: white
+
+//—————————————————————————————————————————————: Special cases
+.copyright
+  position: relative
+  display: inline-block
+  vertical-align: middle
+  margin: 0 0.2em 0 0
+  +corners(50%)
+  padding: 0
+  font-family: $contentFont
+  font-size: 2rem
+  //line-height: 2rem
+  font-weight: normal
+
+  &::after
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    +corners(50%)
+    z-index: -1
+    width: 1.24rem
+    height: 1.24rem
+    +transformThis(translate(-50%, -50%))
+    background-color: theme(prim-blend80)
+    

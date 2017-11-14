@@ -6,9 +6,9 @@ footer
   padding: $contentPadding
   width: auto
   min-height: 6rem
-  background-color: $color3
-  color: $color4
+  background-color: theme(secondary)//$color3
+  color: white//$color4
   z-index: 1
 
   @media only screen and (min-width: $maxWidth)
-    +corners
+    +corners(0 0 $cornerRadius $cornerRadius)

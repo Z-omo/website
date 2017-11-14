@@ -2,12 +2,13 @@
  * SASS for page header element – website.com
  */
 .boundary > header
+  //position: relative
   padding: ($contentPadding * 2) $contentPadding $contentPadding
   box-sizing: border-box
   width: 100%
   min-height: 120px
   color: white
-  background-color: $primary
+  background-color: theme(secondary)
 
   @media only screen and (min-width: $tabletWidth)
     .home &
@@ -17,30 +18,41 @@
     position: absolute
     top: $viewEdgePos
     left: $viewEdgePos
-    opacity: 0.8
+    opacity: 0.9
     width: 5em
+    height: 54px
     z-index: 101
     border: none
 
     .focus-js &
       position: fixed
 
-    img
+    img, svg
       width: 100%
+      height: 100%
 
+    svg
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      
+    svg #iris
+      fill: theme(prim-blend80)
     //@media only screen and (min-width: $tabletWidth)
     //position: fixed
     //width: 5.4em
     transition: transform $transDurationIn ease-out
     -webkit-transform-origin: top left
+    -ms-transform-origin: top left
     transform-origin: top left
     //+transformThis(scale(0.72))
     
     .focus-js &
-      +transformThis(scale(1))
+      +transformThis(scale(1.2))
     
     .js-scrolled &
-      +transformThis(scale(0.72))
+      +transformThis(scale(.72))
 
     @media only screen and (min-width: $desktopWidth)
       //transform: scale(0.84)
@@ -55,7 +67,7 @@
     display: none
   
   h2
-    margin: $viewEdgePos 0
+    margin: ($viewEdgePos * 3) 0 $viewEdgePos
     font-size: $headerTitleFontSize
     line-height: $headerTitleLineHeight
     text-shadow: $textShadow
@@ -100,7 +112,7 @@
     right: 0
     bottom: 0
     left: 0
-    background-color: $primary
+    background-color: theme(primary)//$primary
 
     max-height: 640px
     z-index: 0
