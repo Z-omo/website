@@ -1,16 +1,15 @@
 /*
- * SASS for body elements - website.com
+ * SASS for body elements - colintester.com
  */
 html
   margin: 0
   height: 100%
-  background-color: black//theme(primary)//$primary
+  background-color: black
 
 body
   margin: 0
   padding: 0
   height: 100%
-  //overflow-y: scroll
 
   @media only screen and (min-width: $desktopWidth)
    overflow-y: scroll
@@ -34,8 +33,7 @@ main
   padding: $contentPadding
   min-height: 40vh
   max-width: $maxMainElementWidth
-  //background-color: rgba(#EFEFFF, 0.9)
-  background-color: theme(main)//rgba(white, 0.9)
+  background-color: theme(main)
   z-index: 1
 
   @media only screen and (min-width: $maxMainElementWidth)
@@ -49,7 +47,7 @@ main
         top: 10%
         right: 45%
         height: 80%
-        border-right: solid 1px theme(prim-blend20)//rgba($primary, 0.2)
+        border-right: solid 1px theme(prim-blend20)
 
 .content
   margin: 0 0 $contentMargin
@@ -79,7 +77,7 @@ main
     display: block
     margin: 0
     +corners
-    border: solid 0.4rem theme(sec-blend80)//rgba($primary, 0.8)
+    border: solid 0.4rem theme(sec-blend80)
     width: 100%
 
   figcaption
@@ -133,4 +131,3 @@ main
     +corners
     border: solid 1px theme(sec-blend20)
     padding: $contentPadding
-    //background-color: $color4

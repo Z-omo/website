@@ -1,5 +1,5 @@
 /**
- * Focus app – mediator for website.com
+ * Focus app – mediator for colintester.com
  *
  * @package     Focus
  * @author      Colin Tester <office@z-omo.com>

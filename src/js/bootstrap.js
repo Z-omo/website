@@ -1,5 +1,5 @@
 /**
- * Bootstrap JavaScript file for website.com
+ * Bootstrap JavaScript file for colintester.com
  *
  * @package     Website
  * @author      Colin Tester <office@z-omo.com>

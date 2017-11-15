@@ -16,8 +16,7 @@ fieldset
   box-sizing: border-box
   margin: 0 0 0 -#{$contentPadding}
   border: none
-  border-top: solid 1px theme(prim-blend20)//rgba($primary, 0.2)
-  //+corners
+  border-top: solid 1px theme(prim-blend20)
   padding: $contentPadding
   width: 100vw
   background-color: white
@@ -31,7 +30,7 @@ fieldset
     border: none
     +corners
     width: auto
-    background-color: theme(prim-tint10)//rgba($color4, 0.2)
+    background-color: theme(prim-tint10)
 
   button
     margin: 0
@@ -47,10 +46,9 @@ legend
 input, textarea, select
   font-family: $contentFont
   font-size: 16px
-  color: theme(sec-blend80)//tint($primary, 70%)
+  color: theme(sec-blend80)
 
   &:focus
-    //outline: 1px solid theme(prim-blend80)
     outline: none
     box-shadow: 0 0 3px 1px theme(prim-blend80)
 
@@ -64,7 +62,7 @@ label
   input
     margin: 0
     +corners
-    border: solid 1px theme(prim-tint50)//$color4
+    border: solid 1px theme(prim-tint50)
     padding: 0.4rem
     -webkit-appearance: none // iOS views.
     width: 97%
@@ -94,7 +92,7 @@ label
     margin-left: 0.3rem
     font-size: $contentFontSize * ($gRatio * 1.6)
     font-weight: bold
-    color: theme(tert-blend20)//rgba($primary, 0.3)
+    color: theme(tert-blend20)
 
   &.required-notice
     margin: ($contentPadding / 3) 0 0

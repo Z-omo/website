@@ -1,15 +1,12 @@
 /*
- * SASS for navigation elements - website.com
+ * SASS for navigation elements - colintester.com
  */
-
-// @TODO move to colour theme:
-//$navBGColour: rgba($color4, 0.8)
 
 $mobileRibbonHeight: $iconSize + (2 * $viewEdgePos)
 
 //—————————————————————————————————————————————: Default view
 nav
-  background-color: theme(tertiary)//primary
+  background-color: theme(tertiary)
 
   ul
     list-style: none
@@ -23,15 +20,13 @@ nav
   a
     display: block
     +corners(2em)
-    border: solid 1px theme(prim-blend20)//$color4
+    border: solid 1px theme(prim-blend20)
     padding: 0.8em 2em
     text-decoration: none
     font-size: 1.2rem
     color: theme(secondary)
-    //text-transform: uppercase
-    //font-family: "ff-meta-web-pro", sans-serif
     text-align: center
-    background-color: theme(prim-tint50)//$navBGColour
+    background-color: theme(prim-tint50)
 
 .boundary > header
   a[href="#menu"] // <noscript>
@@ -58,7 +53,6 @@ nav
   width: 100%
   height: $mobileRibbonHeight
   background-color: transparent
-  //+gradientBackground(rgba($primary, 0.8), $primary)
   z-index: 100
 
   &::before
@@ -69,16 +63,15 @@ nav
     right: 0
     bottom: 0
     left: 0
-    background-color: theme(sec-blend80)//rgba($primary, 0.8)
+    background-color: theme(sec-blend80)
     z-index: -1
     transition: opacity $transDurationIn ease-out
-    opacity: 0
+    opacity: 0 // see also .js-scrolled below.
 
   @media only screen and (max-width: $tabletWidth)  
     ul
-      //margin-top: $mobileRibbonHeight
-      //padding-bottom: $mobileRibbonHeight
-      padding-top: $mobileRibbonHeight + $contentPadding
+      // see also .js-scrolled below.
+      padding-top: $mobileRibbonHeight + ($contentPadding * 2) 
       background-color: rgba($primary, 0.9)
       transition-property: transform, opacity
       transition-duration: $transDurationIn, $transDurationIn
@@ -96,15 +89,11 @@ nav
   #menuBtn
     position: fixed
     top: 0
-    right: 0//$iconSize
-    bottom: auto//50vh//6rem
+    right: 0
+    bottom: auto
     left: auto
-    //+corners(50% 0 0 50%)
     width: $mobileRibbonHeight
     height: $mobileRibbonHeight
-    //background-color: rgba($primary, 0.8)
-    //box-shadow: 0 0 1px 1px rgba($primary, 0.3)
-    //transform: translateY(50%)
 
     @media only screen and (min-width: $tabletWidth)
       display: none
@@ -135,8 +124,12 @@ nav
     padding-top: 30px
     opacity: 0.8
 
-.js-scrolled nav::before
+.js-scrolled nav
+  &::before
     opacity: 1
+
+  ul
+    padding-top: $mobileRibbonHeight + $contentPadding
 
 //—————————————————————————————————————————————: Tablet and above.
 @media only screen and (min-width: $tabletWidth)
@@ -182,34 +175,13 @@ nav
       transition-timing-function: ease-out, ease-out
       
       &:hover
-        background-color: theme(prim-tint30)//$navBGColour
+        background-color: theme(prim-tint30)
         transition-duration: $transDurationIn, $transDurationIn * 2
-        color: theme(secondary)//$primary
+        color: theme(secondary)
 
     .active a
-        background-color: theme(prim-blend80)//rgba($color2, 0.4)
+        background-color: theme(prim-blend80)
         color: white
-
-    //.home & .active a
-      //background-color: transparent
-
-  // nav::before
-  //   content: ''
-  //   display: block
-  //   position: absolute
-  //   top: 0
-  //   right: 0
-  //   bottom: 0
-  //   left: 0
-  //   background-color: rgba($primary, 0.8)
-  //   z-index: -1
-  //   transition: opacity $transDurationIn ease-out
-  
-  // .focus-js nav::before
-  //   opacity: 0
-
-  // .js-scrolled nav::before
-  //   opacity: 1
 
 @media only screen and (min-width: $desktopWidth)
   nav

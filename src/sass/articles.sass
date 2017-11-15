@@ -1,5 +1,5 @@
 /*
- * SASS for article collection views – website.com
+ * SASS for article collection views – colintester.com
  */
 
 .articles
@@ -24,16 +24,12 @@
       left: 0
       text-decoration: none
       border: none
-      //background-color: transparent
-      //transition: background-color $transDurationOut ease-out
 
     h1
       padding: $contentPadding / 3 $contentPadding / 2
       font-size: 1.2rem
       line-height: 1.5rem
-      color: theme(secondary)//$primary
-      
-      //transition: background-color $transDurationOut ease-out
+      color: theme(secondary)
       
       @media only screen and (min-width: $tabletWidth)
         font-size: 1.4rem
@@ -52,13 +48,8 @@
       background-size: cover
 
     &:hover
-      background-color: theme(tert-blend20)//rgba($color2, 0.2)
+      background-color: theme(tert-blend20)
       transition-duration: $transDurationIn
-
-    // &.with-image:hover h1
-    //   opacity: 1
-    //   transition-duration: $transDurationIn
-    //   background-color: theme(secondary)//rgba($color3, 0.8)
 
   &.work-articles .with-image a
     background-size: auto 100%
@@ -118,10 +109,10 @@
       color: white
       text-shadow: $textShadow
       opacity: 0.9
-      background-color: theme(sec-blend20)//rgba($primary, 0.4)
+      background-color: theme(sec-blend20)
       transition: background-color $transDurationOut ease-out
 
     &.with-image:hover h1
       opacity: 1
       transition-duration: $transDurationIn
-      background-color: theme(tert-blend20)//rgba($color3, 0.8)
+      background-color: theme(tert-blend20)

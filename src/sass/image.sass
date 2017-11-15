@@ -52,20 +52,3 @@
 
       // for browsers with no flex support:
       display: inline-block
-
-//—————————————————————————————————————————————: Lazy loading
-img[data-lazlo]
-  display: none
-
-.focus-js
-  img[data-lazlo]
-    display: block
-
-  *[data-lazlo], .lazlo
-    opacity: 0.05
-
-  .lazlo-loaded
-    transition-property: opacity
-    transition-duration: $transDurationOut
-    transition-delay: $transDurationIn
-    opacity: 1
