@@ -116,3 +116,20 @@
       opacity: 1
       transition-duration: $transDurationIn
       background-color: theme(tert-blend20)
+
+//—————————————————————————————————————————————: Posts
+
+.post
+  header
+    margin: 0 0 $contentMargin
+
+    time::after
+      content: '   • '
+      display: inline
+      white-space: pre
+      color: theme(primary)
+      
+
+  footer
+    margin: 0 0 -#{$contentPadding} -#{$contentPadding}
+    width: 100vw

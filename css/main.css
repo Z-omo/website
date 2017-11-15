@@ -180,7 +180,7 @@ main {
         border-right: solid 1px rgba(37, 156, 247, 0.2); } }
 
 .content {
-  margin: 0 0 2rem;
+  margin: 0;
   max-width: 69em; }
   .content header, .content footer, .content h1, .content h2, .content h3, .content p, .content ul, .content ol, .content code {
     max-width: 55.62423rem; }
@@ -396,12 +396,18 @@ main a {
   main a:hover {
     border-bottom-style: solid; }
 
+footer a {
+  color: white; }
+
 ul, ol {
   padding: 0 0 0 1rem; }
 
 ul {
-  margin-left: 1rem;
+  margin-left: 0;
   list-style: none; }
+  @media only screen and (min-width: 39em) {
+    ul {
+      margin-left: 1rem; } }
 
 p + ul, p + ol {
   margin-top: -0.4rem; }
@@ -417,19 +423,66 @@ main ul li:before {
   line-height: 1.8rem; }
 
 li {
-  margin: 0;
+  margin: 0 0 0.66667rem;
   padding: 0; }
+  dd li {
+    margin-bottom: 0; }
 
 dl {
   margin: 0 0 2rem;
   padding: 0; }
 
 dt {
-  font-weight: normal; }
+  font-weight: bold; }
 
 dd {
   margin: 0;
   padding: 0; }
+  dd ul {
+    margin-left: 0; }
+
+ol {
+  list-style: none;
+  counter-reset: orderedListCounter; }
+  ol[start="1"] {
+    counter-reset: orderedListCounter 0; }
+  ol[start="2"] {
+    counter-reset: orderedListCounter 1; }
+  ol[start="3"] {
+    counter-reset: orderedListCounter 2; }
+  ol[start="4"] {
+    counter-reset: orderedListCounter 3; }
+  ol[start="5"] {
+    counter-reset: orderedListCounter 4; }
+  ol[start="6"] {
+    counter-reset: orderedListCounter 5; }
+  ol[start="7"] {
+    counter-reset: orderedListCounter 6; }
+  ol[start="8"] {
+    counter-reset: orderedListCounter 7; }
+  ol[start="9"] {
+    counter-reset: orderedListCounter 8; }
+  ol[start="10"] {
+    counter-reset: orderedListCounter 9; }
+  ol > li {
+    position: relative;
+    padding-left: 1rem; }
+    ol > li::before {
+      content: counter(orderedListCounter);
+      counter-increment: orderedListCounter;
+      position: absolute;
+      top: 0;
+      left: -1rem;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      padding: 0.3em;
+      width: 1rem;
+      height: 1rem;
+      background-color: #92cefb;
+      font-size: 1rem;
+      line-height: 0.8rem;
+      text-align: center;
+      color: #31393c; }
 
 q {
   quotes: '\201C' '\201D' '\2018' '\2019'; }
@@ -679,8 +732,9 @@ nav {
 .js-scrolled nav::before {
   opacity: 1; }
 
-.js-scrolled nav ul {
-  padding-top: 5.375rem; }
+@media only screen and (max-width: 39em) {
+  .js-scrolled nav > ul {
+    padding-top: 5.375rem; } }
 
 @media only screen and (min-width: 39em) {
   nav {
@@ -799,6 +853,7 @@ img[data-lazlo] {
  */
 footer {
   position: relative;
+  box-sizing: border-box;
   padding: 2rem;
   width: auto;
   min-height: 6rem;
@@ -914,6 +969,18 @@ footer {
     opacity: 1;
     transition-duration: 200ms;
     background-color: rgba(73, 59, 42, 0.2); }
+
+.post header {
+  margin: 0 0 2rem; }
+  .post header time::after {
+    content: '   \2022   ';
+    display: inline;
+    white-space: pre;
+    color: #259cf7; }
+
+.post footer {
+  margin: 0 0 -2rem -2rem;
+  width: 100vw; }
 
 /*
  * SASS for button elements – colintester.com

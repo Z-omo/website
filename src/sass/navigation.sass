@@ -68,7 +68,7 @@ nav
     transition: opacity $transDurationIn ease-out
     opacity: 0 // see also .js-scrolled below.
 
-  @media only screen and (max-width: $tabletWidth)  
+  @media only screen and (max-width: $tabletWidth)
     ul
       // see also .js-scrolled below.
       padding-top: $mobileRibbonHeight + ($contentPadding * 2) 
@@ -128,7 +128,8 @@ nav
   &::before
     opacity: 1
 
-  ul
+@media only screen and (max-width: $tabletWidth)
+  .js-scrolled nav > ul
     padding-top: $mobileRibbonHeight + $contentPadding
 
 //—————————————————————————————————————————————: Tablet and above.
