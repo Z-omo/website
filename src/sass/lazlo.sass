@@ -1,0 +1,19 @@
+/*
+ * SASS for Lazlo (Lazy Loading) module.
+ */
+
+img[data-lazlo]
+  display: none
+
+.focus-js
+  img[data-lazlo]
+    display: block
+
+  *[data-lazlo], .lazlo
+    opacity: 0.05
+
+  .lazlo-loaded
+    transition-property: opacity
+    transition-duration: $transDurationOut
+    transition-delay: $transDurationIn
+    opacity: 1

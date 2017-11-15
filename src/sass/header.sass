@@ -1,8 +1,7 @@
 /*
- * SASS for page header element – website.com
+ * SASS for page header element – colintester.com
  */
 .boundary > header
-  //position: relative
   padding: ($contentPadding * 2) $contentPadding $contentPadding
   box-sizing: border-box
   width: 100%
@@ -20,48 +19,31 @@
     left: $viewEdgePos
     opacity: 0.9
     width: 5em
-    height: 54px
+    height: 52px
     z-index: 101
     border: none
 
+    @media only screen and (min-width: $maxWidth)
+      left: auto
+
     .focus-js &
       position: fixed
-
-    img, svg
-      width: 100%
-      height: 100%
-
-    svg
-      position: absolute
-      top: 0
-      left: 0
-      width: 100%
       
     svg #iris
       fill: theme(prim-blend80)
-    //@media only screen and (min-width: $tabletWidth)
-    //position: fixed
-    //width: 5.4em
-    transition: transform $transDurationIn ease-out
-    -webkit-transform-origin: top left
-    -ms-transform-origin: top left
-    transform-origin: top left
-    //+transformThis(scale(0.72))
-    
-    .focus-js &
+
+    svg
+      transition: transform $transDurationIn ease-out
+      -webkit-transform-origin: top left
+      -ms-transform-origin: top left
+      transform-origin: top left
       +transformThis(scale(1.2))
     
-    .js-scrolled &
-      +transformThis(scale(.72))
-
-    @media only screen and (min-width: $desktopWidth)
-      //transform: scale(0.84)
+      @media only screen and (min-width: $tabletWidth)
+        +transformThis(scale(1.36))
 
       .js-scrolled &
-        transform: scale(0.72)
-
-    @media only screen and (min-width: $maxWidth)
-      left: auto
+        +transformThis(scale(.72))
 
   h1
     display: none
@@ -112,7 +94,7 @@
     right: 0
     bottom: 0
     left: 0
-    background-color: theme(primary)//$primary
+    background-color: theme(secondary)
 
     max-height: 640px
     z-index: 0

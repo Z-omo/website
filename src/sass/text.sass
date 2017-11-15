@@ -1,5 +1,5 @@
 /*
- * SASS for text content elements – website.com
+ * SASS for text content elements – colintester.com
  */
 
 html
@@ -19,19 +19,12 @@ h1, h2, h3
   font-weight: 700
   color: theme(secondary)
 
-.hilite
-  $hiliteFontSize: ($contentFontSize * $gRatio) * 2
-  font-size: $hiliteFontSize
-  line-height: $hiliteFontSize
-  letter-spacing: -1pt
-  color: theme(primary)
-
 p, ul , ol
   margin: 0 0 $bodyContentLineHeight
   
 //—————————————————————————————————————————————: Links
 main a
-  color: theme(tertiary)//$primary
+  color: theme(tertiary)
   text-decoration: none
   border-bottom: dotted 1px theme(primary)
 
@@ -46,7 +39,7 @@ main a
   margin: 0 0.5rem 0 -1rem
   vertical-align: middle
   font-family: sans-serif
-  color: theme(primary)//rgba($primary, 0.5)
+  color: theme(primary)
   font-size: $contentFontSize * 1.8
   line-height: $contentFontSize * 1.8
 
@@ -83,7 +76,7 @@ q
   quotes: '\201C' '\201D' '\2018' '\2019'
   
 q::before, q::after
-  color: theme(sec-blend80)//$color5
+  color: theme(sec-blend80)
   font-family: $headingFont
   font-size: 1.4em
   line-height: 1em
@@ -104,15 +97,12 @@ blockquote
   font-style: italic
   line-height: $quoteLineHeight
   
-  //text-align: center
-  
   &:first-child
     margin-top: $contentMargin
     
   @media only screen and (min-width: $tabletWidth)
     width: 80%
     margin-left: $contentMargin
-    //margin-right: $contentMargin
     text-align: left
 
   @media only screen and (min-width: $desktopWidth)
@@ -134,7 +124,6 @@ blockquote
   .by-line
     display: block
     margin: $contentMargin / 2 0 0
-    //text-align: right
     font-style: normal
     font-size: 0.8em
     line-height: 0.8em * $gRatio
@@ -163,6 +152,13 @@ blockquote
   color: white
 
 //—————————————————————————————————————————————: Special cases
+.hilite
+  $hiliteFontSize: ($contentFontSize * $gRatio) * 2
+  font-size: $hiliteFontSize
+  line-height: $hiliteFontSize
+  letter-spacing: -1pt
+  color: theme(primary)
+
 .copyright
   position: relative
   display: inline-block
@@ -172,7 +168,6 @@ blockquote
   padding: 0
   font-family: $contentFont
   font-size: 2rem
-  //line-height: 2rem
   font-weight: normal
 
   &::after

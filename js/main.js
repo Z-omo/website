@@ -185,7 +185,7 @@ exports.default = {
 
 "use strict";
 /**
- * Bootstrap JavaScript file for website.com
+ * Bootstrap JavaScript file for colintester.com
  *
  * @package     Website
  * @author      Colin Tester <office@z-omo.com>
@@ -216,7 +216,7 @@ _focusApp2.default.init();
 
 "use strict";
 /**
- * Focus app – mediator for website.com
+ * Focus app – mediator for colintester.com
  *
  * @package     Focus
  * @author      Colin Tester <office@z-omo.com>
