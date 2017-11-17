@@ -38,7 +38,8 @@ Software development:
   - Test-driven development (TDD)
 
 My skill set stack includes:
-: - HTML, XML, CSS, SASS, SVG
+: - HTML, XML, SVG
+  - CSS, SASS
   - JavaScript (ES5, ES6), Node.js
   - PHP, Python
   - MySQL, PostgreSQL, MongoDB

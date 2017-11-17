@@ -120,7 +120,7 @@
 //—————————————————————————————————————————————: Posts
 
 .post
-  header
+  > header
     margin: 0 0 $contentMargin
 
     time::after
@@ -130,6 +130,12 @@
       color: theme(primary)
       
 
-  footer
+  > footer
     margin: 0 0 -#{$contentPadding} -#{$contentPadding}
     width: 100vw
+    background-color: theme(tert-blend80)
+
+    @media only screen and (min-width: $tabletWidth)
+      margin: 0 0 $contentMargin
+      +corners
+      width: auto

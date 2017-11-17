@@ -5,7 +5,7 @@
 $iconsSVGFile:  '#{$imagePath}website-icons.svg'
 //$iconsPNGFile:  '#{$imagePath}family-links-website-icons-3.png'
 
-$iconNames: menu, twitter, email
+$iconNames: menu, twitter, facebook, google, linkedin, email
 
 $iconSize:        2.375rem // 38px, fixes Firefox odd scaling issue.
 $noSVGIconSize:   38px
@@ -46,9 +46,67 @@ $iconInlineSize:  20px
 
   width: $iconSize
   height: $iconSize
-  overflow: hidden
-
-  +iconImage
 
   a
     +setAsIcon
+
+@each $iconLabel in $iconNames
+  .icon.#{$iconLabel} a, .as-icon.#{$iconLabel}::after
+    +setIcon($iconLabel)
+
+.as-icon
+  position: relative
+  top: 0
+  left: 0
+  width: $iconSize
+
+  a
+    position: relative
+    margin: 0
+    padding: 0 0 0 $iconSize
+    width: 0
+    height: $iconSize
+    overflow: hidden
+
+  &::after
+    content: ''
+    +setAsIcon
+
+//—————————————————————————————————————————————: Social share links
+.share-links
+  margin: 0
+
+  dt
+    margin: 0 0 $contentMargin
+
+  dd
+    max-width: 320px
+
+  ul
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    margin: 0
+    padding: 0
+    
+  .icon
+    // for browsers with no flex support:
+    display: inline-block
+    vertical-align: top
+
+    &::before
+      display: none
+
+  @media only screen and (min-width: $tabletWidth)
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+
+    dt
+      margin: 0
+      padding-right: $contentPadding
+      line-height: $iconSize
+    
+    dd
+      flex-grow: 1

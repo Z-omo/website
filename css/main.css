@@ -106,13 +106,7 @@ a img {
   top: 0;
   left: 0;
   width: 2.375rem;
-  height: 2.375rem;
-  overflow: hidden;
-  background-color: transparent;
-  background-image: url("/resources/image/website-icons.svg");
-  background-repeat: no-repeat;
-  background-position: 0 top;
-  background-size: auto 100%; }
+  height: 2.375rem; }
   .icon a {
     position: absolute;
     top: 0;
@@ -127,6 +121,82 @@ a img {
     background-repeat: no-repeat;
     background-position: 0 top;
     background-size: auto 100%; }
+
+.icon.menu a, .as-icon.menu::after {
+  background-position: 0rem 0; }
+
+.icon.twitter a, .as-icon.twitter::after {
+  background-position: -2.375rem 0; }
+
+.icon.facebook a, .as-icon.facebook::after {
+  background-position: -4.75rem 0; }
+
+.icon.google a, .as-icon.google::after {
+  background-position: -7.125rem 0; }
+
+.icon.linkedin a, .as-icon.linkedin::after {
+  background-position: -9.5rem 0; }
+
+.icon.email a, .as-icon.email::after {
+  background-position: -11.875rem 0; }
+
+.as-icon {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 2.375rem; }
+  .as-icon a {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 2.375rem;
+    width: 0;
+    height: 2.375rem;
+    overflow: hidden; }
+  .as-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    padding-top: 2.375rem;
+    width: 2.375rem;
+    height: 0;
+    overflow: hidden;
+    background-color: transparent;
+    background-image: url("/resources/image/website-icons.svg");
+    background-repeat: no-repeat;
+    background-position: 0 top;
+    background-size: auto 100%; }
+
+.share-links {
+  margin: 0; }
+  .share-links dt {
+    margin: 0 0 2rem; }
+  .share-links dd {
+    max-width: 320px; }
+  .share-links ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0; }
+  .share-links .icon {
+    display: inline-block;
+    vertical-align: top; }
+    .share-links .icon::before {
+      display: none; }
+  @media only screen and (min-width: 39em) {
+    .share-links {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start; }
+      .share-links dt {
+        margin: 0;
+        padding-right: 2rem;
+        line-height: 2.375rem; }
+      .share-links dd {
+        flex-grow: 1; } }
 
 /*
  * SASS for body elements - colintester.com
@@ -418,7 +488,7 @@ main ul li:before {
   margin: 0 0.5rem 0 -1rem;
   vertical-align: middle;
   font-family: sans-serif;
-  color: #259cf7;
+  color: rgba(73, 59, 42, 0.8);
   font-size: 1.8rem;
   line-height: 1.8rem; }
 
@@ -478,17 +548,17 @@ ol {
       padding: 0.3em;
       width: 1rem;
       height: 1rem;
-      background-color: #92cefb;
+      background-color: rgba(73, 59, 42, 0.8);
       font-size: 1rem;
       line-height: 0.8rem;
       text-align: center;
-      color: #31393c; }
+      color: white; }
 
 q {
   quotes: '\201C' '\201D' '\2018' '\2019'; }
 
 q::before, q::after {
-  color: rgba(49, 57, 60, 0.8);
+  color: rgba(73, 59, 42, 0.8);
   font-family: "ff-meta-web-pro", "Trebuchet MS", sans-serif;
   font-size: 1.4em;
   line-height: 1em; }
@@ -609,6 +679,10 @@ nav {
     color: #31393c;
     text-align: center;
     background-color: #92cefb; }
+  nav .as-icon a {
+    border: none;
+    background-color: transparent;
+    z-index: 1; }
 
 @media only screen and (max-width: 39em) {
   .boundary > header a[href="#menu"] {
@@ -660,7 +734,7 @@ nav {
   @media only screen and (max-width: 39em) {
     .focus-js nav ul {
       padding-top: 7.375rem;
-      background-color: rgba(37, 156, 247, 0.9);
+      background-color: rgba(73, 59, 42, 0.8);
       transition-property: transform, opacity;
       transition-duration: 200ms, 200ms;
       transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), ease-in-out;
@@ -747,7 +821,9 @@ nav {
     z-index: 100;
     background-color: transparent; }
     .focus-js nav {
-      position: fixed; }
+      position: fixed;
+      right: auto;
+      left: auto; }
     nav ul {
       padding: 1rem;
       display: flex;
@@ -774,9 +850,17 @@ nav {
         color: #31393c; }
     nav .active a {
       background-color: rgba(37, 156, 247, 0.8);
-      color: white; } }
+      color: white; }
+    nav .as-icon {
+      top: -0.2375rem;
+      margin-left: 0.8em;
+      margin-right: 0.5rem; }
+      nav .as-icon a:hover {
+        background-color: transparent; } }
 
 @media only screen and (min-width: 69em) {
+  nav ul {
+    padding: 0.66667rem; }
   nav a {
     padding: 0.2em 3em;
     font-size: 1.2rem; } }
@@ -970,17 +1054,24 @@ footer {
     transition-duration: 200ms;
     background-color: rgba(73, 59, 42, 0.2); }
 
-.post header {
+.post > header {
   margin: 0 0 2rem; }
-  .post header time::after {
+  .post > header time::after {
     content: '   \2022   ';
     display: inline;
     white-space: pre;
     color: #259cf7; }
 
-.post footer {
+.post > footer {
   margin: 0 0 -2rem -2rem;
-  width: 100vw; }
+  width: 100vw;
+  background-color: rgba(73, 59, 42, 0.8); }
+  @media only screen and (min-width: 39em) {
+    .post > footer {
+      margin: 0 0 2rem;
+      -webkit-border-radius: 0.26em;
+      border-radius: 0.26em;
+      width: auto; } }
 
 /*
  * SASS for button elements – colintester.com
@@ -1144,7 +1235,7 @@ fieldset {
       -webkit-border-radius: 0.26em;
       border-radius: 0.26em;
       width: auto;
-      background-color: #e9f5fe; } }
+      background-color: rgba(73, 59, 42, 0.2); } }
   fieldset button {
     margin: 0; }
 
@@ -1162,7 +1253,7 @@ input, textarea, select {
   color: rgba(49, 57, 60, 0.8); }
   input:focus, textarea:focus, select:focus {
     outline: none;
-    box-shadow: 0 0 3px 1px rgba(37, 156, 247, 0.8); }
+    box-shadow: 0 0 3px 1px rgba(73, 59, 42, 0.8); }
 
 label {
   display: block; }
@@ -1173,7 +1264,7 @@ label {
     margin: 0;
     -webkit-border-radius: 0.26em;
     border-radius: 0.26em;
-    border: solid 1px #92cefb;
+    border: solid 1px #a49d95;
     padding: 0.4rem;
     -webkit-appearance: none;
     width: 97%; }
@@ -1198,7 +1289,7 @@ label {
   margin-left: 0.3rem;
   font-size: 2.5888rem;
   font-weight: bold;
-  color: rgba(73, 59, 42, 0.2); }
+  color: #92cefb; }
 
 .required.required-notice {
   margin: 0.66667rem 0 0;
