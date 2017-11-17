@@ -27,6 +27,10 @@ links:
 # main contact URL:
 contactURL: /contact
 
+# social media IDs:
+social:
+  twitter: colint_focus
+
 # blog posts are grouped into year folders, e.g. 2017/title-of-article.
 permalink: :year/:title
 

@@ -3,5 +3,6 @@
     {%- for link in site.links -%}
     <li{% if link.url == page.url %} class="active"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a></li>
     {%- endfor -%}
+    <li class="as-icon twitter"><a href="https://twitter.com/@{{ site.social.twitter }}">Twitter</a></li>
   </ul>
 </nav>

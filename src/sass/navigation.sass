@@ -28,6 +28,12 @@ nav
     text-align: center
     background-color: theme(prim-tint50)
 
+  .as-icon
+    a
+      border: none
+      background-color: transparent
+      z-index: 1
+
 .boundary > header
   a[href="#menu"] // <noscript>
     @media only screen and (max-width: $tabletWidth) // mobile only
@@ -72,7 +78,7 @@ nav
     ul
       // see also .js-scrolled below.
       padding-top: $mobileRibbonHeight + ($contentPadding * 2) 
-      background-color: rgba($primary, 0.9)
+      background-color: theme(tert-blend80)//rgba($primary, 0.9)
       transition-property: transform, opacity
       transition-duration: $transDurationIn, $transDurationIn
       transition-timing-function: $easeOutQuint, ease-in-out
@@ -146,6 +152,8 @@ nav
 
     .focus-js &
       position: fixed
+      right: auto
+      left: auto
 
     ul
       padding: $contentPadding / 2
@@ -184,8 +192,20 @@ nav
         background-color: theme(prim-blend80)
         color: white
 
+    .as-icon
+      top: -$iconSize * 0.1
+      margin-left: 0.8em
+      margin-right: $viewEdgePos
+
+      a:hover
+        background-color: transparent
+
+
 @media only screen and (min-width: $desktopWidth)
   nav
+    ul
+      padding: $contentPadding / 3
+
     a
       padding: 0.2em 3em
       font-size: 1.2rem
