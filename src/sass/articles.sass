@@ -122,6 +122,7 @@
 .post
   > header
     margin: 0 0 $contentMargin
+    font-size: 0.9rem
 
     time::after
       content: '   • '
@@ -133,9 +134,11 @@
   > footer
     margin: 0 0 -#{$contentPadding} -#{$contentPadding}
     width: 100vw
+    min-height: auto
     background-color: theme(tert-blend80)
 
     @media only screen and (min-width: $tabletWidth)
       margin: 0 0 $contentMargin
+      padding: $contentPadding / 2
       +corners
       width: auto
