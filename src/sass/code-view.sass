@@ -1,0 +1,52 @@
+/*
+ * SASS for presenting <code> examples on colintester.com
+ */
+
+@import "code-highlighter"
+
+$mobileCodePadding: $contentPadding / 4
+$codePadding: $contentPadding / 2
+$codeBackgroundColour: rgba(theme(tertiary),0.1)
+
+.highlight
+  position: relative
+  margin: 0 0 $contentMargin -#{$contentPadding}
+  padding: 0 0 0 $mobileCodePadding
+  width: 98vw//calc(100vw - #{$mobileCodePadding})
+  font-family: monospace
+  font-size: 1rem
+  line-height: 1.1rem
+  background-color: $codeBackgroundColour
+  overflow-x: scroll
+
+  @media only screen and (min-width: $tabletWidth)
+    margin-left: 0
+    padding-left: $codePadding
+    width: auto
+    overflow-x: visible
+
+  .gutter
+    min-width: 0.8em//1.6rem
+    color: #667777
+
+    @media only screen and (min-width: $tabletWidth)
+      min-width: 1.6rem
+
+  code::after
+    position: absolute
+    right: $mobileCodePadding
+    bottom: $mobileCodePadding
+    content: attr(data-lang)
+    color: theme(secondary)
+    opacity: 0.5
+
+    @media only screen and (min-width: $tabletWidth)
+      right: $codePadding
+
+.highlighter-rouge
+  +corners
+  padding: 0.2em 0.4em
+  color: black
+  font-family: monospace
+  background-color: $codeBackgroundColour
+  white-space: nowrap

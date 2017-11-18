@@ -15,7 +15,6 @@
   {% include header.html %}
   <main>
     <div class="content">
-      
       <article class="post">
         <header>
           <time datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time> <span class="by-line">by: {{ page.author }}</span>
@@ -26,9 +25,7 @@
           {% include share-links.html %}
         </footer>
       </article>
-      
     </div>
-    
   </main>
   
   {% include navigation.html %}
