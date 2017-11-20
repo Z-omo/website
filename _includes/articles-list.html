@@ -35,7 +35,7 @@
 
   <article {% if articleClass %} class="{{ articleClass }}"{% endif %}>
   <noscript><style>#{{ tileName }} { background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}); }</style></noscript>
-  <a id="{{ tileName }}" href="{{ article.url | relative_url }}" {% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
+  <a id="{{ tileName }}" href="{{ article.url | relative_url }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
     <header>
       <h1>{{ article.title }}</h1>
       {%- if articleDate -%}<time datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
