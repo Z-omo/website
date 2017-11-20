@@ -3,7 +3,7 @@ layout: work-sample
 title: Mega Roller Disco
 rwdURL: http://megarollerdisco.com/
 rwdMode: mobile
-hideTileTitle: true
+imageOnly: true
 ---
 
 ## Website

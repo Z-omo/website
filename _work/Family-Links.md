@@ -1,7 +1,7 @@
 ---
 layout: work-sample
 title: Family Links
-hideTileTitle: true
+imageOnly: true
 ---
 
 # Website, API, Online Shop and Pattern Library

@@ -18,7 +18,10 @@
   {%- if tileName == pageURL -%}{% continue %}{%- endif -%}
   
   {%- assign tileData = site.static_files | where: 'basename', tileName -%}
-  {%- assign articleDate = article.date | date_to_string -%}
+  {%- if article.date -%}
+    {%- assign articleDate = article.date | date_to_string -%}
+  {%- endif -%}
+  
   {%- assign articleClass = '' -%}
   {%- assign withImage = false -%}
   {%- if 1 == tileData.size -%}
@@ -26,7 +29,7 @@
     {% assign articleClass = 'with-image' %}
   {%- endif -%}
 
-  {%- if article.hideTileTitle -%}
+  {%- if article.imageOnly == true -%}
     {% assign articleClass = articleClass | append: ' image-only' %}
   {%- endif -%}
 
@@ -35,9 +38,7 @@
   <a id="{{ tileName }}" href="{{ article.url | relative_url }}" {% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
     <header>
       <h1>{{ article.title }}</h1>
-      {%- if page.listType != 'image' -%}
-      <time datetime="{{ article.date }}">{{ articleDate }}</time>
-      {% endif %}
+      {%- if articleDate -%}<time datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
     </header>
 
     {%- if article.summary -%}<p>{{ article.summary }}</p>{% endif %}
