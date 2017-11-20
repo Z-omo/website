@@ -1,7 +1,7 @@
 ---
 layout: work-sample
 title: Clockwork Components
-hideTileTitle: true
+imageOnly: true
 #rwdURL: http://clockworkcomponents.com/
 #rwdMode: mobile
 ---
