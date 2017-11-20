@@ -15,24 +15,33 @@
   {%- capture postPath -%}/{{ article.date | date: '%Y' }}/{% endcapture %}
   {%- assign tileName = article.id | replace: postPath, '' | replace: '/', '' -%}
 
-  {%- if tileName == pageURL -%}{% continue %}{% endif %}
+  {%- if tileName == pageURL -%}{% continue %}{%- endif -%}
   
-  {% assign tileData = site.static_files | where: 'basename', tileName %}
-
+  {%- assign tileData = site.static_files | where: 'basename', tileName -%}
+  {%- assign articleDate = article.date | date_to_string -%}
+  {%- assign articleClass = '' -%}
+  {%- assign withImage = false -%}
   {%- if 1 == tileData.size -%}
     {% assign withImage = true %}
     {% assign articleClass = 'with-image' %}
   {%- endif -%}
 
   {%- if article.hideTileTitle -%}
-    {% assign articleClass = articleClass | append: ' hide-title' %}
+    {% assign articleClass = articleClass | append: ' image-only' %}
   {%- endif -%}
 
   <article {% if articleClass %} class="{{ articleClass }}"{% endif %}>
   <noscript><style>#{{ tileName }} { background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}); }</style></noscript>
+  <a id="{{ tileName }}" href="{{ article.url | relative_url }}" {% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
     <header>
-      <a id="{{ tileName }}" href="{{ article.url | relative_url }}" {% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}><h1>{{ article.title }}</h1></a>
+      <h1>{{ article.title }}</h1>
+      {%- if page.listType != 'image' -%}
+      <time datetime="{{ article.date }}">{{ articleDate }}</time>
+      {% endif %}
     </header>
+
+    {%- if article.summary -%}<p>{{ article.summary }}</p>{% endif %}
+  </a>
   </article>
   {%- endfor -%}
 </div>

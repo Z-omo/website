@@ -2,6 +2,7 @@
 layout: collection
 title: Work
 permalink: /work
+listType: image
 ---
 
 Herein are recent examples of my work.
