@@ -449,13 +449,16 @@ body {
   line-height: 1.618rem;
   color: #31393c; }
 
-h1, h2, h3 {
+h1, h2, h3, .statement {
   margin: 0 0 2rem;
   font-family: "ff-meta-web-pro", "Trebuchet MS", sans-serif;
   font-size: 1.618rem;
   line-height: 2.61792rem;
   font-weight: 700;
   color: #31393c; }
+
+.statement {
+  color: rgba(73, 59, 42, 0.8); }
 
 p, ul, ol {
   margin: 0 0 1.618rem; }
@@ -953,107 +956,117 @@ footer {
 /*
  * SASS for article collection views – colintester.com
  */
-.articles article {
-  display: block;
+.articles {
   position: relative;
-  box-sizing: border-box;
-  margin: 0 0 2rem 0;
-  padding: 0;
-  border: solid 1px rgba(255, 255, 255, 0.7);
-  -webkit-border-radius: 0.26em;
-  border-radius: 0.26em;
-  height: 8rem;
-  background-color: transparent;
-  transition: background-color 1s ease-out; }
-  .articles article a {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    text-decoration: none;
-    border: none; }
-  .articles article h1 {
-    padding: 0.66667rem 1rem;
-    font-size: 1.2rem;
-    line-height: 1.5rem;
-    color: #31393c; }
+  margin: 0 0 2rem; }
+  @media only screen and (min-width: 39em) {
+    .articles {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center; } }
+  .articles article {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 0 0 -2rem;
+    padding: 0;
+    border-bottom: solid 1px rgba(49, 57, 60, 0.2);
+    width: 100vw;
+    min-height: 6rem;
+    background-color: transparent;
+    overflow: hidden;
+    transition: background-color 1s ease-out; }
     @media only screen and (min-width: 39em) {
-      .articles article h1 {
-        font-size: 1.4rem;
-        line-height: 1.8rem; } }
+      .articles article {
+        box-shadow: 0 0 0 1px rgba(49, 57, 60, 0.2);
+        -webkit-border-radius: 0.26em;
+        border-radius: 0.26em;
+        margin: 0 0.5rem 1rem;
+        width: 47.3%;
+        min-height: 12rem;
+        display: inline-block; } }
     @media only screen and (min-width: 69em) {
-      .articles article h1 {
-        font-size: 1.8rem;
-        line-height: 2.2rem; } }
-  .articles article.hide-title h1 {
-    opacity: 0 !important; }
-  .articles article.with-image a {
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover; }
-  .articles article:hover {
-    background-color: rgba(73, 59, 42, 0.2);
-    transition-duration: 200ms; }
-
-.articles.work-articles .with-image a {
-  background-size: auto 100%; }
-
-@media only screen and (min-width: 39em) {
-  .side-bar .articles {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: left; }
-    .side-bar .articles article {
-      margin: 0 1rem 2rem 0;
-      width: 30%; } }
+      .articles article {
+        width: 30%;
+        min-height: 16rem; } }
+    @media only screen and (min-width: 2000px) {
+      .articles article {
+        width: 24%;
+        min-height: 20rem; } }
+    .articles article a {
+      display: block;
+      box-sizing: border-box;
+      padding: 0.66667rem 1rem;
+      text-decoration: none;
+      border: none;
+      width: 100%;
+      height: 100%; }
+    .articles article header {
+      position: relative;
+      margin: 0 0 1rem; }
+      .articles article header time {
+        font-size: 0.9rem; }
+    .articles article h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2rem;
+      line-height: 1.5rem;
+      color: #31393c; }
+      @media only screen and (min-width: 39em) {
+        .articles article h1 {
+          font-size: 1.4rem;
+          line-height: 1.8rem; } }
+      @media only screen and (min-width: 69em) {
+        .articles article h1 {
+          font-size: 1.8rem;
+          line-height: 2.2rem; } }
+    .articles article p {
+      margin: 0; }
+    .articles article.with-image {
+      min-height: 12rem;
+      border-bottom: none; }
+      @media only screen and (min-width: 39em) {
+        .articles article.with-image {
+          min-height: 16rem; } }
+      .articles article.with-image a {
+        min-height: inherit;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover; }
+      .articles article.with-image header {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0.66667rem 1rem;
+        width: 100%;
+        color: white;
+        text-shadow: 2px 1px 1px #31393c;
+        background-image: -webkit-linear-gradient(top, rgba(49, 57, 60, 0.2), rgba(49, 57, 60, 0.8));
+        background-image: linear-gradient(to bottom, rgba(49, 57, 60, 0.2), rgba(49, 57, 60, 0.8));
+        transition: background-color 1s ease-out; }
+        .articles article.with-image header h1 {
+          color: inherit; }
+    .articles article.with-image:hover header {
+      transition-duration: 200ms;
+      background-color: rgba(37, 156, 247, 0.8); }
+    .articles article:hover {
+      background-color: rgba(37, 156, 247, 0.2);
+      transition-duration: 200ms; }
+    .articles article.image-only {
+      box-shadow: none; }
+      .articles article.image-only a {
+        background-size: contain; }
+      .articles article.image-only header {
+        opacity: 0; }
 
 @media only screen and (min-width: 69em) {
   .side-bar .articles {
     display: block; }
     .side-bar .articles article {
-      margin: 0 0 2rem 0;
-      width: auto; } }
-
-.content .articles {
-  position: relative;
-  margin: 0 0 2rem;
-  padding-top: 2rem; }
-  @media only screen and (min-width: 39em) {
-    .content .articles {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center; } }
-  @media only screen and (min-width: 39em) {
-    .content .articles article {
-      margin: 0 1rem 2rem;
-      width: 45%;
-      height: 12rem;
-      display: inline-block; } }
-  @media only screen and (min-width: 69em) {
-    .content .articles article {
-      width: 30%;
-      height: 16rem; }
-      .content .articles article.with-image a {
-        background-size: contain; } }
-  .content .articles article.with-image h1 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin: 0;
-    -webkit-border-radius: 0 0 0.26em 0.26em;
-    border-radius: 0 0 0.26em 0.26em;
-    box-sizing: border-box;
-    width: 100%;
-    color: white;
-    text-shadow: 2px 1px 1px #31393c;
-    opacity: 0.9;
-    background-color: rgba(49, 57, 60, 0.2);
-    transition: background-color 1s ease-out; }
-  .content .articles article.with-image:hover h1 {
-    opacity: 1;
-    transition-duration: 200ms;
-    background-color: rgba(73, 59, 42, 0.2); }
+      margin: 0 0 1rem 0;
+      width: 100%; } }
 
 .post > header {
   margin: 0 0 2rem;

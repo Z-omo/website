@@ -19,6 +19,9 @@
         <header>
           <time datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time> <span class="by-line">by: {{ page.author }}</span>
         </header>
+        {%- if page.summary -%}
+        <p class="statement">{{ page.summary }}</p>
+        {% endif %}
         {{content}}
 
         <footer>

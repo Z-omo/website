@@ -11,13 +11,19 @@ body
   line-height: $bodyContentLineHeight
   color: theme(secondary)
 
-h1, h2, h3
+$headingFontSize: $contentFontSize * $gRatio
+$headingLineHeight: ($contentFontSize * $gRatio) * $gRatio
+
+h1, h2, h3, .statement
   margin: 0 0 $contentMargin
   font-family: $headingFont
-  font-size: $contentFontSize * $gRatio
-  line-height: ($contentFontSize * $gRatio) * $gRatio
+  font-size: $headingFontSize
+  line-height: $headingLineHeight
   font-weight: 700
   color: theme(secondary)
+
+.statement
+  color: theme(tert-blend80)
 
 p, ul , ol
   margin: 0 0 $bodyContentLineHeight
