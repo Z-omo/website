@@ -678,7 +678,9 @@ nav {
     padding: 2rem 0; }
   nav li {
     margin: 0 auto 1rem;
-    width: 80%; }
+    width: 80%;
+    -webkit-border-radius: 2em;
+    border-radius: 2em; }
   nav a {
     display: block;
     -webkit-border-radius: 2em;
@@ -860,16 +862,23 @@ nav {
       transition-property: background-color, color;
       transition-duration: 1s, 2s;
       transition-timing-function: ease-out, ease-out; }
-      nav a:hover {
-        background-color: #bee1fd !important;
+      nav a:hover, nav a[href="/"]:hover {
+        background-color: #bee1fd;
         transition-duration: 200ms, 400ms;
         color: #31393c; }
     nav .as-icon {
       top: -0.2375rem;
       margin-left: 0.8em;
-      margin-right: 0.5rem; }
-      nav .as-icon a:hover {
-        background-color: transparent; } }
+      margin-right: 0.5rem;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: background-color 1s ease-out; }
+      nav .as-icon:hover {
+        background-color: rgba(37, 156, 247, 0.8);
+        transition-duration: 200ms; }
+        nav .as-icon:hover a {
+          background-color: transparent; } }
 
 @media only screen and (min-width: 69em) {
   nav ul {
