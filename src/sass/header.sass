@@ -46,7 +46,10 @@
         +transformThis(scale(.72))
 
   h1
-    display: none
+    // off screen but readable by screen readers.
+    position: absolute
+    top: -1000px
+    left: 0
   
   h2
     margin: ($viewEdgePos * 3) 0 $viewEdgePos

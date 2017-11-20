@@ -258,13 +258,14 @@ main {
     overflow: hidden; }
 
 .side-bar figure {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 90%;
   min-width: 170px;
   max-width: 320px; }
   @media only screen and (min-width: 39em) {
     .side-bar figure {
+      margin: 0 auto;
       width: 71.2%; } }
 
 .side-bar figcaption {
@@ -327,6 +328,10 @@ main {
       border: solid 1px rgba(49, 57, 60, 0.2);
       padding: 2rem; } }
 
+@media only screen and (min-width: 39em) {
+  .mobile-only {
+    display: none; } }
+
 /*
  * SASS for page header element – colintester.com
  */
@@ -374,7 +379,9 @@ main {
         -ms-transform: scale(0.72);
         transform: scale(0.72); }
   .boundary > header h1 {
-    display: none; }
+    position: absolute;
+    top: -1000px;
+    left: 0; }
   .boundary > header h2 {
     margin: 1.5rem 0 0.5rem;
     font-size: 2.09rem;
@@ -737,7 +744,7 @@ nav {
     opacity: 0; }
   @media only screen and (max-width: 39em) {
     .focus-js nav ul {
-      padding-top: 7.375rem;
+      padding-top: 5.375rem;
       background-color: rgba(73, 59, 42, 0.8);
       transition-property: transform, opacity;
       transition-duration: 200ms, 200ms;
@@ -812,7 +819,7 @@ nav {
 
 @media only screen and (max-width: 39em) {
   .js-scrolled nav > ul {
-    padding-top: 5.375rem; } }
+    padding-top: 4.375rem; } }
 
 @media only screen and (min-width: 39em) {
   nav {
@@ -839,6 +846,11 @@ nav {
       padding: 0;
       width: auto;
       display: inline-block; }
+    nav .active a {
+      background-color: rgba(37, 156, 247, 0.8);
+      color: white; }
+    nav .active a[href="/"] {
+      background-color: transparent; }
     nav a {
       border: none;
       padding: 0 1.8em;
@@ -849,12 +861,9 @@ nav {
       transition-duration: 1s, 2s;
       transition-timing-function: ease-out, ease-out; }
       nav a:hover {
-        background-color: #bee1fd;
+        background-color: #bee1fd !important;
         transition-duration: 200ms, 400ms;
         color: #31393c; }
-    nav .active a {
-      background-color: rgba(37, 156, 247, 0.8);
-      color: white; }
     nav .as-icon {
       top: -0.2375rem;
       margin-left: 0.8em;
@@ -1360,7 +1369,7 @@ footer {
   font-family: monospace;
   font-size: 1rem;
   line-height: 1.1rem;
-  background-color: rgba(73, 59, 42, 0.1);
+  background-color: rgba(73, 59, 42, 0.08);
   overflow-x: scroll; }
   @media only screen and (min-width: 39em) {
     .highlight {
@@ -1391,7 +1400,7 @@ footer {
   padding: 0.2em 0.4em;
   color: black;
   font-family: monospace;
-  background-color: rgba(73, 59, 42, 0.1);
+  background-color: rgba(73, 59, 42, 0.08);
   white-space: nowrap; }
 
 /*
@@ -1533,7 +1542,8 @@ form {
   padding: 0; }
   @media only screen and (min-width: 39em) {
     form {
-      max-width: 37.08282rem; } }
+      max-width: 37.08282rem;
+      min-width: 580px; } }
 
 fieldset {
   position: relative;
