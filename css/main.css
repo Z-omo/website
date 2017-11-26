@@ -850,9 +850,10 @@ nav {
       display: inline-block; }
     nav .active a {
       background-color: rgba(37, 156, 247, 0.8);
-      color: white; }
+      color: black; }
     nav .active a[href="/"] {
-      background-color: transparent; }
+      background-color: transparent;
+      color: white; }
     nav a {
       border: none;
       padding: 0 1.8em;
