@@ -1,6 +1,6 @@
 {% assign shareURL = page.url | prepend: site.url %}
 {%- if page.headerImage -%}
-  {%assign imageURL = site.url | append: '/resources/posts/share/' | append: page.headerImage %}
+  {%assign imageURL = site.url | append: 'resources/posts/share/' | append: page.headerImage %}
 {% endif %}
 {%- if page.summary -%}<meta name="description" content="{{ page.summary }}">{% endif %}
 <meta name="author" content="{{ page.author }}">
