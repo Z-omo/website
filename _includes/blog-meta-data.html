@@ -1,0 +1,19 @@
+{% assign shareURL = page.url | prepend: site.url %}
+{%- if page.summary -%}<meta name="description" content="{{ page.summary }}">{% endif %}
+<meta name="author" content="{{ page.author }}">
+
+{%- assign cardType = 'summary' -%}
+{%- if page.headerImage -%}{% assign cardType = 'summary_large_image' %}{% endif %}
+<meta name="twitter:card" content="{{ cardType }}">
+<meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:creator" content="@{% if page.twitterHandle %}{{ page.twitterHandle }}{% else %}colint_focus{% endif %}">
+{% if page.summary %}<meta name="twitter:description" content="{{ page.summary }}">{% endif %}
+{% if page.headerImage %}<meta name="twitter:image" content="{{ site.url }}resources/posts/share/{{ page.headerImage }}">
+{% if page.headerImageAlt %}<meta name="twitter:image:alt" content="{{ page.headerImageAlt }}">{% endif %}{% endif %}
+<meta name="twitter:url" content="{{ shareURL }}">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ page.title }}">
+{% if page.summary %}<meta property="og:description" content="{{ page.summary }}">{% endif %}
+{% if page.headerImage %}<meta property="og:image" content="{{ site.url }}resources/posts/share/{{ page.headerImage }}">{% endif %}
+<meta property="og:url" content="{{ shareURL }}">
