@@ -1,4 +1,4 @@
-<div class="articles{% if include.group %} {{ include.group }}{% endif %}">
+<div itemscope itemtype="https://schema.org/Blog" class="articles{% if include.group %} {{ include.group }}{% endif %}">
   {%- for article in include.articles -%}
   {% comment %}
   Capture page URL component.
@@ -34,13 +34,16 @@
     {% assign articleClass = articleClass | append: ' image-only' %}
   {%- endif -%}
 
+  {%- assign articleURL = article.url | prepend: site.url -%}
+
   <article itemscope itemtype="http://schema.org/BlogPosting"{% if articleClass %} class="{{ articleClass }}"{% endif %}>
     {% if withImage %}<noscript>
       <style>#{{ tileName }} { background-image: url('{{ imageURL }}'); }</style>
       <meta itemprop="image" content="{{ imageURL }}">
     </noscript>{%- endif -%}
-  <a itemprop="url" id="{{ tileName }}" href="{{ article.url | prepend: site.url }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url('{{ imageURL }}')" data-lazlo-attr="style"{%- endif -%}>
+  <a itemprop="url" id="{{ tileName }}" href="{{ articleURL }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url('{{ imageURL }}')" data-lazlo-attr="style"{%- endif -%}>
     <header>
+      <meta itemprop="mainEntityOfPage" content="{{ articleURL }}">
       <h1 itemprop="headline">{{ article.title }}</h1>
       {% if articleDate %}<time itemprop="datePublished" datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
       {% if article.author %}<span itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="{{ article.author }}"></span>{%- endif-%}
