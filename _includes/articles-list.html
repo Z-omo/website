@@ -27,7 +27,7 @@
   {%- if 1 == tileData.size -%}
     {% assign withImage = true %}
     {% assign articleClass = 'with-image' %}
-    {% assign imageURL = site.url | append: 'resources/posts/tiles/' | append: tileData[0].basename | append: tileData[0].extname %}
+    {% assign imageURL = site.url | append: '/resources/posts/tiles/' | append: tileData[0].basename | append: tileData[0].extname %}
   {%- endif -%}
 
   {%- if article.imageOnly == true -%}
