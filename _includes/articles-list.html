@@ -22,27 +22,38 @@
     {%- assign articleDate = article.date | date_to_string -%}
   {%- endif -%}
   
-  {%- assign articleClass = '' -%}
+  {%- assign articleClass = false -%}
   {%- assign withImage = false -%}
   {%- if 1 == tileData.size -%}
     {% assign withImage = true %}
     {% assign articleClass = 'with-image' %}
+    {% assign imageURL = site.url | append: 'resources/posts/tiles/' | append: tileData[0].basename | append: tileData[0].extname %}
   {%- endif -%}
 
   {%- if article.imageOnly == true -%}
     {% assign articleClass = articleClass | append: ' image-only' %}
   {%- endif -%}
 
-  <article {% if articleClass %} class="{{ articleClass }}"{% endif %}>
-  <noscript><style>#{{ tileName }} { background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }}); }</style></noscript>
-  <a id="{{ tileName }}" href="{{ article.url | relative_url }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url(resources/posts/tiles/{{ tileData[0].basename }}{{ tileData[0].extname }})" data-lazlo-attr="style"{%- endif -%}>
+  <article itemscope itemtype="http://schema.org/BlogPosting"{% if articleClass %} class="{{ articleClass }}"{% endif %}>
+    {% if withImage %}<noscript>
+      <style>#{{ tileName }} { background-image: url('{{ imageURL }}'); }</style>
+      <meta itemprop="image" content="{{ imageURL }}">
+    </noscript>{%- endif -%}
+  <a itemprop="url" id="{{ tileName }}" href="{{ article.url | prepend: site.url }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url('{{ imageURL }}')" data-lazlo-attr="style"{%- endif -%}>
     <header>
-      <h1>{{ article.title }}</h1>
-      {%- if articleDate -%}<time datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
+      <h1 itemprop="headline">{{ article.title }}</h1>
+      {% if articleDate %}<time itemprop="datePublished" datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
+      {% if article.author %}<span itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="{{ article.author }}"></span>{%- endif-%}
     </header>
 
-    {%- if article.summary -%}<p>{{ article.summary }}</p>{% endif %}
-  </a>
+    {%- if article.summary -%}
+      {%- if withImage -%}
+    <meta itemprop="description" content="{{ article.summary }}">
+      {%- else -%}
+    <p itemprop="description">{{ article.summary }}</p>
+      {%- endif -%}
+    {% endif %}
+    </a>
   </article>
   {%- endfor -%}
 </div>
