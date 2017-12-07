@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="{{ '/css/main.css' | relative_url }}">
 </head>
 <body>
-  <div class="boundary">
+  <div class="boundary work-example">
   {% include header.html %}
   <main itemscope itemtype="https://schema.org/Blog">
     <div class="content">
@@ -21,7 +21,9 @@
         <header>
           <meta itemprop="mainEntityOfPage" content="{{ page.url | prepend: site.url }}">
           <meta itemprop="name headline" content="{{ page.title }}">
-          <time itemprop="datePublished" datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time> <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name" class="by-line">by: {{ page.author }}</span></span>
+          <time itemprop="datePublished" datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time> 
+          {%- if page.dateModified -%}<time itemprop="dateModified" datetime="{{ page.dateModified }}">Updated: {{ page.dateModified | date_to_long_string }}</time> {% endif %}
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name" class="by-line">by: {{ page.author }}</span></span>
         </header>
         {% if page.summary %}
         <p itemprop="description" class="statement">{{ page.summary }}</p>
@@ -29,13 +31,20 @@
         <div itemprop="articleBody">
           {{content}}
         </div>
-
+  
         <footer>
-          {% include share-links.html %}
+          {%- include share-links.html -%}
           <span itemprop="publisher" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Colin Tester"></span>
         </footer>
       </article>
     </div>
+
+    <aside class="side-bar">
+      {% include get-in-touch.html %}
+      <p>Latest posts:</p>
+      {% include articles-list.html articles=site.related_posts group='work-articles' %}
+    </aside>
+  
   </main>
   
   {% include navigation.html %}
