@@ -28,7 +28,7 @@
             <dd><time itemprop="dateModified" datetime="{{ page.dateModified }}"> {{ page.dateModified | date_to_long_string }}</time></dd>{% endif %}
 
             {% if page.author %}<dt>By:</dt>
-            <dd temprop="author" itemscope itemtype="https://schema.org/Person">
+            <dd itemprop="author" itemscope itemtype="https://schema.org/Person">
               <a itemprop="sameAs" class="inline-icon twitter" href="https://twitter.com/{% if page.twitterHandle %}{{ page.twitterHandle }}{% else %}colint_focus{% endif %}"><span itemprop="name" class="by-line">{{ page.author }}</span></a>
             </dd>{%- endif -%}
           </dl>
