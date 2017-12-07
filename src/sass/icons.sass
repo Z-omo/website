@@ -50,8 +50,11 @@ $iconInlineSize:  20px
   a
     +setAsIcon
 
+    &::after
+      display: none
+
 @each $iconLabel in $iconNames
-  .icon.#{$iconLabel} a, .as-icon.#{$iconLabel}::after
+  .icon.#{$iconLabel} a, .as-icon.#{$iconLabel}::after, .inline-icon.#{$iconLabel}::after
     +setIcon($iconLabel)
 
 .as-icon
@@ -71,6 +74,29 @@ $iconInlineSize:  20px
   &::after
     content: ''
     +setAsIcon
+
+.inline-icon
+  position: relative
+
+  &::after
+    content: ''
+    +setAsIcon
+    //position: relative
+    //display: inline-block
+    //vertical-align: middle
+    //right: auto//-$iconSize
+    //bottom: auto
+    top: -($iconSize / 4) * 0.7
+    left: auto
+
+    -webkit-transform: scale(0.6)
+    -ms-transform: scale(0.6)
+    transform: scale(0.6)
+    background-color: theme(primary)
+    +corners(50%)
+
+  &:hover::after
+    border: none
 
 //—————————————————————————————————————————————: Social share links
 .share-links
