@@ -78,7 +78,7 @@ nav
   @media only screen and (max-width: $tabletWidth)
     ul
       // see also .js-scrolled below.
-      padding-top: $mobileRibbonHeight + $contentPadding 
+      padding-top: $mobileRibbonHeight + ($contentPadding * 2)
       background-color: theme(tert-blend80)//rgba($primary, 0.9)
       transition-property: transform, opacity
       transition-duration: $transDurationIn, $transDurationIn
@@ -137,7 +137,7 @@ nav
 
 @media only screen and (max-width: $tabletWidth)
   .js-scrolled nav > ul
-    padding-top: $mobileRibbonHeight + ($contentPadding / 2)
+    padding-top: $mobileRibbonHeight + ($contentPadding)
 
 //—————————————————————————————————————————————: Tablet and above.
 @media only screen and (min-width: $tabletWidth)

@@ -21,9 +21,17 @@
         <header>
           <meta itemprop="mainEntityOfPage" content="{{ page.url | prepend: site.url }}">
           <meta itemprop="name headline" content="{{ page.title }}">
-          <time itemprop="datePublished" datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time> 
-          {%- if page.dateModified -%}<time itemprop="dateModified" datetime="{{ page.dateModified }}">Updated: {{ page.dateModified | date_to_long_string }}</time> {% endif %}
-          <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name" class="by-line">by: {{ page.author }}</span></span>
+          <dl>
+            <dt>Published:</dt>
+            <dd><time itemprop="datePublished" datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time></dd>
+            {%- if page.dateModified -%}<dt>Updated:</dt>
+            <dd><time itemprop="dateModified" datetime="{{ page.dateModified }}"> {{ page.dateModified | date_to_long_string }}</time></dd>{% endif %}
+
+            {% if page.author %}<dt>By:</dt>
+            <dd temprop="author" itemscope itemtype="https://schema.org/Person">
+              <a itemprop="sameAs" class="inline-icon twitter" href="https://twitter.com/{% if page.twitterHandle %}{{ page.twitterHandle }}{% else %}colint_focus{% endif %}"><span itemprop="name" class="by-line">{{ page.author }}</span></a>
+            </dd>{%- endif -%}
+          </dl>
         </header>
         {% if page.summary %}
         <p itemprop="description" class="statement">{{ page.summary }}</p>

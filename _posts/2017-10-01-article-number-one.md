@@ -1,7 +1,7 @@
 ---
 layout: post
 title: One of these days we're gonna find us a new house
-author: Colin Tester
+author: Colino Pedro Testeratorro
 headerImage: header-image.jpg
 headerImageAlt: Is the image of the header within the header.
 summary: Aliquip dignissim dolore quis ipsum enim exerci vulputate nulla ipsum. Velit illum tation vulputate augue suscipit.

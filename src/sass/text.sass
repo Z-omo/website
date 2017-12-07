@@ -30,12 +30,22 @@ p, ul , ol
   
 //—————————————————————————————————————————————: Links
 main a
+  position: relative
   color: theme(tertiary)
   text-decoration: none
-  border-bottom: dotted 1px theme(primary)
 
-  &:hover
-    border-bottom-style: solid
+main
+  p, li, dd
+    a::after
+      content: ''
+      position: absolute
+      bottom: 0.1rem
+      left: 0
+      width: 100%
+      border-bottom: dotted 1px theme(primary)
+
+    a:hover::after
+      border-bottom-style: solid
 
 footer a
   color: white
