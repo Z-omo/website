@@ -28,6 +28,8 @@
     {% assign withImage = true %}
     {% assign articleClass = 'with-image' %}
     {% assign imageURL = site.url | append: '/resources/posts/tiles/' | append: tileData[0].basename | append: tileData[0].extname %}
+  {%- else -%}
+    {% assign imageURL = site.url | append: '/resources/image/on-focus-logo.png' %}
   {%- endif -%}
 
   {%- if article.imageOnly == true -%}
@@ -38,14 +40,15 @@
 
   <article itemscope itemtype="http://schema.org/BlogPosting"{% if articleClass %} class="{{ articleClass }}"{% endif %}>
     {% if withImage %}<noscript>
-      <style>#{{ tileName }} { background-image: url('{{ imageURL }}'); }</style>
-      <meta itemprop="image" content="{{ imageURL }}">
+      <style>#{{ tileName }} { background-image: url('{{ imageURL }}');</style>
     </noscript>{%- endif -%}
+    <meta itemprop="image" content="{{ imageURL }}">
   <a itemprop="url" id="{{ tileName }}" href="{{ articleURL }}" title="To read more on: {{ article.title }}"{% if withImage %} data-lazlo="background-image: url('{{ imageURL }}')" data-lazlo-attr="style"{%- endif -%}>
     <header>
       <meta itemprop="mainEntityOfPage" content="{{ articleURL }}">
       <h1 itemprop="headline">{{ article.title }}</h1>
       {% if articleDate %}<time itemprop="datePublished" datetime="{{ article.date }}">{{ articleDate }}</time>{% endif %}
+      <meta itemprop="dateModified" content="{%- if article.dateModified -%}{{ article.dateModified }}{% else %}{{ article.date }}{% endif %}">
       {% if article.author %}<span itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="{{ article.author }}"></span>{%- endif-%}
     </header>
 
@@ -57,6 +60,10 @@
       {%- endif -%}
     {% endif %}
     </a>
+    <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+      <meta itemprop="name" content="Z-omo">
+      <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject"><meta itemprop="url" content="http://z-omo.com/resources/image/z-omo-logo.png"></span>
+    </span>
   </article>
   {%- endfor -%}
 </div>

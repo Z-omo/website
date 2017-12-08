@@ -21,11 +21,12 @@
         <header>
           <meta itemprop="mainEntityOfPage" content="{{ page.url | prepend: site.url }}">
           <meta itemprop="name headline" content="{{ page.title }}">
+          {% if imageURL %}<meta itemprop="image" content="{{ imageURL }}">{% endif %}
           <dl>
             <dt>Published:</dt>
             <dd><time itemprop="datePublished" datetime="{{ page.date }}">{{ page.date | date_to_long_string }}</time></dd>
             {%- if page.dateModified -%}<dt>Updated:</dt>
-            <dd><time itemprop="dateModified" datetime="{{ page.dateModified }}"> {{ page.dateModified | date_to_long_string }}</time></dd>{% endif %}
+            <dd><time itemprop="dateModified" datetime="{{ page.dateModified }}"> {{ page.dateModified | date_to_long_string }}</time></dd>{% else %}<meta itemprop="dateModified" content="{{ page.date }}">{% endif %}
 
             {% if page.author %}<dt>By:</dt>
             <dd itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -42,7 +43,10 @@
   
         <footer>
           {%- include share-links.html -%}
-          <span itemprop="publisher" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="Colin Tester"></span>
+          <span itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="Z-omo">
+            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject"><meta itemprop="url" content="http://z-omo.com/resources/image/z-omo-logo.png"></span>
+          </span>
         </footer>
       </article>
     </div>
