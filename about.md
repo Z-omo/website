@@ -40,10 +40,10 @@ Software development:
 My skill set stack includes:
 : - HTML, XML, SVG
   - CSS, SASS
-  - JavaScript (ES5, ES6), Node.js
+  - JavaScript (ES5, ES6), Node.js, Express
   - PHP, Python
   - MySQL, PostgreSQL, MongoDB
-  - REST, GraphQL
+  - REST, GraphQL, JWT
   - JSON, YAML
   - Mustache, Handlebars
 
@@ -53,6 +53,11 @@ Tools I use regularly:
   - VS Code, Vi
   - Photoshop, Illustrator
   - ssh, rsync
+
+Used in the past/Very familiar with:
+: - Subversion
+  - JQuery, Prototype
+  - Actionscript
 
 Reference materials on my bookshelf include:
 : - [_Clean Code_](https://books.google.co.uk/books/about/Clean_Code.html?id=_i6bDeoCQzsC&source=kp_cover&redir_esc=y)
@@ -74,7 +79,7 @@ I listen to many Podcasts and would recommend the following:
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
 
 Tinkering currently with:
-: - Elm
+: - Elixir, Elm
   - Web Components
   - Functional Programming
 

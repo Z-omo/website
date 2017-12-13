@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -181,6 +181,20 @@ exports.default = {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -199,19 +213,19 @@ exports.default = {
  */
 
 
-var _focusApp = __webpack_require__(2);
+var _focusApp = __webpack_require__(4);
 
 var _focusApp2 = _interopRequireDefault(_focusApp);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(6);
-__webpack_require__(7);
+__webpack_require__(1);
+__webpack_require__(8);
 
 _focusApp2.default.init();
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -238,11 +252,11 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
-var _Lazlo = __webpack_require__(3);
+var _Lazlo = __webpack_require__(5);
 
 var _Lazlo2 = _interopRequireDefault(_Lazlo);
 
-var _rwdView = __webpack_require__(5);
+var _rwdView = __webpack_require__(7);
 
 var _rwdView2 = _interopRequireDefault(_rwdView);
 
@@ -375,7 +389,7 @@ function setupRWDViews() {
 }
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -402,7 +416,7 @@ var _domMan = __webpack_require__(0);
 
 var _domMan2 = _interopRequireDefault(_domMan);
 
-var _imageDims = __webpack_require__(4);
+var _imageDims = __webpack_require__(6);
 
 var _imageDims2 = _interopRequireDefault(_imageDims);
 
@@ -576,7 +590,7 @@ var Lazlo = {
 exports.default = Lazlo;
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -683,7 +697,7 @@ var imgDims = {
 exports.default = imgDims;
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -894,13 +908,7 @@ function resetViewMode(view) {
 exports.default = RWDView;
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12

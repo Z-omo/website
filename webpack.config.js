@@ -30,7 +30,8 @@ const config = {
   },
 
   entry: {
-    main: srcDir + 'js/bootstrap.js'
+    main: [srcDir + 'js/bootstrap.js', srcDir + 'sass/bootstrap.sass'],
+    //critical: srcDir + 'sass/critical.sass'
   },
 
   output: {
