@@ -18,14 +18,19 @@ import imageDims from './image-dims';
 
 const Lazlo = {
 
+  devMode: false,
+
   selectors: {
     resource:     'data-lazlo',
+    legacy:       'data-original',
     resourceAttr: 'data-lazlo-attr',
     defaultAttr:  'src',
     watching:     'lazlo',
     loading:      'lazlo-loading',
-    loaded:       'lazlo-loaded'
+    loaded:       'lazlo-loaded',
+    completed:    'lazlo-completed'
   },
+
   watching: [],
   loaded: [],
   viewPort: null,
@@ -33,7 +38,10 @@ const Lazlo = {
 
   watch(elements)
   {
-    if (!elements || 0 === elements.lenth) { return; }
+    this.resetState();
+
+    elements = elements || this.getResources();
+    if (!elements || 0 === elements.length) { return; }
 
     imageDims.setup();
     this.setupWatch();
@@ -41,10 +49,28 @@ const Lazlo = {
     this.checkView();
   },
 
+  resetState: function()
+  {
+    this.watching = [];
+    this.loaded = [];
+    this.watchCount = 0;
+  },
+
+  getResources: function()
+  {
+    let selector = `[${this.selectors.resource}]`;
+
+    // legacy support:
+    if (this.selectors.legacy) { selector += `,[${this.selectors.legacy}]`; }
+
+    let toWatch = DOM.getAll(selector);
+    return toWatch;
+  },
+
   setupWatch()
   {
     if (this.scrollHandler) { return; }
-    this.scrollHandler = this.onScroll.bind(this)
+    this.scrollHandler = this.onScroll.bind(this);
     window.addEventListener('scroll', this.scrollHandler);
 
     this.loadedHandler = this.onResourceLoaded.bind(this);
@@ -60,14 +86,14 @@ const Lazlo = {
 
   addToWatch(elements)
   {
-    elements.forEach(element => {
-      if (DOM.hasAttr(this.selectors.resource, element))
-      {
-        this.watching.push(element);
-        this.watchCount += 1;
-        DOM.addClass(this.selectors.watching, element);
-      }
-    });
+    this.watching = elements.map(this.prepareLazloItem);
+    this.watchCount = this.watching.length;
+  },
+
+  prepareLazloItem: function(item)
+  {
+    DOM.addClass(Lazlo.selectors.watching, item);
+    return item;
   },
 
   checkView()
@@ -82,7 +108,14 @@ const Lazlo = {
     this.watching = remaining;
     this.checking = false;
 
-    //console.log('lazlo: ', waiting.length, remaining.length);
+    if (true === Lazlo.devMode)
+    {
+      console.log(
+        'Lazlo status: watchCount: %s, waiting: %s, remaining: %s', this.watchCount, waiting.length, remaining.length
+      );
+    }
+
+    if (this.watchCount === this.loaded.length) { this.standDown(); }
 
     if (0 === waiting.length) { return; }
     this.processLoading(waiting);
@@ -91,33 +124,73 @@ const Lazlo = {
   isWithinView(element)
   {
     let dims = DOM.viewDims(element);
-    return dims.top <= this.viewPort.height && dims.bottom >= 0;
+
+    // is element visible (width and height) and within the view:
+    return  0 < dims.width &&
+            //0 < dims.height &&
+            dims.top <= this.viewPort.height &&
+            dims.bottom >= 0;
   },
 
   processLoading(elements)
   {
+    let selectors = this.selectors;
+    this.rwdImages = []; // reset for counting
+
     elements.forEach(element => {
-      DOM.addClass(this.selectors.loading, element);
+      DOM.addClass(selectors.loading, element);
 
-      let resource = element.getAttribute(this.selectors.resource);
+      let resource = element.getAttribute(selectors.resource) ||
+          (selectors.legacy && element.getAttribute(selectors.legacy));
       if (!resource) { return; }
-      
-      let attr = element.getAttribute(this.selectors.resourceAttr) ||   
-        this.selectors.defaultAttr;
-      if (this.selectors.defaultAttr === attr)
-      {
-        element.addEventListener('load', this.loadedHandler);
-      }
-      
-      element.setAttribute(attr, resource);
 
-      if (this.selectors.defaultAttr === attr)
+      if ('noscript' === resource)
       {
-        this.prepareSrcSet(element);
+        this.processNoscriptLoading(element);
       } else {
-        this.setAsLoaded(element);
+        this.processElementLoading(element, resource);
       }
-    })
+    });
+
+    if (0 < this.rwdImages.length && window.picturefill)
+    {
+      window.picturefill({ elements: this.rwdImages, reevaluate: true });
+    }
+  },
+
+  processNoscriptLoading: function(element)
+  {
+    const noscript = element.querySelector('noscript');
+    if (!noscript) { return; }
+
+    const content = noscript.textContent;
+    noscript.insertAdjacentHTML('beforebegin', content);
+    
+    let rwdImages = DOM.getAll('img[srcset], picture img', element);
+    if (rwdImages) { this.rwdImages = this.rwdImages.concat(rwdImages); }
+
+    this.setAsLoaded(element);
+  },
+
+  processElementLoading(element, resource)
+  {
+    let selectors = this.selectors;
+    let attr =  element.getAttribute(selectors.resourceAttr) ||
+                selectors.defaultAttr;
+
+    if (selectors.defaultAttr === attr)
+    {
+      element.addEventListener('load', this.loadedHandler);
+    }
+
+    element.setAttribute(attr, resource);
+
+    if (selectors.defaultAttr === attr && DOM.tagIs('img', element))
+    {
+      this.prepareSrcSet(element);
+    } else {
+      this.setAsLoaded(element);
+    }
   },
 
   prepareSrcSet(element)
@@ -139,10 +212,7 @@ const Lazlo = {
       source.removeAttribute(attr);
     });
 
-    if (window.picturefill)
-    {
-      window.picturefill({ elements: [element], reevaluate: true });
-    }
+    this.rwdImages.push(element);
   },
 
   onResourceLoaded(e)
@@ -152,19 +222,24 @@ const Lazlo = {
     element.removeEventListener('load', this.loadedHandler);
     this.setAsLoaded(element);
 
-    if ('IMG' === element.nodeName) { this.removeImageDims(element); }
+    if (DOM.tagIs('img', element)) { this.removeImageDims(element); }
   },
 
   setAsLoaded(element)
   {
-    DOM.removeClass(this.selectors.loading, element);
-    element.removeAttribute(this.selectors.resource);
-    element.removeAttribute(this.selectors.resourceAttr);
+    let selectors = this.selectors;
 
-    DOM.addClass(this.selectors.loaded, element);
+    DOM.removeClass(selectors.loading, element);
+    element.removeAttribute(selectors.resource);
+    element.removeAttribute(selectors.resourceAttr);
+
+    if (selectors.legacy) { element.removeAttribute(selectors.legacy); }
+
+    DOM.addClass(selectors.loaded, element);
     this.loaded.push(element);
 
-    if (this.watchCount === this.loaded.length) { this.standDown(); }
+    const parent = DOM.parent(element);
+    if (parent) { DOM.addClass(selectors.completed, parent); }
   },
 
   removeImageDims(element)
@@ -180,7 +255,8 @@ const Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
-    //console.log('Lazlo has stood down.');
+    
+    if (true === Lazlo.devMode) { console.log('Lazlo has stood down.'); }
   }
 };
 
