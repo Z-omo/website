@@ -73,9 +73,9 @@ const imgDims = {
   {
     let values = img.getAttribute(this.selectors.attr).split(',');
     let dims = {
-      element:    img,
+      element:   img,
       defWidth:  Number(values[0]),
-      defHeight:   Number(values[1])
+      defHeight: Number(values[1])
     };
 
     return dims;

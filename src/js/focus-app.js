@@ -54,11 +54,7 @@ function setViewParams()
 
 function setJSMode()
 {
-  let html = document.querySelector('html');
-  if (!html) { return; }
-
-  DOM.addClass('focus-js', html);
-  focus.view.html = html;
+  DOM.addClass('focus-js', DOM.html);
 }
 
 function setupMobileMenu()
@@ -113,14 +109,14 @@ function setScrollState()
 
   if (0 === scroll)
   {
-    DOM.removeClass(focus.view.scrolledClass, focus.view.html);
+    DOM.removeClass(focus.view.scrolledClass, DOM.html);
     focus.view.scrolled = false;
     return;
   }
 
   if (!focus.view.scrolled)
   {
-    DOM.addClass(focus.view.scrolledClass, focus.view.html);
+    DOM.addClass(focus.view.scrolledClass, DOM.html);
   }
   
   focus.view.scrolled = true;

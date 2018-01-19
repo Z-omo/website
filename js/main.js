@@ -86,24 +86,47 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = {
+var DOM = {
+
+  html: document.querySelector('html'),
+  body: document.querySelector('body'),
+  customEvents: null,
+
   addClass: function addClass(className, element) {
     if (!element) {
       return;
     }
     if (element.classList) {
-      element.classList.add(className);
+      var classNames = className.trim().split(' ').forEach(function (name) {
+        return element.classList.add(name);
+      });
+
+      // Would prefer the following but IE does not support multiple arguments.
+      // element.classList.add(...classNames);
     } else {
-      element.className = element.className + ' ' + className;
+
+      var _classNames = element.className ? element.className + ' ' : '';
+      _classNames += className;
+      element.className = _classNames;
     }
   },
   hasClass: function hasClass(className, element) {
-    return element.classList && element.classList.contains(className);
+    if (element.classList) {
+      return element.classList && element.classList.contains(className);
+    } else {
+
+      var regexName = new RegExp('[\w\s]*' + className + '[\s\w]*');
+      return regexName.test(element.className);
+    }
   },
   toggleClass: function toggleClass(className, element) {
     element.classList.toggle(className);
   },
   removeClass: function removeClass(className, element) {
+    if (!element) {
+      return;
+    }
+
     if (element.classList) {
       element.classList.remove(className);
     } else {
@@ -114,10 +137,40 @@ exports.default = {
       element.removeAttribute('class');
     }
   },
+  hide: function hide(elements) {
+    if (Array !== elements.constructor) {
+      elements = [elements];
+    }
+    elements.forEach(function (e) {
+      return e.style.display = 'none';
+    });
+  },
+  show: function show(elements) {
+    if (Array !== elements.constructor) {
+      elements = [elements];
+    }
+    elements.forEach(function (e) {
+      return e.style.display = '';
+    });
+  },
+  setStyle: function setStyle(rules, element) {
+    for (var prop in rules) {
+      if (rules.hasOwnProperty(prop)) {
+        element.style[prop] = rules[prop];
+      }
+    }
+  },
+  setAttrs: function setAttrs(attrs, element) {
+    for (var prop in attrs) {
+      if (attrs.hasOwnProperty(prop)) {
+        element.setAttribute(prop, attrs[prop]);
+      }
+    }
+  },
   hasAttr: function hasAttr(attrName, element) {
     return element.getAttribute(attrName);
   },
-  tagIS: function tagIS(tagName, element) {
+  tagIs: function tagIs(tagName, element) {
     if (!element) {
       return;
     }
@@ -131,7 +184,10 @@ exports.default = {
       return;
     }
 
-    // convert NodeList to an Array, otherwise IE throws error on forEach:
+    /*
+     * convert NodeList to an Array, otherwise IE throws error on a
+     * subsequent forEach:
+     */
     return Array.prototype.slice.call(nodes);
   },
   add: function add(element, container) {
@@ -176,8 +232,61 @@ exports.default = {
     }
 
     return dims;
+  },
+  trigger: function trigger(eventName, element, data) {
+    var event = getCustomEvent(eventName, data);
+    if (!event) {
+      throw new Error('Unable to trigger custom event: ' + eventName);
+    }
+
+    element.dispatchEvent(event);
   }
 };
+
+exports.default = DOM;
+
+
+function getCustomEvent(eventName, data) {
+  if (DOM.customEvents && DOM.customEvents[eventName]) {
+    return DOM.customEvents[eventName];
+  }
+
+  var event = createCustomEvent(eventName, data);
+
+  registerCustomEvent(eventName, event);
+  return event;
+}
+
+function createCustomEvent(eventName, data) {
+  if ('function' !== typeof window.CustomEvent) {
+    CustomEvent.prototype = window.Event.prototype;
+  }
+
+  var event = new CustomEvent(eventName, data && { detail: data });
+  return event;
+}
+
+/*
+ * Polyfill code gleaned from MDN: 
+ * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+ */
+function CustomEvent(event, params) {
+  params = params || {
+    bubbles: false, cancelable: false, detail: undefined
+  };
+
+  var evt = document.createEvent('CustomEvent');
+  evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+
+  return evt;
+}
+
+function registerCustomEvent(eventName, event) {
+  if (null === DOM.customEvents) {
+    DOM.customEvents = {};
+  }
+  DOM.customEvents[eventName] = event;
+}
 
 /***/ }),
 /* 1 */
@@ -303,13 +412,7 @@ function setViewParams() {
 }
 
 function setJSMode() {
-  var html = document.querySelector('html');
-  if (!html) {
-    return;
-  }
-
-  _domMan2.default.addClass('focus-js', html);
-  focus.view.html = html;
+  _domMan2.default.addClass('focus-js', _domMan2.default.html);
 }
 
 function setupMobileMenu() {
@@ -358,13 +461,13 @@ function setScrollState() {
   var scroll = window.pageYOffset;
 
   if (0 === scroll) {
-    _domMan2.default.removeClass(focus.view.scrolledClass, focus.view.html);
+    _domMan2.default.removeClass(focus.view.scrolledClass, _domMan2.default.html);
     focus.view.scrolled = false;
     return;
   }
 
   if (!focus.view.scrolled) {
-    _domMan2.default.addClass(focus.view.scrolledClass, focus.view.html);
+    _domMan2.default.addClass(focus.view.scrolledClass, _domMan2.default.html);
   }
 
   focus.view.scrolled = true;
@@ -424,21 +527,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Lazlo = {
 
+  devMode: false,
+
   selectors: {
     resource: 'data-lazlo',
+    legacy: 'data-original',
     resourceAttr: 'data-lazlo-attr',
     defaultAttr: 'src',
     watching: 'lazlo',
     loading: 'lazlo-loading',
-    loaded: 'lazlo-loaded'
+    loaded: 'lazlo-loaded',
+    completed: 'lazlo-completed'
   },
+
   watching: [],
   loaded: [],
   viewPort: null,
   watchCount: 0,
 
   watch: function watch(elements) {
-    if (!elements || 0 === elements.lenth) {
+    this.resetState();
+
+    elements = elements || this.getResources();
+    if (!elements || 0 === elements.length) {
       return;
     }
 
@@ -447,6 +558,26 @@ var Lazlo = {
     this.addToWatch(elements);
     this.checkView();
   },
+
+
+  resetState: function resetState() {
+    this.watching = [];
+    this.loaded = [];
+    this.watchCount = 0;
+  },
+
+  getResources: function getResources() {
+    var selector = '[' + this.selectors.resource + ']';
+
+    // legacy support:
+    if (this.selectors.legacy) {
+      selector += ',[' + this.selectors.legacy + ']';
+    }
+
+    var toWatch = _domMan2.default.getAll(selector);
+    return toWatch;
+  },
+
   setupWatch: function setupWatch() {
     if (this.scrollHandler) {
       return;
@@ -465,30 +596,36 @@ var Lazlo = {
     this.checking = true;
   },
   addToWatch: function addToWatch(elements) {
-    var _this = this;
-
-    elements.forEach(function (element) {
-      if (_domMan2.default.hasAttr(_this.selectors.resource, element)) {
-        _this.watching.push(element);
-        _this.watchCount += 1;
-        _domMan2.default.addClass(_this.selectors.watching, element);
-      }
-    });
+    this.watching = elements.map(this.prepareLazloItem);
+    this.watchCount = this.watching.length;
   },
+
+
+  prepareLazloItem: function prepareLazloItem(item) {
+    _domMan2.default.addClass(Lazlo.selectors.watching, item);
+    return item;
+  },
+
   checkView: function checkView() {
-    var _this2 = this;
+    var _this = this;
 
     this.viewPort = _domMan2.default.viewDims();
     var waiting = [];
 
     var remaining = this.watching.filter(function (element) {
-      return !(_this2.isWithinView(element) && waiting.push(element));
+      return !(_this.isWithinView(element) && waiting.push(element));
     });
 
     this.watching = remaining;
     this.checking = false;
 
-    //console.log('lazlo: ', waiting.length, remaining.length);
+    if (true === Lazlo.devMode) {
+      console.log('Lazlo status: watchCount: %s, waiting: %s, remaining: %s', this.watchCount, waiting.length, remaining.length);
+    }
+
+    if (this.watchCount === this.loaded.length) {
+      this.standDown();
+    }
 
     if (0 === waiting.length) {
       return;
@@ -497,32 +634,71 @@ var Lazlo = {
   },
   isWithinView: function isWithinView(element) {
     var dims = _domMan2.default.viewDims(element);
-    return dims.top <= this.viewPort.height && dims.bottom >= 0;
+
+    // is element visible (width and height) and within the view:
+    return 0 < dims.width &&
+    //0 < dims.height &&
+    dims.top <= this.viewPort.height && dims.bottom >= 0;
   },
   processLoading: function processLoading(elements) {
-    var _this3 = this;
+    var _this2 = this;
+
+    var selectors = this.selectors;
+    this.rwdImages = []; // reset for counting
 
     elements.forEach(function (element) {
-      _domMan2.default.addClass(_this3.selectors.loading, element);
+      _domMan2.default.addClass(selectors.loading, element);
 
-      var resource = element.getAttribute(_this3.selectors.resource);
+      var resource = element.getAttribute(selectors.resource) || selectors.legacy && element.getAttribute(selectors.legacy);
       if (!resource) {
         return;
       }
 
-      var attr = element.getAttribute(_this3.selectors.resourceAttr) || _this3.selectors.defaultAttr;
-      if (_this3.selectors.defaultAttr === attr) {
-        element.addEventListener('load', _this3.loadedHandler);
-      }
-
-      element.setAttribute(attr, resource);
-
-      if (_this3.selectors.defaultAttr === attr) {
-        _this3.prepareSrcSet(element);
+      if ('noscript' === resource) {
+        _this2.processNoscriptLoading(element);
       } else {
-        _this3.setAsLoaded(element);
+        _this2.processElementLoading(element, resource);
       }
     });
+
+    if (0 < this.rwdImages.length && window.picturefill) {
+      window.picturefill({ elements: this.rwdImages, reevaluate: true });
+    }
+  },
+
+
+  processNoscriptLoading: function processNoscriptLoading(element) {
+    var noscript = element.querySelector('noscript');
+    if (!noscript) {
+      return;
+    }
+
+    var content = noscript.textContent;
+    noscript.insertAdjacentHTML('beforebegin', content);
+
+    var rwdImages = _domMan2.default.getAll('img[srcset], picture img', element);
+    if (rwdImages) {
+      this.rwdImages = this.rwdImages.concat(rwdImages);
+    }
+
+    this.setAsLoaded(element);
+  },
+
+  processElementLoading: function processElementLoading(element, resource) {
+    var selectors = this.selectors;
+    var attr = element.getAttribute(selectors.resourceAttr) || selectors.defaultAttr;
+
+    if (selectors.defaultAttr === attr) {
+      element.addEventListener('load', this.loadedHandler);
+    }
+
+    element.setAttribute(attr, resource);
+
+    if (selectors.defaultAttr === attr && _domMan2.default.tagIs('img', element)) {
+      this.prepareSrcSet(element);
+    } else {
+      this.setAsLoaded(element);
+    }
   },
   prepareSrcSet: function prepareSrcSet(element) {
     var attr = 'data-srcset';
@@ -545,9 +721,7 @@ var Lazlo = {
       source.removeAttribute(attr);
     });
 
-    if (window.picturefill) {
-      window.picturefill({ elements: [element], reevaluate: true });
-    }
+    this.rwdImages.push(element);
   },
   onResourceLoaded: function onResourceLoaded(e) {
     var element = e.target;
@@ -555,20 +729,27 @@ var Lazlo = {
     element.removeEventListener('load', this.loadedHandler);
     this.setAsLoaded(element);
 
-    if ('IMG' === element.nodeName) {
+    if (_domMan2.default.tagIs('img', element)) {
       this.removeImageDims(element);
     }
   },
   setAsLoaded: function setAsLoaded(element) {
-    _domMan2.default.removeClass(this.selectors.loading, element);
-    element.removeAttribute(this.selectors.resource);
-    element.removeAttribute(this.selectors.resourceAttr);
+    var selectors = this.selectors;
 
-    _domMan2.default.addClass(this.selectors.loaded, element);
+    _domMan2.default.removeClass(selectors.loading, element);
+    element.removeAttribute(selectors.resource);
+    element.removeAttribute(selectors.resourceAttr);
+
+    if (selectors.legacy) {
+      element.removeAttribute(selectors.legacy);
+    }
+
+    _domMan2.default.addClass(selectors.loaded, element);
     this.loaded.push(element);
 
-    if (this.watchCount === this.loaded.length) {
-      this.standDown();
+    var parent = _domMan2.default.parent(element);
+    if (parent) {
+      _domMan2.default.addClass(selectors.completed, parent);
     }
   },
   removeImageDims: function removeImageDims(element) {
@@ -583,7 +764,10 @@ var Lazlo = {
     window.removeEventListener('scroll', this.scrollHandler);
     this.scrollHandler = null;
     this.loadedHandler = null;
-    //console.log('Lazlo has stood down.');
+
+    if (true === Lazlo.devMode) {
+      console.log('Lazlo has stood down.');
+    }
   }
 };
 
