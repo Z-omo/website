@@ -17,6 +17,8 @@ import DOM from './dom-man';
 
 const imgDims = {
 
+  resizing: false,
+
   selectors: {
     attr: 'data-dims'
   },
@@ -25,78 +27,85 @@ const imgDims = {
   {
     if (!this.resizeHandler)
     {
-      this.resizeHandler = this.onResize.bind(this);
+      this.resizeHandler = onResize;
       window.addEventListener('resize', this.resizeHandler);
     }
     
-    this.process();
-  },
-
-  onResize()
-  {
-    if (true === this.resizing) { return; }
-    
-    setTimeout(this.process.bind(this), 200); // debounced.
-    this.resizing = true;
-  },
-
-  process()
-  {
-    let images = this.findImages();
-    if (!images || 0 === images.length) { return; }
-
-    let imageData = this.getImageData(images);
-    this.setImageDims(imageData);
-    this.resizing = false;
-  },
-
-  findImages()
-  {
-    let images = DOM.getAll(`img[${this.selectors.attr}]`);
-    return images;
-  },
-
-  getImageData(imgs)
-  {
-    let imageData = [];
-
-    imgs.forEach(img => {
-      let dims = this.getDefinedDims(img);
-      this.addComputedDims(dims);
-      imageData.push(dims);
-    });
-    
-    return imageData;
-  },
-
-  getDefinedDims(img)
-  {
-    let values = img.getAttribute(this.selectors.attr).split(',');
-    let dims = {
-      element:   img,
-      defWidth:  Number(values[0]),
-      defHeight: Number(values[1])
-    };
-
-    return dims;
-  },
-
-  addComputedDims(dims)
-  {
-    dims.parent = DOM.parent(dims.element);
-    let rect = dims.parent.getBoundingClientRect();
-
-    dims.width = rect.width;
-    dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
-    dims.height = Math.floor(dims.ratio * dims.width);
-  },
-
-  setImageDims(imageData)
-  {
-    imageData.forEach(image => {
-      image.element.setAttribute('height', image.height);
-    });
+    processDims();
   }
 };
 
-export default imgDims
+export default imgDims;
+
+
+function onResize()
+{
+  if (true === imgDims.resizing) { return; }
+  
+  setTimeout(processDims, 200); // debounced.
+  imgDims.resizing = true;
+}
+
+function processDims()
+{
+  const images = findImages();
+  if (!images || 0 === images.length) { return; }
+
+  const imageData = getImageData(images);
+  setImageDims(imageData);
+  imgDims.resizing = false;
+}
+
+function findImages()
+{
+  const images = DOM.getAll(`img[${imgDims.selectors.attr}]`);
+  return images;
+}
+
+function getImageData(imgs)
+{
+  const imageData = [];
+
+  imgs.forEach(img => {
+    let dims = getDefinedDims(img);
+    addComputedDims(dims);
+    imageData.push(dims);
+  });
+  
+  return imageData;
+}
+
+function getDefinedDims(img)
+{
+  const values = img.getAttribute(imgDims.selectors.attr).split(',');
+  const dims = {
+    element:   img,
+    defWidth:  Number(values[0]),
+    defHeight: Number(values[1])
+  };
+
+  return dims;
+}
+
+function addComputedDims(dims)
+{
+  dims.parent = DOM.parent(dims.element);
+  const rect = dims.parent.getBoundingClientRect();
+
+  dims.width = (rect.width > dims.defWidth)
+    ? dims.defWidth
+    : Math.round(rect.width);
+
+  dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
+  dims.height = Math.floor(dims.ratio * dims.width);
+}
+
+function setImageDims(imageData)
+{
+  imageData.forEach(image => {
+    DOM.setStyle({
+      width: image.width + 'px',
+      height: image.height + 'px'
+    }, image.element);
+  });
+}
