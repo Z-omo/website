@@ -980,10 +980,10 @@ nav {
  * SASS for Lazlo (Lazy Loading) module.
  */
 img[data-lazlo] {
-  display: none; }
+  visibility: hidden; }
 
 .focus-js img[data-lazlo] {
-  display: block; }
+  visibility: visible; }
 
 .focus-js *[data-lazlo], .focus-js .lazlo {
   opacity: 0.05; }

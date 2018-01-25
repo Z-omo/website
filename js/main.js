@@ -806,79 +806,91 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var imgDims = {
 
+  resizing: false,
+
   selectors: {
     attr: 'data-dims'
   },
 
   setup: function setup() {
     if (!this.resizeHandler) {
-      this.resizeHandler = this.onResize.bind(this);
+      this.resizeHandler = onResize;
       window.addEventListener('resize', this.resizeHandler);
     }
 
-    this.process();
-  },
-  onResize: function onResize() {
-    if (true === this.resizing) {
-      return;
-    }
-
-    setTimeout(this.process.bind(this), 200); // debounced.
-    this.resizing = true;
-  },
-  process: function process() {
-    var images = this.findImages();
-    if (!images || 0 === images.length) {
-      return;
-    }
-
-    var imageData = this.getImageData(images);
-    this.setImageDims(imageData);
-    this.resizing = false;
-  },
-  findImages: function findImages() {
-    var images = _domMan2.default.getAll('img[' + this.selectors.attr + ']');
-    return images;
-  },
-  getImageData: function getImageData(imgs) {
-    var _this = this;
-
-    var imageData = [];
-
-    imgs.forEach(function (img) {
-      var dims = _this.getDefinedDims(img);
-      _this.addComputedDims(dims);
-      imageData.push(dims);
-    });
-
-    return imageData;
-  },
-  getDefinedDims: function getDefinedDims(img) {
-    var values = img.getAttribute(this.selectors.attr).split(',');
-    var dims = {
-      element: img,
-      defWidth: Number(values[0]),
-      defHeight: Number(values[1])
-    };
-
-    return dims;
-  },
-  addComputedDims: function addComputedDims(dims) {
-    dims.parent = _domMan2.default.parent(dims.element);
-    var rect = dims.parent.getBoundingClientRect();
-
-    dims.width = rect.width;
-    dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
-    dims.height = Math.floor(dims.ratio * dims.width);
-  },
-  setImageDims: function setImageDims(imageData) {
-    imageData.forEach(function (image) {
-      image.element.setAttribute('height', image.height);
-    });
+    processDims();
   }
 };
 
 exports.default = imgDims;
+
+
+function onResize() {
+  if (true === imgDims.resizing) {
+    return;
+  }
+
+  setTimeout(processDims, 200); // debounced.
+  imgDims.resizing = true;
+}
+
+function processDims() {
+  var images = findImages();
+  if (!images || 0 === images.length) {
+    return;
+  }
+
+  var imageData = getImageData(images);
+  setImageDims(imageData);
+  imgDims.resizing = false;
+}
+
+function findImages() {
+  var images = _domMan2.default.getAll('img[' + imgDims.selectors.attr + ']');
+  return images;
+}
+
+function getImageData(imgs) {
+  var imageData = [];
+
+  imgs.forEach(function (img) {
+    var dims = getDefinedDims(img);
+    addComputedDims(dims);
+    imageData.push(dims);
+  });
+
+  return imageData;
+}
+
+function getDefinedDims(img) {
+  var values = img.getAttribute(imgDims.selectors.attr).split(',');
+  var dims = {
+    element: img,
+    defWidth: Number(values[0]),
+    defHeight: Number(values[1])
+  };
+
+  return dims;
+}
+
+function addComputedDims(dims) {
+  dims.parent = _domMan2.default.parent(dims.element);
+  var rect = dims.parent.getBoundingClientRect();
+
+  dims.width = rect.width > dims.defWidth ? dims.defWidth : Math.round(rect.width);
+
+  dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
+  dims.height = Math.floor(dims.ratio * dims.width);
+}
+
+function setImageDims(imageData) {
+  imageData.forEach(function (image) {
+    _domMan2.default.setStyle({
+      width: image.width + 'px',
+      height: image.height + 'px'
+    }, image.element);
+  });
+}
 
 /***/ }),
 /* 7 */
