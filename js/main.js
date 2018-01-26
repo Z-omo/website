@@ -1,4 +1,1114 @@
-!function(e){function t(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=2)}([function(e,t,n){"use strict";function r(e,t){if(o.customEvents&&o.customEvents[e])return o.customEvents[e];var n=i(e,t);return a(e,n),n}function i(e,t){return"function"!=typeof window.CustomEvent&&(s.prototype=window.Event.prototype),new s(e,t&&{detail:t})}function s(e,t){t=t||{bubbles:!1,cancelable:!1,detail:void 0};var n=document.createEvent("CustomEvent");return n.initCustomEvent(e,t.bubbles,t.cancelable,t.detail),n}function a(e,t){null===o.customEvents&&(o.customEvents={}),o.customEvents[e]=t}Object.defineProperty(t,"__esModule",{value:!0});var o={html:document.querySelector("html"),body:document.querySelector("body"),customEvents:null,addClass:function(e,t){if(t)if(t.classList){e.trim().split(" ").forEach(function(e){return t.classList.add(e)})}else{var n=t.className?t.className+" ":"";n+=e,t.className=n}},hasClass:function(e,t){return t.classList?t.classList&&t.classList.contains(e):new RegExp("[ws]*"+e+"[sw]*").test(t.className)},toggleClass:function(e,t){t.classList.toggle(e)},removeClass:function(e,t){t&&(t.classList?t.classList.remove(e):t.className=t.className.replace(new RegExp("(^|\\b)"+e.split(" ").join("|")+"(\\b|$)","gi")," "),""===t.className&&t.removeAttribute("class"))},hide:function(e){Array!==e.constructor&&(e=[e]),e.forEach(function(e){return e.style.display="none"})},show:function(e){Array!==e.constructor&&(e=[e]),e.forEach(function(e){return e.style.display=""})},setStyle:function(e,t){for(var n in e)e.hasOwnProperty(n)&&(t.style[n]=e[n])},setAttrs:function(e,t){for(var n in e)e.hasOwnProperty(n)&&t.setAttribute(n,e[n])},hasAttr:function(e,t){return t.getAttribute(e)},tagIs:function(e,t){if(t)return t.tagName.toLowerCase()===e.toLowerCase()},getAll:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:document,n=t.querySelectorAll(e);if(n&&0!==n.length)return Array.prototype.slice.call(n)},add:function(e,t){t.appendChild(e)},prepend:function(e,t){t.insertBefore(e,t.firstChild)},parent:function(e,t){if(e){var n=e,r=void 0,i=void 0;do{if(i=n.parentNode,!i)break;r=!t||this.hasClass(t,i),n=i}while(!r&&i);return i}},viewDims:function(e){return e?e.getBoundingClientRect():{top:window.pageYOffset,width:window.innerWidth,height:window.innerHeight,bottom:window.pageYOffset+window.innerHeight}},trigger:function(e,t,n){var i=r(e,n);if(!i)throw new Error("Unable to trigger custom event: "+e);t.dispatchEvent(i)}};t.default=o},function(e,t){},function(e,t,n){n(3),e.exports=n(1)},function(e,t,n){"use strict";var r=n(4),i=function(e){return e&&e.__esModule?e:{default:e}}(r);n(1),n(8),i.default.init()},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}function i(){var e=document.querySelector(".boundary");if(e){var t=window.getComputedStyle(e),n=/^\d+/,r=Number(n.exec(t.width)),i=Number(n.exec(t.fontSize)),s=A.view.smallViewEM*i;A.view.smallView=r<s}}function s(){p.default.addClass("focus-js",p.default.html)}function a(){var e=document.querySelector("#menu");if(e){var t=document.createElement("span");e.appendChild(t),t.id="menuBtn",t.addEventListener("click",function(){return p.default.toggleClass("open",A.view.nav)}),A.view.nav=e}}function o(){window.addEventListener("scroll",c)}function c(){A.view.scrolling||(window.requestAnimationFrame?window.requestAnimationFrame(u):setTimeout(u,200)),A.view.scrolling=!0}function u(){l(),A.view.scrolling=!1}function l(){if(0===window.pageYOffset)return p.default.removeClass(A.view.scrolledClass,p.default.html),void(A.view.scrolled=!1);A.view.scrolled||p.default.addClass(A.view.scrolledClass,p.default.html),A.view.scrolled=!0}function d(){var e=p.default.getAll("[data-lazlo]");e&&v.default.watch(e)}function f(){var e=p.default.getAll(".rwd-view");e&&w.default.setup(e,A.view.smallView)}Object.defineProperty(t,"__esModule",{value:!0});var h=n(0),p=r(h),m=n(5),v=r(m),g=n(7),w=r(g),A={view:{smallViewEM:39,scrolledClass:"js-scrolled"},init:function(){i(),s(),!0===A.view.smallView&&a(),o(),d(),!1===A.view.smallView&&f()}};t.default=A},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var i=n(0),s=r(i),a=n(6),o=r(a),c={devMode:!1,selectors:{resource:"data-lazlo",legacy:"data-original",resourceAttr:"data-lazlo-attr",defaultAttr:"src",watching:"lazlo",loading:"lazlo-loading",loaded:"lazlo-loaded",completed:"lazlo-completed"},watching:[],loaded:[],viewPort:null,watchCount:0,watch:function(e){this.resetState(),(e=e||this.getResources())&&0!==e.length&&(o.default.setup(),this.setupWatch(),this.addToWatch(e),this.checkView())},resetState:function(){this.watching=[],this.loaded=[],this.watchCount=0},getResources:function(){var e="["+this.selectors.resource+"]";return this.selectors.legacy&&(e+=",["+this.selectors.legacy+"]"),s.default.getAll(e)},setupWatch:function(){this.scrollHandler||(this.scrollHandler=this.onScroll.bind(this),window.addEventListener("scroll",this.scrollHandler),this.loadedHandler=this.onResourceLoaded.bind(this))},onScroll:function(){!0!==this.checking&&(setTimeout(this.checkView.bind(this),200),this.checking=!0)},addToWatch:function(e){this.watching=e.map(this.prepareLazloItem),this.watchCount=this.watching.length},prepareLazloItem:function(e){return s.default.addClass(c.selectors.watching,e),e},checkView:function(){var e=this;this.viewPort=s.default.viewDims();var t=[],n=this.watching.filter(function(n){return!(e.isWithinView(n)&&t.push(n))});this.watching=n,this.checking=!1,!0===c.devMode&&console.log("Lazlo status: watchCount: %s, waiting: %s, remaining: %s",this.watchCount,t.length,n.length),this.watchCount===this.loaded.length&&this.standDown(),0!==t.length&&this.processLoading(t)},isWithinView:function(e){var t=s.default.viewDims(e);return 0<t.width&&t.top<=this.viewPort.height&&t.bottom>=0},processLoading:function(e){var t=this,n=this.selectors;this.rwdImages=[],e.forEach(function(e){s.default.addClass(n.loading,e);var r=e.getAttribute(n.resource)||n.legacy&&e.getAttribute(n.legacy);r&&("noscript"===r?t.processNoscriptLoading(e):t.processElementLoading(e,r))}),0<this.rwdImages.length&&window.picturefill&&window.picturefill({elements:this.rwdImages,reevaluate:!0})},processNoscriptLoading:function(e){var t=e.querySelector("noscript");if(t){var n=t.textContent;t.insertAdjacentHTML("beforebegin",n);var r=s.default.getAll("img[srcset], picture img",e);r&&(this.rwdImages=this.rwdImages.concat(r)),this.setAsLoaded(e)}},processElementLoading:function(e,t){var n=this.selectors,r=e.getAttribute(n.resourceAttr)||n.defaultAttr;n.defaultAttr===r&&e.addEventListener("load",this.loadedHandler),e.setAttribute(r,t),n.defaultAttr===r&&s.default.tagIs("img",e)?this.prepareSrcSet(e):this.setAsLoaded(e)},prepareSrcSet:function(e){var t="data-srcset",n=e.getAttribute(t),r=[e];if(!n){var i=s.default.parent(e,"image");if(!i)return;if(!(r=s.default.getAll("source["+t+"]",i)))return}r.forEach(function(e){e.setAttribute("srcset",e.getAttribute(t)),e.removeAttribute(t)}),this.rwdImages.push(e)},onResourceLoaded:function(e){var t=e.target;t.removeEventListener("load",this.loadedHandler),this.setAsLoaded(t),s.default.tagIs("img",t)&&this.removeImageDims(t)},setAsLoaded:function(e){var t=this.selectors;s.default.removeClass(t.loading,e),e.removeAttribute(t.resource),e.removeAttribute(t.resourceAttr),t.legacy&&e.removeAttribute(t.legacy),s.default.addClass(t.loaded,e),this.loaded.push(e);var n=s.default.parent(e);n&&s.default.addClass(t.completed,n)},removeImageDims:function(e){s.default.hasAttr("data-dims",e)&&(e.removeAttribute("data-dims"),e.removeAttribute("height"))},standDown:function(){window.removeEventListener("scroll",this.scrollHandler),this.scrollHandler=null,this.loadedHandler=null,!0===c.devMode&&console.log("Lazlo has stood down.")}};t.default=c},function(e,t,n){"use strict";"user strict";function r(){!0!==f.resizing&&(setTimeout(i,200),f.resizing=!0)}function i(){var e=s();if(e&&0!==e.length){u(a(e)),f.resizing=!1}}function s(){return d.default.getAll("img["+f.selectors.attr+"]")}function a(e){var t=[];return e.forEach(function(e){var n=o(e);c(n),t.push(n)}),t}function o(e){var t=e.getAttribute(f.selectors.attr).split(",");return{element:e,defWidth:Number(t[0]),defHeight:Number(t[1])}}function c(e){e.parent=d.default.parent(e.element);var t=e.parent.getBoundingClientRect();e.width=t.width>e.defWidth?e.defWidth:Math.round(t.width),e.ratio=Number((e.defHeight/e.defWidth).toFixed(2)),e.height=Math.floor(e.ratio*e.width)}function u(e){e.forEach(function(e){d.default.setStyle({width:e.width+"px",height:e.height+"px"},e.element)})}Object.defineProperty(t,"__esModule",{value:!0});var l=n(0),d=function(e){return e&&e.__esModule?e:{default:e}}(l),f={resizing:!1,selectors:{attr:"data-dims"},setup:function(){this.resizeHandler||(this.resizeHandler=r,window.addEventListener("resize",this.resizeHandler)),i()}};t.default=f},function(e,t,n){"use strict";"user strict";function r(e){var t=document.createElement("div");f.default.addClass(h.selectors.controls,t),h.viewModes.forEach(function(n,r){var i=document.createElement("button");s(n,i),i.setAttribute("data-index",r),f.default.add(i,t),f.default.hasClass(n,e)&&o(i)}),f.default.prepend(t,e)}function i(){h.container.forEach(function(e){r(e),c(e),e.addEventListener("click",a)})}function s(e,t){e=e.replace("rwd-",""),e=e.toLowerCase().replace(/\b[a-z]/g,function(e){return e.toUpperCase()}),t.innerHTML=e}function a(e){var t=e.target;if("button"===t.tagName.toLowerCase()){e.stopPropagation();var n=Number(t.getAttribute(h.selectors.index)),r=f.default.parent(t,h.selectors.container);r&&u(r,n),o(t)}}function o(e){h.activeControl&&f.default.removeClass(h.selectors.active,h.activeControl),f.default.addClass(h.selectors.active,e),h.activeControl=e}function c(e){var t=f.default.parent(e,"boxed");if(t){var n=t.querySelector(".hilite");n&&(n.textContent="3",t.querySelector(".plural").textContent="s")}}function u(e,t){var n=h.viewModes[t];n&&(l(e),f.default.addClass(n,e))}function l(e){h.viewModes.forEach(function(t){f.default.hasClass(t,e)&&f.default.removeClass(t,e)})}Object.defineProperty(t,"__esModule",{value:!0});var d=n(0),f=function(e){return e&&e.__esModule?e:{default:e}}(d),h={viewModes:["rwd-mobile","rwd-tablet","rwd-desktop"],selectors:{container:"rwd-view",controls:"rwd-view-controls",active:"active",device:"rwd-device",frame:"rwd-view-frame",index:"data-index",frameURL:"data-src"},setup:function(e){h.container=e,i()}};t.default=h},function(e,t,n){var r;/*! picturefill - v3.0.2 - 2016-02-12
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Browser DOM manager: provides helper functions for DOM manipulation.
+ *
+ * @package     Focus-App
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var DOM = {
+
+  html: document.querySelector('html'),
+  body: document.querySelector('body'),
+  customEvents: null,
+
+  addClass: function addClass(className, element) {
+    if (!element) {
+      return;
+    }
+    if (element.classList) {
+      var classNames = className.trim().split(' ').forEach(function (name) {
+        return element.classList.add(name);
+      });
+
+      // Would prefer the following but IE does not support multiple arguments.
+      // element.classList.add(...classNames);
+    } else {
+
+      var _classNames = element.className ? element.className + ' ' : '';
+      _classNames += className;
+      element.className = _classNames;
+    }
+  },
+  hasClass: function hasClass(className, element) {
+    if (element.classList) {
+      return element.classList && element.classList.contains(className);
+    } else {
+
+      var regexName = new RegExp('[\w\s]*' + className + '[\s\w]*');
+      return regexName.test(element.className);
+    }
+  },
+  toggleClass: function toggleClass(className, element) {
+    element.classList.toggle(className);
+  },
+  removeClass: function removeClass(className, element) {
+    if (!element) {
+      return;
+    }
+
+    if (element.classList) {
+      element.classList.remove(className);
+    } else {
+      element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+
+    if ('' === element.className) {
+      element.removeAttribute('class');
+    }
+  },
+  hide: function hide(elements) {
+    if (Array !== elements.constructor) {
+      elements = [elements];
+    }
+    elements.forEach(function (e) {
+      return e.style.display = 'none';
+    });
+  },
+  show: function show(elements) {
+    if (Array !== elements.constructor) {
+      elements = [elements];
+    }
+    elements.forEach(function (e) {
+      return e.style.display = '';
+    });
+  },
+  setStyle: function setStyle(rules, element) {
+    for (var prop in rules) {
+      if (rules.hasOwnProperty(prop)) {
+        element.style[prop] = rules[prop];
+      }
+    }
+  },
+  setAttrs: function setAttrs(attrs, element) {
+    for (var prop in attrs) {
+      if (attrs.hasOwnProperty(prop)) {
+        element.setAttribute(prop, attrs[prop]);
+      }
+    }
+  },
+  hasAttr: function hasAttr(attrName, element) {
+    return element.getAttribute(attrName);
+  },
+  tagIs: function tagIs(tagName, element) {
+    if (!element) {
+      return;
+    }
+    return element.tagName.toLowerCase() === tagName.toLowerCase();
+  },
+  getAll: function getAll(selector) {
+    var element = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+
+    var nodes = element.querySelectorAll(selector);
+    if (!nodes || 0 === nodes.length) {
+      return;
+    }
+
+    /*
+     * convert NodeList to an Array, otherwise IE throws error on a
+     * subsequent forEach:
+     */
+    return Array.prototype.slice.call(nodes);
+  },
+  add: function add(element, container) {
+    container.appendChild(element);
+  },
+  prepend: function prepend(element, container) {
+    container.insertBefore(element, container.firstChild);
+  },
+  parent: function parent(element, selector) {
+    if (!element) {
+      return;
+    }
+    var target = element;
+    var found = void 0;
+    var parent = void 0;
+
+    do {
+      parent = target.parentNode;
+      if (!parent) {
+        break;
+      }
+
+      found = !selector || this.hasClass(selector, parent);
+      target = parent;
+    } while (!found && parent);
+
+    return parent;
+  },
+  viewDims: function viewDims(element) {
+    var dims = void 0;
+
+    if (!element) {
+      dims = {
+        top: window.pageYOffset,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        bottom: window.pageYOffset + window.innerHeight
+      };
+    } else {
+
+      dims = element.getBoundingClientRect();
+    }
+
+    return dims;
+  },
+  trigger: function trigger(eventName, element, data) {
+    var event = getCustomEvent(eventName, data);
+    if (!event) {
+      throw new Error('Unable to trigger custom event: ' + eventName);
+    }
+
+    element.dispatchEvent(event);
+  }
+};
+
+exports.default = DOM;
+
+
+function getCustomEvent(eventName, data) {
+  if (DOM.customEvents && DOM.customEvents[eventName]) {
+    return DOM.customEvents[eventName];
+  }
+
+  var event = createCustomEvent(eventName, data);
+
+  registerCustomEvent(eventName, event);
+  return event;
+}
+
+function createCustomEvent(eventName, data) {
+  if ('function' !== typeof window.CustomEvent) {
+    CustomEvent.prototype = window.Event.prototype;
+  }
+
+  var event = new CustomEvent(eventName, data && { detail: data });
+  return event;
+}
+
+/*
+ * Polyfill code gleaned from MDN: 
+ * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+ */
+function CustomEvent(event, params) {
+  params = params || {
+    bubbles: false, cancelable: false, detail: undefined
+  };
+
+  var evt = document.createEvent('CustomEvent');
+  evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+
+  return evt;
+}
+
+function registerCustomEvent(eventName, event) {
+  if (null === DOM.customEvents) {
+    DOM.customEvents = {};
+  }
+  DOM.customEvents[eventName] = event;
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(1);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Bootstrap JavaScript file for colintester.com
+ *
+ * @package     Website
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+var _focusApp = __webpack_require__(4);
+
+var _focusApp2 = _interopRequireDefault(_focusApp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+__webpack_require__(1);
+__webpack_require__(8);
+
+_focusApp2.default.init();
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Focus app – mediator for colintester.com
+ *
+ * @package     Focus
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+var _Lazlo = __webpack_require__(5);
+
+var _Lazlo2 = _interopRequireDefault(_Lazlo);
+
+var _rwdView = __webpack_require__(7);
+
+var _rwdView2 = _interopRequireDefault(_rwdView);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var focus = {
+
+  view: {
+    smallViewEM: 39,
+    scrolledClass: 'js-scrolled'
+  },
+
+  init: function init() {
+    setViewParams();
+    setJSMode();
+    if (true === focus.view.smallView) {
+      setupMobileMenu();
+    }
+
+    setupEvents();
+    setupLazyLoad();
+    if (false === focus.view.smallView) {
+      setupRWDViews();
+    }
+  }
+};
+
+exports.default = focus;
+
+
+function setViewParams() {
+  var boundary = document.querySelector('.boundary');
+  if (!boundary) {
+    return;
+  }
+
+  var compStyle = window.getComputedStyle(boundary);
+  var regexNumeric = /^\d+/;
+  var vpWidth = Number(regexNumeric.exec(compStyle.width));
+  var vpFontSize = Number(regexNumeric.exec(compStyle.fontSize));
+  var vpMobileMax = focus.view.smallViewEM * vpFontSize;
+
+  focus.view.smallView = vpWidth < vpMobileMax;
+}
+
+function setJSMode() {
+  _domMan2.default.addClass('focus-js', _domMan2.default.html);
+}
+
+function setupMobileMenu() {
+  var nav = document.querySelector('#menu');
+  if (!nav) {
+    return;
+  }
+
+  var menu = document.createElement('span');
+  nav.appendChild(menu);
+  menu.id = 'menuBtn';
+  menu.addEventListener('click', function () {
+    return _domMan2.default.toggleClass('open', focus.view.nav);
+  });
+
+  // let home = document.createElement('span');
+  // nav.appendChild(home);
+  // DOM.addClass('home-link', home);
+  // home.addEventListener('click', () => window.location.href = './');
+
+  focus.view.nav = nav;
+}
+
+function setupEvents() {
+  window.addEventListener('scroll', onScroll);
+}
+
+function onScroll() {
+  if (!focus.view.scrolling) {
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(requestScrollCheck);
+    } else {
+      setTimeout(requestScrollCheck, 200);
+    }
+  }
+
+  focus.view.scrolling = true;
+}
+
+function requestScrollCheck() {
+  setScrollState();
+  focus.view.scrolling = false;
+}
+
+function setScrollState() {
+  var scroll = window.pageYOffset;
+
+  if (0 === scroll) {
+    _domMan2.default.removeClass(focus.view.scrolledClass, _domMan2.default.html);
+    focus.view.scrolled = false;
+    return;
+  }
+
+  if (!focus.view.scrolled) {
+    _domMan2.default.addClass(focus.view.scrolledClass, _domMan2.default.html);
+  }
+
+  focus.view.scrolled = true;
+}
+
+function setupLazyLoad() {
+  var toLoad = _domMan2.default.getAll('[data-lazlo]');
+  if (!toLoad) {
+    return;
+  }
+
+  _Lazlo2.default.watch(toLoad);
+}
+
+function setupRWDViews() {
+  var rwd = _domMan2.default.getAll('.rwd-view');
+  if (!rwd) {
+    return;
+  }
+
+  _rwdView2.default.setup(rwd, focus.view.smallView);
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * ES6 class to handle the lazy loading of content.
+ *
+ * @package     Focus
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+var _imageDims = __webpack_require__(6);
+
+var _imageDims2 = _interopRequireDefault(_imageDims);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Lazlo = {
+
+  devMode: false,
+
+  selectors: {
+    resource: 'data-lazlo',
+    legacy: 'data-original',
+    resourceAttr: 'data-lazlo-attr',
+    defaultAttr: 'src',
+    watching: 'lazlo',
+    loading: 'lazlo-loading',
+    loaded: 'lazlo-loaded',
+    completed: 'lazlo-completed'
+  },
+
+  watching: [],
+  loaded: [],
+  viewPort: null,
+  watchCount: 0,
+
+  watch: function watch(elements) {
+    this.resetState();
+
+    elements = elements || this.getResources();
+    if (!elements || 0 === elements.length) {
+      return;
+    }
+
+    _imageDims2.default.setup();
+    this.setupWatch();
+    this.addToWatch(elements);
+    this.checkView();
+  },
+
+
+  resetState: function resetState() {
+    this.watching = [];
+    this.loaded = [];
+    this.watchCount = 0;
+  },
+
+  getResources: function getResources() {
+    var selector = '[' + this.selectors.resource + ']';
+
+    // legacy support:
+    if (this.selectors.legacy) {
+      selector += ',[' + this.selectors.legacy + ']';
+    }
+
+    var toWatch = _domMan2.default.getAll(selector);
+    return toWatch;
+  },
+
+  setupWatch: function setupWatch() {
+    if (this.scrollHandler) {
+      return;
+    }
+    this.scrollHandler = this.onScroll.bind(this);
+    window.addEventListener('scroll', this.scrollHandler);
+
+    this.loadedHandler = this.onResourceLoaded.bind(this);
+  },
+  onScroll: function onScroll() {
+    if (true === this.checking) {
+      return;
+    }
+
+    setTimeout(this.checkView.bind(this), 200); // debounced.
+    this.checking = true;
+  },
+  addToWatch: function addToWatch(elements) {
+    this.watching = elements.map(this.prepareLazloItem);
+    this.watchCount = this.watching.length;
+  },
+
+
+  prepareLazloItem: function prepareLazloItem(item) {
+    _domMan2.default.addClass(Lazlo.selectors.watching, item);
+    return item;
+  },
+
+  checkView: function checkView() {
+    var _this = this;
+
+    this.viewPort = _domMan2.default.viewDims();
+    var waiting = [];
+
+    var remaining = this.watching.filter(function (element) {
+      return !(_this.isWithinView(element) && waiting.push(element));
+    });
+
+    this.watching = remaining;
+    this.checking = false;
+
+    if (true === Lazlo.devMode) {
+      console.log('Lazlo status: watchCount: %s, waiting: %s, remaining: %s', this.watchCount, waiting.length, remaining.length);
+    }
+
+    if (this.watchCount === this.loaded.length) {
+      this.standDown();
+    }
+
+    if (0 === waiting.length) {
+      return;
+    }
+    this.processLoading(waiting);
+  },
+  isWithinView: function isWithinView(element) {
+    var dims = _domMan2.default.viewDims(element);
+
+    // is element visible (width and height) and within the view:
+    return 0 < dims.width &&
+    //0 < dims.height &&
+    dims.top <= this.viewPort.height && dims.bottom >= 0;
+  },
+  processLoading: function processLoading(elements) {
+    var _this2 = this;
+
+    var selectors = this.selectors;
+    this.rwdImages = []; // reset for counting
+
+    elements.forEach(function (element) {
+      _domMan2.default.addClass(selectors.loading, element);
+
+      var resource = element.getAttribute(selectors.resource) || selectors.legacy && element.getAttribute(selectors.legacy);
+      if (!resource) {
+        return;
+      }
+
+      if ('noscript' === resource) {
+        _this2.processNoscriptLoading(element);
+      } else {
+        _this2.processElementLoading(element, resource);
+      }
+    });
+
+    if (0 < this.rwdImages.length && window.picturefill) {
+      window.picturefill({ elements: this.rwdImages, reevaluate: true });
+    }
+  },
+
+
+  processNoscriptLoading: function processNoscriptLoading(element) {
+    var noscript = element.querySelector('noscript');
+    if (!noscript) {
+      return;
+    }
+
+    var content = noscript.textContent;
+    noscript.insertAdjacentHTML('beforebegin', content);
+
+    var rwdImages = _domMan2.default.getAll('img[srcset], picture img', element);
+    if (rwdImages) {
+      this.rwdImages = this.rwdImages.concat(rwdImages);
+    }
+
+    this.setAsLoaded(element);
+  },
+
+  processElementLoading: function processElementLoading(element, resource) {
+    var selectors = this.selectors;
+    var attr = element.getAttribute(selectors.resourceAttr) || selectors.defaultAttr;
+
+    if (selectors.defaultAttr === attr) {
+      element.addEventListener('load', this.loadedHandler);
+    }
+
+    element.setAttribute(attr, resource);
+
+    if (selectors.defaultAttr === attr && _domMan2.default.tagIs('img', element)) {
+      this.prepareSrcSet(element);
+    } else {
+      this.setAsLoaded(element);
+    }
+  },
+  prepareSrcSet: function prepareSrcSet(element) {
+    var attr = 'data-srcset';
+    var srcSet = element.getAttribute(attr);
+    var sources = [element];
+
+    if (!srcSet) {
+      var parent = _domMan2.default.parent(element, 'image');
+      if (!parent) {
+        return;
+      }
+      sources = _domMan2.default.getAll('source[' + attr + ']', parent);
+      if (!sources) {
+        return;
+      }
+    }
+
+    sources.forEach(function (source) {
+      source.setAttribute('srcset', source.getAttribute(attr));
+      source.removeAttribute(attr);
+    });
+
+    this.rwdImages.push(element);
+  },
+  onResourceLoaded: function onResourceLoaded(e) {
+    var element = e.target;
+
+    element.removeEventListener('load', this.loadedHandler);
+    this.setAsLoaded(element);
+
+    //if (DOM.tagIs('img', element)) { this.removeImageDims(element); }
+  },
+  setAsLoaded: function setAsLoaded(element) {
+    var selectors = this.selectors;
+
+    _domMan2.default.removeClass(selectors.loading, element);
+    element.removeAttribute(selectors.resource);
+    element.removeAttribute(selectors.resourceAttr);
+
+    if (selectors.legacy) {
+      element.removeAttribute(selectors.legacy);
+    }
+
+    _domMan2.default.addClass(selectors.loaded, element);
+    this.loaded.push(element);
+
+    var parent = _domMan2.default.parent(element);
+    if (parent) {
+      _domMan2.default.addClass(selectors.completed, parent);
+    }
+  },
+  removeImageDims: function removeImageDims(element) {
+    if (!_domMan2.default.hasAttr('data-dims', element)) {
+      return;
+    }
+
+    element.removeAttribute('data-dims');
+    element.removeAttribute('height');
+  },
+  standDown: function standDown() {
+    window.removeEventListener('scroll', this.scrollHandler);
+    this.scrollHandler = null;
+    this.loadedHandler = null;
+
+    if (true === Lazlo.devMode) {
+      console.log('Lazlo has stood down.');
+    }
+  }
+};
+
+exports.default = Lazlo;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Module to handle exact dimensions of image tags.
+ *
+ * @package     ZLibrary
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+"user strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var imgDims = {
+
+  resizing: false,
+
+  selectors: {
+    attr: 'data-dims'
+  },
+
+  setup: function setup() {
+    if (!this.resizeHandler) {
+      this.resizeHandler = onResize;
+      window.addEventListener('resize', this.resizeHandler);
+    }
+
+    processDims();
+  }
+};
+
+exports.default = imgDims;
+
+
+function onResize() {
+  if (true === imgDims.resizing) {
+    return;
+  }
+
+  setTimeout(processDims, 160); // debounced.
+  imgDims.resizing = true;
+}
+
+function processDims() {
+  var images = findImages();
+  if (!images || 0 === images.length) {
+    return;
+  }
+
+  var imageData = getImageData(images);
+  setImageDims(imageData);
+  imgDims.resizing = false;
+}
+
+function findImages() {
+  var images = _domMan2.default.getAll('img[' + imgDims.selectors.attr + ']');
+  return images;
+}
+
+function getImageData(imgs) {
+  var imageData = imgs.map(function (img) {
+    var dims = getDefinedDims(img);
+    addComputedDims(dims);
+    return dims;
+  });
+
+  return imageData;
+}
+
+function getDefinedDims(img) {
+  var values = img.getAttribute(imgDims.selectors.attr).split(',');
+  var dims = {
+    element: img,
+    defWidth: Number(values[0]),
+    defHeight: Number(values[1])
+  };
+
+  return dims;
+}
+
+function addComputedDims(dims) {
+  dims.parent = _domMan2.default.parent(dims.element);
+  var rect = dims.parent.getBoundingClientRect();
+
+  dims.width = rect.width > dims.defWidth ? dims.defWidth : Math.round(rect.width);
+
+  dims.ratio = Number((dims.defHeight / dims.defWidth).toFixed(2));
+  dims.height = Math.floor(dims.ratio * dims.width);
+}
+
+function setImageDims(imageData) {
+  imageData.forEach(function (image) {
+    // DOM.setStyle({
+    //   width: image.width + 'px',
+    //   height: image.height + 'px'
+    // }, image.element);
+
+    _domMan2.default.setAttrs({
+      width: image.width,
+      height: image.height
+    }, image.element);
+  });
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+/**
+ * Module to handle input and control of RWD frame views.
+ *
+ * @package     Focus-App
+ * @author      Colin Tester <office@z-omo.com>
+ * 
+ * This file forms part of the installed @package and should not be copied 
+ * and/or distributed without the written consent from the file's author.
+ *
+ * @copyright: Please see: <https://en.wikipedia.org/wiki/Berne_Convention>
+ *
+ * This file and its @package are under version control.
+ */
+'user strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _domMan = __webpack_require__(0);
+
+var _domMan2 = _interopRequireDefault(_domMan);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var RWDView = {
+  viewModes: ['rwd-mobile', 'rwd-tablet', 'rwd-desktop'],
+
+  selectors: {
+    container: 'rwd-view',
+    controls: 'rwd-view-controls',
+    active: 'active',
+    device: 'rwd-device',
+    frame: 'rwd-view-frame',
+    index: 'data-index',
+    frameURL: 'data-src'
+  },
+
+  setup: function setup(container) {
+    RWDView.container = container;
+    setupViewControls();
+    //setupView();
+  }
+};
+
+function buildViewControls(container) {
+  var controls = document.createElement('div');
+  _domMan2.default.addClass(RWDView.selectors.controls, controls);
+
+  RWDView.viewModes.forEach(function (mode, index) {
+    var button = document.createElement('button');
+    setButtonText(mode, button);
+    button.setAttribute('data-index', index);
+    _domMan2.default.add(button, controls);
+
+    if (_domMan2.default.hasClass(mode, container)) {
+      activateControl(button);
+    }
+  });
+
+  _domMan2.default.prepend(controls, container);
+}
+
+function setupViewControls() {
+  RWDView.container.forEach(function (view) {
+    buildViewControls(view);
+    setupRWDTitle(view);
+    view.addEventListener('click', onSelectControl);
+  });
+}
+
+function setButtonText(text, button) {
+  text = text.replace('rwd-', '');
+  text = text.toLowerCase().replace(/\b[a-z]/g, function (letter) {
+    return letter.toUpperCase();
+  });
+  button.innerHTML = text;
+}
+
+function onSelectControl(e) {
+  var control = e.target;
+  if ('button' !== control.tagName.toLowerCase()) {
+    return;
+  }
+
+  e.stopPropagation();
+  var modeIndex = Number(control.getAttribute(RWDView.selectors.index));
+
+  //let view = getViewContainer(control);
+  var view = _domMan2.default.parent(control, RWDView.selectors.container);
+  if (view) {
+    setViewMode(view, modeIndex);
+  }
+  activateControl(control);
+}
+
+function activateControl(control) {
+  if (RWDView.activeControl) {
+    _domMan2.default.removeClass(RWDView.selectors.active, RWDView.activeControl);
+  }
+
+  _domMan2.default.addClass(RWDView.selectors.active, control);
+  RWDView.activeControl = control;
+}
+
+function setupRWDTitle(view) {
+  var box = _domMan2.default.parent(view, 'boxed');
+  if (!box) {
+    return;
+  }
+
+  var hilite = box.querySelector('.hilite');
+  if (!hilite) {
+    return;
+  }
+
+  hilite.textContent = '3';
+  box.querySelector('.plural').textContent = 's';
+}
+
+function setViewMode(view, index) {
+  var mode = RWDView.viewModes[index];
+  if (!mode) {
+    return;
+  }
+
+  resetViewMode(view);
+  _domMan2.default.addClass(mode, view);
+}
+
+function resetViewMode(view) {
+  RWDView.viewModes.forEach(function (mode) {
+    if (_domMan2.default.hasClass(mode, view)) {
+      _domMan2.default.removeClass(mode, view);
+    }
+  });
+}
+
+// function buildFrame(element)
+// {
+//   let device = getViewDevice(element);
+//   if (!device) { device = element; }
+
+//   let frame = document.createElement('iframe');
+//   DOM.add(frame, device);
+//   DOM.addClass(RWDView.selectors.frame, frame);
+
+//   return frame;
+// }
+
+// function getViewDevice(view) {
+//   return view.querySelector('.' + RWDView.selectors.device);
+// }
+
+// @TODO: rewrite so that element passed could be identified as container.
+
+// function getViewFrame(element)
+// {
+//   let frame = element.querySelector('.' + RWDView.selectors.frame);
+//   //if (!frame) { frame = buildFrame(element); }
+//   return frame;
+// }
+
+
+// function setupView()
+// {
+//   RWDView.container.forEach(function(view) {
+//     let frame = getViewFrame(view);
+//     if (!frame) { return; }
+
+//     console.log('frame: ', frame);
+//     let barWidth = frame.offsetWidth - frame.clientWidth;
+//     console.log('barWidth: ', barWidth);
+
+//     if (0 < barWidth)
+//     {
+//       let device = getViewDevice(view);
+//       if (!device) { return; }
+
+//       let frameWidth = 100 * ((frame.offsetWidth + barWidth) / device.offsetWidth);
+//       //frame.setAttribute('style', 'width: ' + frameWidth + '%;');
+//     }
+//     // let url = view.getAttribute(RWDView.selectors.frameURL);
+//     // if (!url) { return; }
+
+//     // frame.setAttribute('src', url);    
+//   });
+//}
+
+// function setMobileAgent(targetWindow)
+// {
+//   let agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.0 Mobile/14G60 Safari/602.1';
+//   if (agent === targetWindow.parent.navigator.userAgent) { return; }
+
+//   let agentProp = { get: function(){ return agent; }};
+
+//   try {
+//     Object.defineProperty(targetWindow.parent.navigator, 'userAgent', agentProp);
+//   } catch (e) {
+//     targetWindow.parent.navigator = Object.create(navigator, { userAgent: agentProp });
+//   }
+//}
+
+exports.default = RWDView;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*! picturefill - v3.0.2 - 2016-02-12
  * https://scottjehl.github.io/picturefill/
  * Copyright (c) 2016 https://github.com/scottjehl/picturefill/blob/master/Authors.txt; Licensed MIT
  */

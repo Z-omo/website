@@ -222,7 +222,7 @@ const Lazlo = {
     element.removeEventListener('load', this.loadedHandler);
     this.setAsLoaded(element);
 
-    if (DOM.tagIs('img', element)) { this.removeImageDims(element); }
+    //if (DOM.tagIs('img', element)) { this.removeImageDims(element); }
   },
 
   setAsLoaded(element)

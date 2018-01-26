@@ -42,7 +42,7 @@ function onResize()
 {
   if (true === imgDims.resizing) { return; }
   
-  setTimeout(processDims, 200); // debounced.
+  setTimeout(processDims, 160); // debounced.
   imgDims.resizing = true;
 }
 
@@ -64,12 +64,10 @@ function findImages()
 
 function getImageData(imgs)
 {
-  const imageData = [];
-
-  imgs.forEach(img => {
+  const imageData = imgs.map(img => {
     let dims = getDefinedDims(img);
     addComputedDims(dims);
-    imageData.push(dims);
+    return dims;
   });
   
   return imageData;
@@ -103,9 +101,14 @@ function addComputedDims(dims)
 function setImageDims(imageData)
 {
   imageData.forEach(image => {
-    DOM.setStyle({
-      width: image.width + 'px',
-      height: image.height + 'px'
+    // DOM.setStyle({
+    //   width: image.width + 'px',
+    //   height: image.height + 'px'
+    // }, image.element);
+
+    DOM.setAttrs({
+      width: image.width,
+      height: image.height
     }, image.element);
   });
 }
