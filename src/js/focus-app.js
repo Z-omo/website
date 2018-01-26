@@ -1,7 +1,7 @@
-/**
- * Focus app – mediator for colintester.com
+/**!
+ * Focus app – Initiator/Client Control for colintester.com
  *
- * @package     Focus
+ * @package     OnFocus
  * @author      Colin Tester <office@z-omo.com>
  * 
  * This file forms part of the installed @package and should not be copied 

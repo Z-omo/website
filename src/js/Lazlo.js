@@ -1,5 +1,5 @@
 /**
- * ES6 class to handle the lazy loading of content.
+ * Mdule to handle the lazy loading of content.
  *
  * @package     Focus
  * @author      Colin Tester <office@z-omo.com>
