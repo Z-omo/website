@@ -1,4 +1,4 @@
-/**
+/**!
  * ES6 class to handle the lazy loading of content.
  *
  * @package     Focus
