@@ -66,6 +66,8 @@ function getImageData(imgs)
 {
   const imageData = imgs.map(img => {
     let dims = getDefinedDims(img);
+    if (!dims) { return; }
+
     addComputedDims(dims);
     return dims;
   });
@@ -75,13 +77,21 @@ function getImageData(imgs)
 
 function getDefinedDims(img)
 {
-  const values = img.getAttribute(imgDims.selectors.attr).split(',');
+  const values = img.getAttribute(imgDims.selectors.attr).split(/\s*x\s*/i);
+  if (2 !== values.length) {
+    throw new Error('Image data-dims value is not defined in expected format.');
+  }
+  
   const dims = {
     element:   img,
     defWidth:  Number(values[0]),
     defHeight: Number(values[1])
   };
 
+  if (isNaN(dims.defWidth) || isNaN(dims.defHeight))
+  {
+    throw new Error('An image data-dims value for width or height is not a number.');
+  }
   return dims;
 }
 
@@ -101,11 +111,6 @@ function addComputedDims(dims)
 function setImageDims(imageData)
 {
   imageData.forEach(image => {
-    // DOM.setStyle({
-    //   width: image.width + 'px',
-    //   height: image.height + 'px'
-    // }, image.element);
-
     DOM.setAttrs({
       width: image.width,
       height: image.height
