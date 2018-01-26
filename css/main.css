@@ -939,15 +939,14 @@ nav {
   display: block;
   margin: 0 0 2rem;
   max-width: 55.62423rem; }
+  .image picture {
+    display: block; }
   .image .image {
     margin-bottom: 0; }
   .image img {
-    width: 100%; }
+    max-width: 100%; }
   .image.image-centred {
     text-align: center; }
-    .image.image-centred img {
-      width: auto;
-      max-width: 100%; }
   .image.float-image {
     margin: 0 auto 2rem;
     width: 100%; }

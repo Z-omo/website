@@ -729,9 +729,7 @@ var Lazlo = {
     element.removeEventListener('load', this.loadedHandler);
     this.setAsLoaded(element);
 
-    if (_domMan2.default.tagIs('img', element)) {
-      this.removeImageDims(element);
-    }
+    //if (DOM.tagIs('img', element)) { this.removeImageDims(element); }
   },
   setAsLoaded: function setAsLoaded(element) {
     var selectors = this.selectors;
@@ -830,7 +828,7 @@ function onResize() {
     return;
   }
 
-  setTimeout(processDims, 200); // debounced.
+  setTimeout(processDims, 160); // debounced.
   imgDims.resizing = true;
 }
 
@@ -851,12 +849,10 @@ function findImages() {
 }
 
 function getImageData(imgs) {
-  var imageData = [];
-
-  imgs.forEach(function (img) {
+  var imageData = imgs.map(function (img) {
     var dims = getDefinedDims(img);
     addComputedDims(dims);
-    imageData.push(dims);
+    return dims;
   });
 
   return imageData;
@@ -885,9 +881,14 @@ function addComputedDims(dims) {
 
 function setImageDims(imageData) {
   imageData.forEach(function (image) {
-    _domMan2.default.setStyle({
-      width: image.width + 'px',
-      height: image.height + 'px'
+    // DOM.setStyle({
+    //   width: image.width + 'px',
+    //   height: image.height + 'px'
+    // }, image.element);
+
+    _domMan2.default.setAttrs({
+      width: image.width,
+      height: image.height
     }, image.element);
   });
 }
