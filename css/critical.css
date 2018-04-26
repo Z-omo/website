@@ -1,0 +1,75 @@
+/*
+ * SASS for critical rules to be loaded written into page <head>.
+ */
+/*
+ * SASS base variables for website.com
+ */
+/*
+ * Fonts loaded via Typekit
+ * Preference is Seravek, but not available through paid plan,
+ * perhaps buy it when funds allow?available?
+ */
+/*
+ * SASS helper mixins, functions and classes.
+ */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.print-only {
+  display: none; }
+
+.with-floats:after {
+  content: ' ';
+  display: table;
+  clear: both; }
+
+.boundary > header {
+  padding: 4rem 2rem 2rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 120px;
+  color: white;
+  background-color: theme(secondary); }
+  @media only screen and (min-width: 39em) {
+    .home .boundary > header {
+      min-height: 320px; } }
+  .boundary > header .logo {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    opacity: 0.9;
+    width: 5em;
+    height: 52px;
+    z-index: 101;
+    border: none; }
+    @media only screen and (min-width: 2000px) {
+      .boundary > header .logo {
+        left: auto; } }
+    .focus-js .boundary > header .logo {
+      position: fixed; }
+    .boundary > header .logo svg #iris {
+      fill: theme(prim-blend80); }
+    .boundary > header .logo svg {
+      transition: transform 200ms ease-out;
+      -webkit-transform-origin: top left;
+      -ms-transform-origin: top left;
+      transform-origin: top left;
+      -webkit-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+      transform: scale(1.2); }
+      @media only screen and (min-width: 39em) {
+        .boundary > header .logo svg {
+          -webkit-transform: scale(1.36);
+          -ms-transform: scale(1.36);
+          transform: scale(1.36); } }
+      .js-scrolled .boundary > header .logo svg {
+        -webkit-transform: scale(0.72);
+        -ms-transform: scale(0.72);
+        transform: scale(0.72); }
