@@ -1,5 +1,5 @@
 /**
- * Mdule to handle the lazy loading of content.
+ * Module to faciliate the lazy loading of content.
  *
  * @package     Focus
  * @author      Colin Tester <office@z-omo.com>
@@ -41,10 +41,11 @@ const Lazlo = {
     this.resetState();
 
     elements = elements || this.getResources();
-    if (!elements || 0 === elements.length) { return; }
+    if (!elements || !elements.length) { return; }
 
     imageDims.setup();
-    this.setupWatch();
+    if (!this.scrollHandler) { this.setupScrollHandler(); }
+  
     this.addToWatch(elements);
     this.checkView();
   },
@@ -67,9 +68,8 @@ const Lazlo = {
     return toWatch;
   },
 
-  setupWatch()
+  setupScrollHandler()
   {
-    if (this.scrollHandler) { return; }
     this.scrollHandler = this.onScroll.bind(this);
     window.addEventListener('scroll', this.scrollHandler);
 
@@ -117,7 +117,7 @@ const Lazlo = {
 
     if (this.watchCount === this.loaded.length) { this.standDown(); }
 
-    if (0 === waiting.length) { return; }
+    if (!waiting.length) { return; }
     this.processLoading(waiting);
   },
 

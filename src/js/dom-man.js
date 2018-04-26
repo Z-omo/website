@@ -24,7 +24,7 @@ const DOM = {
     if (!element) { return; }
     if (element.classList)
     {
-      let classNames = className.trim().split(' ')
+      className.trim().split(' ')
         .forEach((name) => element.classList.add(name));
       
       // Would prefer the following but IE does not support multiple arguments.
