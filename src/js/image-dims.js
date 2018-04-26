@@ -11,7 +11,7 @@
  *
  * This file and its @package are under version control.
  */
-"user strict";
+"use strict";
 
 import DOM from './dom-man';
 
