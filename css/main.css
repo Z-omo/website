@@ -470,7 +470,7 @@ main {
     bottom: -1px;
     left: 0;
     width: 100%;
-    height: 5em;
+    height: 10em;
     background-image: -webkit-linear-gradient(top, transparent, white);
     background-image: linear-gradient(to bottom, transparent, white); }
 
@@ -1080,7 +1080,7 @@ footer {
     .articles article p {
       margin: 0; }
     .articles article.with-image {
-      min-height: 12rem;
+      min-height: 16rem;
       border-bottom: none; }
       @media only screen and (min-width: 39em) {
         .articles article.with-image {
@@ -1100,8 +1100,8 @@ footer {
         width: 100%;
         color: white;
         text-shadow: 2px 1px 1px #31393c;
-        background-image: -webkit-linear-gradient(top, rgba(49, 57, 60, 0.2), rgba(49, 57, 60, 0.8));
-        background-image: linear-gradient(to bottom, rgba(49, 57, 60, 0.2), rgba(49, 57, 60, 0.8));
+        background-image: -webkit-linear-gradient(top, rgba(49, 57, 60, 0.05), rgba(49, 57, 60, 0.8));
+        background-image: linear-gradient(to bottom, rgba(49, 57, 60, 0.05), rgba(49, 57, 60, 0.8));
         transition: background-color 1s ease-out; }
         .articles article.with-image header h1 {
           color: inherit; }
@@ -1161,7 +1161,7 @@ footer {
         width: auto; } }
 
 .post > footer {
-  margin: 0 0 -2rem -2rem;
+  margin: 0 0 2rem -2rem;
   width: 100vw;
   min-height: auto;
   background-color: rgba(73, 59, 42, 0.8); }
@@ -1438,7 +1438,7 @@ footer {
 .highlight {
   position: relative;
   margin: 0 0 2rem -2rem;
-  padding: 0 0 0 0.5rem;
+  padding: 0.5rem;
   width: 98vw;
   font-family: monospace;
   font-size: 1rem;
@@ -1452,14 +1452,14 @@ footer {
       width: auto;
       overflow-x: visible; } }
   .highlight .gutter {
-    min-width: 0.8em;
+    min-width: 1.4rem;
     color: #667777; }
     @media only screen and (min-width: 39em) {
       .highlight .gutter {
         min-width: 1.6rem; } }
   .highlight code::after {
     position: absolute;
-    right: 0.5rem;
+    right: 1rem;
     bottom: 0.5rem;
     content: attr(data-lang);
     color: #31393c;
@@ -1467,6 +1467,8 @@ footer {
     @media only screen and (min-width: 39em) {
       .highlight code::after {
         right: 1rem; } }
+  .highlight table pre {
+    margin: 0; }
 
 .highlighter-rouge {
   -webkit-border-radius: 0.26em;

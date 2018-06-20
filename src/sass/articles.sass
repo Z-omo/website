@@ -79,7 +79,7 @@
 
   
     &.with-image
-      min-height: 12rem
+      min-height: 16rem
       border-bottom: none
 
       @media only screen and (min-width: $tabletWidth)
@@ -101,7 +101,8 @@
         width: 100%
         color: white
         text-shadow: $textShadow
-        +gradientBackground(theme(sec-blend20), theme(sec-blend80))
+        //+gradientBackground(theme(sec-blend20), theme(sec-blend80))
+        +gradientBackground(rgba(theme(secondary), 0.05), theme(sec-blend80))
         transition: background-color $transDurationOut ease-out
 
         h1
@@ -191,7 +192,8 @@
       // content: ''      
 
   > footer
-    margin: 0 0 -#{$contentPadding} -#{$contentPadding}
+    margin: 0 0 $contentMargin -#{$contentPadding}
+
     width: 100vw
     min-height: auto
     background-color: theme(tert-blend80)
