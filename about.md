@@ -50,6 +50,7 @@ My skill set stack includes:
 Tools I use regularly:
 : - Git, Github
   - Bash, npm, webpack, Grunt
+  - Jasmine, Karma
   - VS Code, Vi
   - Photoshop, Illustrator
   - ssh, rsync
@@ -79,8 +80,8 @@ I listen to many Podcasts and would recommend the following:
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
 
 Tinkering currently with:
-: - Elixir, Elm
+: - Go, Google Cloud
+  - Elixir, Elm
   - Web Components
-  - Functional Programming
 
 </div>

@@ -11,7 +11,8 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
 .highlight
   position: relative
   margin: 0 0 $contentMargin -#{$contentPadding}
-  padding: 0 0 0 $mobileCodePadding
+  //padding: 0 0 0 $mobileCodePadding
+  padding: $mobileCodePadding
   width: 98vw//calc(100vw - #{$mobileCodePadding})
   font-family: monospace
   font-size: 1rem
@@ -26,7 +27,7 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
     overflow-x: visible
 
   .gutter
-    min-width: 0.8em//1.6rem
+    min-width: 1.4rem
     color: #667777
 
     @media only screen and (min-width: $tabletWidth)
@@ -34,7 +35,7 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
 
   code::after
     position: absolute
-    right: $mobileCodePadding
+    right: $mobileCodePadding * 2
     bottom: $mobileCodePadding
     content: attr(data-lang)
     color: theme(secondary)
@@ -42,6 +43,9 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
 
     @media only screen and (min-width: $tabletWidth)
       right: $codePadding
+
+  table pre
+    margin: 0
 
 .highlighter-rouge
   +corners
