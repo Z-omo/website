@@ -40,17 +40,24 @@ Software development:
 My skill set stack includes:
 : - HTML, XML, SVG
   - CSS, SASS
-  - JavaScript (ES5, ES6), Node.js, Express
-  - PHP, Python
+  - JavaScript (ES5, ES6)
+  - PHP, Python, Node.js
   - MySQL, PostgreSQL, MongoDB
   - REST, GraphQL, JWT
   - JSON, YAML
   - Mustache, Handlebars
 
+Tinkering currently with:
+: - Golang, Google Cloud Platform, AWS
+  - Kubernetes, MiniKube
+  - Elixir, Elm
+  - Web Components
+
 Tools I use regularly:
 : - Git, Github
+  - Docker
   - Bash, npm, webpack, Grunt
-  - Jasmine, Karma
+  - Babel, Jasmine, Karma
   - VS Code, Vi
   - Photoshop, Illustrator
   - ssh, rsync
@@ -78,10 +85,5 @@ I listen to many Podcasts and would recommend the following:
   - [Software Engineering Radio](http://www.se-radio.net/)
   - [The Changelog](https://changelog.com/podcast)
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
-
-Tinkering currently with:
-: - Go, Google Cloud
-  - Elixir, Elm
-  - Web Components
 
 </div>
