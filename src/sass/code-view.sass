@@ -14,6 +14,7 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
   //padding: 0 0 0 $mobileCodePadding
   padding: $mobileCodePadding
   width: 98vw//calc(100vw - #{$mobileCodePadding})
+  max-width: $maxContentWidth
   font-family: monospace
   font-size: 1rem
   line-height: 1.1rem
@@ -36,7 +37,7 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
   code::after
     position: absolute
     right: $mobileCodePadding * 2
-    bottom: $mobileCodePadding
+    top: $mobileCodePadding
     content: attr(data-lang)
     color: theme(secondary)
     opacity: 0.5

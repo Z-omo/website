@@ -153,6 +153,8 @@
 
     dl
       margin: 0
+      padding-bottom: $contentPadding / 2
+      border-bottom: 1px solid theme(tert-blend20)
 
     dt
       width: auto
@@ -167,12 +169,13 @@
     dd
       width: 64%
 
-    dt::before
-      content: '• '
-      display: inline
-      margin-right: 0.2em
-      //white-space: pre
-      color: theme(primary)
+
+    // dt::before
+    //   content: '• '
+    //   display: inline
+    //   margin-right: 0.2em
+    //   //white-space: pre
+    //   color: theme(primary)
 
     dt, dd
       margin: 0 0.2rem 0 0 
@@ -184,7 +187,9 @@
       @media only screen and (min-width: $tabletWidth)
         width: auto
 
- 
+    @media only screen and (min-width: $tabletWidth)
+      dd
+        margin-right: 1rem
     // dt:first-child
     //   clear: none
 
