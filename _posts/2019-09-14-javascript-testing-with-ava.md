@@ -19,7 +19,7 @@ $ npm install -save-dev ava @babel/core @babel/preset-env @babel/register
 
 ### Babel configuration.
 
-With the AVA and babel modules installed, create a .babelrc file (saved in the project's root folder) in which we will set the preset that babel should use when compiling our source files.
+With the AVA and Babel modules installed, create a `.babelrc` file (saved in the project's root folder) in which we will set the preset that Babel should use when compiling our source files.
 
 {% highlight json %}
 {
@@ -31,7 +31,7 @@ With the AVA and babel modules installed, create a .babelrc file (saved in the p
 
 ### AVA configuration.
 
-AVA operational options can be set within the project's <strong>package.json</strong> file. We want to set where test files and source files can be located.
+[AVA operational options](https://github.com/avajs/ava/blob/master/docs/06-configuration.md) can be set within the project's <strong>package.json</strong> file. We want to set where test files and source files can be located.
 
 {% highlight json %}
 {
