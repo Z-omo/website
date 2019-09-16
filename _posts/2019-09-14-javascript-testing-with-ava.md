@@ -22,7 +22,7 @@ AVA is a test runner for Node.js so we will install the required modules using [
 We want to load AVA and Babel as our project dev dependencies, with additional support to compile our ES6 written source files.
 
 {% highlight cli %}
-$ npm install -save-dev ava @babel/core @babel/preset-env @babel/register
+$ npm install --save-dev ava @babel/core @babel/preset-env @babel/register
 {% endhighlight %}
 
 ### Babel configuration.
@@ -73,7 +73,7 @@ AVA does not, by default, compile ES6 source (src) files, only the test and help
 }
 {% endhighlight %}
 
-However, when using Babel’s <em>register</em> module, it will now compile not only our source files, but also the test files, which is not want we need or is necessary. We can inform Babel's <em>register</em> to ignore test files via an external JavaScript file.
+However, when using Babel’s <em>register</em> module, it will now compile not only our source files, but also the test files, which is not want we need nor is it necessary. We can inform Babel's <em>register</em> to ignore test files via an external JavaScript file.
 
 The external file (_babel-register.js) is to be stored within our ./tests folder and the file name is prefixed with an underscore as AVA will ignore files with that prefix. The _babel-register.js file will contain the code to load (<em>require</em>) the `@babel/register` module and set the ignore option.
 
@@ -83,9 +83,9 @@ require('@babel/register')({
 });
 {% endhighlight %}
 
-We are now specified that @babel/register ignores all files in our <em>tests</em> folder and – for good measure – our <em>node_modules</em> folder.
+We have now specified that @babel/register ignores all files in our <em>tests</em> folder and – for good measure – our <em>node_modules</em> folder.
 
-Now, back within the AVA configuration; in the <strong>package.json</strong> file, we can require and substitute our external register file to be preloaded before AVA runs its tests.
+Now, back within the AVA configuration; located in the <strong>package.json</strong> file, we can require and substitute our external register file to be preloaded before AVA runs any tests.
 
 {% highlight json %}
 {
@@ -106,7 +106,7 @@ AVA provides currently no support for running tests in a browser. However, we ca
 Firstly, let's install the browser-env module.
 
 {% highlight cli %}
-$ npm install -save-dev browser-env
+$ npm install --save-dev browser-env
 {% endhighlight %}
 
 Next we create a helper file for the browser-env module and store it in our tests folder. Again, the helper file name is prefixed with an underscore so that AVA ignores the file.
@@ -182,7 +182,7 @@ Currently, we have no tests, so let's create our example source JavaScript and s
 
 ### Writing tests.
 
-Create the file example-module.js and save it within the ./src folder, and add the following code to the file:
+Create the file example-module.js and save it within the ./src folder. Add the following code to the file:
 
 {% highlight javascript %}
 'use strict';
@@ -212,7 +212,7 @@ function setupView() {
 
 Our JavaScript example module defines a simple object <em>exampleModule</em> with a simple interface method <em>setupView</em> which will create an HTML element and insert it into the DOM, within the browser's document body element.
 
-Next let's create a test file named example-module-test.js and save it in the ./tests folder.
+Next let's create a test file named example-module-test.js and save it in the ./tests folder. Add the following code to the test file:
 
 {% highlight javascript %}
 import test from "ava";
@@ -254,7 +254,7 @@ test('Module has inserted an HTML element into the body element.', t => {
 });
 {% endhighlight %}
 
-In the above test, we first call the module interface function <em>setupView</em>, and then attempt to find the element in the DOM, which our module built and inserted.
+In the above test, we first call the module interface function <em>setupView</em>, and then attempt to find in the DOM, the element our module built and inserted.
 
 Run the AVA tests again from the command line:
 
