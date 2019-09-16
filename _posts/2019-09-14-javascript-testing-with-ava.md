@@ -103,24 +103,24 @@ Now, back within the AVA configuration; in the <strong>package.json</strong> fil
 
 AVA provides currently no support for running tests in a browser. However, we can mock browser globals such as `window` and `document` in order to test DOM integrations. That mocking is assisted by using the [npm browser-env module](https://www.npmjs.com/package/browser-env).
 
-First;y, let's install the browser-env module.
+Firstly, let's install the browser-env module.
 
 {% highlight cli %}
 $ npm install -save-dev browser-env
 {% endhighlight %}
 
-Next we create a helper file for the browser-env module and store it in our tests folder. Again,the helper file name is preficed with an underscore so that AVA ignores the file.
+Next we create a helper file for the browser-env module and store it in our tests folder. Again, the helper file name is prefixed with an underscore so that AVA ignores the file.
 
-Within the helper file ./tests/_browser-env.js include code to load (require) the `browser-env` module.
-
-By default `browser-env` will add all global browser variables to the Node global space. However, this is considered generally to be not such a good idea, therefore, we can reduce the created browser globals by specifying what's needed for the tests via an array.
+Within the helper file ./tests/_browser-env.js include the following code to load (require) the `browser-env` module:
 
 {% highlight javascript %}
 const browserEnv = require('browser-env');
 browserEnv(['window', 'document']);
 {% endhighlight %}
 
-We have specified required globals for `window` and `document` only.
+By default `browser-env` will add all global browser variables to the Node global space. However, this is considered generally to be not such a good idea, therefore, we can reduce the created browser globals by specifying what's needed for the tests via an array.
+
+In the above code, we have specified required globals for `window` and `document` only.
 
 Finally, within the <strong>package.json</strong> file we can require that AVA preloads our helper _browser-env.js file.
 
@@ -137,7 +137,7 @@ Finally, within the <strong>package.json</strong> file we can require that AVA p
 }
 {% endhighlight %}
 
-We are now ready to run AVA and as we have installed AVA locally, relative to our project folder, we need to run AVA from its location within the node_modules folder. This can be done in one of two ways:
+We are now ready to run AVA and as we have installed AVA locally, relative to our project folder, we need to run AVA from its location within the <em>node_modules</em> folder. This can be done in one of two ways:
 
 1. via npx which will run a locally npm installed module as a binary executable.
 2. from an npm script defined within the package.json file.
@@ -178,7 +178,7 @@ npm test
   ✖ Couldn't find any files to test
 {% endhighlight %}
 
-Currently, we have no tests, so let's create our simple source JavaScript and some tests for it.
+Currently, we have no tests, so let's create our example source JavaScript and some tests for it.
 
 ### Writing tests.
 
@@ -202,7 +202,7 @@ const exampleModule = {
 
 export default exampleModule;
 
-function buildElement() {
+function setupView() {
   const element = document.createElement('div');
   element.id = exampleModule.view.elementID;
   
@@ -210,7 +210,7 @@ function buildElement() {
 }
 {% endhighlight %}
 
-Our JavaScript example module defines a simple object <em>exampleModule</em> with a simple interface method <em>setupElement</em> which will create an HTML element and insert it into the DOM, via the browser's document body element.
+Our JavaScript example module defines a simple object <em>exampleModule</em> with a simple interface method <em>setupView</em> which will create an HTML element and insert it into the DOM, within the browser's document body element.
 
 Next let's create a test file named example-module-test.js and save it in the ./tests folder.
 
@@ -227,7 +227,7 @@ test('Module has a view property as an object', t => {
 });
 {% endhighlight %}
 
-We need to import AVA as ‘test’ and our example module file as ‘module’. We also have two tests defined and if we now run AVA again on the command line, we should see:
+We are importing AVA as ‘test’ and our example module file as ‘module’. We also have two tests defined and if we now run AVA again on the command line - we should see:
 
 {% highlight cli %}
 npm test
@@ -270,9 +270,9 @@ npm test
   3 tests passed
 {% endhighlight %}
 
-As you should see we now have 3 tests passed.
+As you should see we now have <em>3 tests passed</em>.
 
-I hope that the above is helpful in getting the AVA test runner set up for your project, and please see the links below for more on AVA and the other supporting modules. I would also recommend highly learning about [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD) as a better way to plan and implement tests for your next project.
+I hope that this post is helpful in getting the AVA test runner set up for your project, and please see the links below for more on AVA and the other supporting modules. I would also recommend highly learning about [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) (TDD) as a better way to plan and implement tests for your next project.
 
 Links:
 
