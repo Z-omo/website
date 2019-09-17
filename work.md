@@ -2,6 +2,7 @@
 layout: collection
 title: Work
 permalink: /work
+headerImage: colin-tester-work-header.jpg
 ---
 
 Herein are recent examples of my work.
