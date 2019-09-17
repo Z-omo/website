@@ -2,6 +2,7 @@
 layout: default
 title: About
 permalink: /about
+headerImage: colin-tester-about-header.jpg
 ---
 
 The technology of the web and the numerous ways information is communicated is changing constantly, which means it's important to keep abreast of developments in order to maintain good practice and a professional viewpoint.

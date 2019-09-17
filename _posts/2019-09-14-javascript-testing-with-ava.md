@@ -3,6 +3,7 @@ layout: post
 title: "JavaScript testing with AVA – ES6"
 author: Colin Tester
 summary: Adding the AVA test runner to a project which uses ES6 modules.
+headerImage: javascript-testing-with-ava-header.jpg
 ---
 
 Setting up a JavaScript testing environment can be a complex process; there is much to learn and numerous tools that need loading and configuring manually. [AVA – the JavaScript test runner](https://github.com/avajs/ava) – offers a much simpler test API with a minimal amount of setting up.
@@ -13,7 +14,6 @@ In my project working folder I have two sub-folders, labelled: <em>src</em> and 
 
 - ./src/example-module.js
 - ./tests/example-module-test.js
-
 
 ### Installing AVA and supporting dependencies.
 
@@ -279,5 +279,3 @@ Links:
 - [AVA Writing tests](https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md)
 - [Babel](https://babeljs.io/)
 - [browser-env](https://www.npmjs.com/package/browser-env)
-
-
