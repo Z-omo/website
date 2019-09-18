@@ -193,7 +193,7 @@ const exampleModule = {
   },
 
   setupView() {
-    const element = buildElement();
+    const element = setupView();
 
     document.body.appendChild(element);
     this.view.element = element;
