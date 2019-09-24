@@ -8,7 +8,7 @@ headerImage: javascript-testing-with-ava-header.jpg
 
 Setting up a JavaScript testing environment can be a complex process; there is much to learn and numerous tools that need loading and configuring manually. [AVA – the JavaScript test runner](https://github.com/avajs/ava) – offers a much simpler test API with a minimal amount of setting up.
 
-In this post I wish to demonstrate how simple – relatively speaking – it is to get AVA up and running tests on a simple example ES6 module (example-module.js) which implements a simple interface to interact with a browser <abbr title="Document Object Model">DOM</abbr>.
+In this post I wish to demonstrate how simple – relatively speaking – it is to get AVA up and running tests on a example ES6 module which implements a simple interface to interact with a browser <abbr title="Document Object Model">DOM</abbr>.
 
 In my project working folder I have two sub-folders, labelled: <em>src</em> and <em>tests</em> to hold, respectively, our JavaScript source file and test file.
 
@@ -22,7 +22,9 @@ AVA is a test runner for Node.js so we will install the required modules using [
 We want to load AVA and Babel as our project dev dependencies, with additional support to compile our ES6 written source files.
 
 {% highlight cli %}
-$ npm install --save-dev ava @babel/core @babel/preset-env @babel/register
+$ npm install --save-dev ava \
+@babel/core @babel/preset-env \
+@babel/register
 {% endhighlight %}
 
 ### Babel configuration.
@@ -145,13 +147,13 @@ We are now ready to run AVA and as we have installed AVA locally, relative to ou
 To run AVA directly from the command line with npx, type:
 
 {% highlight cli %}
-npx ava
+$ npx ava
 {% endhighlight %}
 
 We can also add the `--watch` option to our command to allow AVA to watch for changes made to our source and test files and run tests automatically.
 
 {% highlight cli %}
-npx ava --watch
+$ npx ava --watch
 {% endhighlight %}
 
 <strong>Note:</strong> When running in <em>watch</em> mode, `CTRL + c` will stop the watching process.
@@ -171,7 +173,7 @@ However, let's follow an npm convention and also add a test script to our packag
 We can then run the AVA tests from the command line simply with:
 
 {% highlight cli %}
-npm test
+$ npm test
 
 ...
 
@@ -230,7 +232,7 @@ test('Module has a view property as an object', t => {
 We are importing AVA as ‘test’ and our example module file as ‘module’. We also have two tests defined and if we now run AVA again on the command line - we should see:
 
 {% highlight cli %}
-npm test
+$ npm test
 
 ...
 
@@ -259,7 +261,7 @@ In the above test, we first call the module interface function <em>setupView</em
 Run the AVA tests again from the command line:
 
 {% highlight cli %}
-npm test
+$ npm test
 
 ...
 
