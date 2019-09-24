@@ -1452,6 +1452,11 @@ footer {
       padding-left: 1rem;
       width: auto;
       overflow-x: visible; } }
+  .highlight pre {
+    padding-top: 0.5rem; }
+    @media only screen and (min-width: 69em) {
+      .highlight pre {
+        padding-top: 0; } }
   .highlight .gutter {
     min-width: 1.4rem;
     color: #667777; }
