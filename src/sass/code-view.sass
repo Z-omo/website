@@ -27,6 +27,12 @@ $codeBackgroundColour: rgba(theme(tertiary),0.08)
     width: auto
     overflow-x: visible
 
+  pre
+    padding-top: $mobileCodePadding
+
+    @media only screen and (min-width: $desktopWidth)
+      padding-top: 0
+
   .gutter
     min-width: 1.4rem
     color: #667777
