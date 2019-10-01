@@ -10,7 +10,7 @@ Setting up a JavaScript testing environment can be a complex process; there is m
 
 In this post I wish to demonstrate how simple – relatively speaking – it is to get AVA up and running tests on a example ES6 module which implements a simple interface to interact with a browser <abbr title="Document Object Model">DOM</abbr>.
 
-In my project working folder I have two sub-folders, labelled: <em>src</em> and <em>tests</em> to hold, respectively, our JavaScript source file and test file.
+[In my project working folder](https://github.com/Z-omo/javascript-testing-with-ava) I have two sub-folders, labelled: <em>src</em> and <em>tests</em> to hold, respectively, our JavaScript source file and test file.
 
 - ./src/example-module.js
 - ./tests/example-module-test.js
@@ -226,7 +226,7 @@ test('Module imported is an object', t => {
 
 test('Module has a view property as an object', t => {
   t.is(typeof module.view, 'object');
-});
+}); 
 {% endhighlight %}
 
 We are importing AVA as ‘test’ and our example module file as ‘module’. We also have two tests defined and if we now run AVA again on the command line - we should see:
@@ -281,3 +281,4 @@ Links:
 - [AVA Writing tests](https://github.com/avajs/ava/blob/master/docs/01-writing-tests.md)
 - [Babel](https://babeljs.io/)
 - [browser-env](https://www.npmjs.com/package/browser-env)
+- [Example files to support this blog post.](https://github.com/Z-omo/javascript-testing-with-ava)
