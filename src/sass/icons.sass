@@ -5,7 +5,7 @@
 $iconsSVGFile:  '#{$imagePath}website-icons.svg'
 //$iconsPNGFile:  '#{$imagePath}family-links-website-icons-3.png'
 
-$iconNames: menu, twitter, facebook, google, linkedin, email
+$iconNames: menu, twitter, facebook, google, linkedin, email, github
 
 $iconSize:        2.375rem // 38px, fixes Firefox odd scaling issue.
 $noSVGIconSize:   38px
@@ -97,6 +97,9 @@ $iconInlineSize:  20px
 
   &:hover::after
     border: none
+
+  &.github::after
+    background-color: transparent
 
 //—————————————————————————————————————————————: Social share links
 .share-links

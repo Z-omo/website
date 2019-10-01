@@ -42,15 +42,14 @@ My skill set stack includes:
 : - HTML, XML, SVG
   - CSS, SASS
   - JavaScript (ES5, ES6)
-  - PHP, Python, Node.js
+  - PHP, Python, Node.js, Golang
   - MySQL, PostgreSQL, MongoDB
   - REST, GraphQL, JWT
   - JSON, YAML
   - Mustache, Handlebars
 
 Tinkering currently with:
-: - Golang, Google Cloud Platform, AWS
-  - Kubernetes, MiniKube
+: - Kubernetes, MiniKube
   - Elixir, Elm
   - Web Components
 
@@ -58,7 +57,7 @@ Tools I use regularly:
 : - Git, Github
   - Docker
   - Bash, npm, webpack, Grunt
-  - Babel, Jasmine, Karma
+  - Babel, AVA, Jasmine, Karma
   - VS Code, Vi
   - Photoshop, Illustrator
   - ssh, rsync
@@ -87,4 +86,5 @@ I listen to many Podcasts and would recommend the following:
   - [The Changelog](https://changelog.com/podcast)
   - [HTTP 203](https://developers.google.com/web/shows/http203/podcast/)
 
+  {% include github-link.html %}
 </div>

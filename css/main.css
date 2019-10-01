@@ -142,6 +142,9 @@ a img {
 .icon.email a, .as-icon.email::after, .inline-icon.email::after {
   background-position: -11.875rem 0; }
 
+.icon.github a, .as-icon.github::after, .inline-icon.github::after {
+  background-position: -14.25rem 0; }
+
 .as-icon {
   position: relative;
   top: 0;
@@ -197,6 +200,8 @@ a img {
     border-radius: 50%; }
   .inline-icon:hover::after {
     border: none; }
+  .inline-icon.github::after {
+    background-color: transparent; }
 
 .share-links {
   margin: 0; }
@@ -1440,7 +1445,7 @@ footer {
   margin: 0 0 2rem -2rem;
   padding: 0.5rem;
   width: 98vw;
-  max-width: 55.62423rem;
+  max-width: 44rem;
   font-family: monospace;
   font-size: 1rem;
   line-height: 1.1rem;
