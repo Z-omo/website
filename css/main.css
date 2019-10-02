@@ -1445,7 +1445,7 @@ footer {
   margin: 0 0 2rem -2rem;
   padding: 0.5rem;
   width: 98vw;
-  max-width: 44rem;
+  max-width: 46rem;
   font-family: monospace;
   font-size: 1rem;
   line-height: 1.1rem;
@@ -1459,9 +1459,6 @@ footer {
       overflow-x: visible; } }
   .highlight pre {
     padding-top: 0.5rem; }
-    @media only screen and (min-width: 69em) {
-      .highlight pre {
-        padding-top: 0; } }
   .highlight .gutter {
     min-width: 1.4rem;
     color: #667777; }
