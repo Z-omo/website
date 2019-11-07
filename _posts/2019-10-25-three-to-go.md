@@ -3,7 +3,7 @@ layout: post
 title: "Three to Go!"
 author: Colin Tester
 summary: Multiple Go apps from one Digital Ocean droplet with their own domain/sub-domain.
-headerImage: three-to-go.jpg
+headerImage: three-to-go-header.jpg
 ---
 
 In planning a project with a need to abstract out some of its operations to separate, self-contained services, it seems sensible to utilise the benefits of containerisation. Sometimes, however, this approach might appear overly complex, particularly for a project that begins its life with fewer demands on technical resources.
