@@ -302,7 +302,7 @@ $ sudo ln -s /etc/nginx/sites-available/third-app \
 /etc/nginx/sites-enabled/third-app
 {% endhighlight %}
 
-Check that the symlinks has been created as expected by using the unix <em>list</em> command:
+Check that the symlinks have been created as expected by using the unix <em>list</em> command:
 
 {% highlight cli %}
 $ sudo ls -l /etc/nginx/sites-enabled
