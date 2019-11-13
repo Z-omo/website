@@ -1,5 +1,5 @@
 # baseurl is being used to set <base> tag on pages built into subfolders.
-baseurl: 'https://colintester.com'
+baseurl: './'
 
 exclude: [
   '.DS_Store',
