@@ -199,11 +199,13 @@ main
 
 ### Domain name setup
 
+If you have followed the steps in the article [How To Set Up a Host Name with DigitalOcean](https://www.digitalocean.com/docs/networking/dns/), you should have your own domain name set up on your Digital Ocean account. You will also need to point your domain and sub-domains to the droplet you are using for your Go apps.
 
+Please see [how to manage DNS records](https://www.digitalocean.com/docs/networking/dns/how-to/manage-records/) in the Digital Ocean docs section, where you can set the <em>WILL DIRECT TO</em> option to point your domain/sub-domain to your droplet instance.
 
 ### Setup Nginx to serve multiple Go apps
 
-As stated in the [Introduction](2019/multiple-go-apps-one-server#introduction), I assume that nginx has been installed onto your droplet. You can check if it is running by visiting the server's IP address in your browser.
+As stated in the [Introduction](2019/three-to-go#introduction), I assume that nginx has been installed onto your droplet. You can check if it is running by visiting the server's IP address in your browser.
 
 {% include figure-element.html picture="nginx-welcome.png" alt="nginx welcome content." dims="520x220" %}
 
@@ -237,11 +239,11 @@ server {
 
 In the configuration file, we are specifying a server definition for the domain names we wish to catch, and the location of the end server to which the proxy will pass the requests.
 
-<strong>Note:</strong> the <em>proxy_pass</em> value includes the port number (9991), the port number the First Go app is listening on.
+<strong>Note:</strong> the <em>proxy_pass</em> value includes the port number (9991), that being the port number the First Go app is listening on.
 
 Substitute your own domain name for <em>example.com</em>. Note that we have included the <em>www</em> sub-domain in the <em>server_name</em> value, defining that either of the two domain variants are to be captured.
 
-Exit Vim's `-- INSERT --`  mode by pressing the <strong>ESC</strong> key, then save the configuration file by typing <strong>:wq</strong> the Vim command to write changes to the file and then quit.
+Exit Vim's `-- INSERT --`  mode by pressing the <strong>ESC</strong> key, then save the configuration file by typing <strong>:wq</strong> – the Vim command to write (w) changes to the file and then quit (q).
 
 Now that we have a configuration file for the First Go app, we can create one each – using Vim – for the Second and Third Go apps.
 
@@ -285,7 +287,7 @@ server {
 }
 {% endhighlight %}
 
-Now that we have configuration files for each of the three Go apps in nginx's <em>sites-available</em>, we now need to enable each individual site. That is done by creating a [symbolic link](https://en.wikipedia.org/wiki/Symbolic_link) in nginx's <em>sites-enabled</em> folder to each Go app configuration file created in <em>sites-available</em>.
+Now that we have configuration files for each of the three Go apps in nginx's <em>sites-available</em>, we now need to enable each individual site. That is done by creating a [symbolic link](https://en.wikipedia.org/wiki/Symbolic_link) in nginx's <em>sites-enabled</em> folder, linking to each Go app configuration file created in <em>sites-available</em>.
 
 Create a symlink for each of the three Go apps:
 
@@ -300,7 +302,7 @@ $ sudo ln -s /etc/nginx/sites-available/third-app \
 /etc/nginx/sites-enabled/third-app
 {% endhighlight %}
 
-Check that the symlinks has been created ok by using the unix <em>list</em> command:
+Check that the symlinks has been created as expected by using the unix <em>list</em> command:
 
 {% highlight cli %}
 $ sudo ls -l /etc/nginx/sites-enabled
@@ -312,13 +314,13 @@ $ sudo ls -l /etc/nginx/sites-enabled
 
 The `-l` flag will display in long listing format and show how the symlinks are connected, e.g. link_file -> source_file.
 
-To get nginx to read the configuration file, we need to as it to reload.
+To get nginx to read the configuration files, we need to tell it to reload.
 
 {% highlight cli %}
 $ sudo nginx -s reload
 {% endhighlight %}
 
-The `-s reload` flag sends a signal to the master process running nginx to ‘reload’.
+The `-s reload` flag sends a signal to the master process running nginx; telling it to ‘reload’.
 
 As a test, let's run the First Go app executable and see what loads in the browser for the domain example.com.
 
@@ -328,11 +330,11 @@ Run the First Go app (from the server session terminal window).
 $ ./go/first.main
 {% endhighlight %}
 
-With the First Go app running, point a browser the app's domain name, e.g. http://example.com – substitute your own domain name.
+With the First Go app running, point a browser to the app's domain name, e.g. http://example.com – substitute your own domain name.
 
 The following should be loaded: <strong>Hello from the [ First ] Go app.</strong>
 
-Ok, that should be working ok, so let's stop the First Go app by returning to the server terminal window pressing the CTRL + C keys, and then let's also test if the Second and Third apps configurations are running as expected.
+Ok, that should be working ok, so let's stop the First Go app by returning to the server terminal window and pressing the CTRL + C keys. Then, let's also test if the Second and Third apps configurations are running as expected.
 
 Run the Second Go app.
 
@@ -383,7 +385,7 @@ WorkingDirectory=/home/non-root-user/go/first
 WantedBy=multi-user.target
 {% endhighlight %}
 
-In the `.service` file the <em>service</em> specifics are defined under the `[Service]` section. Crucial options are:
+In the `.service` file, the <em>service</em> specifics are defined under the `[Service]` section. Crucial options are:
 
 - Restart – service shall be restarted after it exits or is killed.
 - ExecStart – The command to run, points to a Go app.
@@ -443,7 +445,7 @@ $ sudo systemctl enable second-app.service
 $ sudo systemctl enable third-app.service
 {% endhighlight %}
 
-If we want to, we can also get our services and subsequently our apps to run now with systemctl:
+If we want to, we can also get our services, and subsequently our apps, to run now with systemctl:
 
 {% highlight cli %}
 $ sudo systemctl start first-app.service
@@ -451,13 +453,13 @@ $ sudo systemctl start second-app.service
 $ sudo systemctl start third-app.service
 {% endhighlight %}
 
-The final test: let's see if the services we've set up start automatically after a server reboot:
+The final test: let's see if the services we've set up, now start automatically after a server reboot:
 
 {% highlight cli %}
 $ sudo shutdown -r now
 {% endhighlight %}
 
-The above will command the server to `shutdown` and restart `-r`.
+The above `shutdown` command will instruct the server to `shutdown` and restart `-r`.
 
 After a few moments, reload the three apps via their domain variants in your browser – they should all be running!
 
