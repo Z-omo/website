@@ -314,7 +314,7 @@ $ sudo ls -l /etc/nginx/sites-enabled
 
 The `-l` flag will display in long listing format and show how the symlinks are connected, e.g. link_file -> source_file.
 
-To get nginx to read the configuration files, we need to tell it to reload.
+To get nginx to read the configuration files, we need to instruct it to reload.
 
 {% highlight cli %}
 $ sudo nginx -s reload
@@ -322,17 +322,17 @@ $ sudo nginx -s reload
 
 The `-s reload` flag sends a signal to the master process running nginx; telling it to ‘reload’.
 
-As a test, let's run the First Go app executable and see what loads in the browser for the domain example.com.
+As a test, let's run the First Go app executable and see what loads in a browser for the main domain name (example.com).
 
 Run the First Go app (from the server session terminal window).
 
 {% highlight cli %}
-$ ./go/first.main
+$ ./go/first/main
 {% endhighlight %}
 
 With the First Go app running, point a browser to the app's domain name, e.g. http://example.com – substitute your own domain name.
 
-The following should be loaded: <strong>Hello from the [ First ] Go app.</strong>
+In the browser window, the following should be loaded: <strong>Hello from the [ First ] Go app.</strong>
 
 Ok, that should be working ok, so let's stop the First Go app by returning to the server terminal window and pressing the CTRL + C keys. Then, let's also test if the Second and Third apps configurations are running as expected.
 
