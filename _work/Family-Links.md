@@ -13,7 +13,7 @@ Family Links is a national charity dedicated to creating an emotionally healthy,
 <div class="float-group" markdown="1">
 {% include rwd-floated-image.html align="right" picture="Family-Links-home-mobile.png" alt="Family Links website home – mobile view." maxWidth="240px" dims="520x1048" %}
 
-Family Links invited me to join their web team to help implement a content strategy and visual redesign which would present users with a much improved experience.
+Family Links invited me to join their web team in 2015 to help implement a content strategy and visual redesign which would present users with a much improved experience.
 
 <blockquote class="long-format"><q>Colin provides a very high level of service and takes a genuine interest in the task of supporting the promotion of our work. He spends time understanding and discussing our requirements and is extremely flexible in his approach. All the work has been delivered on time and to budget and is of a very high quality. I would recommend Colin Tester very highly.</q><p class="by-line">Gail Allan, Business Development Director, Family Links</p></blockquote>
 
