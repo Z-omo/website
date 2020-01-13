@@ -59,7 +59,7 @@ With the AVA and Babel modules installed, we will next create a `.babelrc` file 
 }
 {% endhighlight %}
 
-We can also added, in the above code, [further AVA options](further AVA options) to make sure tests fail as soon as an error is encountered (failFast) and receive a more verbose test result log.
+We also added, in the above code, [further AVA options](further AVA options) to make sure tests fail as soon as an error is encountered (failFast) and receive a more verbose test result log.
 
 AVA does not, by default, compile ES6 source (src) files, only the test and helper files. To compile ES6 source files, we need to use Babel’s <em>register</em> module, which can also be added to the AVA configuration.
 
