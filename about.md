@@ -42,7 +42,7 @@ My skill set stack includes:
 : - HTML, XML, SVG
   - CSS, SASS
   - JavaScript (ES5, ES6)
-  - PHP, Python, Node.js, Golang
+  - [Golang](https://en.wikipedia.org/wiki/Go_(programming_language)), PHP, Python, Node.js
   - MySQL, PostgreSQL, MongoDB
   - REST, GraphQL, JWT
   - JSON, YAML
