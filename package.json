@@ -9,7 +9,7 @@
     "jekyll-serve": "bundle exec jekyll liveserve --host=127.0.0.1 --baseurl \"/\"",
     "open-chrome": "open-cli http://dev.colintester.com:4000 -- 'google chrome'",
     "prod": "webpack -p",
-    "dev": "npm run open-chrome && npm run jekyll-serve & npm run webpack-dev",
+    "dev": "npm run jekyll-serve & npm run webpack-dev",
     "restart": "npm run jekyll-serve & npm run webpack-dev"
   },
   "repository": {
@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "hoek": "5.0.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "picturefill": "^3.0.3",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
