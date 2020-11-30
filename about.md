@@ -38,11 +38,12 @@ Software development:
   - Object Oriented Programming (OOP)
   - Test-driven development (TDD)
 
-My skill set stack includes:
-: - HTML, XML, SVG
+My knowledge stack includes:
+: - [Golang](https://en.wikipedia.org/wiki/Go_(programming_language)), PHP, Python, Node.js
+  - HTML, XML, SVG
   - CSS, SASS
-  - JavaScript (ES5, ES6)
-  - [Golang](https://en.wikipedia.org/wiki/Go_(programming_language)), PHP, Python, Node.js
+  - JavaScript (ES5, ES6 and beyond)
+  - Web Components
   - MySQL, PostgreSQL, MongoDB
   - REST, GraphQL, JWT
   - JSON, YAML
@@ -51,7 +52,6 @@ My skill set stack includes:
 Tinkering currently with:
 : - Kubernetes, MiniKube
   - Elixir, Elm
-  - Web Components
 
 Tools I use regularly:
 : - Git, Github
