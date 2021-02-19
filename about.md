@@ -57,7 +57,7 @@ Tools I use regularly:
 : - Git, Github
   - Docker
   - Bash, npm, webpack, Grunt
-  - Babel, AVA, Jasmine, Karma
+  - Babel, Cypress, AVA, Jasmine, Karma
   - VS Code, Vi
   - Photoshop, Illustrator
   - ssh, rsync
