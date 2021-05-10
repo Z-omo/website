@@ -74,10 +74,9 @@ Reference materials on my bookshelf include:
   - [_JavaScript: The Good Parts_](http://shop.oreilly.com/product/9780596517748.do)
 
 Resources available online that I have found to be invaluable:
-: - [OWASP](https://www.owasp.org/index.php/Main_Page)
+: - [MDN Web Docs](https://developer.mozilla.org/en-US/)
+  - [OWASP](https://www.owasp.org/index.php/Main_Page)
   - [_You Don't Know JS_](https://github.com/getify/You-Dont-Know-JS)
-  - [MDN Web Docs](https://developer.mozilla.org/en-US/)
-  - [HTML5 Doctor](http://html5doctor.com/)
   - [Can I Use](https://caniuse.com/)
 
 I listen to many Podcasts and would recommend the following:
